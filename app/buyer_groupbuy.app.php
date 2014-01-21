@@ -114,7 +114,7 @@ class Buyer_groupbuyApp extends MemberbaseApp
 
     function exit_group()
     {
-        $id = empty($_GET['id']) ? 0 : $_GET['id'];
+        $id = empty($_GET['id']) ? 0 : intval($_GET['id']);
         if (!$id)
         {
             $this->show_warning('no_such_groupbuy');

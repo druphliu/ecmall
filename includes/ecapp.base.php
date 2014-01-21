@@ -140,13 +140,13 @@ class ECBaseApp extends BaseApp
         }
         if (SESSION_TYPE == 'mysql' || defined('IN_BACKEND'))
         {
-            $this->_session =& new SessionProcessor(db(), '`ecm_sessions`', '`ecm_sessions_data`', 'ECM_ID');
+            $this->_session = new SessionProcessor(db(), '`ecm_sessions`', '`ecm_sessions_data`', 'ECM_ID');
             /* 清理超时的购物车项目 */
             $this->_session->add_related_table('`ecm_cart`', 'cart', 'session_id', 'user_id=0');
         }
         else if (SESSION_TYPE == 'memcached')
         {
-            $this->_session =& new MemcacheSession(SESSION_MEMCACHED, 'ECM_ID');
+            $this->_session = new MemcacheSession(SESSION_MEMCACHED, 'ECM_ID');
         }
         else
         {

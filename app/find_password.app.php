@@ -128,9 +128,10 @@ class Find_passwordApp extends MallbaseApp
             $id = intval($_GET['id']);
             $word = $this->_rand();
             $md5word = md5($word);
+            $old_password=trim($_POST['new_password']);
 
             $ms =& ms();        //连接用户系统
-            $ms->user->edit($id, '', array('password' => $password), true); //强制修改
+            $ms->user->edit($id, $old_password, array('password' => $password), false); //强制修改
             if ($ms->user->has_error())
             {
                 $this->show_warning($ms->user->get_error());

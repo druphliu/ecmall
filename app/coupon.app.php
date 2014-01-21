@@ -154,7 +154,7 @@ class CouponApp extends StoreadminbaseApp
             }
             $start_time = gmstr2time(trim($_POST['start_time']));
             $end_time = gmstr2time_end(trim($_POST['end_time']))-1;
-            //echo gmstr2time_end(trim($_POST['end_time'])) . '-------' .$end_time;exit; 
+            //echo gmstr2time_end(trim($_POST['end_time'])) . '-------' .$end_time;exit;
             if ($end_time < $start_time)
             {
                 $this->pop_warning('end_gt_start');
