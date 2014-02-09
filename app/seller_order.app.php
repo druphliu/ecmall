@@ -355,12 +355,12 @@ class Seller_orderApp extends StoreadminbaseApp
         }
         else
         {
-            if (!$_POST['invoice_no'])
-            {
-                $this->pop_warning('invoice_no_empty');
-
-                return;
-            }
+//            if (!$_POST['invoice_no'])
+//            {
+//                $this->pop_warning('invoice_no_empty');
+//
+//                return;
+//            }
             $edit_data = array('status' => ORDER_SHIPPED, 'invoice_no' => $_POST['invoice_no']);
             $is_edit = true;
             if (empty($order_info['invoice_no']))

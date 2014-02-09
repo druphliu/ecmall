@@ -49,7 +49,10 @@ return array(
     'check' => '检查',
     'usable' => '有效 该优惠券的优惠价格为',
     'unusable' => "无效的优惠券.您可以到 <a href='index.php?app=my_coupon'>我的优惠券</a> 登记或者查询具体的优惠券信息",
-    'quantity_beyond_stock' => '库存不足,请调整购买数量或联系卖家：%s'
+    'quantity_beyond_stock' => '库存不足,请调整购买数量或联系卖家：%s',
+    'order_created'  => '订单提交成功！',
+    'order_created_desc'    => '您的订单已成功生成，我们会尽快处理并配送!',
+    'member_view_order'     => '您可以在用户中心中的我的订单查看该订单',
 );
 
 ?>

@@ -16,8 +16,8 @@ define('STORE_CLOSED',   2); // 关闭
 
 /* 订单状态 */
 define('ORDER_SUBMITTED', 10);                 // 针对货到付款而言，他的下一个状态是卖家已发货
-define('ORDER_PENDING', 11);                   // 等待买家付款
-define('ORDER_ACCEPTED', 20);                  // 买家已付款，等待卖家发货
+define('ORDER_PENDING', 11);                   // 买家已下单
+define('ORDER_ACCEPTED', 20);                  // 卖家已确认
 define('ORDER_SHIPPED', 30);                   // 卖家已发货
 define('ORDER_FINISHED', 40);                  // 交易成功
 define('ORDER_CANCELED', 0);                   // 交易已取消

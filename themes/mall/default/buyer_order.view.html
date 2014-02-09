@@ -50,7 +50,7 @@
                         <!--{/if}-->
                         <li>{$lang.add_time}&nbsp;:&nbsp;{$order.order_add_time|date:complete}</li>
                         <!--{if $order.pay_time}-->
-                        <li>{$lang.pay_time}&nbsp;:&nbsp;{$order.pay_time|date:complete}</li>
+                        <li>{$lang.pending_time}&nbsp;:&nbsp;{$order.pay_time|date:complete}</li>
                         <!--{/if}-->
                         <!--{if $order.ship_time}-->
                         <li>{$lang.ship_time}&nbsp;:&nbsp;{$order.ship_time|date:complete}</li>
@@ -67,15 +67,7 @@
                 {$lang.consignee_address}&nbsp;:&nbsp;{$order_extm.consignee|escape}<!--{if $order_extm.phone_mob}-->, &nbsp;{$order_extm.phone_mob}<!--{/if}--><!--{if $order_extm.phone_tel}-->,&nbsp;{$order_extm.phone_tel}<!--{/if}-->
                 ,&nbsp;{$order_extm.region_name|escape}&nbsp;{$order_extm.address|escape}
                 <!--{if $order_extm.zipcode}-->,&nbsp;{$order_extm.zipcode|escape}<!--{/if}--><br />
-                {$lang.shipping_way}&nbsp;:&nbsp;{$order_extm.shipping_name|escape}
-                <!--{if $order.invoice_no}-->
-                <br />
-                {$lang.invoice_no}&nbsp;:&nbsp;{$order.invoice_no|escape}<!--&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$shipping_info.query_url}&amp;{$order.invoice_no}" target="_blank">{$lang.query_logistics}</a>-->
-                <!--{/if}-->
-                <!--{if $order.postscript}-->
-                <br />
-                {$lang.postscript}&nbsp;:&nbsp;{$order.postscript|escape}<br />
-                <!--{/if}-->
+
             </div>
 
             <div class="particular_bottom"></div>

@@ -616,6 +616,7 @@ function get_domain()
 function site_url()
 {
     return get_domain() . substr(PHP_SELF, 0, strrpos(PHP_SELF, '/'));
+//    return get_domain();
 }
 
 

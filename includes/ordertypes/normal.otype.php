@@ -59,18 +59,18 @@ class NormalOrder extends BaseOrder
         $data['regions']            = $this->_get_regions();
 
         /* 配送方式 */
-        $data['shipping_methods']   = $this->_get_shipping_methods($store_id);
-        if (empty($data['shipping_methods']))
-        {
-            $this->_error('no_shipping_methods');
-
-            return false;
-        }
-        $data['shippings']          = ecm_json_encode($data['shipping_methods']);
-        foreach ($data['shipping_methods'] as $shipping)
-        {
-            $data['shipping_options'][$shipping['shipping_id']] = $shipping['shipping_name'];
-        }
+//        $data['shipping_methods']   = $this->_get_shipping_methods($store_id);
+//        if (empty($data['shipping_methods']))
+//        {
+//            $this->_error('no_shipping_methods');
+//
+//            return false;
+//        }
+//        $data['shippings']          = ecm_json_encode($data['shipping_methods']);
+//        foreach ($data['shipping_methods'] as $shipping)
+//        {
+//            $data['shipping_options'][$shipping['shipping_id']] = $shipping['shipping_name'];
+//        }
 
         return array('data' => $data, 'template' => $template);
     }

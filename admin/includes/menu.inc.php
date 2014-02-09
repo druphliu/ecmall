@@ -54,10 +54,6 @@ return array(
                 'text'  => Lang::get('region'),
                 'url'   => 'index.php?app=region',
             ),
-            'payment' => array(
-                'text'  => Lang::get('payment'),
-                'url'   => 'index.php?app=payment',
-            ),
             'theme' => array(
                 'text'  => Lang::get('theme'),
                 'url'   => 'index.php?app=theme',

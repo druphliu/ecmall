@@ -198,9 +198,8 @@ class OrderApp extends ShoppingbaseApp
                 $goods_ids[] = $goods['goods_id'];
             }
             $model_goodsstatistics->edit($goods_ids, 'orders=orders+1');
-
-            /* 到收银台付款 */
-            header('Location:index.php?app=cashier&order_id=' . $order_id);
+            $this->assign('order', $order_info);
+            $this->display('order.finished.html');
         }
     }
 

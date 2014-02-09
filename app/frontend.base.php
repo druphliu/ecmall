@@ -678,10 +678,10 @@ class MemberbaseApp extends MallbaseApp
                 'url'   => 'index.php?app=apply',
                 'name'  => 'apply_store',
             );*/
-            $menu['overview'] = array(
-                'text' => Lang::get('apply_store'),
-                'url'  => 'index.php?app=apply',
-            );
+//            $menu['overview'] = array(
+//                'text' => Lang::get('apply_store'),
+//                'url'  => 'index.php?app=apply',
+//            );
         }
         if ($this->visitor->get('manage_store'))
         {
@@ -734,18 +734,18 @@ class MemberbaseApp extends MallbaseApp
                     'name'  => 'my_theme',
                     'icon'  => 'ico12',
             );
-            $menu['im_seller']['submenu']['my_payment'] =  array(
-                    'text'  => Lang::get('my_payment'),
-                    'url'   => 'index.php?app=my_payment',
-                    'name'  => 'my_payment',
-                    'icon'  => 'ico13',
-            );
-            $menu['im_seller']['submenu']['my_shipping'] = array(
-                    'text'  => Lang::get('my_shipping'),
-                    'url'   => 'index.php?app=my_shipping',
-                    'name'  => 'my_shipping',
-                    'icon'  => 'ico14',
-            );
+//            $menu['im_seller']['submenu']['my_payment'] =  array(
+//                    'text'  => Lang::get('my_payment'),
+//                    'url'   => 'index.php?app=my_payment',
+//                    'name'  => 'my_payment',
+//                    'icon'  => 'ico13',
+//            );
+//            $menu['im_seller']['submenu']['my_shipping'] = array(
+//                    'text'  => Lang::get('my_shipping'),
+//                    'url'   => 'index.php?app=my_shipping',
+//                    'name'  => 'my_shipping',
+//                    'icon'  => 'ico14',
+//            );
             $menu['im_seller']['submenu']['my_navigation'] = array(
                     'text'  => Lang::get('my_navigation'),
                     'url'   => 'index.php?app=my_navigation',

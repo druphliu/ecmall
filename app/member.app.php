@@ -233,8 +233,8 @@ class MemberApp extends MemberbaseApp
 
             $this->show_message(Lang::get('register_successed') . $synlogin,
                 'back_before_register', rawurldecode($_POST['ret_url']),
-                'enter_member_center', 'index.php?app=member',
-                'apply_store', 'index.php?app=apply'
+                'enter_member_center', 'index.php?app=member'//,
+//                'apply_store', 'index.php?app=apply'
             );
         }
     }
