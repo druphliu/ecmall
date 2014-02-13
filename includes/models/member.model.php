@@ -16,6 +16,13 @@ class MemberModel extends BaseModel
             'foreign_key' => 'store_id',    //外键名
             'dependent'   => true           //依赖
         ),
+        // 一个会员拥有一个微信，id相同
+        'has_wechat' => array(
+            'model'       => 'memberwechat',       //模型的名称
+            'type'        => HAS_ONE,       //关系类型
+            'foreign_key' => 'user_id',    //外键名
+            'dependent'   => true           //依赖
+        ),
         'manage_mall'   =>  array(
             'model'       => 'userpriv',
             'type'        => HAS_ONE,

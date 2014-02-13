@@ -496,7 +496,7 @@ class GoodsApp extends StorebaseApp
             $data['goods_name'],
             $data['cate_name']
         );
-        $seo_info['keywords'] = implode(',', array_merge($keywords, $data['tags']));        
+        $seo_info['keywords'] = implode(',', array_merge($keywords, $data['tags']));
         $seo_info['description'] = sub_str(strip_tags($data['description']), 10, true);
         return $seo_info;
     }

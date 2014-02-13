@@ -26,6 +26,11 @@ define('VERSION', '2.3.0');
 /* 当前ECMall程序Release */
 define('RELEASE', '20120918');
 
+/*********wechat**********/
+define("TOKEN", "zhaigow2014");
+define('APPID', "wxe7fabc14e07edbe5");
+define('APPSECRET', 'ffbf4bde24775ed99cfc31723a1227c0');
+
 /*---------------------以下是PHP在不同版本，不同服务器上的兼容处理-----------------------*/
 
 /* 在部分IIS上会没有REQUEST_URI变量 */

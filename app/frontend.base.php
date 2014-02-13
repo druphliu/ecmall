@@ -517,6 +517,16 @@ class ShoppingbaseApp extends MallbaseApp
 }
 
 /**
+ * 微信接口基础类
+ */
+class WechatbaseApp extends MallbaseApp{
+    function _run_action(){
+
+        include_once(ROOT_PATH . '/includes/wechat/oauth.wechat.php');
+        parent::_run_action();
+    }
+}
+/**
  *    用户中心子系统基础类
  *
  *    @author    Garbin
