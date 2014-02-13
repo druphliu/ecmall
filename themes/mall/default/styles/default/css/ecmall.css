@@ -1188,3 +1188,7 @@ form label.validate_right { padding-left:12px; background:transparent url(../ima
 .tab .active a { color: #ff4f01; text-decoration: none; float: left; height: 26px; padding: 0 20px; }
 .tab .normal a { color: #3e3e3e; text-decoration: none; float: left; height: 26px; padding: 0 20px; }
 /**/
+
+
+.area_select{line-height: 50px}
+.select_area{cursor: pointer}
