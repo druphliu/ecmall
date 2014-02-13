@@ -1180,4 +1180,11 @@ form label.validate_right { padding-left:12px; background:transparent url(../ima
  * ******************** end hack.css *********************
  * -------------------------------------------------------
  */
-
+/*********************area select********************/
+.tab { width: 100%; height: 28px; line-height: 26px; background: url(../images/member/tab.gif) repeat-x bottom; }
+.tab li { float: left; margin-right: 2px; cursor: pointer; font-size: 14px; }
+.tab .active { height: 26px; color: #ff4f01; font-weight: bold; padding: 0 20px; border: 1px solid #e2e2e2; border-bottom: 1px solid #fff; background: #fff; }
+.tab .normal { height: 26px; color: #3e3e3e; font-weight: bold; padding: 0px; border: 1px solid #e2e2e2; background: #f9f9f9; }
+.tab .active a { color: #ff4f01; text-decoration: none; float: left; height: 26px; padding: 0 20px; }
+.tab .normal a { color: #3e3e3e; text-decoration: none; float: left; height: 26px; padding: 0 20px; }
+/**/

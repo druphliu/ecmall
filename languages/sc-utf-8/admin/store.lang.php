@@ -3,6 +3,7 @@ return array(
     'store' => '店铺',
     'store_name' => '店铺名称',
     'region' => '所在地',
+    'seller_area'=>'销售区域',
     'sgrade' => '所属等级',
     'state' => '状态',
     'certification' => '认证',

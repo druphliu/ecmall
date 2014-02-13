@@ -4,7 +4,7 @@
 //<!CDATA[
 $(function(){
     regionInit("region");
-
+    $(".chosen-select").chosen({no_results_text: '没有找到数据', search_contains: true});
     $("#tr_close_reason").hide();
 <!--{if $smarty.get.act eq "edit"}-->
     $(":radio[name='state']").click(function(){
@@ -63,6 +63,33 @@ $(function(){
             }
         }
     });
+    //区域校验
+    var $chosen_choices = $(".chosen-choices");
+    var $seller_area_notice = $(".seller_area_notice");
+    var $chosen_select = $(".chosen-select");
+    $('#form_submit').click(function () {
+        var area = $chosen_select.val();
+        if(!area){
+            $chosen_choices.addClass("error").find("input").focus();
+            $seller_area_notice.addClass("error").html("此项不允许为空");
+            return false
+        }
+    });
+    $chosen_select.change(function () {
+        var area = $chosen_select.val();
+        if (area) {
+            $chosen_choices.removeClass("error");
+            $seller_area_notice.removeClass("error");
+        } else {
+            $chosen_choices.removeClass("error").addClass("error").find("input").focus();
+            $seller_area_notice.removeClass("error").addClass("error").html("此项不允许为空");
+        }
+    });
+    $chosen_choices.find("input").blur(function(){
+        if(!$chosen_select.val()){
+            $seller_area_notice.removeClass("error").addClass("error").html("此项不允许为空");
+        }
+    })
 });
 //]]>
 </script>
@@ -132,6 +159,19 @@ $(function(){
             <!-- {/if} -->
           </div></td>
       </tr>
+        <tr>
+            <th>{$lang.seller_area}:</th>
+            <td>
+
+                <select name="seller_area[]" data-placeholder="选择销售区域" style="width:350px;" class="chosen-select" multiple tabindex="6">
+                    <!--{foreach from=$options item=option}-->
+                    {$option}
+                    <!--{/foreach}-->
+                </select>
+                <label generated="true" class="seller_area_notice">销售区域,必填</label>
+
+            </td>
+        </tr>
       <tr>
         <th class="paddingT15">{$lang.address}:</th>
         <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="address" type="text" id="address" value="{$store.address|escape}"/></td>
@@ -191,7 +231,7 @@ $(function(){
       <!--{/if}-->
       <tr>
         <th></th>
-        <td class="ptb20"><input class="formbtn" type="submit" name="Submit" value="{$lang.submit}" />
+        <td class="ptb20"><input class="formbtn" type="submit" id="form_submit" name="Submit" value="{$lang.submit}" />
           <input class="formbtn" type="reset" name="Reset" value="{$lang.reset}" /></td>
       </tr>
     </table>

@@ -163,3 +163,14 @@ function transform_char(str)
     }
     return str;
 }
+
+function init_area(region_id) {
+    var url = SITE_URL + '/index.php?app=area&act=init&jsoncallback=?&ajax=1';
+    $.getJSON(url, {'region_id': region_id}, function (data) {
+        if (data.retval == 1) {
+            location.reload();
+        } else {
+            alert(data.msg);
+        }
+    });
+}

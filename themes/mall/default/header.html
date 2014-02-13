@@ -29,6 +29,14 @@ $(function(){
     select_list.onmouseout = function () {
         float_list.style.display = "none";
     };
+    $('*[ectype="getarea"]').click(function(){
+        var id = $(this).attr('dialog_id');
+        var title = $(this).attr('dialog_title') ? $(this).attr('dialog_title') : '';
+        var url = $(this).attr('uri');
+        var width = $(this).attr('dialog_width');
+        ajax_form(id, title, url, width);
+        return false;
+    });
 });
 //]]>
 </script>
@@ -74,6 +82,7 @@ $(function(){
             <li class="line"><a href="{$nav.link}"{if $nav.open_new} target="_blank"{/if}>{$nav.title|escape}</a></li>
             <!--{/foreach}-->
         </ul>
+        <div><b style="color: #C53801">{$area_name}</b><b class="ico3"  ectype="getarea" dialog_title="选择区域" dialog_id="my_area_changet" dialog_width="480" uri="index.php?app=area">切换区域</b></div>
     </div>
 </div>
 

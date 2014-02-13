@@ -179,12 +179,39 @@ class StoreApp extends BackendApp
 
             $this->assign('scategories', $this->_get_scategory_options());
 
+            //区域
             $region_mod =& m('region');
-            $this->assign('regions', $region_mod->get_options(0));
+            $regions = $region_mod->get_options(0);
+            $this->assign('regions', $regions);
+            $options = $sub_options = '';
+            foreach ($regions as $value => $reg) {
+                $options .= "<optgroup label='$reg'>";
+                $sub_regions = $region_mod->get_options($value);
+                foreach ($sub_regions as $sub_key => $sub_name) {
+                    $sub_options .= " <option value='$sub_key'>$reg.$sub_name</option>";
+                }
+                $options .= $sub_options . "</optgroup>";
+                unset($sub_options);
+            }
+            $this->assign('options', $options);
 
             /* 导入jQuery的表单验证插件 */
             $this->import_resource(array(
-                'script' => 'jquery.plugins/jquery.validate.js,mlselection.js'
+                'script' => array(
+                    array(
+                        'path'=>'jquery.plugins/jquery.validate.js',
+                        'attr'=>'id="validate_js"',
+                    ),
+                    array(
+                        'path' => 'mlselection.js',
+                        'attr' => 'id="mlselection_js"',
+                    ),
+                    array(
+                        'path' => 'chosen_v1.1.0/chosen.jquery.js',
+                        'attr' => 'id="chosen_js"',
+                    ),
+                ),
+                'style' =>  'chosen_v1.1.0/chosen.min.css',
             ));
             $this->assign('enabled_subdomain', ENABLED_SUBDOMAIN);
             $this->display('store.form.html');
@@ -221,6 +248,7 @@ class StoreApp extends BackendApp
                 'sort_order'   => $_POST['sort_order'],
                 'add_time'     => gmtime(),
                 'domain'       => $domain,
+                'seller_area' => implode(',', $_POST['seller_area'])
             );
             $certs = array();
             isset($_POST['autonym']) && $certs[] = 'autonym';
@@ -282,8 +310,27 @@ class StoreApp extends BackendApp
                 '0' => Lang::get('no'),
             ));
 
+            //区域
+            if($store['seller_area']){
+                foreach(explode(',', $store['seller_area']) as $val){
+                    $seller_area_value[$val] = $val;
+                }
+            }
             $region_mod =& m('region');
-            $this->assign('regions', $region_mod->get_options(0));
+            $regions = $region_mod->get_options(0);
+            $this->assign('regions', $regions);
+            $options = $sub_options = '';
+            foreach ($regions as $value => $reg) {
+                $options .= "<optgroup label='$reg'>";
+                $sub_regions = $region_mod->get_options($value);
+                foreach ($sub_regions as $sub_key => $sub_name) {
+                    $selected = $seller_area_value[$sub_key] ? "selected" : "";
+                    $sub_options .= " <option value='$sub_key' $selected>$reg.$sub_name</option>";
+                }
+                $options .= $sub_options . "</optgroup>";
+                unset($sub_options);
+            }
+            $this->assign('options', $options);
 
             $this->assign('scategories', $this->_get_scategory_options());
 
@@ -292,7 +339,21 @@ class StoreApp extends BackendApp
 
             /* 导入jQuery的表单验证插件 */
             $this->import_resource(array(
-                'script' => 'jquery.plugins/jquery.validate.js,mlselection.js'
+                'script' => array(
+                    array(
+                        'path'=>'jquery.plugins/jquery.validate.js',
+                        'attr'=>'id="validate_js"',
+                    ),
+                    array(
+                        'path' => 'mlselection.js',
+                        'attr' => 'id="mlselection_js"',
+                    ),
+                    array(
+                        'path' => 'chosen_v1.1.0/chosen.jquery.js',
+                        'attr' => 'id="chosen_js"',
+                    ),
+                ),
+                'style' =>  'chosen_v1.1.0/chosen.min.css',
             ));
             $this->assign('enabled_subdomain', ENABLED_SUBDOMAIN);
             $this->display('store.form.html');
@@ -332,6 +393,7 @@ class StoreApp extends BackendApp
                 'sort_order'   => $_POST['sort_order'],
                 'recommended'  => $_POST['recommended'],
                 'domain'       => $domain,
+                'seller_area' => implode(',', $_POST['seller_area']),
             );
             $data['state'] == STORE_CLOSED && $data['close_reason'] = $_POST['close_reason'];
             $certs = array();

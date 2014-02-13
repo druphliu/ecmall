@@ -11,6 +11,7 @@ class FrontendApp extends ECBaseApp
     function __construct()
     {
         $this->FrontendApp();
+        $this->assign(array('area' => $_COOKIE['area'], 'area_name' => $_COOKIE['area_name']));
     }
     function FrontendApp()
     {
@@ -80,7 +81,7 @@ class FrontendApp extends ECBaseApp
                 }
             }
             /* 防止登陆成功后跳转到登陆、退出的页面 */
-            $ret_url = strtolower($ret_url);            
+            $ret_url = strtolower($ret_url);
             if (str_replace(array('act=login', 'act=logout',), '', $ret_url) != $ret_url)
             {
                 $ret_url = SITE_URL . '/index.php';
@@ -400,6 +401,21 @@ class UserVisitor extends BaseVisitor
  */
 class MallbaseApp extends FrontendApp
 {
+    function __construct(){
+        parent::__construct();
+        $this->import_resource( array(
+                'script' => array(
+                    array(
+                        'path' => 'dialog/dialog.js',
+                        'attr' => 'id="dialog_js"',
+                    ),
+                    array(
+                        'path' => 'jquery.ui/jquery.ui.js',
+                        'attr' => '',
+                    )
+                )
+            ));
+    }
     function _run_action()
     {
         /* 只有登录的用户才可访问 */
@@ -871,7 +887,7 @@ class StoreadminbaseApp extends MemberbaseApp
             }
         }
     }
-    
+
     /* 获取当前店铺所使用的主题 */
     function _get_theme()
     {

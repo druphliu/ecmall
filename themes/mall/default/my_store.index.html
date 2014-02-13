@@ -1,10 +1,14 @@
 {include file=member.header.html}
 <style>
 .information .info table{ width :auto;}
+.chosen-choices.error {
+    border: 1px dotted #FF0000 !important;
+}
 </style>
 <script type="text/javascript">
 //<!CDATA[
 $(function(){
+    $('.chosen-select').chosen({no_results_text: '没有找到数据', search_contains: true});
         $('input[ectype="change_store_logo"]').change(function(){
             var src = getFullPath($(this)[0]);
             $('img[ectype="store_logo"]').attr('src', src);
@@ -17,7 +21,6 @@ $(function(){
             $('input[ectype="change_store_banner"]').removeAttr('name');
             $(this).attr('name', 'store_banner');
         });
-
         $('#my_store_form').validate({
             errorPlacement: function(error, element){
                 $(element).next('.field_notice').hide();
@@ -87,7 +90,35 @@ $(function(){
         $(".right").mouseout(function(){
             $(this).next("div").hide();
         });
+//区域校验
+    var $chosen_choices = $(".chosen-choices");
+    var $seller_area_notice = $(".seller_area_notice");
+    var $chosen_select = $(".chosen-select");
+    $('#form_submit').click(function () {
+        var area = $chosen_select.val();
+        if(!area){
+            $chosen_choices.addClass("error").find("input").focus();
+            $seller_area_notice.addClass("error").html("此项不允许为空");
+            return false
+        }
+    });
+    $chosen_select.change(function () {
+        var area = $chosen_select.val();
+        if (area) {
+            $chosen_choices.removeClass("error");
+            $seller_area_notice.removeClass("error");
+        } else {
+            $chosen_choices.removeClass("error").addClass("error").find("input").focus();
+            $seller_area_notice.removeClass("error").addClass("error").html("此项不允许为空");
+        }
+    });
+    $chosen_choices.find("input").blur(function(){
+        if(!$chosen_select.val()){
+            $seller_area_notice.removeClass("error").addClass("error").html("此项不允许为空");
+        }
+    })
 });
+
 function add_uploadedfile(file_data)
 {
         $('#desc_images').append('<li file_name="'+ file_data.file_name +'" file_path="'+ file_data.file_path +'" ectype="handle_pic" file_id="'+ file_data.file_id +'"><input type="hidden" name="desc_file_id[]" value="'+ file_data.file_id +'"><div class="pic" style="z-index: 2;"><img src="{$site_url}/'+ file_data.file_path +'" width="50" height="50" alt="'+ file_data.file_name +'" /></div><div ectype="handler" class="bg" style="z-index: 3;display:none"><img src="{$site_url}/'+ file_data.file_path +'" width="50" height="50" alt="'+ file_data.file_name +'" /><p class="operation"><a href="javascript:void(0);" class="cut_in" ectype="insert_editor" ecm_title="{$lang.insert_editor}"></a><span class="delete" ectype="drop_image" ecm_title="{$lang.drop}"></span></p><p class="name">'+ file_data.file_name +'</p></div></li>');
@@ -115,7 +146,6 @@ function drop_image(file_id)
             });
         }
 }
-
 //]]>
 
 </script>
@@ -129,7 +159,7 @@ function drop_image(file_id)
     <div class="wrap">
         <div class="public">
             <div class="information">
-            <form method="post" enctype="multipart/form-data" id="my_store_form">
+            <form method="post" enctype="multipart/form-data" id="my_store_form" >
                     <div class="setup">
                         <div class="photo relative1">
 
@@ -186,6 +216,19 @@ function drop_image(file_id)
                                       {html_options options=$regions}
                                     </select>
                                     <!-- {/if} --></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{$lang.seller_area}:</th>
+                                <td>
+
+                                    <select name="seller_area[]" data-placeholder="选择销售区域" style="width:350px;" class="chosen-select" multiple tabindex="6">
+                                    <!--{foreach from=$options item=option}-->
+                                    {$option}
+                                    <!--{/foreach}-->
+                                </select>
+                                <label generated="true" class="seller_area_notice">销售区域,必填</label>
+
                                 </td>
                             </tr>
                             <tr>
@@ -284,7 +327,7 @@ function drop_image(file_id)
                                     </ul>
                                     <div class="clear"></div>
                                     </div>
-                                    <div class="issuance"><input type="submit" class="btn" value="{$lang.submit}" /></div>
+                                    <div class="issuance"><input type="submit" id="form_submit" class="btn" value="{$lang.submit}" /></div>
                                  </td>
                              </tr>
                          </table></form>

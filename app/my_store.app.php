@@ -64,9 +64,27 @@ class My_storeApp extends StoreadminbaseApp
             $msn_active_url = 'http://settings.messenger.live.com/applications/websignup.aspx?returnurl=' .
                 SITE_URL . '/index.php' . urlencode('?app=my_store&act=update_im_msn') . '&amp;privacyurl=' . SITE_URL . '/index.php' . urlencode('?app=article&act=system&code=msn_privacy');
             $this->assign('msn_active_url', $msn_active_url);
-
+            //区域
+            if($store['seller_area']){
+                foreach(explode(',', $store['seller_area']) as $val){
+                    $seller_area_value[$val] = $val;
+                }
+            }
             $region_mod =& m('region');
-            $this->assign('regions', $region_mod->get_options(0));
+            $regions = $region_mod->get_options(0);
+            $this->assign('regions', $regions);
+            $options = $sub_options = '';
+            foreach ($regions as $value => $reg) {
+                $options .= "<optgroup label='$reg'>";
+                $sub_regions = $region_mod->get_options($value);
+                foreach ($sub_regions as $sub_key => $sub_name) {
+                    $selected = $seller_area_value[$sub_key] ? "selected" : "";
+                    $sub_options .= " <option value='$sub_key' $selected>$reg.$sub_name</option>";
+                }
+                $options .= $sub_options . "</optgroup>";
+                unset($sub_options);
+            }
+            $this->assign('options', $options);
             //$this->headtag('<script type="text/javascript" src="{lib file=mlselection.js}"></script>');
 
             /* 属于店铺的附件 */
@@ -79,7 +97,23 @@ class My_storeApp extends StoreadminbaseApp
             $this->_curlocal(LANG::get('member_center'), 'index.php?app=member', LANG::get('my_store'));
             $this->_curitem('my_store');
             $this->_curmenu('my_store');
-            $this->import_resource('jquery.plugins/jquery.validate.js,mlselection.js');
+            $this->import_resource( array(
+                'script' => array(
+                    array(
+                        'path' => 'chosen_v1.1.0/chosen.jquery.js',
+                        'attr' => 'id="chosen_js"',
+                    ),
+                    array(
+                        'path' => 'jquery.plugins/jquery.validate.js',
+                        'attr' => 'id="validate_js"',
+                    ),
+                    array(
+                        'path' => 'mlselection.js',
+                        'attr' => 'id="mlselection_js"',
+                    )
+                ),
+                'style' =>  'chosen_v1.1.0/chosen.min.css',
+            ));
             $this->assign('files_belong_store', $files_belong_store);
             $this->assign('subdomain_enable', $subdomain_enable);
             $this->assign('domain_length', Conf::get('subdomain_length'));
@@ -126,7 +160,6 @@ class My_storeApp extends StoreadminbaseApp
                     }
                 }
             }
-            
             $data = array_merge($data, array(
                 'store_name' => $_POST['store_name'],
                 'region_id'  => $_POST['region_id'],
@@ -139,6 +172,7 @@ class My_storeApp extends StoreadminbaseApp
                 'domain'     => $subdomain,
                 'enable_groupbuy'   => $_POST['enable_groupbuy'],
                 'enable_radar'      => $_POST['enable_radar'],
+                'seller_area' => implode(',', $_POST['seller_area'])
             ));
             $this->_store_mod->edit($this->_store_id, $data);
 

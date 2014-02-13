@@ -48,6 +48,7 @@ return array(
     'guest'         => '游客',
     'consignee'      => '收货人姓名',
     'region'      => '所在地区',
+    'seller_area'=>'销售区域',
     'address'      => '详细地址',
     'zipcode'      => '邮政编码',
     'phone'      => '电话/手机',
