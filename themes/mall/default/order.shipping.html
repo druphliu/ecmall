@@ -173,10 +173,12 @@
                     <li class="mobile"><!--{if $address.phone_mob}-->{$address.phone_mob}<!--{else}-->{$address.phone_tel}<!--{/if}--></li>
                 </ul>
                 <!--{/foreach}-->
+                <!--{if !$my_address}-->
                 <ul class="new_receive_add address_item">
                     <li class="radio"><input type="radio" name="address_options" id="use_new_address" value="0" /</li>
                     <li class="particular">{$lang.use_new_address}</li>
                 </ul>
+                <!--{/if}-->
                 <!--{/if}-->
 
                 <ul class="fill_in_content" id="address_form">

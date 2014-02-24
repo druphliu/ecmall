@@ -8,10 +8,13 @@
  */
 class FrontendApp extends ECBaseApp
 {
+    var $area, $area_name;
     function __construct()
     {
         $this->FrontendApp();
-        $this->assign(array('area' => $_COOKIE['area'], 'area_name' => $_COOKIE['area_name']));
+        $this->area = ecm_getcookie('area');
+        $this->area_name = ecm_getcookie('area_name');
+        $this->assign(array('area' => $this->area, 'area_name' => $this->area_name));
     }
     function FrontendApp()
     {
@@ -1028,6 +1031,13 @@ class StorebaseApp extends FrontendApp
         {
             $store_mod  =& m('store');
             $store_info = $store_mod->get_info($this->_store_id);
+            foreach(explode(',', $store_info['seller_area']) as $a){
+                if($this->area == $a){
+                    $store_info['is_area'] = true;
+                }else{
+                    $store_info['is_area'] = false;
+                }
+            }
         }
 
         return $store_info;

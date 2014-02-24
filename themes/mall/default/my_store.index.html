@@ -264,19 +264,6 @@ function drop_image(file_id)
                                   </td>
                              </tr>
                              {/if}
-                             {if $store.functions.enable_radar}
-                             <!-- goods radar  -->
-                             <tr>
-                                  <th>{$lang.enable_radar}:</th>
-                                  <td><label>
-					                 <input type="radio" name="enable_radar" value="1" {if $store.enable_radar}checked="checked"{/if} />
-					                {$lang.yes}</label>
-					                <label>
-					                <input type="radio" name="enable_radar" value="0" {if !$store.enable_radar}checked="checked"{/if} />
-					                {$lang.no}</label></td>
-                             </tr>
-                             <!-- goods radar -->
-                             {/if}
                              <tr>
                                 <th class="align3">{$lang.description}:</th>
                                 <td><div class="editor"><div>

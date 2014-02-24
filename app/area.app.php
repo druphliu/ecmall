@@ -29,10 +29,11 @@ class AreaApp extends MallbaseApp
         $region_id = intval($_GET['region_id']);
         $region_mod =& m('region');
         $area = $region_mod->get($region_id);
+        $expire = 60*60*24*30;
         if($area){
             $parent = $region_mod->get($area['parent_id']);
-            ecm_setcookie('area', $area['region_id']);
-            ecm_setcookie('area_name', $parent['region_name'].".".$area['region_name']);
+            ecm_setcookie('area', $area['region_id'], time() + $expire);
+            ecm_setcookie('area_name', $parent['region_name'] . "." . $area['region_name'], time() + $expire);
             $retval = 1;
             $mesg = 'ok';
         }else{

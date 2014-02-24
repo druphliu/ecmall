@@ -95,13 +95,18 @@ class My_addressApp extends MemberbaseApp
                 'phone_mob'     => $_POST['phone_mob'],
             );
             $model_address =& m('address');
-            if (!($address_id = $model_address->add($data)))
-            {
-                $this->pop_warning($model_address->get_error());
+            //只需允许添加一条收货地址
+            $addresses     = $model_address->find(array(
+                'conditions'    => 'user_id = ' . $this->visitor->get('user_id'),
+            ));
+            if (!$addresses) {
+                if (!($address_id = $model_address->add($data))) {
+                    $this->pop_warning($model_address->get_error());
 
-                return;
+                    return;
+                }
+                $this->pop_warning('ok', APP . '_' . ACT);
             }
-            $this->pop_warning('ok', APP.'_'.ACT);
         }
     }
     function edit()
