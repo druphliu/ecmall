@@ -13,12 +13,12 @@ class AreaApp extends MallbaseApp
         $regions = $region_mod->get_options(0);
         $areas = $sub_options = '';
         foreach ($regions as $value => $reg) {
-            $areas .= "<optgroup label='$reg'>";
+            $areas .= "<h1>$reg</h1>";
             $sub_regions = $region_mod->get_options($value);
             foreach ($sub_regions as $sub_key => $sub_name) {
-                $sub_options .= " <option value='$sub_key' onclick='init_area($sub_key)'>$reg.$sub_name</option>";
+                $sub_options .= " <span value='$sub_key' onclick='init_area($sub_key)'>$reg.$sub_name</span>";
             }
-            $areas .= $sub_options . "</optgroup>";
+            $areas .= $sub_options;
             unset($sub_options);
         }
         $this->assign('areas', $areas);
