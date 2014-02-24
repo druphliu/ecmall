@@ -18,7 +18,8 @@ class Response
 
     function bind_response($request)
     {
-        $content = "还未绑定账户，点此进行绑定.bind_url";
+        $bing_url = site_url()."/index.php?app=wechat&act=oauth&openid=".$request->from_user_name;
+        $content = "还未绑定账户，点此进行绑定:\n<a href='$bing_url'>绑定</a>";
         $response = new WeChatTextResponse($content);
         $xml = $response->_to_xml($request);
         return $xml;
@@ -26,12 +27,7 @@ class Response
 
     static public function help($request)
     {
-        $content = "您可以直接使用底部菜单选择相应功能。或者尝试以下命令：\n
-                    cxdd：查询所有订单\n
-                    ddcx+订单号：查询您的订单状态\n
-                    ddqx+订单号：取消您的订单\n
-                    cd+订单号：催单\n
-                    dc+餐饮名：快捷订餐\n";
+        $content = "您可以直接使用底部菜单选择相应功能。或者尝试以下命令：\ncxdd：查询所有订单\nddcx+订单号：查询您的订单状态\nddqx+订单号：取消您的订单\ncd+订单号：催单\ndc+餐饮名：快捷订餐\n";
         $response = new WeChatTextResponse($content);
         $xml = $response->_to_xml($request);
         return $xml;
@@ -41,6 +37,7 @@ class Response
     {
         $cache_file = sprintf(ROOT_PATH . "/temp/wechat/%s.php", $request->from_user_name);
         if (file_exists($cache_file)) {
+            @unlink($cache_file);
             $content = "已经退出当前操作!";
         } else {
             $content = "当前无任何操作，你可通过点击菜单或者命令来进行相关操作";
@@ -310,8 +307,9 @@ class OrderFood extends OrderResponse
         $good_ids = array();
         $i = 1;
         $address = $this->get_address();
+        $bind_url = site_url()."/index.php?app=wechat&act=set_address&openid=$this->openid";
         if (!$address) {
-            $response = "账户信息还未完善，请点此完善：mock_url";
+            $response = "账户信息还未完善，请点此完善：\n <a href='$bind_url'>完善</a>";
             return $response;
         }
         $status = $this->get_status();

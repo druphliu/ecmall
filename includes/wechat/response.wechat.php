@@ -10,7 +10,7 @@ class TextResponse
 {
     static function response($request)
     {
-        $content = $request->content;
+        $content = strtolower($request->content);
         $patterns['help'] = "/^\?$/";
         $patterns['jump'] = "/^\#$/";
         $patterns['order_food'] = "/^dc(.*)/";
@@ -30,6 +30,8 @@ class TextResponse
         $key = $result['key'] ? $result['key'] : null;
         if ($key == "help" && !empty($matches)) {
             return OrderResponse::help($request);
+        } elseif ($key == "jump" && !empty($matches)) {
+            return OrderResponse::jump($request);exit;
         } elseif (($key == "order_list" && !empty($result)) || ($status && $status[OrderResponse::$KEY_STATUS] == OrderResponse::$status_order_list)) {
             $order_list = new OrderList($openid);
             $response = $order_list->text_handle($dialog);
@@ -45,9 +47,7 @@ class TextResponse
         } elseif (($key == "order_urge" && !empty($result)) || ($status && $status[OrderResponse::$KEY_STATUS] == OrderResponse::$status_order_urge)) {
             $order_urge = new OrderUrge($openid);
             $response = $order_urge->text_handle($dialog);
-        } elseif ($key == "help" && !empty($matches)) {
-            return OrderResponse::jump($request);
-        } else {
+        }else {
             //TODO 处理其他消息,包括客户乱发的消息就显示help信息
 
         }

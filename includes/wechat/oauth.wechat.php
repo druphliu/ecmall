@@ -40,9 +40,10 @@ class OAuth extends ECBaseApp
     function bind($username, $password)
     {
         $this->redirect_uri = "";
-        $url = sprintf($this->url, $this->appid, $this->redirect_uri, $this->API_BASE, $this->state);
-        $response = $this->curl_get($url);
-        $this->openid = $response->openid;
+//        $url = sprintf($this->url, $this->appid, $this->redirect_uri, $this->API_BASE, $this->state);
+//        $response = $this->curl_get($url);
+//        $this->openid = $response->openid;
+        $this->openid = $_SESSION['openid'];
         $ms =& ms();
         $user_id = $ms->user->auth($username, $password);
         $_wechat_mod = & m('memberwechat');
