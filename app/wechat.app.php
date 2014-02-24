@@ -10,6 +10,11 @@ class WechatApp extends WechatbaseApp
 {
     function oauth()
     {
+        if($_GET['openid']){
+            $openid = $_SESSION['openid'] = $_GET['openid'];
+        }else{
+            return;
+        }
         if (IS_POST && $_POST['user_name'] && $_POST['password']) {
             $username = trim($_POST['user_name']);
             $password = $_POST['password'];
@@ -20,15 +25,16 @@ class WechatApp extends WechatbaseApp
                 $addresses = $model_address->find(array(
                     'conditions' => 'user_id = ' . $this->visitor->get('user_id'),
                 ));
-                $result = "绑定成功！";
+                $response = "绑定成功！";
                 if (!$addresses) {
-                    $result .= "你还未设置你的配送地址，设置地址后即可快速订餐！<a href='/index.php?app=oauth&act=set_address'>点此设置</a>";
+                    $site_url = site_url();
+                    $response .= "你还未设置你的配送地址，设置地址后即可快速订餐！<a href='{$site_url}/index.php?app=wechat&act=set_address&openid=$openid'>点此设置</a>";
                 }
-
             } else {
-                var_dump($oauth->openid);
-                echo "未知错误";
+                $response = "未知错误".$result;
             }
+            $this->assign('message', $response);
+            $this->display('wechat.message.html');
         } else {
             $this->display('member.wechat.bind.html');
         }
@@ -37,12 +43,12 @@ class WechatApp extends WechatbaseApp
     function set_address()
     {
         $model_address =& m('address');
-        $openid = $_GET['openid'];
+        $member_wechat =& m('memberwechat');
+        $openid = $_GET['openid']?$_GET['openid']:$_POST['openid'];
         if (!$openid) {
             show_message("参数不正确！");
             return;
         }
-        $member_wechat =& m('memberwechat');
         $wechat_info = $member_wechat->get_info($openid);
         if (IS_POST) {
             if (!$wechat_info) {
@@ -63,7 +69,8 @@ class WechatApp extends WechatbaseApp
                 show_message($model_address->get_error());
                 return;
             }
-            show_message("设置成功");
+            $this->assign('message', '设置成功');
+            $this->display('wechat.message.html');
         } else {
             $my_address = $model_address->get(array('conditions' => 'user_id = ' . $wechat_info['user_id'])); ;
             if($my_address){
