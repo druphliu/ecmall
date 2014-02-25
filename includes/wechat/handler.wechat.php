@@ -80,7 +80,7 @@ class EventHandler
         if ($request->is_subscribe) {
             $content = '你好，欢迎关注！';
             $data[0] = array('title' => '', 'description' => $content, 'url' => 'http://www.zhaigow.com.cn', 'pic_url' => 'http://img3.cache.netease.com/photo/0001/2014-02-09/9KKRH71500AO0001.jpg');
-            $data[1] = array('title' => 'test', 'description' => '描述描述描述描述描述', 'url' => 'http://www.zhaigow.com.cn', 'pic_url' => '');
+            $data[1] = array('title' => '你好，欢迎关注！你可通过回复"?"或者点击"帮助"来获取操作提示', 'description' => '描述描述描述描述描述', 'url' => '', 'pic_url' => '');
             $response = new WeChatArticleResponse($data);
             $xml = $response->_to_xml($request);
             return $xml;

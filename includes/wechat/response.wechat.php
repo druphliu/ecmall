@@ -28,10 +28,10 @@ class TextResponse
         $result = self::content_match($content);
         $dialog = $result['message'] ? $result['message'] : $content;
         $key = $result['key'] ? $result['key'] : null;
-        if ($key == "help" && !empty($matches)) {
+        if ($key == "help" && !empty($result)) {
             return OrderResponse::help($request);
-        } elseif ($key == "jump" && !empty($matches)) {
-            return OrderResponse::jump($request);exit;
+        } elseif ($key == "jump" && !empty($result)) {
+            return OrderResponse::jump($request);
         } elseif (($key == "order_list" && !empty($result)) || ($status && $status[OrderResponse::$KEY_STATUS] == OrderResponse::$status_order_list)) {
             $order_list = new OrderList($openid);
             $response = $order_list->text_handle($dialog);
@@ -92,6 +92,12 @@ class ClickResponse
 
     static function order_list($request)
     {
+        $handle = fopen("test_click.txt", "a+");
+        fwrite($handle,$request->create_time.$request->from_user_name."\n");
+        fclose($handle);
+        while(file_exists("test_click.txt")){
+
+        }
         $order_list = new OrderList($request->from_user_name);
         $status[OrderResponse::$KEY_STATUS] = OrderResponse::$status_order_list;
         $order_list->update_status($status);
