@@ -27,7 +27,7 @@ class Response
 
     static public function help($request)
     {
-        $content = "您可以直接使用底部菜单选择相应功能。或者尝试以下命令：\ncxdd：查询所有订单\nddcx+订单号：查询您的订单状态\nddqx+订单号：取消您的订单\ncd+订单号：催单\ndc+餐饮名：快捷订餐\n";
+        $content = "您可以直接使用底部菜单选择相应功能。或者尝试以下命令：\ncxdd：查询所有订单\nddcx+订单号：查询您的订单状态\nddqx+订单号：取消您的订单\ncd+订单号：催单\ndc+餐饮名：快捷订餐\n#:退出当前操作";
         $response = new WeChatTextResponse($content);
         $xml = $response->_to_xml($request);
         return $xml;
