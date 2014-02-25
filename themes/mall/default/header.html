@@ -19,6 +19,8 @@
 var SITE_URL = "{$site_url}";
 var REAL_SITE_URL = "{$real_site_url}";
 var PRICE_FORMAT = '{$price_format}';
+var area = '{$area}';
+var area_name = '{$area_name}';
 
 $(function(){
     var select_list = document.getElementById("select_list");
@@ -37,6 +39,9 @@ $(function(){
         ajax_form(id, title, url, width);
         return false;
     });
+    if(area == 0){
+        $('*[ectype="getarea"]').click();
+    }
 });
 //]]>
 </script>

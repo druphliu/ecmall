@@ -16,6 +16,7 @@ class StoreApp extends StorebaseApp
         $store = $this->get_store_data();
         if(!$store['is_area']){
             $this->show_message("不支持你当前区域配送");
+            return;
         }
         $this->assign('store', $store);
 
