@@ -159,6 +159,10 @@ class OrderApp extends ShoppingbaseApp
             /* 获取订单信息 */
             $order_info = $model_order->get($order_id);
 
+            /*发送微信提醒*/
+            $wechat_info = $this->get_wechat_info($order_info['seller_id']);
+            //TODO 调用客服接口
+
             /* 发送事件 */
             $feed_images = array();
             foreach ($goods_info['items'] as $_gi)
@@ -437,6 +441,12 @@ class OrderApp extends ShoppingbaseApp
             }
         }
         return $goods_beyond_stock;
+    }
+
+    function get_wechat_info($user_id){
+        $_wechat_mod = & m('memberwechat');
+        $wechat = $_wechat_mod->get("user_id= '$user_id'");print_r($wechat);exit;
+        return $wechat;
     }
 }
 ?>

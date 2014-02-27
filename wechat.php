@@ -27,6 +27,7 @@ include(ROOT_PATH . '/includes/wechat/check.wechat.php');
 include(ROOT_PATH . '/includes/wechat/oauth.wechat.php');
 include(ROOT_PATH . '/includes/wechat/response.wechat.php');
 include(ROOT_PATH. '/includes/wechat/order.response.wechat.php');
+include(ROOT_PATH. '/includes/wechat/service.wechat.php');
 /* 载入配置项 */
 $setting =& af('settings');
 Conf::load($setting->getAll());
@@ -38,6 +39,11 @@ if ($_GET && $_GET['action']) {
             $menu = new MenuWeChat($access_token);
             $result = $menu->create_menu();
             echo $result;
+            break;
+        default:
+            //test case
+            $post = new WeChatTextService('o5hUjuPNWekp7T7LBzA__0rybdGs','test');
+            $post->handle_post();
             break;
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
