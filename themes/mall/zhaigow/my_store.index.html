@@ -90,33 +90,6 @@ $(function(){
         $(".right").mouseout(function(){
             $(this).next("div").hide();
         });
-//区域校验
-    var $chosen_choices = $(".chosen-choices");
-    var $seller_area_notice = $(".seller_area_notice");
-    var $chosen_select = $(".chosen-select");
-    $('#form_submit').click(function () {
-        var area = $chosen_select.val();
-        if(!area){
-            $chosen_choices.addClass("error").find("input").focus();
-            $seller_area_notice.addClass("error").html("此项不允许为空");
-            return false
-        }
-    });
-    $chosen_select.change(function () {
-        var area = $chosen_select.val();
-        if (area) {
-            $chosen_choices.removeClass("error");
-            $seller_area_notice.removeClass("error");
-        } else {
-            $chosen_choices.removeClass("error").addClass("error").find("input").focus();
-            $seller_area_notice.removeClass("error").addClass("error").html("此项不允许为空");
-        }
-    });
-    $chosen_choices.find("input").blur(function(){
-        if(!$chosen_select.val()){
-            $seller_area_notice.removeClass("error").addClass("error").html("此项不允许为空");
-        }
-    })
 });
 
 function add_uploadedfile(file_data)
@@ -160,28 +133,7 @@ function drop_image(file_id)
         <div class="public">
             <div class="information">
             <form method="post" enctype="multipart/form-data" id="my_store_form" >
-                    <div class="setup">
-                        <div class="photo relative1">
 
-                            <p><img src="<!--{if $store.store_logo neq ''}-->{$store.store_logo}<!--{else}-->data/system/default_store_logo.gif<!--{/if}-->" width="120" height="120" ectype="store_logo" /></p>
-                            <b class="ie6hack">
-                                <span class="file1"><input type="file" size="1" maxlength="0" hidefocus="true" ectype="change_store_logo" /></span>
-                                <span class="file2" style="_right: -22px;"><input type="file" ectype="change_store_logo" size="1" maxlength="0" hidefocus="true" /></span>
-                                <div class="txt">{$lang.change_store_logo}</div>
-                            </b>
-                            <span class="explain">{$lang.change_store_logo_des}</span>
-                        </div>
-                        <div class="photo relative2">
-                            <p><img src="<!--{ if $store.store_banner neq ''}-->{$store.store_banner}<!--{else}-->{res file=images/member/banner.gif}<!--{/if}-->" width="607" height="120" ectype="store_banner" /></p>
-                            <b>
-                                <span class="file1"><input type="file" size="1" maxlength="0" hidefocus="true" ectype="change_store_banner"/></span>
-                                <span class="file2" style="_right: -22px;"><input type="file" size="1" maxlength="0" hidefocus="true" ectype="change_store_banner"/></span>
-                                <div class="txt">{$lang.change_store_banner}</div>
-                            </b>
-                            <span class="explain">{$lang.change_store_banner_des}</span>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
                     <div class="setup info shop">
 
                         <table style="width: 100%">
@@ -195,7 +147,7 @@ function drop_image(file_id)
                                 <th class="width2">{$lang.store_name}:</th>
                                 <td>
                                     <p class="td_block"><input id="store_name" type="text" class="text width_normal" name="store_name" value="{$store.store_name|escape}"/><label class="field_notice">{$lang.store_name}</label></p>
-                                    <b class="padding1">*</b><a href="{url app=store&id=$store.store_id}" target="_blank" class="btn1">{$lang.my_store_index}</a>
+                                    <b class="padding1">*</b>
                                 </td>
                             </tr>
                             <tr>
@@ -220,14 +172,14 @@ function drop_image(file_id)
                             </tr>
                             <tr>
                                 <th>{$lang.seller_area}:</th>
-                                <td>
+                                <td><span>
 
-                                    <select name="seller_area[]" data-placeholder="选择销售区域" style="width:350px;" class="chosen-select" multiple tabindex="6">
+
                                     <!--{foreach from=$options item=option}-->
                                     {$option}
                                     <!--{/foreach}-->
-                                </select>
-                                <label generated="true" class="seller_area_notice">销售区域,必填</label>
+                                </span>
+                                    <label generated="true" class="seller_area_notice"></label>
 
                                 </td>
                             </tr>
