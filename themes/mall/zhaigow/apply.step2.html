@@ -121,17 +121,7 @@ $(function(){
                                 <td><input type="text" class="text width7" name="store_name" id="store_name" value="{$store.store_name|escape}"/></td>
                                 <td class="padding3"><span class="fontColor3">*</span> <span class="field_notice">{$lang.note_for_store_name}</span></td>
                             </tr>
-                            <tr>
-                                <th>{$lang.store_category}: </th>
-                                <td>
-                                    <div class="select_add"><select name="cate_id">
-                                    <option value="0">{$lang.select_pls}</option>
-                                    {html_options options=$scategories selected=$scategory.cate_id}
-                                    </select>
-                                    </div>
-                                </td>
-                                <td></td>
-                            </tr>
+
                             <tr>
                                 <th>{$lang.region}: </th>
                                 <td>
