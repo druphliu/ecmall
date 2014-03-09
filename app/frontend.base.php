@@ -771,12 +771,12 @@ class MemberbaseApp extends MallbaseApp
 //                    'name'  => 'my_navigation',
 //                    'icon'  => 'ico15',
 //            );
-            $menu['im_seller']['submenu']['my_partner']  = array(
-                    'text'  => Lang::get('my_partner'),
-                    'url'   => 'index.php?app=my_partner',
-                    'name'  => 'my_partner',
-                    'icon'  => 'ico16',
-            );
+//            $menu['im_seller']['submenu']['my_partner']  = array(
+//                    'text'  => Lang::get('my_partner'),
+//                    'url'   => 'index.php?app=my_partner',
+//                    'name'  => 'my_partner',
+//                    'icon'  => 'ico16',
+//            );
             $menu['im_seller']['submenu']['coupon']  = array(
                     'text'  => Lang::get('coupon'),
                     'url'   => 'index.php?app=coupon',
