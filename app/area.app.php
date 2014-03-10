@@ -13,12 +13,12 @@ class AreaApp extends MallbaseApp
         $regions = $region_mod->get_options(0);
         $areas = $sub_options = '';
         foreach ($regions as $value => $reg) {
-            $areas .= "<optgroup label='$reg'>";
+            $areas .= "<h1>$reg</h1>";
             $sub_regions = $region_mod->get_options($value);
             foreach ($sub_regions as $sub_key => $sub_name) {
-                $sub_options .= " <option value='$sub_key' onclick='init_area($sub_key)'>$reg.$sub_name</option>";
+                $sub_options .= " <span value='$sub_key' onclick='init_area($sub_key)'>$reg.$sub_name</span>";
             }
-            $areas .= $sub_options . "</optgroup>";
+            $areas .= $sub_options;
             unset($sub_options);
         }
         $this->assign('areas', $areas);
@@ -29,10 +29,11 @@ class AreaApp extends MallbaseApp
         $region_id = intval($_GET['region_id']);
         $region_mod =& m('region');
         $area = $region_mod->get($region_id);
+        $expire = 60*60*24*30;
         if($area){
             $parent = $region_mod->get($area['parent_id']);
-            ecm_setcookie('area', $area['region_id']);
-            ecm_setcookie('area_name', $parent['region_name'].".".$area['region_name']);
+            ecm_setcookie('area', $area['region_id'], time() + $expire);
+            ecm_setcookie('area_name', $parent['region_name'] . "." . $area['region_name'], time() + $expire);
             $retval = 1;
             $mesg = 'ok';
         }else{

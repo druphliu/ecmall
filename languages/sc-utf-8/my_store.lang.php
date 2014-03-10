@@ -2,7 +2,7 @@
 return array(
     'store_logo' => '店铺标志',
     'store_banner' => '店铺条幅',
-    'description' => '店铺简介',
+    'description' => '简介',
     'edit_ok' => '保存设置成功。',
     'address' => '详细地址',
     'tel' => '联系电话',

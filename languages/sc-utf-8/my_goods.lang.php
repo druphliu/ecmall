@@ -19,6 +19,7 @@ return array(
     'description' => '商品描述',
     'name_exist' => '该商品名称已存在，请您换一个',
     'color' => '颜色',
+    'amount'=>'数量',
     'size' => '尺码',
     'spec' => '规格',
     'price' => '价格',

@@ -73,18 +73,15 @@ class My_storeApp extends StoreadminbaseApp
             $region_mod =& m('region');
             $regions = $region_mod->get_options(0);
             $this->assign('regions', $regions);
-            $options = $sub_options = '';
+            $options = $regions_list = '';
             foreach ($regions as $value => $reg) {
-                $options .= "<optgroup label='$reg'>";
                 $sub_regions = $region_mod->get_options($value);
-                foreach ($sub_regions as $sub_key => $sub_name) {
-                    $selected = $seller_area_value[$sub_key] ? "selected" : "";
-                    $sub_options .= " <option value='$sub_key' $selected>$reg.$sub_name</option>";
+                foreach ($sub_regions as  $sub_name) {
+                    $regions_list .=$comm.$reg.$sub_name;
+                    $comm = ",";
                 }
-                $options .= $sub_options . "</optgroup>";
-                unset($sub_options);
             }
-            $this->assign('options', $options);
+            $this->assign('options', $regions_list);
             //$this->headtag('<script type="text/javascript" src="{lib file=mlselection.js}"></script>');
 
             /* 属于店铺的附件 */
@@ -171,8 +168,7 @@ class My_storeApp extends StoreadminbaseApp
                 'im_ww'      => $_POST['im_ww'],
                 'domain'     => $subdomain,
                 'enable_groupbuy'   => $_POST['enable_groupbuy'],
-                'enable_radar'      => $_POST['enable_radar'],
-                'seller_area' => implode(',', $_POST['seller_area'])
+                'enable_radar'      => $_POST['enable_radar']
             ));
             $this->_store_mod->edit($this->_store_id, $data);
 

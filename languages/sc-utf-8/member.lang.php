@@ -125,6 +125,7 @@ return array(
     'store_grade'  => '店铺等级',
     'expire_time' => '有效期',
     'goods_put' => '商品发布',
+    'goods_manage'=>'商品管理',
     'space_use' => '空间使用',
     'leaving_day' => '剩余 %s 天',
     'no_limit' => '不限制',
