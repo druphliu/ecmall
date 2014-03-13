@@ -144,14 +144,35 @@ class DefaultPassportUser extends BasePassportUser
      */
     function check_email($email)
     {
-        /* 暂时无此设置 */
-        return true;
 
         $model_member =& m('member');
         $info = $model_member->get("email='{$email}'");
         if (!empty($info))
         {
             $this->_error('email_exists');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     *    检查手机是否唯一
+     *
+     *    @author    Garbin
+     *    @param     string $tel
+     *    @return    bool
+     */
+    function check_tel($tel)
+    {
+
+
+        $model_member =& m('member');
+        $info = $model_member->get("phone_mob='{$tel}'");
+        if (!empty($info))
+        {
+            $this->_error('tel_exists');
 
             return false;
         }

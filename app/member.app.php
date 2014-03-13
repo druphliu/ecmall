@@ -155,6 +155,7 @@ class MemberApp extends MemberbaseApp
                     $ret_url = SITE_URL . '/index.php';
                 }
             }
+            $this->_get_regions();
             $this->assign('ret_url', rawurlencode($ret_url));
             $this->_curlocal(LANG::get('user_register'));
             $this->_config_seo('title', Lang::get('user_register') . ' - ' . Conf::get('site_title'));
@@ -165,7 +166,18 @@ class MemberApp extends MemberbaseApp
             }
 
             /* 导入jQuery的表单验证插件 */
-            $this->import_resource('jquery.plugins/jquery.validate.js');
+            $this->import_resource(array(
+                'script' => array(
+                    array(
+                        'path' => 'jquery.plugins/jquery.validate.js',
+                        'attr' => '',
+                    ),
+                    array(
+                        'path' => 'mlselection.js',
+                        'attr' => '',
+                    )
+                ))
+            );
             $this->display('member.register.html');
         }
         else
@@ -194,6 +206,9 @@ class MemberApp extends MemberbaseApp
             $email     = trim($_POST['email']);
             $passlen = strlen($password);
             $user_name_len = strlen($user_name);
+            $real_name = $_POST['real_name'];
+            $phone_mob = $_POST['tel'];
+            $gender = $_POST['sex'];
             if ($user_name_len < 3 || $user_name_len > 25)
             {
                 $this->show_warning('user_name_length_error');
@@ -212,9 +227,13 @@ class MemberApp extends MemberbaseApp
 
                 return;
             }
-
+            $data=array(
+                'real_name'=>$real_name,
+                'gender'=>$gender,
+                'phone_mob'=>$phone_mob
+            );
             $ms =& ms(); //连接用户中心
-            $user_id = $ms->user->register($user_name, $password, $email);
+            $user_id = $ms->user->register($user_name, $password, $email,$data);
 
             if (!$user_id)
             {
@@ -222,6 +241,22 @@ class MemberApp extends MemberbaseApp
 
                 return;
             }
+            //设置收获地址
+            $data = array(
+                'user_id'       => $user_id,
+                'consignee'     => $real_name,
+                'region_id'     => $_POST['region_id'],
+                'region_name'   => $_POST['region_name'],
+                'address'       => $_POST['address'],
+                'phone_tel'     => $phone_mob
+            );
+            $model_address =& m('address');
+            $model_address->add($data);//添加收货地址
+            //update area
+            $expire = 60*60*24*30;
+            ecm_setcookie('area', $_POST['region_id'], time() + $expire);
+            ecm_setcookie('area_name', $_POST['region_name'], time() + $expire);
+
             $this->_hook('after_register', array('user_id' => $user_id));
             //登录
             $this->_do_login($user_id);
@@ -258,6 +293,43 @@ class MemberApp extends MemberbaseApp
         $ms =& ms();
 
         echo ecm_json_encode($ms->user->check_username($user_name));
+    }
+
+    /**
+     *    检查邮箱是否存在
+     *
+     *    @author    Garbin
+     *    @return    void
+     */
+    function check_email()
+    {
+        $email = empty($_GET['email']) ? null : trim($_GET['email']);
+        if (!$email)
+        {
+            echo ecm_json_encode(false);
+
+            return;
+        }
+        $ms =& ms();
+        echo ecm_json_encode($ms->user->check_email($email));
+    }
+
+    /**
+     *    检查手机号码是否存在
+     *
+     *    @author    Garbin
+     *    @return    void
+     */
+    function check_tel()
+    {
+        $tel = empty($_GET['tel']) ? null : trim($_GET['tel']);
+        if (!$tel) {
+            echo ecm_json_encode(false);
+
+            return;
+        }
+        $ms =& ms();
+        echo ecm_json_encode($ms->user->check_tel($tel));
     }
 
     /**
@@ -571,6 +643,22 @@ class MemberApp extends MemberbaseApp
         }
         $uploader->root_dir(ROOT_PATH);
         return $uploader->save('data/files/mall/portrait/' . ceil($user_id / 500), $user_id);
+    }
+
+    function _get_regions()
+    {
+        $model_region =& m('region');
+        $regions = $model_region->get_list(0);
+        if ($regions)
+        {
+            $tmp  = array();
+            foreach ($regions as $key => $value)
+            {
+                $tmp[$key] = $value['region_name'];
+            }
+            $regions = $tmp;
+        }
+        $this->assign('regions', $regions);
     }
 }
 

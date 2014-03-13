@@ -788,6 +788,22 @@ function is_email($user_email)
 }
 
 /**
+ * 检查是否为一个合法的手机号码
+ *
+ * @param string $user_phone
+ * @return bool
+ */
+function is_phone_number($user_phone)
+{
+    $chars = "/^13[0-9]{1}[0-9]{8}$|147[0-9]{8}|15[012356789]{1}[0-9]{8}$|18[0256789]{1}[0-9]{8}$|170[0-9]{8}/";
+    if (preg_match($chars, $user_phone)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
  * 检查是否为一个合法的时间格式
  *
  * @param   string  $time

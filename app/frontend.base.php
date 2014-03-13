@@ -117,9 +117,19 @@ class FrontendApp extends ECBaseApp
 
             $user_name = trim($_POST['user_name']);
             $password  = $_POST['password'];
-
+            $type = 0;
+            if(is_email($user_name)){
+                $type = 2;
+            }elseif(is_phone_number($user_name)){
+                $model_user =& m('member');
+                $profile    = $model_user->get(array(
+                    'conditions' => '1=1 AND phone_mob='.$user_name,
+                    'field'=>'user_name'
+                ));
+                $user_name = $profile['user_name'];
+            }
             $ms =& ms();
-            $user_id = $ms->user->auth($user_name, $password);
+            $user_id = $ms->user->auth($user_name, $password,$type);
             if (!$user_id)
             {
                 /* 未通过验证，提示错误信息 */
@@ -406,18 +416,6 @@ class MallbaseApp extends FrontendApp
 {
     function __construct(){
         parent::__construct();
-        $this->import_resource( array(
-                'script' => array(
-                    array(
-                        'path' => 'dialog/dialog.js',
-                        'attr' => 'id="dialog_js"',
-                    ),
-                    array(
-                        'path' => 'jquery.ui/jquery.ui.js',
-                        'attr' => '',
-                    )
-                )
-            ));
     }
     function _run_action()
     {
@@ -530,7 +528,7 @@ class MemberbaseApp extends MallbaseApp
     function _run_action()
     {
         /* 只有登录的用户才可访问 */
-        if (!$this->visitor->has_login && !in_array(ACT, array('login', 'register', 'check_user')))
+        if (!$this->visitor->has_login && !in_array(ACT, array('login', 'register', 'check_user','check_email','check_tel')))
         {
             if (!IS_AJAX)
             {

@@ -243,10 +243,10 @@ class UcPassportUser extends BasePassportUser
      *    @param     $string $password
      *    @return    int    用户ID
      */
-    function auth($user_name, $password)
+    function auth($user_name, $password,$type=0)
     {
         register_shutdown_function('restore_error_handler'); // 恢复PHP系统默认的错误处理
-        $result = outer_call('uc_user_login', array($user_name, $password));
+        $result = outer_call('uc_user_login', array($user_name, $password, $type));
         if ($result[0] < 0)
         {
             switch ($result[0])
