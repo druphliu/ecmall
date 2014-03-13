@@ -19,7 +19,6 @@
                         <th>{$lang.consignee}</th>
                         <th>{$lang.region}</th>
                         <th class="width3">{$lang.address}</th>
-                        <th>{$lang.zipcode}</th>
                         <th class="width5">{$lang.phone}</th>
                         <th>{$lang.handle}</th>
                     </tr>
@@ -29,7 +28,6 @@
                         <td>{$address.consignee|escape}</td>
                         <td>{$address.region_name|escape}</td>
                         <td>{$address.address|escape}</td>
-                        <td>{$address.zipcode|escape}</td>
                         <td>{$address.phone_tel} / {$address.phone_mob}</td>
                         <td> <a href="javascript:void(0);" ectype="dialog" dialog_id="my_address_edit" dialog_title="{$lang.edit_address}" dialog_width="700" uri="index.php?app=my_address&act=edit&addr_id={$address.addr_id}" class="edit1 float_none">{$lang.edit}</a>
                             <a href="javascript:drop_confirm('{$lang.drop_confirm}', 'index.php?app=my_address&amp;act=drop&addr_id={$address.addr_id}');" class="delete float_none">{$lang.drop}</a></td>

@@ -1,7 +1,11 @@
 {include file="header.html"}
 <script type="text/javascript">
+    jQuery.validator.addMethod("alnum", function(value, element) {
+        return this.optional(element) || /[A-Za-z]/.test(value);
+    }, "必须包含字母");
 //注册表单验证
 $(function(){
+    regionInit("region");
     $('#register_form').validate({
         errorPlacement: function(error, element){
             var error_td = element.parent('td').next('td');
@@ -16,6 +20,7 @@ $(function(){
             user_name : {
                 required : true,
                 byteRange: [3,15,'{$charset}'],
+                alnum : true,
                 remote   : {
                     url :'index.php?app=member&act=check_user&ajax=1',
                     type:'get',
@@ -45,7 +50,57 @@ $(function(){
             },
             email : {
                 required : true,
-                email    : true
+                email    : true,
+                remote   : {
+                    url :'index.php?app=member&act=check_email&ajax=1',
+                    type:'get',
+                    data:{
+                        email : function(){
+                            return $('#email').val();
+                        }
+                    },
+                    beforeSend:function(){
+                        var _checking = $('#checking_email');
+                        _checking.prev('.field_notice').hide();
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_email').hide();
+                    }
+                }
+            },
+            tel :{
+                required : true,
+                checkTel:true,
+                remote   : {
+                    url :'index.php?app=member&act=check_tel&ajax=1',
+                    type:'get',
+                    data:{
+                        tel : function(){
+                            return $('#tel').val();
+                        }
+                    },
+                    beforeSend:function(){
+                        var _checking = $('#checking_tel');
+                        _checking.prev('.field_notice').hide();
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_tel').hide();
+                    }
+                }
+            },
+            real_name : {
+                required : true
+            },
+            region_id : {
+                required : true,
+                min   : 1
+            },
+            address : {
+              required : true
             },
             captcha : {
                 required : true,
@@ -79,7 +134,23 @@ $(function(){
             },
             email : {
                 required : '{$lang.email_required}',
-                email    : '{$lang.email_invalid}'
+                email    : '{$lang.email_invalid}',
+                remote   : '{$lang.email_already_taken}'
+            },
+            tel : {
+                required : '{$lang.tel_required}',
+                checkTel : '{$lang.tel_invalid}',
+                remote   : '{$lang.tel_already_taken}'
+            },
+            real_name : {
+                required : '{$lang.real_name_required}'
+            },
+            region_id : {
+                required : '{$lang.region_required}',
+                min  : '{$lang.region_required}'
+            },
+            address :{
+                required : '{$lang.address_requied}',
             },
             captcha : {
                 required : '{$lang.captcha_required}',
@@ -91,6 +162,9 @@ $(function(){
         }
     });
 });
+function hide_error(){
+    $('#region').find('.error').hide();
+}
 </script>
 <div class="content">
     <div class="module_common">
@@ -121,8 +195,55 @@ $(function(){
                             </tr>
                             <tr>
                                 <td>{$lang.email}:</td>
-                                <td><input type="text" name="email" class="text width10" /></td>
-                                <td class="padding3 fontColor4"><label class="field_notice">{$lang.email_desc}</label></td>
+                                <td><input id="email" type="text" name="email" class="text width10" /></td>
+                                <td class="padding3 fontColor4"><label class="field_notice">{$lang.email_desc}</label>
+                                    <label id="checking_email" class="checking">{$lang.checking}</label></td>
+                            </tr>
+                            <tr>
+                                <td>{$lang.phone_mob}</td>
+                                <td><input type="text" name="tel" id="tel" class="text width10"></td>
+                                <td class="padding3 fontColor4"><label class="field_notice">{$lang.phone_mob_desc}</label>
+                                    <label id="checking_tel" class="checking">{$lang.checking}</label></td>
+                            </tr>
+                            <tr>
+                                <td>{$lang.real_name}</td>
+                                <td><input type="text" name="real_name" class="text width10"></td>
+                                <td class="padding3 fontColor4"><label class="field_notice">{$lang.real_name_desc}</label></td>
+                            </tr>
+                            <tr>
+                                <td>{$lang.gender}</td>
+                                <td><select name="sex">
+                                    <option value="1">{$lang.male}</option>
+                                    <option value="2">{$lang.female}</option>
+                                </select></td>
+                                <td class="padding3 fontColor4"><label class="field_notice"></label></td>
+                            </tr>
+                            <tr>
+                                <td>{$lang.school_area}:</td>
+                                <td id="region">
+                                    <input type="hidden" name="region_id" value="{$area}" id="region_id" class="mls_id" />
+                                    <input type="hidden" name="region_name" value="{$area_name}" class="mls_names" />
+                                    <!-- {if $area} -->
+                                    <span>{$area_name}</span>
+                                    <input type="button" value="{$lang.edit}" class="edit_region" />
+                                    <select style="display:none" onchange="hide_error();">
+                                        <option>{$lang.select_pls}</option>
+                                        {html_options options=$regions}
+                                    </select>
+                                    <!-- {else} -->
+                                    <select onchange="hide_error();">
+                                        <option>{$lang.select_pls}</option>
+                                        {html_options options=$regions}
+                                    </select>
+                                    <!-- {/if} -->
+
+                                </td>
+                                <td class="padding3 fontColor4"><label class="field_notice"></label></td>
+                            </tr>
+                            <tr>
+                                <td>{$lang.address}</td>
+                                <td><input type="text" name="address" class="text width10"></td>
+                                <td class="padding3 fontColor4"><label class="field_notice">{$lang.address_desc}</label></td>
                             </tr>
                             <!--{if $captcha}-->
                             <tr>
