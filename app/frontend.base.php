@@ -757,12 +757,12 @@ class MemberbaseApp extends MallbaseApp
                     'name'  => 'my_store',
                     'icon'  => 'ico11',
             );
-            $menu['im_seller']['submenu']['my_theme']  = array(
-                    'text'  => Lang::get('my_theme'),
-                    'url'   => 'index.php?app=my_theme',
-                    'name'  => 'my_theme',
-                    'icon'  => 'ico12',
-            );
+//            $menu['im_seller']['submenu']['my_theme']  = array(
+//                    'text'  => Lang::get('my_theme'),
+//                    'url'   => 'index.php?app=my_theme',
+//                    'name'  => 'my_theme',
+//                    'icon'  => 'ico12',
+//            );
 //            $menu['im_seller']['submenu']['my_payment'] =  array(
 //                    'text'  => Lang::get('my_payment'),
 //                    'url'   => 'index.php?app=my_payment',
@@ -775,18 +775,18 @@ class MemberbaseApp extends MallbaseApp
 //                    'name'  => 'my_shipping',
 //                    'icon'  => 'ico14',
 //            );
-            $menu['im_seller']['submenu']['my_navigation'] = array(
-                    'text'  => Lang::get('my_navigation'),
-                    'url'   => 'index.php?app=my_navigation',
-                    'name'  => 'my_navigation',
-                    'icon'  => 'ico15',
-            );
-            $menu['im_seller']['submenu']['my_partner']  = array(
-                    'text'  => Lang::get('my_partner'),
-                    'url'   => 'index.php?app=my_partner',
-                    'name'  => 'my_partner',
-                    'icon'  => 'ico16',
-            );
+//            $menu['im_seller']['submenu']['my_navigation'] = array(
+//                    'text'  => Lang::get('my_navigation'),
+//                    'url'   => 'index.php?app=my_navigation',
+//                    'name'  => 'my_navigation',
+//                    'icon'  => 'ico15',
+//            );
+//            $menu['im_seller']['submenu']['my_partner']  = array(
+//                    'text'  => Lang::get('my_partner'),
+//                    'url'   => 'index.php?app=my_partner',
+//                    'name'  => 'my_partner',
+//                    'icon'  => 'ico16',
+//            );
             $menu['im_seller']['submenu']['coupon']  = array(
                     'text'  => Lang::get('coupon'),
                     'url'   => 'index.php?app=coupon',
