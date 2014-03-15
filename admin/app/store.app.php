@@ -181,17 +181,15 @@ class StoreApp extends BackendApp
 
             //区域
             $region_mod =& m('region');
-            $regions = $region_mod->get_options(0);
-            $this->assign('regions', $regions);
-            $options = $sub_options = '';
-            foreach ($regions as $value => $reg) {
-                $options .= "<optgroup label='$reg'>";
-                $sub_regions = $region_mod->get_options($value);
-                foreach ($sub_regions as $sub_key => $sub_name) {
-                    $sub_options .= " <option value='$sub_key'>$reg.$sub_name</option>";
-                }
-                $options .= $sub_options . "</optgroup>";
-                unset($sub_options);
+            import('tree.lib');
+            $tree = new Tree();
+            $tree->setTree($region_mod->get_list(), 'region_id', 'parent_id', 'region_name');
+            $region_list = $tree->getArrayList();
+            $options = '';
+            foreach($region_list as $r){
+                $options .= "<optgroup label='{$r['value']}'>";
+                $options .= $this->_getChildList($r['children'],$r['value'],'');
+                $options.="</optgroup>";
             }
             $this->assign('options', $options);
 
@@ -742,16 +740,18 @@ class StoreApp extends BackendApp
 
     function _getChildList($list, $parent_name,$selected)
     {
-        $result = '';
+        $result = $selected_html = '';
         if (is_array($list)) {
             foreach ($list as $m) {
                 if ($m['children'] && is_array($m['children'])) {
                     $result .= $this->_getChildList($m['children'], $m['value'],$selected);
                 } else {
+                    if($selected and is_array($selected)){
                     foreach($selected as $s){
                         if($s == $m['id']){
                             $selected_html ="selected='selected'";
                         }
+                    }
                     }
                     $result.="<option value='{$m["id"]}' {$selected_html}>{$parent_name}.{$m['value']}</option>";
                 }
