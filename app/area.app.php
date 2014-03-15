@@ -10,19 +10,31 @@ class AreaApp extends MallbaseApp
     function index()
     {
         $region_mod =& m('region');
-        $regions = $region_mod->get_options(0);
-        $areas = $sub_options = '';
-        foreach ($regions as $value => $reg) {
-            $areas .= "<h1>$reg</h1>";
-            $sub_regions = $region_mod->get_options($value);
-            foreach ($sub_regions as $sub_key => $sub_name) {
-                $sub_options .= " <span value='$sub_key' onclick='init_area($sub_key)'>$reg.$sub_name</span>";
-            }
-            $areas .= $sub_options;
-            unset($sub_options);
-        }
+        import('tree.lib');
+        $tree = new Tree();
+        $tree->setTree($region_mod->get_list(), 'region_id', 'parent_id', 'region_name');
+        $region_list = $tree->getArrayList();
+        $areas = $this->_getList($region_list,1);
         $this->assign('areas', $areas);
         $this->display('area.html');
+    }
+
+    function _getList($list, $depth)
+    {
+        $result = '';
+        if (is_array($list)) {
+            foreach ($list as $m) {
+                if ($m['children'] && is_array($m['children'])) {
+                    $padding = $depth*10;
+                    $result .= "<h{$depth} style='padding-left:{$padding}px'> " . $m['value'] . "</h{$depth}>";
+                    $result .= $this->_getList($m['children'], $depth + 1);
+                } else {
+                    $padding = ($depth+1)*10;
+                    $result .= " <span value='{$m["id"]}' style='padding-left: ".$padding."px' onclick='init_area({$m["id"]})'>{$m['value']}</span>";
+                }
+            }
+        }
+        return $result;
     }
 
     function init(){

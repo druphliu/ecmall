@@ -317,19 +317,30 @@ class StoreApp extends BackendApp
                 }
             }
             $region_mod =& m('region');
-            $regions = $region_mod->get_options(0);
-            $this->assign('regions', $regions);
-            $options = $sub_options = '';
-            foreach ($regions as $value => $reg) {
-                $options .= "<optgroup label='$reg'>";
-                $sub_regions = $region_mod->get_options($value);
-                foreach ($sub_regions as $sub_key => $sub_name) {
-                    $selected = $seller_area_value[$sub_key] ? "selected" : "";
-                    $sub_options .= " <option value='$sub_key' $selected>$reg.$sub_name</option>";
-                }
-                $options .= $sub_options . "</optgroup>";
-                unset($sub_options);
+            import('tree.lib');
+            $tree = new Tree();
+            $tree->setTree($region_mod->get_list(), 'region_id', 'parent_id', 'region_name');
+            $region_list = $tree->getArrayList();
+            $options = '';
+            foreach($region_list as $r){
+                $options .= "<optgroup label='{$r['value']}'>";
+                $options .= $this->_getChildList($r['children'],$r['value'],$seller_area_value);
+                $options.="</optgroup>";
             }
+//            print_r($areas);
+//            $regions = $region_mod->get_options(0);
+//            $this->assign('regions', $regions);
+//            $options = $sub_options = '';
+//            foreach ($regions as $value => $reg) {
+//                $options .= "<optgroup label='$reg'>";
+//                $sub_regions = $region_mod->get_options($value);
+//                foreach ($sub_regions as $sub_key => $sub_name) {
+//                    $selected = $seller_area_value[$sub_key] ? "selected" : "";
+//                    $sub_options .= " <option value='$sub_key' $selected>$reg.$sub_name</option>";
+//                }
+//                $options .= $sub_options . "</optgroup>";
+//                unset($sub_options);
+//            }
             $this->assign('options', $options);
 
             $this->assign('scategories', $this->_get_scategory_options());
@@ -727,6 +738,26 @@ class StoreApp extends BackendApp
         $tree->setTree($scategories, 'cate_id', 'parent_id', 'cate_name');
 
         return $tree->getOptions();
+    }
+
+    function _getChildList($list, $parent_name,$selected)
+    {
+        $result = '';
+        if (is_array($list)) {
+            foreach ($list as $m) {
+                if ($m['children'] && is_array($m['children'])) {
+                    $result .= $this->_getChildList($m['children'], $m['value'],$selected);
+                } else {
+                    foreach($selected as $s){
+                        if($s == $m['id']){
+                            $selected_html ="selected='selected'";
+                        }
+                    }
+                    $result.="<option value='{$m["id"]}' {$selected_html}>{$parent_name}.{$m['value']}</option>";
+                }
+            }
+        }
+        return $result;
     }
 }
 
