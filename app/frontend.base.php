@@ -265,6 +265,20 @@ class FrontendApp extends ECBaseApp
     }
 
     /**
+     * 设置当前区域
+     */
+    function set_area($region_id){
+        $region_mod =& m('region');
+        $area = $region_mod->get($region_id);
+        if(!$area)
+            return false;
+        $expire = 60*60*24*30;
+        $parent = $region_mod->get($area['parent_id']);
+        ecm_setcookie('area', $area['region_id'], time() + $expire);
+        ecm_setcookie('area_name', $parent['region_name'] . "." . $area['region_name'], time() + $expire);
+        return true;
+    }
+    /**
      *    获取JS语言项
      *
      *    @author    Garbin

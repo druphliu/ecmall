@@ -73,7 +73,7 @@ class PhpCacheServer extends CacheServer
             return false;
         }
         $cache_file = $this->_get_cache_path($key);
-        $cache_data = "<?php\r\n/**\r\n *  @Created By ECMall PhpCacheServer\r\n *  @Time:" . date('Y-m-d H:i:s') . "\r\n */";
+        $cache_data = "<?php\r\n/**\r\n *  @Created By Druphliu PhpCacheServer\r\n *  @Time:" . date('Y-m-d H:i:s') . "\r\n */";
         $cache_data .= $this->_get_expire_condition(intval($ttl));
         $cache_data .= "\r\nreturn " . var_export($value, true) .  ";\r\n";
         $cache_data .= "\r\n?>";
