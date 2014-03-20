@@ -364,7 +364,8 @@ return array(
     'tags' => '标签(TAG)',
     'msg_instruction' => '短消息使用格式?',
     'not_csv_file' => '您选择的文件不是CSV格式',
-    'radar_title' => '商品雷达'
+    'radar_title' => '商品雷达',
+    'area_seller_do_not_exit'=>'该区域暂无快餐服务'
 );
 
 ?>

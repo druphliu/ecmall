@@ -2,6 +2,7 @@
 return array(
     'store' => '店铺',
     'store_name' => '店铺名称',
+    'folder'=>'店铺文件夹',
     'region' => '所在地',
     'seller_area'=>'销售区域',
     'sgrade' => '所属等级',
@@ -10,6 +11,7 @@ return array(
     'autonym' => '实名认证',
     'material' => '实体店铺认证',
     'name_exist' => '该店铺名称已经存在，请您换一个',
+    'folder_exist' => '文件夹已经存在，请您换一个',
     'add_ok' => '新增店铺成功。',
     'continue_add' => '继续新增店铺',
     'back_list' => '返回店铺列表',
@@ -70,6 +72,7 @@ return array(
     'note_for_end_time' => '格式：2009-4-30，留空表示不限时间',
     'owner_name_required' => '请输入店主姓名',
     'store_name_required' => '请输入店铺名称',
+    'folder_required'=>'店铺文件夹不能为空',
     'apply_remark' => '申请说明',
     'editable'     => '可编辑',
     'subdomain'    => '二级域名',

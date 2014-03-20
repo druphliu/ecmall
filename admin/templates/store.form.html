@@ -48,6 +48,19 @@ $(function(){
             },
             end_time : {
                 dateISO : true
+            },
+            folder:{
+                required:true,
+                remote : {
+                    url  : 'index.php?app=store&act=check_folder',
+                    type : 'get',
+                    data : {
+                        store_name : function(){
+                            return $('#folder').val();
+                        },
+                        id : '{$store.store_id}'
+                    }
+                }
             }
         },
         messages : {
@@ -60,6 +73,10 @@ $(function(){
             },
             end_time : {
                 dateISO : '{$lang.note_for_end_time}'
+            },
+            folder:{
+                required:'{$lang.folder_required}',
+                remote: '{$lang.folder_exist}'
             }
         }
     });
@@ -132,6 +149,10 @@ $(function(){
         <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="domain" type="text" id="domain" value="{$store.domain|escape}"/></td>
       </tr>
       {/if}
+      <tr>
+          <th class="paddingT15">{$lang.folder}:</th>
+          <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="folder" type="text" id="folder" value="{$store.folder}"/></td>
+      </tr>
       <tr>
         <th class="paddingT15">{$lang.scategory}:</th>
         <td class="paddingT15 wordSpacing5" ><select name="cate_id">

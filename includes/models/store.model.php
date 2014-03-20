@@ -168,6 +168,15 @@ class StoreModel extends BaseModel
     }
 
     /**
+     * 判断文件夹是否唯一
+     */
+    function folder_unique($folder, $store_id = 0)
+    {
+        $conditions = "folder = '" . $folder . "'";
+        $store_id && $conditions .= " AND store_id <> '" . $store_id . "'";
+        return count($this->find(array('conditions' => $conditions))) == 0;
+    }
+    /**
      * 取得信息
      */
     function get_info($store_id)

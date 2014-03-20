@@ -10,7 +10,7 @@ define('NUM_PER_PAGE', 16);        // 每页显示数量
 define('ENABLE_SEARCH_CACHE', true); // 启用商品搜索缓存
 define('SEARCH_CACHE_TTL', 3600);  // 商品搜索缓存时间
 
-class ListApp extends MallbaseApp
+class ListApp extends AreabaseApp
 {
     /* 搜索商品 */
     function index()

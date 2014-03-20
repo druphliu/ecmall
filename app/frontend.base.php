@@ -12,8 +12,8 @@ class FrontendApp extends ECBaseApp
     function __construct()
     {
         $this->FrontendApp();
-        $this->area = ecm_getcookie('area');
-        $this->area_name = ecm_getcookie('area_name');
+        $this->area = defined('AREA') ? AREA : ecm_getcookie('area');
+        $this->area_name = defined('AREA_NAME') ? AREA_NAME : ecm_getcookie('area_name');
         $this->assign(array('area' => $this->area, 'area_name' => $this->area_name));
     }
     function FrontendApp()
@@ -501,6 +501,23 @@ class MallbaseApp extends FrontendApp
     }
 }
 
+class AreabaseApp extends MallbaseApp{
+    var $store_info;
+    function _run_action(){
+        //店铺详情
+        $store_mod  =& m('store');
+        $store_info = $store_mod->get_info(STORE_ID);
+        $this->store_info = $store_info;
+        if(!defined('AREA') || $store_info['state'] == 0){
+            $this->show_message('area_seller_do_not_exit');
+            return;
+        }
+        if(ecm_getcookie('area')!=AREA){
+            $this->set_area(AREA);
+        }
+        parent::_run_action();
+    }
+}
 /**
  *    购物流程子系统基础类
  *

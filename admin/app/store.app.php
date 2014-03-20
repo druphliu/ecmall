@@ -222,6 +222,12 @@ class StoreApp extends BackendApp
                 $this->show_warning('name_exist');
                 return;
             }
+            /*检查文件夹是否唯一*/
+            if (!$this->_store_mod->folder_unique(trim($_POST['folder'])))
+            {
+                $this->show_warning('folder_exist');
+                return;
+            }
             $domain = empty($_POST['domain']) ? '' : trim($_POST['domain']);
             if (!$this->_store_mod->check_domain($domain, Conf::get('subdomain_reserved'), Conf::get('subdomain_length')))
             {
@@ -246,18 +252,20 @@ class StoreApp extends BackendApp
                 'sort_order'   => $_POST['sort_order'],
                 'add_time'     => gmtime(),
                 'domain'       => $domain,
-                'seller_area' => implode(',', $_POST['seller_area'])
+                'seller_area' => implode(',', $_POST['seller_area']),
+                'folder'=>$_POST['folder']
             );
             $certs = array();
             isset($_POST['autonym']) && $certs[] = 'autonym';
             isset($_POST['material']) && $certs[] = 'material';
             $data['certification'] = join(',', $certs);
-
-            if ($this->_store_mod->add($data) === false)
+            $store_id = $this->_store_mod->add($data);
+            if ( $store_id=== false)
             {
                 $this->show_warning($this->_store_mod->get_error());
                 return false;
             }
+            $this->_create_folder($store_id, $_POST['folder']);
 
             $this->_store_mod->unlinkRelation('has_scategory', $user_id);
             $cate_id = intval($_POST['cate_id']);
@@ -325,20 +333,6 @@ class StoreApp extends BackendApp
                 $options .= $this->_getChildList($r['children'],$r['value'],$seller_area_value);
                 $options.="</optgroup>";
             }
-//            print_r($areas);
-//            $regions = $region_mod->get_options(0);
-//            $this->assign('regions', $regions);
-//            $options = $sub_options = '';
-//            foreach ($regions as $value => $reg) {
-//                $options .= "<optgroup label='$reg'>";
-//                $sub_regions = $region_mod->get_options($value);
-//                foreach ($sub_regions as $sub_key => $sub_name) {
-//                    $selected = $seller_area_value[$sub_key] ? "selected" : "";
-//                    $sub_options .= " <option value='$sub_key' $selected>$reg.$sub_name</option>";
-//                }
-//                $options .= $sub_options . "</optgroup>";
-//                unset($sub_options);
-//            }
             $this->assign('options', $options);
 
             $this->assign('scategories', $this->_get_scategory_options());
@@ -375,6 +369,12 @@ class StoreApp extends BackendApp
                 $this->show_warning('name_exist');
                 return;
             }
+            /*检查文件夹是否唯一*/
+            if (!$this->_store_mod->folder_unique(trim($_POST['folder']), $id))
+            {
+                $this->show_warning('folder_exist');
+                return;
+            }
             $store_info = $this->_store_mod->get_info($id);
             $domain = empty($_POST['domain']) ? '' : trim($_POST['domain']);
             if ($domain && $domain != $store_info['domain'])
@@ -386,7 +386,10 @@ class StoreApp extends BackendApp
                     return;
                 }
             }
-
+            if(!file_exists(ROOT_PATH."/".$_POST['folder'])){
+                @mkdir(ROOT_PATH."/".$_POST['folder']);
+                @unlink(ROOT_PATH."/".$store_info['folder']);
+            }
             $data = array(
                 'store_name'   => $_POST['store_name'],
                 'owner_name'   => $_POST['owner_name'],
@@ -403,6 +406,7 @@ class StoreApp extends BackendApp
                 'recommended'  => $_POST['recommended'],
                 'domain'       => $domain,
                 'seller_area' => implode(',', $_POST['seller_area']),
+                'folder'=>$_POST['folder']
             );
             $data['state'] == STORE_CLOSED && $data['close_reason'] = $_POST['close_reason'];
             $certs = array();
@@ -690,6 +694,19 @@ class StoreApp extends BackendApp
         echo ecm_json_encode(true);
     }
 
+    function check_folder()
+    {
+        $id         = empty($_GET['id']) ? 0 : intval($_GET['id']);
+        $folder = empty($_GET['folder']) ? '' : trim($_GET['folder']);
+
+        if (!$this->_store_mod->folder_unique($folder, $id))
+        {
+            echo ecm_json_encode(false);
+            return;
+        }
+        echo ecm_json_encode(true);
+    }
+
     /* 删除店铺相关图片 */
     function _drop_store_image($store_id)
     {
@@ -758,6 +775,11 @@ class StoreApp extends BackendApp
             }
         }
         return $result;
+    }
+
+    function _create_folder($store_id, $folder){
+        @mkdir(ROOT_PATH."/".$folder);
+
     }
 }
 
