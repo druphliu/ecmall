@@ -5,13 +5,15 @@ class My_couponApp extends MemberbaseApp
     var $_user_mod;
     var $_store_mod;
     var $_coupon_mod;
-    
+    var $_couponsn_mod;
+
     function index()
     {
         $page = $this->_get_page(10);
         $this->_user_mod =& m('member');
         $this->_store_mod =& m('store');
         $this->_coupon_mod =& m('coupon');
+        $this->_couponsn_mod =& m('couponsn');
         $msg = $this->_user_mod->findAll(array(
             'conditions' => 'user_id = ' . $this->visitor->get('user_id'),
             'count' => true,
@@ -95,8 +97,27 @@ class My_couponApp extends MemberbaseApp
             {
                 $this->pop_warning('involid_data');
                 exit;
+            }elseif($coupon['is_activity']){
+                $this->pop_warning('coupon_activitied');
+                exit;
             }
-            $coupon_sn_mod->createRelation('bind_user', $coupon_sn, $this->visitor->get('user_id'));
+            //检查此用户是否已经拥有此优惠券的优惠码
+            $coupon_id = $coupon['coupon_id'];
+            $db = &db();
+            $user_coupon=$db->getrow("select * from ecm_user_coupon a left join ecm_coupon_sn b on a.coupon_sn=b.coupon_sn where a.user_id=".$this->visitor->get('user_id')." and b.coupon_id=$coupon_id");
+            if($user_coupon){
+                $this->pop_warning('has_one_coupon');
+                exit;
+            }
+            $result = $coupon_sn_mod->createRelation('bind_user', $coupon_sn, $this->visitor->get('user_id'));
+            if($result){
+                $coupon_sn_mod->edit(array(
+                    'coupon_sn'=>$coupon_sn
+                ),
+                array(
+                    'is_activity'=>1
+                ));
+            }
             $this->pop_warning('ok', 'my_coupon_bind');
             exit;
         }

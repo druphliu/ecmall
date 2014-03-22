@@ -740,13 +740,14 @@ class StoreApp extends BackendApp
 
     function _getChildList($list, $parent_name,$selected)
     {
-        $result = $selected_html = '';
+        $result = '';
         if (is_array($list)) {
             foreach ($list as $m) {
                 if ($m['children'] && is_array($m['children'])) {
                     $result .= $this->_getChildList($m['children'], $m['value'],$selected);
                 } else {
                     if($selected and is_array($selected)){
+                    $selected_html = '';
                     foreach($selected as $s){
                         if($s == $m['id']){
                             $selected_html ="selected='selected'";

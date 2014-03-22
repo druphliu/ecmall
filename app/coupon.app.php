@@ -55,8 +55,12 @@ class CouponApp extends StoreadminbaseApp
                     'path' => 'jquery.plugins/jquery.validate.js',
                     'attr' => '',
                 ),
+                array(
+                    'path' => 'chosen_v1.1.0/chosen.jquery.js',
+                    'attr' => 'id="chosen_js"',
+                ),
             ),
-            'style' =>  'jquery.ui/themes/ui-lightness/jquery.ui.css',
+            'style' =>  'jquery.ui/themes/ui-lightness/jquery.ui.css,chosen_v1.1.0/chosen.min.css',
         ));
         $this->assign('time', gmtime());
         $this->display('coupon.index.html');
@@ -66,7 +70,17 @@ class CouponApp extends StoreadminbaseApp
     {
         if (!IS_POST)
         {
+            $store_id = $this->_store_id;
+            $store_info = $this->_store_mod->get($store_id);
+            $area_array = explode(',',$store_info['seller_area']);
+            $region_mod =& m('region');
+            $regions = $region_mod->get_list();
+            foreach($area_array as $a){
+                $region = $regions[$a];
+                $option[]="<option value='$a'>".$regions[$region['parent_id']]['region_name'].".".$region['region_name']."</option>";
+            }
             header("Content-Type:text/html;charset=" . CHARSET);
+            $this->assign('option', $option);
             $this->assign('today', gmtime());
             $this->display('coupon.form.html');
         }
@@ -74,16 +88,10 @@ class CouponApp extends StoreadminbaseApp
         {
 
             $coupon_value = floatval(trim($_POST['coupon_value']));
-            $use_times = intval(trim($_POST['use_times']));
             $min_amount = floatval(trim($_POST['min_amount']));
             if (empty($coupon_value) || $coupon_value < 0 )
             {
                 $this->pop_warning('coupon_value_not');
-                exit;
-            }
-            if (empty($use_times))
-            {
-                $this->pop_warning('use_times_not_zero');
                 exit;
             }
             if ($min_amount < 0)
@@ -98,15 +106,20 @@ class CouponApp extends StoreadminbaseApp
                 $this->pop_warning('end_gt_start');
                 exit;
             }
+            $use_area = $_POST['use_area'];
+            if(!$this->_exit_area($use_area)){
+                return;
+            }
             $coupon = array(
                 'coupon_name' => trim($_POST['coupon_name']),
                 'coupon_value' => $coupon_value,
                 'store_id' => $this->_store_id,
-                'use_times' => $use_times,
                 'start_time' => $start_time,
                 'end_time' => $end_time,
                 'min_amount' => $min_amount,
                 'if_issue'  => trim($_POST['if_issue']) == 1 ? 1 : 0,
+                'use_area'=>implode(',',$use_area),
+                'use_area_name'=>$this->_get_area_name($use_area)
             );
             $this->_coupon_mod->add($coupon);
             if ($this->_coupon_mod->has_error())
@@ -129,22 +142,32 @@ class CouponApp extends StoreadminbaseApp
         {
             header("Content-Type:text/html;charset=" . CHARSET);
             $coupon = $this->_coupon_mod->get_info($coupon_id);
+            $store_id = $this->_store_id;
+            $store_info = $this->_store_mod->get($store_id);
+            $area_array = explode(',',$store_info['seller_area']);
+            $region_mod =& m('region');
+            $regions = $region_mod->get_list();
+            foreach($area_array as $a){
+                $selected = '';
+                foreach(explode(',', $coupon['use_area']) as $u){
+                    if($a==$u){
+                        $selected = 'selected="selected"';
+                    }
+                }
+                $region = $regions[$a];
+                $option[]="<option value='$a' $selected>".$regions[$region['parent_id']]['region_name'].".".$region['region_name']."</option>";
+            }
+            $this->assign('option', $option);
             $this->assign('coupon', $coupon);
             $this->display('coupon.form.html');
         }
         else
         {
             $coupon_value = floatval(trim($_POST['coupon_value']));
-            $use_times = intval(trim($_POST['use_times']));
             $min_amount = floatval(trim($_POST['min_amount']));
             if (empty($coupon_value) || $coupon_value < 0 )
             {
                 $this->pop_warning('coupon_value_not');
-                exit;
-            }
-            if (empty($use_times))
-            {
-                $this->pop_warning('use_times_not_zero');
                 exit;
             }
             if ($min_amount < 0)
@@ -160,15 +183,20 @@ class CouponApp extends StoreadminbaseApp
                 $this->pop_warning('end_gt_start');
                 exit;
             }
+            $use_area = $_POST['use_area'];
+            if(!$this->_exit_area($use_area)){
+                exit;
+            }
             $coupon = array(
                 'coupon_name' => trim($_POST['coupon_name']),
                 'coupon_value' => $coupon_value,
                 'store_id' => $this->_store_id,
-                'use_times' => $use_times,
                 'start_time' => $start_time,
                 'end_time' => $end_time,
                 'min_amount' => $min_amount,
                 'if_issue'  => trim($_POST['if_issue']) == 1 ? 1 : 0,
+                'use_area_name'=>$this->_get_area_name($use_area),
+                'use_area'=>implode(',',$use_area)
             );
             $this->_coupon_mod->edit($coupon_id, $coupon);
             if ($this->_coupon_mod->has_error())
@@ -217,7 +245,7 @@ class CouponApp extends StoreadminbaseApp
             'back_list', 'index.php?app=coupon');
     }
 
-    function export()
+    function make()
     {
         $coupon_id = isset($_GET['id']) ? trim($_GET['id']) : '';
         if (empty($coupon_id))
@@ -229,7 +257,7 @@ class CouponApp extends StoreadminbaseApp
         {
             header("Content-Type:text/html;charset=" . CHARSET);
             $this->assign('id', $coupon_id);
-            $this->display('coupon_export.html');
+            $this->display('coupon_make.html');
         }
         else
         {
@@ -239,16 +267,28 @@ class CouponApp extends StoreadminbaseApp
                 $this->pop_warning('involid_data');
                 exit;
             }
-            $info = $this->_coupon_mod->get_info($coupon_id);
-            $coupon_name = ecm_iconv(CHARSET, 'gbk', $info['coupon_name']);
-            header('Content-type: application/txt');
-            header('Content-Disposition: attachment; filename="coupon_' .date('Ymd'). '_' .$coupon_name.'.txt"');
-            $sn_array = $this->generate($amount, $coupon_id);
-            $crlf = get_crlf();
-            foreach ($sn_array as $val)
-            {
-                echo $val['coupon_sn'] . $crlf;
-            }
+            $this->generate($amount, $coupon_id);
+            $this->pop_warning("ok","coupon_make");
+        }
+    }
+
+    function export()
+    {
+        $coupon_id = isset($_GET['id']) ? trim($_GET['id']) : '';
+        if (empty($coupon_id))
+        {
+            echo Lang::get('no_coupon');
+            exit;
+        }
+        $info = $this->_coupon_mod->get_info($coupon_id);
+        $coupon_name = ecm_iconv(CHARSET, 'gbk', $info['coupon_name']);
+        header('Content-type: application/txt');
+        header('Content-Disposition: attachment; filename="coupon_' .date('Ymd'). '_' .$coupon_name.'.txt"');
+        $sn_array = $this->_couponsn_mod->findAll(array('coupon_id'=>$coupon_id));
+        $crlf = get_crlf();
+        foreach ($sn_array as $val)
+        {
+            echo $val['coupon_sn'] . $crlf;
         }
     }
 
@@ -302,6 +342,73 @@ class CouponApp extends StoreadminbaseApp
         }
     }
 
+    function sn_list()
+    {
+        $coupon_id = isset($_GET['id']) ? trim($_GET['id']) : '';
+        if (empty($coupon_id)) {
+            echo Lang::get('no_coupon');
+            exit;
+        }
+        $page = $this->_get_page(10);
+        $coupon_sn = $this->_couponsn_mod->find(array(
+            'conditions' => 'coupon_id = '.$coupon_id,
+            'limit' => $page['limit'],
+            'count' => true,
+            'join'=>'bind_user',
+            'order'=>'is_activity desc, is_used desc'
+        ));
+
+        $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
+            LANG::get('coupon'), 'index.php?app=coupon',
+            LANG::get('coupon_sn'));
+        $page['item_count'] = $this->_couponsn_mod->getCount();
+        $this->_format_page($page);
+        $this->assign('page_info', $page);
+
+        $this->import_resource(array(
+            'script' => array(
+                array(
+                    'path' => 'dialog/dialog.js',
+                    'attr' => 'id="dialog_js"',
+                ),
+                array(
+                    'path' => 'jquery.ui/jquery.ui.js',
+                    'attr' => '',
+                ),
+            ),
+            'style' =>  'jquery.ui/themes/ui-lightness/jquery.ui.css',
+        ));
+
+        $this->_curitem('coupon_sn');
+        $this->_curmenu('coupon_sn');
+        $this->_config_seo('title', Lang::get('member_center') . ' - ' . Lang::get('coupon').'-'.Lang::get('coupon_sn'));
+        $this->assign('coupon_sn', $coupon_sn);
+        $this->assign('coupon_id',$coupon_id);
+        $this->display("coupon.sn.html");
+    }
+
+    function drop_sn(){
+        $coupon_sns = isset($_GET['coupon_sn']) ? trim($_GET['coupon_sn']) : '';
+        if (empty($coupon_sns)) {
+            echo Lang::get('no_coupon_sn');
+            exit;
+        }
+        $coupon_sn_ids = explode(',', $coupon_sns);
+
+        $rows = $this->_couponsn_mod->drop("is_activity = 0 AND coupon_sn ".db_create_in($coupon_sn_ids));
+        if ($this->_coupon_mod->has_error())
+        {
+            $this->show_warning($this->_coupon_mod->get_error());
+        }
+        if($rows){
+            $this->show_message('drop_ok');
+        }else{
+            $this->show_warning('drop_error');
+        }
+
+
+    }
+
     function _message_to_user($users, $coupon)
     {
         $ms =& ms();
@@ -351,8 +458,6 @@ class CouponApp extends StoreadminbaseApp
 
     function generate($num, $id)
     {
-        $use_times = $this->_coupon_mod->get(array('fields' => 'use_times', 'conditions' => 'store_id = ' . $this->_store_id . ' AND coupon_id = ' . $id));
-
         if ($num > 1000)
         {
             $num = 1000;
@@ -361,7 +466,6 @@ class CouponApp extends StoreadminbaseApp
         {
             $num = 1;
         }
-        $times = $use_times['use_times'];
         $add_data = array();
         $str = '';
         $pix = 0;
@@ -381,15 +485,14 @@ class CouponApp extends StoreadminbaseApp
             $cpm = sprintf("%08d", $i);
             $tmp = mt_rand(1000, 9999);
             $couponsn = $cpm . $tmp;
-            $str .= "('{$couponsn}', {$id}, {$times}),";
+            $str .= "('$couponsn', {$id}, 0),";
             $add_data[] = array(
                 'coupon_sn' => $couponsn,
-                'coupon_id' => $id,
-                'remain_times' => $times,
+                'coupon_id' => $id
                 );
         }
         $string = substr($str,0, strrpos($str, ','));
-        $this->_couponsn_mod->db->query("INSERT INTO {$this->_couponsn_mod->table} (coupon_sn, coupon_id, remain_times) VALUES {$string}", 'SILENT');
+        $this->_couponsn_mod->db->query("INSERT INTO {$this->_couponsn_mod->table} (coupon_sn, coupon_id, is_activity) VALUES {$string}", 'SILENT');
         return $add_data;
     }
 
@@ -427,6 +530,39 @@ class CouponApp extends StoreadminbaseApp
             ),
         );
         return $menus;
+    }
+
+    function _exit_area($area){
+        $store_info = $this->_store_mod->get($this->_store_id);
+        $store_area = explode(',', $store_info['seller_area']);
+        if(!is_array($area)){
+            $area_arr = explode(',', $area);
+        }else{
+            $area_arr = $area;
+        }
+        foreach($area_arr as $a){
+            if(!in_array($a, $store_area)){
+
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function _get_area_name($area){
+        $area_name = '';
+        $region_md =& m('region');
+        $regions = $region_md->get_list();
+        if(!is_array($area)){
+            $area_arr = explode(',', $area);
+        }else{
+            $area_arr = $area;
+        }
+        foreach($area_arr as $a){
+            $area = $regions[$a];
+            $area_name .=$regions[$area['parent_id']]['region_name'].".".$area['region_name']."<br>";
+        }
+        return $area_name;
     }
 }
 

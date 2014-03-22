@@ -289,6 +289,21 @@ body { font-size: 12px; font-family: Arial, Verdana, sans-serif; }
 .sign_box { float: left; width: 300px; }
 .eject_con .adds .sign { float: left; width: 150px; height: 50px; background: url(../images/member/default.gif); margin-right: 5px; }
 
+/*chonsen 时样式*/
+.eject_con .special_adds { width: auto; padding: 20px; overflow: hidden; }
+.eject_con .special_adds ul {  }
+.eject_con .special_adds li {   float: left; padding-bottom: 10px; }
+.eject_con .special_adds li h3 { float: left; width: 80px; color: #646665; font-weight: normal; font-size: 12px; line-height: 26px; }
+.eject_con .special_adds li p { float: left; }
+.eject_con .special_adds li p span { color: #646665; padding-left: 10px; }
+.eject_con .special_adds .strong { padding-left: 10px; color: #ff4e00; }
+
+.eject_con .special_adds .submit { padding: 10px 0 0 80px; }
+.eject_con .special_adds .submit .btn { border: 0; width: 120px; height: 32px; background: url(../images/member/btn.gif) no-repeat 0 -253px; cursor: pointer; font-weight: bold; color: #3f3d3e; }
+.eject_con .chosen-container .chosen-results li{
+    padding: 5px 6px;
+    padding-bottom: 0;
+}
 /* 6 */
 .info_table_wrap { padding: 10px 5px; }
 .info_table_wrap h3 { height: 26px; line-height: 26px; padding-left: 10px; background: #eee; color: #333; font-size: 14px; margin-bottom: 10px; }
@@ -1042,7 +1057,7 @@ form label.validate_right { padding-left:12px; background:transparent url(../ima
 .order_detail_list li { padding:8px 10px; border-top:1px solid #efefef; }
 
 .table .line_bold_bottom td { padding:0px 0px 2px 0px; line-height:2px; font-size:2px; }
-.table .last_line td { border-bottom:0px; }
+.table .last_line td { border-bottom:0px; text-align: center}
 #seller_groupbuy_form .wrap_bottom { position: static; }
 
 .send_out { padding: 0 0 20px 68px; }
@@ -1060,3 +1075,4 @@ form label.validate_right { padding-left:12px; background:transparent url(../ima
 #short_msg_desc { margin-left:80px;margin-top:10px; }
 #short_msg_desc a { color:#0099CC; }
 #short_msg_desc div { display:none;color:#646665;border:1px solid #CCCCCC;padding:5px;width:340px;background-color:#F5F5F5;line-height:25px; }
+.coupon_sn .ok{ float: left; padding-left: 15px; background: url(../images/member/ico.gif) no-repeat 0 -1042px; }

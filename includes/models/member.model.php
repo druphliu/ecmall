@@ -106,8 +106,8 @@ class MemberModel extends BaseModel
             'type' => HAS_MANY,
             'foreign_key' => 'user_id',
         ),
-        //会员和优惠券编号是多对多的关系
-        'bind_couponsn' => array(
+        //会员和优惠券编号是一对一的关系
+        'user_couponsn' => array(
             'model'        => 'couponsn',
             'type'         => HAS_AND_BELONGS_TO_MANY,
             'middle_table' => 'user_coupon',

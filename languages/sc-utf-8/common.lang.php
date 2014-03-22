@@ -293,6 +293,7 @@ return array(
     'login_please' => '您需要先登录才可以执行该操作',
     'consigness_info' => '收货人信息',
     'coupon' => '优惠券管理',
+    'coupon_sn' => '优惠码列表',
     'involid_data' => '无效的数据',
     'comma' => '，',
     'whitespace' => '　',
