@@ -57,15 +57,6 @@ $(function(){
         }
     });
 
-    $('*[ectype="dialog"]').click(function(){
-        var id = $(this).attr('dialog_id');
-        var title = $(this).attr('dialog_title') ? $(this).attr('dialog_title') : '';
-        var url = $(this).attr('uri');
-        var width = $(this).attr('dialog_width');
-        ajax_form(id, title, url, width);
-        return false;
-    });
-
     $('*[ectype="gselector"]').focus(function(){
         var id = $(this).attr('gs_id');
         var name = $(this).attr('gs_name');
@@ -171,12 +162,6 @@ function js_success(dialog_id)
     var url = window.location.href;
     url =  url.indexOf('#') > 0 ? url.replace(/#/g, '') : url;
     window.location.replace(url);
-}
-
-function js_fail(str)
-{
-    $('#warning').html('<label class="error">' + str + '</label>');
-    $('#warning').show();
 }
 
 function check_number(v)

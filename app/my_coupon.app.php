@@ -81,6 +81,7 @@ class My_couponApp extends MemberbaseApp
         {
             header("Content-Type:text/html;charset=" . CHARSET);
             $this->display('my_coupon.form.html');
+
         }
         else 
         {
@@ -215,7 +216,32 @@ class My_couponApp extends MemberbaseApp
         $this->assign('coupons', $coupon);
         $this->display('my_coupon.index.html');
     }
-    
+    function getCoupon(){
+        $couponsn_mod =& m('couponsn');
+        $coupon_id = isset($_GET['coupon_id']) ? intval($_GET['coupon_id']) : '';
+        #TODO 弹出窗口提示显示统一优化
+        if (empty($coupon_id))
+        {
+            $this->show_warning('params_not_empty');
+            exit;
+        }
+        $limit_couponsn =  $couponsn_mod->get(array(
+            'conditions'=>"coupon_id=$coupon_id AND user_id=0"
+        ));
+        if(!$limit_couponsn){
+            $this->show_warning('coupon_has_none');
+            exit;
+        }
+        $has_couponsn = $couponsn_mod->get(array(
+            'conditions'=>"coupon_id=$coupon_id AND user_id =".$this->visitor->get('user_id')
+        ));
+        if($has_couponsn){
+            $this->show_warning('has_get_one');
+            exit;
+        }
+        $couponsn_mod->edit(array('coupon_sn'=>$limit_couponsn['coupon_sn']),array('user_id'=>$this->visitor->get('user_id')));
+        $this->show_warning('get_success');
+    }
     function _get_member_submenu()
     {
         $menus = array(

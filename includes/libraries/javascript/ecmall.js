@@ -1,3 +1,13 @@
+$(function(){
+    $('*[ectype="dialog"]').click(function(){
+        var id = $(this).attr('dialog_id');
+        var title = $(this).attr('dialog_title') ? $(this).attr('dialog_title') : '';
+        var url = $(this).attr('uri');
+        var width = $(this).attr('dialog_width');
+        ajax_form(id, title, url, width);
+        return false;
+    });
+})
 jQuery.extend({
   getCookie : function(sName) {
     var aCookie = document.cookie.split("; ");
@@ -173,4 +183,10 @@ function init_area(region_id) {
             alert(data.msg);
         }
     });
+}
+
+function js_fail(str)
+{
+    $('#warning').html('<label class="error">' + str + '</label>');
+    $('#warning').show();
 }

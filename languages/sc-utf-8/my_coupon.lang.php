@@ -18,6 +18,10 @@ return array(
     'coupon_passed'=>'优惠券已经过期了',
     'has_one_coupon'=>'亲，你已领取过优惠券',
     'coupon_used'=>'已用优惠券',
-    'coupon_passed'=>'已过期优惠券'
+    'coupon_passed'=>'已过期优惠券',
+    'coupon_has_none'=>'<div style="width:200px;height: 80px;color: red;text-align: center;line-height: 80px">优惠券已没有了！</div>',
+    'params_not_empty'=>'<div style="width:200px;height: 80px;color: red;text-align: center;line-height: 80px">参数不正确！</div>',
+    'has_get_one'=>'<div style="width:200px;height: 80px;color: red;text-align: center;line-height: 80px">亲，你已领取过优惠券</div>',
+    'get_success'=>'<div style="width:200px;height: 80px;color: red;text-align: center;line-height: 80px">领取成功！</div>',
 );
 ?>
