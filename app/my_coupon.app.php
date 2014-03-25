@@ -33,11 +33,11 @@ class My_couponApp extends MemberbaseApp
                 ));
                 $coupon_tmp['valid'] = 0;
                 $time = gmtime();
-                if (($val['remain_times'] > 0) && ($coupon_tmp['end_time'] == 0 || $coupon_tmp['end_time'] > $time))
+                if ( $val['is_used']==0 && ($coupon_tmp['end_time'] == 0 || $coupon_tmp['end_time'] > $time))
                 {
-                    $coupon_tmp['valid'] = 1;
+                    $coupon[$key] = array_merge($val, $coupon_tmp);
                 }
-               $coupon[$key] = array_merge($val, $coupon_tmp);
+
            }
        }
        $this->import_resource(array(
@@ -96,8 +96,8 @@ class My_couponApp extends MemberbaseApp
             {
                 $this->pop_warning('involid_data');
                 exit;
-            }elseif($coupon['is_activity']){
-                $this->pop_warning('coupon_activitied');
+            }elseif($coupon['end_time']<=time()){
+                $this->pop_warning('coupon_passed');
                 exit;
             }
             //检查此用户是否已经拥有此优惠券的优惠码
@@ -149,11 +149,11 @@ class My_couponApp extends MemberbaseApp
                 ));
                 $coupon_tmp['valid'] = 0;
                 $time = gmtime();
-                if (($val['remain_times'] > 0) && ($coupon_tmp['end_time'] == 0 || $coupon_tmp['end_time'] > $time))
+                if ($val['is_used']==1)
                 {
-                    $coupon_tmp['valid'] = 1;
+                    $coupon[$key] = array_merge($val, $coupon_tmp);
                 }
-                $coupon[$key] = array_merge($val, $coupon_tmp);
+
             }
         }
         /* 当前位置 */
@@ -195,11 +195,11 @@ class My_couponApp extends MemberbaseApp
                 ));
                 $coupon_tmp['valid'] = 0;
                 $time = gmtime();
-                if (($val['remain_times'] > 0) && ($coupon_tmp['end_time'] == 0 || $coupon_tmp['end_time'] > $time))
+                if ($val['is_used']==0 &&$coupon_tmp['end_time'] < $time)
                 {
-                    $coupon_tmp['valid'] = 1;
+                    $coupon[$key] = array_merge($val, $coupon_tmp);
                 }
-                $coupon[$key] = array_merge($val, $coupon_tmp);
+
             }
         }
         /* 当前位置 */

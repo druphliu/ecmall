@@ -15,7 +15,7 @@ return array(
     'coupon_sn_empty' => '优惠券号码不能为空',
     'drop_ok' => '删除成功。',
     'area_name' => '使用校区',
-    'coupon_activitied'=>'优惠券已经被激活了或被使用',
+    'coupon_passed'=>'优惠券已经过期了',
     'has_one_coupon'=>'亲，你已领取过优惠券',
     'coupon_used'=>'已用优惠券',
     'coupon_passed'=>'已过期优惠券'
