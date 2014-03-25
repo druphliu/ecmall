@@ -21,7 +21,6 @@
                         <th></th>
                         <th>{$lang.sn}</th>
                         <th>{$lang.is_activity}</th>
-                        <th>{$lang.is_used}</th>
                         <th class="align5">{$lang.handle}</th>
                     </tr>
                      <!-- {/if} -->
@@ -32,14 +31,10 @@
                 <tr class="line<!--{if $smarty.foreach.v.last}--> last_line<!--{/if}-->">
                     <td class="align2"><input type="checkbox" class="checkitem" value="{$sn.coupon_sn}" /></td>
                     <td class="align2">{$sn.coupon_sn}</td>
-                    <td class="align2"><!--{if $sn.is_activity}--><span class="right_ico" status="on" ectype="editobj" style="margin:0px 5px;" idvalue="366"></span>
+                    <td class="align2"><!--{if $sn.user_id>0}--><span class="right_ico" status="on" ectype="editobj" style="margin:0px 5px;" idvalue="366"></span>
                                         <!--{else}-->
                                         <span class="wrong_ico" status="on" ectype="editobj" style="margin:0px 5px;" idvalue="366"></span>
                                         <!--{/if}--></td>
-                    <td class="align2"><!--{if $sn.is_used}--><span class="right_ico" status="on" ectype="editobj" style="margin:0px 5px;" idvalue="366"></span>
-                        <!--{else}-->
-                        <span class="wrong_ico" status="on" ectype="editobj" style="margin:0px 5px;" idvalue="366"></span>
-                        <!--{/if}--></td>
                     <td class="align2">
                         <a  href="javascript:drop_confirm('{$lang.drop_confirm}', 'index.php?app=coupon&act=drop_sn&coupon_sn={$sn.coupon_sn}');" class="delete" >{$lang.drop}</a>
                     </td>

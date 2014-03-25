@@ -355,7 +355,7 @@ class CouponApp extends StoreadminbaseApp
             'limit' => $page['limit'],
             'count' => true,
             'join'=>'bind_user',
-            'order'=>'is_activity desc, is_used desc'
+            'order'=>'user_id desc'
         ));
 
         $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',

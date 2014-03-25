@@ -109,10 +109,8 @@ class MemberModel extends BaseModel
         //会员和优惠券编号是一对一的关系
         'user_couponsn' => array(
             'model'        => 'couponsn',
-            'type'         => HAS_AND_BELONGS_TO_MANY,
-            'middle_table' => 'user_coupon',
-            'foreign_key'  => 'user_id',
-            'reverse'      => 'bind_user',
+            'type'         => HAS_MANY,
+            'foreign_key'  => 'user_id'
         ),
         // 会员和团购活动是多对多的关系（会员收藏商品）
         'join_groupbuy' => array(

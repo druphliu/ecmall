@@ -58,7 +58,6 @@ return array(
     'preview'=>'查看',
     'no_coupon'=>'优惠券不存在',
     'no_coupon_sn'=>'优惠码不存在',
-    'is_used'=>'是否被使用',
     'drop_error'=>'删除失败，不能删除已被激活的优惠码',
     'use_area'=>'可使用校区',
     'use_area_no_limit'=>'无限制',

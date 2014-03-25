@@ -1057,7 +1057,7 @@ form label.validate_right { padding-left:12px; background:transparent url(../ima
 .order_detail_list li { padding:8px 10px; border-top:1px solid #efefef; }
 
 .table .line_bold_bottom td { padding:0px 0px 2px 0px; line-height:2px; font-size:2px; }
-.table .last_line td { border-bottom:0px; text-align: center}
+/*.table .last_line td { border-bottom:0px; text-align: center}*/
 #seller_groupbuy_form .wrap_bottom { position: static; }
 
 .send_out { padding: 0 0 20px 68px; }

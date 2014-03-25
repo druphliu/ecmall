@@ -13,14 +13,12 @@ class CouponsnModel extends BaseModel
             'foreign_key'   => 'coupon_id',
             'reverse'       => 'has_couponsn',
         ),
-        // 用户与优惠券是多对多的关系   
-        'bind_user' => array(
+        // 用户与优惠券是一对多的关系
+        'belongs_to_user'  => array(
+            'type'          => BELONGS_TO,
+            'reverse'       => 'user_couponsn',
             'model'         => 'member',
-            'type'          => HAS_AND_BELONGS_TO_MANY,
-            'middle_table'  => 'user_coupon',
-            'foreign_key'   => 'coupon_sn',
-            'reverse'       => 'bind_couponsn',
-        ),
+        )
     );
 }
 

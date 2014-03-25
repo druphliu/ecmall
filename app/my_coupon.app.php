@@ -14,18 +14,17 @@ class My_couponApp extends MemberbaseApp
         $this->_store_mod =& m('store');
         $this->_coupon_mod =& m('coupon');
         $this->_couponsn_mod =& m('couponsn');
-        $msg = $this->_user_mod->findAll(array(
-            'conditions' => 'user_id = ' . $this->visitor->get('user_id'),
-            'count' => true,
-            'limit' => $page['limit'],
-            'include' => array('bind_couponsn' => array())));
+        $coupon_sn = $this->_couponsn_mod->findAll(array(
+                'conditions' => 'coupon_sn.user_id = ' . $this->visitor->get('user_id'),
+                'count' => true,
+                'join'=>'belongs_to_user',
+                'limit' => $page['limit'])
+        );
         $page['item_count'] = $this->_user_mod->getCount();
         $coupon = array();
-        $coupon_ids = array();
-        $msg = current($msg);
-       if (!empty($msg['coupon_sn']))
+       if (!empty($coupon_sn))
        {
-           foreach ($msg['coupon_sn'] as $key=>$val)
+           foreach ($coupon_sn as $key=>$val)
            {
                $coupon_tmp = $this->_coupon_mod->get(array(
                 'fields' => "this.*,store.store_name,store.store_id",
@@ -91,8 +90,8 @@ class My_couponApp extends MemberbaseApp
                 $this->pop_warning('coupon_sn_not_empty');
                 exit;
             }
-            $coupon_sn_mod =&m ('couponsn');
-            $coupon = $coupon_sn_mod->get_info($coupon_sn);
+            $this->_couponsn_mod =&m ('couponsn');
+            $coupon = $this->_couponsn_mod->get_info($coupon_sn);
             if (empty($coupon))
             {
                 $this->pop_warning('involid_data');
@@ -102,16 +101,18 @@ class My_couponApp extends MemberbaseApp
                 exit;
             }
             //检查此用户是否已经拥有此优惠券的优惠码
-            $coupon_id = $coupon['coupon_id'];
-            $db = &db();
-            $user_coupon=$db->getrow("select * from ecm_user_coupon a left join ecm_coupon_sn b on a.coupon_sn=b.coupon_sn where a.user_id=".$this->visitor->get('user_id')." and b.coupon_id=$coupon_id");
+            $user_coupon= $this->_couponsn_mod->get(array(
+                'conditions' => 'coupon_sn.user_id = ' . $this->visitor->get('user_id').' AND coupon_sn.coupon_id = '.$coupon['coupon_id'],
+                'count' => true,
+                'join'=>'belongs_to_user')
+                );
             if($user_coupon){
                 $this->pop_warning('has_one_coupon');
                 exit;
             }
-            $result = $coupon_sn_mod->createRelation('bind_user', $coupon_sn, $this->visitor->get('user_id'));
+            $result = $this->_couponsn_mod->createRelation('bind_user', $coupon_sn, $this->visitor->get('user_id'));
             if($result){
-                $coupon_sn_mod->edit(array(
+                $this->_couponsn_mod->edit(array(
                     'coupon_sn'=>$coupon_sn
                 ),
                 array(
@@ -122,24 +123,97 @@ class My_couponApp extends MemberbaseApp
             exit;
         }
     }
-    
-    function drop()
-    {
-        if (!isset($_GET['id']) && empty($_GET['id']))
+
+    function used(){
+        $page = $this->_get_page(10);
+        $this->_user_mod =& m('member');
+        $this->_store_mod =& m('store');
+        $this->_coupon_mod =& m('coupon');
+        $this->_couponsn_mod =& m('couponsn');
+        $coupon_sn = $this->_couponsn_mod->findAll(array(
+                'conditions' => 'coupon_sn.user_id = ' . $this->visitor->get('user_id'),
+                'count' => true,
+                'join'=>'belongs_to_user',
+                'limit' => $page['limit'])
+        );
+        $page['item_count'] = $this->_user_mod->getCount();
+        $coupon = array();
+        if (!empty($coupon_sn))
         {
-            $this->show_warning("involid_data");
-            exit;
+            foreach ($coupon_sn as $key=>$val)
+            {
+                $coupon_tmp = $this->_coupon_mod->get(array(
+                    'fields' => "this.*,store.store_name,store.store_id",
+                    'conditions' => 'coupon_id = ' . $val['coupon_id'],
+                    'join' => 'belong_to_store',
+                ));
+                $coupon_tmp['valid'] = 0;
+                $time = gmtime();
+                if (($val['remain_times'] > 0) && ($coupon_tmp['end_time'] == 0 || $coupon_tmp['end_time'] > $time))
+                {
+                    $coupon_tmp['valid'] = 1;
+                }
+                $coupon[$key] = array_merge($val, $coupon_tmp);
+            }
         }
-        $ids = explode(',', trim($_GET['id']));
-        $couponsn_mod =& m('couponsn');
-        $couponsn_mod->unlinkRelation('bind_user', db_create_in($ids, 'coupon_sn'));
-        if ($couponsn_mod->has_error())
+        /* 当前位置 */
+        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
+            LANG::get('my_coupon'), 'index.php?app=my_coupon',
+            LANG::get('coupon_list'));
+        $this->_curitem('my_coupon');
+
+        $this->_curmenu('coupon_used');
+        $this->assign('page_info', $page);          //将分页信息传递给视图，用于形成分页条
+        $this->_config_seo('title', Lang::get('member_center') . ' - ' . Lang::get('coupon_list'));
+        $this->_format_page($page);
+        $this->assign('coupons', $coupon);
+        $this->display('my_coupon.index.html');
+    }
+
+    function passed(){
+        $page = $this->_get_page(10);
+        $this->_user_mod =& m('member');
+        $this->_store_mod =& m('store');
+        $this->_coupon_mod =& m('coupon');
+        $this->_couponsn_mod =& m('couponsn');
+        $coupon_sn = $this->_couponsn_mod->findAll(array(
+                'conditions' => 'coupon_sn.user_id = ' . $this->visitor->get('user_id'),
+                'count' => true,
+                'join'=>'belongs_to_user',
+                'limit' => $page['limit'])
+        );
+        $page['item_count'] = $this->_user_mod->getCount();
+        $coupon = array();
+        if (!empty($coupon_sn))
         {
-            $this->show_warning($couponsn_mod->get_error());
-            exit;
+            foreach ($coupon_sn as $key=>$val)
+            {
+                $coupon_tmp = $this->_coupon_mod->get(array(
+                    'fields' => "this.*,store.store_name,store.store_id",
+                    'conditions' => 'coupon_id = ' . $val['coupon_id'],
+                    'join' => 'belong_to_store',
+                ));
+                $coupon_tmp['valid'] = 0;
+                $time = gmtime();
+                if (($val['remain_times'] > 0) && ($coupon_tmp['end_time'] == 0 || $coupon_tmp['end_time'] > $time))
+                {
+                    $coupon_tmp['valid'] = 1;
+                }
+                $coupon[$key] = array_merge($val, $coupon_tmp);
+            }
         }
-        $this->show_message('drop_ok',
-            'back_list', 'index.php?app=my_coupon');
+        /* 当前位置 */
+        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
+            LANG::get('my_coupon'), 'index.php?app=my_coupon',
+            LANG::get('coupon_list'));
+        $this->_curitem('my_coupon');
+
+        $this->_curmenu('coupon_passed');
+        $this->assign('page_info', $page);          //将分页信息传递给视图，用于形成分页条
+        $this->_config_seo('title', Lang::get('member_center') . ' - ' . Lang::get('coupon_list'));
+        $this->_format_page($page);
+        $this->assign('coupons', $coupon);
+        $this->display('my_coupon.index.html');
     }
     
     function _get_member_submenu()
@@ -149,6 +223,14 @@ class My_couponApp extends MemberbaseApp
                 'name'  => 'coupon_list',
                 'url'   => 'index.php?app=my_coupon',
             ),
+            array(
+                'name'  => 'coupon_used',
+                'url'   => 'index.php?app=my_coupon&act=used',
+            ),
+            array(
+                'name'  => 'coupon_passed',
+                'url'   => 'index.php?app=my_coupon&act=passed',
+            )
         );
         return $menus;
     }
