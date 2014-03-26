@@ -40,7 +40,7 @@ class My_goodsApp extends StoreadminbaseApp
     function index()
     {
         /* 取得店铺商品分类 */
-        $this->assign('sgcategories', $this->_get_sgcategory_options());
+//        $this->assign('sgcategories', $this->_get_sgcategory_options());
 
         $conditions = $this->_get_conditions();
         $page = $this->_get_page();
@@ -214,7 +214,7 @@ class My_goodsApp extends StoreadminbaseApp
         {
              /* 取得商品分类 */
              $this->assign('mgcategories', $this->_get_mgcategory_options(0)); // 商城分类第一级
-             $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
+//             $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
 
              /* 当前页面信息 */
              $this->_curlocal(LANG::get('member_center'), url('app=member'),
@@ -465,7 +465,7 @@ class My_goodsApp extends StoreadminbaseApp
              $this->assign('desc_images', $desc_images);
              /* 取得商品分类 */
              $this->assign('mgcategories', $this->_get_mgcategory_options(0)); // 商城分类第一级
-             $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
+//             $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
 
              /* 当前页面信息 */
              $this->_curlocal(LANG::get('member_center'), url('app=member'),
@@ -631,7 +631,7 @@ class My_goodsApp extends StoreadminbaseApp
 
             /* 取得商品分类 */
             $this->assign('mgcategories', $this->_get_mgcategory_options(0)); // 商城分类第一级
-            $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
+//            $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
 
             /* 当前页面信息 */
             $this->_curlocal(LANG::get('member_center'), url('app=member'),

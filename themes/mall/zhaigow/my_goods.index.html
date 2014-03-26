@@ -49,10 +49,6 @@ $(function(){
                             <a class="detlink" style="float:right" href="{url app=my_goods}">{$lang.cancel_query}</a>
                             <!--{/if}-->
                             <input type="hidden" name="app" value="my_goods">
-                            <select class="select1" name='sgcate_id'>
-                                <option value="0">{$lang.sgcategory}</option>
-                                {html_options options=$sgcategories selected=$smarty.get.sgcate_id}
-                            </select>
                             <select class="select2" name="character">
                                 <option value="0">{$lang.character}</option>
                                 {html_options options=$lang.character_array selected=$smarty.get.character}
