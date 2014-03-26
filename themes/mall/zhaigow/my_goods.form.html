@@ -187,29 +187,6 @@ $(function(){
                                     <input type="hidden" name="cate_name" value="{$goods.cate_name|escape}" class="mls_names" />
                                 </p>
                             </div>
-                            <div class="assort">
-                                <p class="txt">{$lang.sgcategory}: </p>
-                                <p class="select">
-                                    <!--{if $goods._scates}-->
-                                    <!--{foreach from=$goods._scates item=sgcate}-->
-                                    <select name="sgcate_id[]" class="sgcategory">
-                                        <option value="0">{$lang.select_pls}</option>
-                                        {html_options options=$sgcategories selected=$sgcate.cate_id}
-                                    </select>
-                                    <!-- {/foreach} -->
-                                    <!--{else}-->
-                                    <select name="sgcate_id[]" class="sgcategory">
-                                        <option value="0">{$lang.select_pls}</option>
-                                        {html_options options=$sgcategories}
-                                    </select>
-                                    <!--{/if}-->
-
-                                </p>
-                                <p class="new_add">
-                                    <a href="javascript:;" id="add_sgcategory" class="btn">{$lang.add_scategory}</a>
-                                    <span>{$lang.note_for_sgcategory}</span>
-                                </p>
-                            </div>
                         </div>
 
                         <h4>{$lang.goods_base_info}</h4>
