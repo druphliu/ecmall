@@ -49,8 +49,8 @@ class My_paymentApp extends StoreadminbaseApp
         ));
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('my_payment'), 'index.php?app=my_payment',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('my_payment'), url('app=my_payment'),
                          LANG::get('payment_list'));
 
         /* 当前用户中心菜单 */
@@ -97,8 +97,8 @@ class My_paymentApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_payment'), 'index.php?app=my_payment',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_payment'), url('app=my_payment'),
                              LANG::get('payment_list'));
 
             /* 当前用户中心菜单 */
@@ -167,8 +167,8 @@ class My_paymentApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_payment'), 'index.php?app=my_payment',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_payment'), url('app=my_payment'),
                              LANG::get('payment_list'));
 
             /* 当前用户中心菜单 */
@@ -242,7 +242,7 @@ class My_paymentApp extends StoreadminbaseApp
         $arr = array(
             array(
                 'name'  => 'payment_list',
-                'url'   => 'index.php?app=my_payment',
+                'url'   => url('app=my_payment'),
             ),
             array(
                 'name'  => 'install_payment',

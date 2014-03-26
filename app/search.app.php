@@ -19,7 +19,7 @@ class SearchApp extends MallbaseApp
         $param = $this->_get_query_param();
         if (empty($param))
         {
-            header('Location: index.php?app=category');
+            header('Location: '.url("app=category"));
             exit;
         }
         if (isset($param['cate_id']) && $param['layer'] === false)

@@ -31,7 +31,7 @@ class StoreApp extends StorebaseApp
         $this->assign('new_goods', $this->_get_new_goods($id));
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('all_stores'), 'index.php?app=search&amp;act=store', $store['store_name']);
+        $this->_curlocal(LANG::get('all_stores'), url('app=search&act=store'), $store['store_name']);
 
         $this->_config_seo('title', $store['store_name'] . ' - ' . Conf::get('site_title'));
         /* 配置seo信息 */
@@ -56,8 +56,8 @@ class StoreApp extends StorebaseApp
         $this->_assign_searched_goods($id);
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('all_stores'), 'index.php?app=search&amp;act=store',
-            $store['store_name'], 'index.php?app=store&amp;id=' . $store['store_id'],
+        $this->_curlocal(LANG::get('all_stores'), url('app=search&act=store'),
+            $store['store_name'], url('app=store&id=' . $store['store_id']),
             LANG::get('goods_list')
         );
 
@@ -140,8 +140,8 @@ class StoreApp extends StorebaseApp
             }
         }
         /* 当前位置 */
-        $this->_curlocal(LANG::get('all_stores'), 'index.php?app=search&amp;act=store',
-            $store['store_name'], 'index.php?app=store&amp;id=' . $store['store_id'],
+        $this->_curlocal(LANG::get('all_stores'), url('app=search&act=store'),
+            $store['store_name'], url('app=store&id=' . $store['store_id']),
             LANG::get('groupbuy_list')
         );
 
@@ -173,8 +173,8 @@ class StoreApp extends StorebaseApp
         $this->assign('store', $store);
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('all_stores'), 'index.php?app=search&amp;act=store',
-            $store['store_name'], 'index.php?app=store&amp;id=' . $store['store_id'],
+        $this->_curlocal(LANG::get('all_stores'), url('app=search&act=store'),
+            $store['store_name'], url('app=store&id=' . $store['store_id']),
             $article['title']
         );
 
@@ -268,8 +268,8 @@ class StoreApp extends StorebaseApp
         $this->assign('stats', $stats);
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('all_stores'), 'index.php?app=search&amp;act=store',
-            $store['store_name'], 'index.php?app=store&amp;id=' . $store['store_id'],
+        $this->_curlocal(LANG::get('all_stores'), url('app=search&act=store'),
+            $store['store_name'], url('app=store&id=' . $store['store_id']),
             LANG::get('credit_evaluation')
         );
 

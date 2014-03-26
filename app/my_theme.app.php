@@ -20,7 +20,7 @@ class My_themeApp extends StoreadminbaseApp
         }
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
                          LANG::get('theme_list'));
 
         /* 当前用户中心菜单 */
@@ -115,7 +115,7 @@ class My_themeApp extends StoreadminbaseApp
         $menus = array(
             array(
                 'name' => 'theme_config',
-                'url'  => 'index.php?app=my_theme',
+                'url'  => url('app=my_theme'),
             ),
             );
         return $menus;

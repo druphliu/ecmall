@@ -83,7 +83,7 @@ class ApplyApp extends MallbaseApp
                 if (empty($sgrade))
                 {
                     $this->show_message('request_error',
-                        'back_step1', 'index.php?app=apply');
+                        'back_step1', url('app=apply'));
                          exit;
                 }
 
@@ -180,7 +180,7 @@ class ApplyApp extends MallbaseApp
                 }
                 break;
             default:
-                header("Location:index.php?app=apply&step=1");
+                header("Location:".url("app=apply&step=1"));
                 break;
         }
     }

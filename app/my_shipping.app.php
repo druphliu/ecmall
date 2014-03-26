@@ -40,8 +40,8 @@ class My_shippingApp extends StoreadminbaseApp
         ));
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('my_shipping'), 'index.php?app=my_shipping',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('my_shipping'), url('app=my_shipping'),
                          LANG::get('shipping_list'));
 
         /* 当前用户中心菜单 */
@@ -60,8 +60,8 @@ class My_shippingApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_shipping'), 'index.php?app=my_shipping',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_shipping'), url('app=my_shipping'),
                              LANG::get('add_shipping'));
 
             /* 当前用户中心菜单 */
@@ -130,8 +130,8 @@ class My_shippingApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_shipping'), 'index.php?app=my_shipping',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_shipping'), url('app=my_shipping'),
                              LANG::get('edit_shipping'));
 
             /* 当前用户中心菜单 */
@@ -225,7 +225,7 @@ class My_shippingApp extends StoreadminbaseApp
         $menus = array(
             array(
                 'name'  => 'shipping_list',
-                'url'   => 'index.php?app=my_shipping',
+                'url'   => url('app=my_shipping'),
             ),
 /*            array(
                 'name'  => 'add_shipping',

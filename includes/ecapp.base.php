@@ -112,7 +112,6 @@ class ECBaseApp extends BaseApp
             /* 载入配置项 */
             $setting =& af('settings');
             Conf::load($setting->getAll());
-
             /* 初始化访问者(放在此可能产生问题) */
             $this->_init_visitor();
 

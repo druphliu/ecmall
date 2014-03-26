@@ -82,8 +82,8 @@ class My_goodsApp extends StoreadminbaseApp
             'style' =>  'jquery.ui/themes/ui-lightness/jquery.ui.css',
       ));
         /* 当前页面信息 */
-        $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                         LANG::get('my_goods'), 'index.php?app=my_goods',
+        $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                         LANG::get('my_goods'), url('app=my_goods'),
                          LANG::get('goods_list'));
         $this->_curitem('my_goods');
         $this->_curmenu('goods_list');
@@ -116,7 +116,7 @@ class My_goodsApp extends StoreadminbaseApp
         }
 
         $this->show_message(sprintf(Lang::get('truncate_ok'), $rows),
-            'back_list', 'index.php?app=my_goods'
+            'back_list', url('app=my_goods')
         );
     }
     
@@ -217,8 +217,8 @@ class My_goodsApp extends StoreadminbaseApp
              $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
 
              /* 当前页面信息 */
-             $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                              LANG::get('my_goods'), 'index.php?app=my_goods',
+             $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                              LANG::get('my_goods'), url('app=my_goods'),
                               LANG::get('goods_add'));
              $this->_curitem('my_goods');
              $this->_curmenu('batch_edit');
@@ -351,7 +351,7 @@ class My_goodsApp extends StoreadminbaseApp
 
              $ret_page = isset($_GET['ret_page']) ? intval($_GET['ret_page']) : 1;
              $this->show_message('edit_ok',
-                 'back_list', 'index.php?app=my_goods&page=' . $ret_page);
+                 'back_list', url('app=my_goods&page=' . $ret_page));
         }
     }
 
@@ -468,8 +468,8 @@ class My_goodsApp extends StoreadminbaseApp
              $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
 
              /* 当前页面信息 */
-             $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                              LANG::get('my_goods'), 'index.php?app=my_goods',
+             $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                              LANG::get('my_goods'), url('app=my_goods'),
                               LANG::get('goods_add'));
              $this->_curitem('my_goods');
              $this->_curmenu('goods_add');
@@ -482,7 +482,7 @@ class My_goodsApp extends StoreadminbaseApp
                  'item_id' => 0,
                  'button_text' => Lang::get('bat_upload'),
                  'progress_id' => 'goods_upload_progress',
-                 'upload_url' => 'index.php?app=swfupload&instance=goods_image',
+                 'upload_url' => url('app=swfupload&instance=goods_image'),
                  'if_multirow' => 1,
              )));
 
@@ -494,7 +494,7 @@ class My_goodsApp extends StoreadminbaseApp
                  'button_text' => Lang::get('bat_upload'),
                  'button_id' => 'editor_upload_button',
                  'progress_id' => 'editor_upload_progress',
-                 'upload_url' => 'index.php?app=swfupload&instance=desc_image',
+                 'upload_url' => url('app=swfupload&instance=desc_image'),
                  'if_multirow' => 1,
                  'ext_js' => false,
                  'ext_css' => false,
@@ -570,8 +570,8 @@ class My_goodsApp extends StoreadminbaseApp
             }
 
             $this->show_message('add_ok',
-                'back_list', 'index.php?app=my_goods',
-                'continue_add', 'index.php?app=my_goods&amp;act=add'
+                'back_list', url('app=my_goods'),
+                'continue_add', url('app=my_goods&amp;act=add')
             );
         }
     }
@@ -634,8 +634,8 @@ class My_goodsApp extends StoreadminbaseApp
             $this->assign('sgcategories', $this->_get_sgcategory_options());  // 店铺分类
 
             /* 当前页面信息 */
-            $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                             LANG::get('my_goods'), 'index.php?app=my_goods',
+            $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                             LANG::get('my_goods'), url('app=my_goods'),
                              LANG::get('goods_list'));
             $this->_curitem('my_goods');
             $this->_curmenu('edit_goods');
@@ -674,7 +674,7 @@ class My_goodsApp extends StoreadminbaseApp
                 'item_id' => $id,
                 'button_text' => Lang::get('bat_upload'),
                 'progress_id' => 'goods_upload_progress',
-                'upload_url' => 'index.php?app=swfupload&instance=goods_image',
+                'upload_url' => url('app=swfupload&instance=goods_image'),
                 'if_multirow' => 1,
             )));
 
@@ -686,7 +686,7 @@ class My_goodsApp extends StoreadminbaseApp
                 'button_text' => Lang::get('bat_upload'),
                 'button_id' => 'editor_upload_button',
                 'progress_id' => 'editor_upload_progress',
-                'upload_url' => 'index.php?app=swfupload&instance=desc_image',
+                'upload_url' => url('app=swfupload&instance=desc_image'),
                 'if_multirow' => 1,
                 'ext_js' => false,
                 'ext_css' => false,
@@ -720,8 +720,8 @@ class My_goodsApp extends StoreadminbaseApp
             }
 
             $this->show_message('edit_ok',
-                'back_list', 'index.php?app=my_goods',
-                'edit_again', 'index.php?app=my_goods&amp;act=edit&amp;id=' . $id);
+                'back_list', url('app=my_goods'),
+                'edit_again', url('app=my_goods&act=edit&id=' . $id));
         }
     }
 
@@ -945,11 +945,11 @@ class My_goodsApp extends StoreadminbaseApp
             $menus = array(
                 array(
                     'name' => 'goods_list',
-                    'url'  => 'index.php?app=my_goods',
+                    'url'  => url('app=my_goods'),
                 ),
                 array(
                     'name' => 'brand_apply_list',
-                    'url' => 'index.php?app=my_goods&amp;act=brand_list'
+                    'url' => url('app=my_goods&act=brand_list')
                 ),
             );
         }
@@ -958,11 +958,11 @@ class My_goodsApp extends StoreadminbaseApp
              $menus = array(
                  array(
                      'name' => 'goods_list',
-                     'url'  => 'index.php?app=my_goods',
+                     'url'  => url('app=my_goods'),
                  ),
                  array(
                      'name' => 'goods_add',
-                     'url'  => 'index.php?app=my_goods&amp;act=add',
+                     'url'  => url('app=my_goods&act=add'),
                  ),
 //                 array(
 //                     'name' => 'import_taobao',
@@ -970,7 +970,7 @@ class My_goodsApp extends StoreadminbaseApp
 //                 ),
                  array(
                     'name' => 'brand_apply_list',
-                    'url' => 'index.php?app=my_goods&amp;act=brand_list'
+                    'url' => url('app=my_goods&act=brand_list')
                 ),
              );
         }
@@ -993,11 +993,11 @@ class My_goodsApp extends StoreadminbaseApp
             $menus = array(
                 array(
                     'name' => 'goods_list',
-                    'url'  => 'index.php?app=my_goods',
+                    'url'  => url('app=my_goods'),
                 ),
                 array(
                     'name' => 'brand_apply_list',
-                    'url' => 'index.php?app=my_goods&amp;act=brand_list'
+                    'url' => url('app=my_goods&act=brand_list')
                 ),
             );
         }
@@ -1613,8 +1613,8 @@ class My_goodsApp extends StoreadminbaseApp
         ));
         $page['item_count'] = $this->_brand_mod->getCount();
         $this->_format_page($page);
-        $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                         LANG::get('my_goods'), 'index.php?app=my_goods',
+        $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                         LANG::get('my_goods'), url('index.php?app=my_goods'),
                          LANG::get('brand_list'));
         $this->_curitem('my_goods');
         $this->_curmenu('brand_apply_list');

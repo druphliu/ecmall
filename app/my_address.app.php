@@ -18,8 +18,8 @@ class My_addressApp extends MemberbaseApp
         $this->assign('addresses', $addresses);
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('my_address'), 'index.php?app=my_address',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('my_address'), url('app=my_address'),
                          LANG::get('address_list'));
 
         /* 当前用户中心菜单 */
@@ -130,8 +130,8 @@ class My_addressApp extends MemberbaseApp
             $address = current($find_data);
 
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_address'), 'index.php?app=my_address',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_address'), url('app=my_address'),
                              LANG::get('edit_address'));
 
             /* 当前用户中心菜单 */
@@ -232,7 +232,7 @@ class My_addressApp extends MemberbaseApp
         $menus = array(
             array(
                 'name'  => 'address_list',
-                'url'   => 'index.php?app=my_address',
+                'url'   => url('app=my_address'),
             ),
 /*            array(
                 'name'  => 'add_address',

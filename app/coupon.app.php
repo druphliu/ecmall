@@ -26,8 +26,8 @@ class CouponApp extends StoreadminbaseApp
             'limit' => $page['limit'],
             'count' => true,
         ));
-        $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                         LANG::get('coupon'), 'index.php?app=coupon',
+        $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                         LANG::get('coupon'), url('app=coupon'),
                          LANG::get('coupons_list'));
         $page['item_count'] = $this->_coupon_mod->getCount();
         $this->_format_page($page);
@@ -223,7 +223,7 @@ class CouponApp extends StoreadminbaseApp
             exit;
         }
         $this->show_message('issue_success',
-            'back_list', 'index.php?app=coupon');
+            'back_list', url('app=coupon'));
     }
 
     function drop()
@@ -242,7 +242,7 @@ class CouponApp extends StoreadminbaseApp
             $this->show_warning($this->_coupon_mod->get_error());
         }
         $this->show_message('drop_ok',
-            'back_list', 'index.php?app=coupon');
+            'back_list', url('app=coupon'));
     }
 
     function make()
@@ -358,8 +358,8 @@ class CouponApp extends StoreadminbaseApp
             'order'=>'user_id desc'
         ));
 
-        $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-            LANG::get('coupon'), 'index.php?app=coupon',
+        $this->_curlocal(LANG::get('member_center'), url('app=member'),
+            LANG::get('coupon'), url('app=coupon'),
             LANG::get('coupon_sn'));
         $page['item_count'] = $this->_couponsn_mod->getCount();
         $this->_format_page($page);
@@ -526,7 +526,7 @@ class CouponApp extends StoreadminbaseApp
         $menus = array(
             array(
                 'name'  => 'coupons_list',
-                'url'   => 'index.php?app=coupon',
+                'url'   => url('app=coupon'),
             ),
         );
         return $menus;

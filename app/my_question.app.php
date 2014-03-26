@@ -30,8 +30,8 @@ class My_questionApp extends MemberbaseApp
             'order' => 'if_new desc,time_post desc',
         ));
                 /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('my_question'), 'index.php?app=my_question',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('my_question'), url('app=my_question'),
                          LANG::get('my_question_list'));
 
         /* 当前用户中心菜单 */
@@ -60,11 +60,11 @@ class My_questionApp extends MemberbaseApp
         return array(
             array(
                 'name' => 'all_qa',
-                'url' => 'index.php?app=my_question&amp;type=all_qa',
+                'url' => url('app=my_question&type=all_qa'),
             ),
             array(
                 'name' => 'reply_qa',
-                'url' => 'index.php?app=my_question&amp;type=reply_qa',
+                'url' => url('app=my_question&type=reply_qa'),
             ),            
         );
     }

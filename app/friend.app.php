@@ -11,8 +11,8 @@ class FriendApp extends MemberbaseApp
     function index()
     {
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),   'index.php?app=member',
-                         LANG::get('friend'),         'index.php?app=friend',
+        $this->_curlocal(LANG::get('member_center'),   url('app=member'),
+                         LANG::get('friend'),         url('app=friend'),
                          LANG::get('friend_list')
                          );
 
@@ -60,8 +60,8 @@ class FriendApp extends MemberbaseApp
     {
         if (!IS_POST){
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),   'index.php?app=member',
-                             LANG::get('friend'),         'index.php?app=friend',
+            $this->_curlocal(LANG::get('member_center'),   url('app=member'),
+                             LANG::get('friend'),         url('app=friend'),
                              LANG::get('add_friend')
                              );
              header('Content-Type:text/html;charset=' . CHARSET);
@@ -145,7 +145,7 @@ class FriendApp extends MemberbaseApp
         return array(
             array(
                 'name'  => 'friend_list',
-                'url'   => 'index.php?app=friend',
+                'url'   => url('app=friend'),
             ),
         );
     }

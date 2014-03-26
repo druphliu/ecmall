@@ -61,8 +61,8 @@ class My_partnerApp extends StoreadminbaseApp
         $this->assign('partners', $partners);
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('my_partner'), 'index.php?app=my_partner',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('my_partner'), url('app=my_partner'),
                          LANG::get('partner_list'));
 
         /* 当前用户中心菜单 */
@@ -89,8 +89,8 @@ class My_partnerApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_partner'), 'index.php?app=my_partner',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_partner'), url('app=my_partner'),
                              LANG::get('add_partner'));
 
             /* 当前用户中心菜单 */
@@ -147,8 +147,8 @@ class My_partnerApp extends StoreadminbaseApp
             $partner = current($find_data);
 
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_partner'), 'index.php?app=my_partner',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_partner'), url('app=my_partner'),
                              LANG::get('edit_partner'));
 
             /* 当前用户中心菜单 */
@@ -227,7 +227,7 @@ class My_partnerApp extends StoreadminbaseApp
         $menus = array(
             array(
                 'name'  => 'partner_list',
-                'url'   => 'index.php?app=my_partner',
+                'url'   => url('app=my_partner'),
             ),
         );
         if (ACT == 'edit')

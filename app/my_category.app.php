@@ -45,8 +45,8 @@ class My_categoryApp extends StoreadminbaseApp
         }
         $this->assign('map', ecm_json_encode($map));
         /* 当前页面信息 */
-        $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                         LANG::get('my_category'), 'index.php?app=my_category',
+        $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                         LANG::get('my_category'), url('app=my_category'),
                          LANG::get('gcategory_list'));
         $this->_curitem('my_category');
         $this->_curmenu('gcategory_manage');
@@ -90,8 +90,8 @@ class My_categoryApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前页面信息 */
-            $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                             LANG::get('my_category'), 'index.php?app=my_category',
+            $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                             LANG::get('my_category'), url('app=my_category'),
                              LANG::get('gcategory_add'));
             $this->_curitem('my_category');
             $this->_curmenu('gcategory_manage');
@@ -175,8 +175,8 @@ class My_categoryApp extends StoreadminbaseApp
             $this->assign('parents', $this->_get_options($id));
 
             /* 当前页面信息 */
-            $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                             LANG::get('my_category'), 'index.php?app=my_category',
+            $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                             LANG::get('my_category'), url('app=my_category'),
                              LANG::get('gcategory_edit'));
             $this->_curitem('my_category');
             $this->_curmenu('edit_category');
@@ -285,8 +285,8 @@ class My_categoryApp extends StoreadminbaseApp
                 $this->assign('note_for_export', sprintf(LANG::get('note_for_export'), $to_charset));
 
                 /* 当前页面信息 */
-                $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                                 LANG::get('my_category'), 'index.php?app=my_category',
+                $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                                 LANG::get('my_category'), url('app=my_category'),
                                  LANG::get('export'));
                 $this->_curitem('gcategory_manage');
                 $this->_curmenu('export');
@@ -342,8 +342,8 @@ class My_categoryApp extends StoreadminbaseApp
             $this->assign('note_for_import', sprintf(LANG::get('note_for_import'), CHARSET));
 
             /* 当前页面信息 */
-            $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                             LANG::get('my_category'), 'index.php?app=my_category',
+            $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                             LANG::get('my_category'), url('app=my_category'),
                              LANG::get('import'));
             $this->_curitem('my_category');
             $this->_curmenu('import');
@@ -433,7 +433,7 @@ class My_categoryApp extends StoreadminbaseApp
         $menus = array(
             array(
                 'name' => 'gcategory_manage',
-                'url'  => 'index.php?app=my_category',
+                'url'  => url('app=my_category'),
             ),
             );
         return $menus;

@@ -129,7 +129,7 @@ class SitemapApp extends FrontendApp
             foreach ($updated_store as $_store_id => $_v)
             {
                 $result[] = array(
-                    'url'       => SITE_URL . '/index.php?app=store&id=' . $_store_id,
+                    'url'       => SITE_URL . '/'.url('app=store&id=' . $_store_id),
                     'lastmod'   => date("Y-m-d", $_v['add_time']),
                     'changefreq'=> 'daily',
                     'priority'  => '1',
@@ -148,7 +148,7 @@ class SitemapApp extends FrontendApp
             foreach ($updated_article as $_article_id => $_v)
             {
                 $result[] = array(
-                    'url'       => SITE_URL . '/index.php?app=article&act=view&article_id=' . $_article_id,
+                    'url'       => SITE_URL . '/'.url('app=article&act=view&article_id=' . $_article_id),
                     'lastmod'   => date("Y-m-d", $_v['add_time']),
                     'changefreq'=> 'daily',
                     'priority'  => '0.8',
@@ -168,7 +168,7 @@ class SitemapApp extends FrontendApp
             foreach ($updated_goods as $_goods_id => $_v)
             {
                 $result[] = array(
-                    'url'       => SITE_URL . '/index.php?app=goods&id=' . $_goods_id,
+                    'url'       => SITE_URL . '/'.url('app=goods&id=' . $_goods_id),
                     'lastmod'   => date("Y-m-d", $_v['last_update']),
                     'changefreq'=> 'daily',
                     'priority'  => '0.8',
