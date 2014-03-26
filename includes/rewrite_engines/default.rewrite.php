@@ -59,6 +59,7 @@ class DefaultRewrite extends BaseRewrite
         'app_act_id'=>'app_cate_id',
         'app_act_page'=>'app_cate_page',
         'app_act_cate_id_id_page'=>'app_cate_id_id_page'
+        #TODO 还有一些静态化路径未实现
 //        /*卖家相关*/
 //        'my_goods'=>'my_goods_index',
 //        'my_goods_act'=>'my_goods_cate',
