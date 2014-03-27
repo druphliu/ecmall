@@ -14,8 +14,8 @@ class Seller_orderApp extends StoreadminbaseApp
         $this->_get_orders();
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('order_manage'), 'index.php?app=seller_order',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('order_manage'), url('app=seller_order'),
                          LANG::get('order_list'));
 
         /* 当前用户中心菜单 */
@@ -84,8 +84,8 @@ class Seller_orderApp extends StoreadminbaseApp
         }
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('order_manage'), 'index.php?app=seller_order',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('order_manage'), url('app=seller_order'),
                          LANG::get('view_order'));
 
         /* 当前用户中心菜单 */
@@ -702,31 +702,31 @@ class Seller_orderApp extends StoreadminbaseApp
         $array = array(
             array(
                 'name' => 'all_orders',
-                'url' => 'index.php?app=seller_order&amp;type=all_orders',
+                'url' => url('app=seller_order&type=all_orders'),
             ),
             array(
                 'name' => 'pending',
-                'url' => 'index.php?app=seller_order&amp;type=pending',
+                'url' => url('app=seller_order&type=pending'),
             ),
             array(
                 'name' => 'submitted',
-                'url' => 'index.php?app=seller_order&amp;type=submitted',
+                'url' => url('app=seller_order&type=submitted'),
             ),
             array(
                 'name' => 'accepted',
-                'url' => 'index.php?app=seller_order&amp;type=accepted',
+                'url' => url('app=seller_order&type=accepted'),
             ),
             array(
                 'name' => 'shipped',
-                'url' => 'index.php?app=seller_order&amp;type=shipped',
+                'url' => url('app=seller_order&type=shipped'),
             ),
             array(
                 'name' => 'finished',
-                'url' => 'index.php?app=seller_order&amp;type=finished',
+                'url' => url('app=seller_order&type=finished'),
             ),
             array(
                 'name' => 'canceled',
-                'url' => 'index.php?app=seller_order&amp;type=canceled',
+                'url' => url('app=seller_order&type=canceled'),
         ),
         );
         return $array;

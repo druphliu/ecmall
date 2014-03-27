@@ -47,103 +47,173 @@ RewriteRule ^store/([0-9]+)/groupbuy/page_([^/]+)/?$ index.php?app=store&id=$1&a
 
 class DefaultRewrite extends BaseRewrite
 {
+    /*静态化的键*/
+    var $_rewrite_query = array('act','cate_id','id','page');
+
     /* Rewrite规则地图，记录参数对应的rule名称 */
     var $_rewrite_maps  = array(
         /* '{app名称}_{参数列表，按升序排序，"_"连接}' => '重写规则名称', */
-
-        /* 店铺首页 */
-        'store_id'  => 'store_index',
-
-        /* 商品详情 */
-        'goods_id'  => 'goods_detail',
-        'groupbuy_id'   => 'groupbuy_detail',
-
-        /* 商品分类 */
-        'category'  => 'goods_cate',
-
-        /* 品牌列表 */
-        'brand'     => 'brand_list',
-
-        /* 店铺分类 */
-        'category_act' => 'store_cate',
-
-        /* 文章详情 */
-        'article_act_id' => 'article_detail',
-        'article_act_article_id' => 'article_detail',
-
-        /* 店铺文章 */
-        'store_act_id'  => REWRITE_RULE_FN,
-        'store_act_id_page' => REWRITE_RULE_FN,
-        'store_act_eval_id' => 'store_credit_eval',
-        'store_act_eval_id_page'    => 'store_credit_eval_page',
-        'store_act_cate_id_id'  => 'store_goodscate',
-        'store_act_cate_id_id_page' => 'store_goodscate_page',
-        'goods_act_id'      => 'goods_extra_info',
-        'goods_act_id_page' => 'goods_extra_info_page',
+        'app'=>'app_index',
+        'app_cate_id'=>'app_id',
+        'app_act'=>'app_cate',
+        'app_act_id'=>'app_cate_id',
+        'app_act_page'=>'app_cate_page',
+        'app_act_cate_id_id_page'=>'app_cate_id_id_page'
+        #TODO 还有一些静态化路径未实现
+//        /*卖家相关*/
+//        'my_goods'=>'my_goods_index',
+//        'my_goods_act'=>'my_goods_cate',
+//        /*会员*/
+//        'member'=>'member_index',
+//        'member_act'=>'member_cate',
+//        /*订单*/
+//        'buyer_order'=>'buyer_order_index',
+//
+//        /*收藏夹*/
+//        'my_favorite'=>'favorite_index',
+//        'my_favorite_store'=>'favorite_store',
+//
+//        /*购物车*/
+//        'cart'=>'cart_index',
+//
+//        /* 搜索 */
+//        'search_cate_id'=>'goods_search',
+//
+//        /* 店铺首页 */
+//        'store_id'  => 'store_index',
+//
+//        /* 商品详情 */
+//        'goods_id'  => 'goods_detail',
+//        'groupbuy_id'   => 'groupbuy_detail',
+//
+//        /* 商品分类 */
+//        'category'  => 'goods_cate',
+//
+//        /* 品牌列表 */
+//        'brand'     => 'brand_list',
+//
+//        /* 店铺分类 */
+//        'category_act' => 'store_cate',
+//
+//        /* 文章详情 */
+//        'article_act_id' => 'article_detail',
+//        'article_act_article_id' => 'article_detail',
+//
+//        /* 店铺文章 */
+//        'store_act_id'  => REWRITE_RULE_FN,
+//        'store_act_id_page' => REWRITE_RULE_FN,
+//        'store_act_eval_id' => 'store_credit_eval',
+//        'store_act_eval_id_page'    => 'store_credit_eval_page',
+//        'store_act_cate_id_id'  => 'store_goodscate',
+//        'store_act_cate_id_id_page' => 'store_goodscate_page',
+//        'goods_act_id'      => 'goods_extra_info',
+//        'goods_act_id_page' => 'goods_extra_info_page',
     );
 
     /* Rewrite rules，记录各规则信息 */
     var $_rewrite_rules = array(
-        'store_index'   => array(
-            'rewrite'   => 'store/%id%',
+        'app_id'=>array(
+            'rewrite'=>'%app%/%cate_id%.html'
         ),
-        'goods_detail'  => array(
-            'rewrite'   => 'goods/%id%',
+        'app_index'=>array(
+            'rewrite'=>'%app%.html'
         ),
-        'goods_cate'    => array(
-            'rewrite'   => 'category/goods',
+        'app_cate'=>array(
+            'rewrite'=>'%app%/%act%.html'
         ),
-        'brand_list'    => array(
-            'rewrite'   => 'brand',
+        'app_cate_id'=>array(
+            'rewrite'=>'%app%/%act%/%id%.html'
         ),
-        'store_cate'    => array(
-            'rewrite'   => 'category/%act%',
+        'app_cate_page'=>array(
+            'rewrite'=>'%app%/%act%/page_%page%.html'
         ),
-        'article_detail'    => array(
-            'rewrite'   => 'article/%article_id%.html',
-        ),
-        'store_article' => array(
-            'rewrite'   => 'store/article/%id%.html',
-        ),
-        'store_credit'  => array(
-            'rewrite'   => 'store/%id%/credit',
-        ),
-        'store_credit_page'  => array(
-            'rewrite'   => 'store/%id%/credit/page_%page%',
-        ),
-        'store_credit_eval'  => array(
-            'rewrite'   => 'store/%id%/credit/%eval%',
-        ),
-        'store_credit_eval_page'    => array(
-            'rewrite'   => 'store/%id%/credit/%eval%/page_%page%',
-        ),
-        'store_goodslist'   => array(
-            'rewrite'   => 'store/%id%/goods',
-        ),
-        'store_goodslist_page'   => array(
-            'rewrite'   => 'store/%id%/goods/page_%page%',
-        ),
-        'store_goodscate'   => array(
-            'rewrite'   => 'store/%id%/category/%cate_id%',
-        ),
-        'store_goodscate_page'   => array(
-            'rewrite'   => 'store/%id%/category/%cate_id%/page_%page%',
-        ),
-        'goods_extra_info' => array(
-            'rewrite'   => 'goods/%id%/%act%',
-        ),
-        'goods_extra_info_page' => array(
-            'rewrite'   => 'goods/%id%/%act%/page_%page%',
-        ),
-        'groupbuy_detail'   =>  array(
-            'rewrite'   => 'groupbuy/%id%',
-        ),
-        'store_groupbuy'   =>  array(
-            'rewrite'   => 'store/%id%/groupbuy',
-        ),
-        'store_groupbuy_page'   =>  array(
-            'rewrite'   => 'store/%id%/groupbuy/page_%page%',
-        ),
+//        'my_goods_index'=>array(
+//            'rewrite'=>'my_goods.html'
+//        ),
+//        'my_goods_cate'=>array(
+//            'rewrite'=>'my_goods/%act%.html'
+//        ),
+//        'member_index'=>array(
+//            'rewrite'=>'member.html'
+//        ),
+//        'member_cate'=>array(
+//            'rewrite'=>'member/%act%.html'
+//        ),
+//        'buyer_order_index'=>array(
+//            'rewrite'=>'buyer_order.html'
+//        ),
+//        'favorite_index'=>array(
+//            'rewrite'=>'my_favorite.html'
+//        ),
+//        'favorite_store'=>array(
+//            'rewrite'=>'my_favorite/store.html'
+//        ),
+//        'cart_index'=>array(
+//            'rewrite'=>'cart.html'
+//        ),
+//        'goods_search'=>array(
+//            'rewrite'=>'search/%cate_id%.html'
+//        ),
+//        'store_index'   => array(
+//            'rewrite'   => 'store/%id%.html',
+//        ),
+//        'goods_detail'  => array(
+//            'rewrite'   => 'goods/%id%.html',
+//        ),
+//        'goods_cate'    => array(
+//            'rewrite'   => 'category.html',
+//        ),
+//        'brand_list'    => array(
+//            'rewrite'   => 'brand.html',
+//        ),
+//        'store_cate'    => array(
+//            'rewrite'   => 'category/%act%.html',
+//        ),
+//        'article_detail'    => array(
+//            'rewrite'   => 'article/%article_id%.html',
+//        ),
+//        'store_article' => array(
+//            'rewrite'   => 'store/article/%id%.html',
+//        ),
+//        'store_credit'  => array(
+//            'rewrite'   => 'store/%id%/credit.html',
+//        ),
+//        'store_credit_page'  => array(
+//            'rewrite'   => 'store/%id%/credit/page_%page%.html',
+//        ),
+//        'store_credit_eval'  => array(
+//            'rewrite'   => 'store/%id%/credit/%eval%.html',
+//        ),
+//        'store_credit_eval_page'    => array(
+//            'rewrite'   => 'store/%id%/credit/%eval%/page_%page%.html',
+//        ),
+//        'store_goodslist'   => array(
+//            'rewrite'   => 'store/%id%/goods.html',
+//        ),
+//        'store_goodslist_page'   => array(
+//            'rewrite'   => 'store/%id%/goods/page_%page%.html',
+//        ),
+//        'store_goodscate'   => array(
+//            'rewrite'   => 'store/%id%/category/%cate_id%.html',
+//        ),
+//        'store_goodscate_page'   => array(
+//            'rewrite'   => 'store/%id%/category/%cate_id%/page_%page%.html',
+//        ),
+//        'goods_extra_info' => array(
+//            'rewrite'   => 'goods/%id%/%act%.html',
+//        ),
+//        'goods_extra_info_page' => array(
+//            'rewrite'   => 'goods/%id%/%act%/page_%page%.html',
+//        ),
+//        'groupbuy_detail'   =>  array(
+//            'rewrite'   => 'groupbuy/%id%.html',
+//        ),
+//        'store_groupbuy'   =>  array(
+//            'rewrite'   => 'store/%id%/groupbuy.html',
+//        ),
+//        'store_groupbuy_page'   =>  array(
+//            'rewrite'   => 'store/%id%/groupbuy/page_%page%.html',
+//        ),
     );
 
 

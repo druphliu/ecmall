@@ -42,8 +42,8 @@ class My_navigationApp extends StoreadminbaseApp
         $this->assign('navigations', $articles);
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('my_navigation'), 'index.php?app=my_navigation',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('my_navigation'), url('app=my_navigation'),
                          LANG::get('navigation_list'));
 
         /* 当前用户中心菜单 */
@@ -96,8 +96,8 @@ class My_navigationApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_navigation'), 'index.php?app=my_navigation',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_navigation'), url('app=my_navigation'),
                              LANG::get('add_navigation'));
 
             /* 当前用户中心菜单 */
@@ -131,7 +131,7 @@ class My_navigationApp extends StoreadminbaseApp
                 'button_text' => Lang::get('bat_upload'),
                 'button_id' => 'editor_upload_button',
                 'progress_id' => 'editor_upload_progress',
-                'upload_url' => 'index.php?app=swfupload',
+                'upload_url' => url('app=swfupload'),
                 'if_multirow' => 1,
                 'ext_js' => false,
                 'ext_css' => false,
@@ -210,8 +210,8 @@ class My_navigationApp extends StoreadminbaseApp
             $this->assign("belong", BELONG_ARTICLE);
 
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_navigation'), 'index.php?app=my_navigation',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_navigation'), url('app=my_navigation'),
                              LANG::get('edit_navigation'));
 
             /* 当前用户中心菜单 */
@@ -240,7 +240,7 @@ class My_navigationApp extends StoreadminbaseApp
                 'button_text' => Lang::get('bat_upload'),
                 'button_id' => 'editor_upload_button',
                 'progress_id' => 'editor_upload_progress',
-                'upload_url' => 'index.php?app=swfupload',
+                'upload_url' => url('app=swfupload'),
                 'if_multirow' => 1,
                 'ext_js' => false,
                 'ext_css' => false,
@@ -318,7 +318,7 @@ class My_navigationApp extends StoreadminbaseApp
         $menus = array(
             array(
                 'name'  => 'navigation_list',
-                'url'   => 'index.php?app=my_navigation',
+                'url'   => url('app=my_navigation'),
             ),
         );
         return $menus;

@@ -142,7 +142,7 @@ class CashierApp extends ShoppingbaseApp
             if ($payment_info['payment_code'] == 'cod')
             {
                 $this->show_message('cod_order_notice',
-                    'view_order',   'index.php?app=buyer_order',
+                    'view_order',   url('app=buyer_order'),
                     'close_window', 'javascript:window.close();'
                 );
 
@@ -280,13 +280,13 @@ class CashierApp extends ShoppingbaseApp
         $this->_mailto($seller_info['email'], addslashes($mail['subject']), addslashes($mail['message']));
 
         $this->show_message('pay_message_successed',
-            'view_order',   'index.php?app=buyer_order',
+            'view_order',   url('app=buyer_order'),
             'close_window', 'javascript:window.close();');
     }
 
     function _goto_pay($order_id)
     {
-        header('Location:index.php?app=cashier&order_id=' . $order_id);
+        header('Location:'.url('app=cashier&order_id=' . $order_id));
     }
 }
 

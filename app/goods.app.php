@@ -186,7 +186,7 @@ class GoodsApp extends StorebaseApp
             );
             if ($goods_qa->add($data))
             {
-                header("Location: index.php?app=goods&act=qa&id={$id}#module\n");
+                header("Location: ".url("app=goods&act=qa&id={$id}#module\n"));
                 exit;
             }
             else

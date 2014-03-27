@@ -28,7 +28,7 @@ class WechatApp extends WechatbaseApp
                 $response = "绑定成功！";
                 if (!$addresses) {
                     $site_url = site_url();
-                    $response .= "你还未设置你的配送地址，设置地址后即可快速订餐！<a href='{$site_url}/index.php?app=wechat&act=set_address&openid=$openid'>点此设置</a>";
+                    $response .= "你还未设置你的配送地址，设置地址后即可快速订餐！<a href=\"{$site_url}/".url('app=wechat&act=set_address&openid='.$openid).\">点此设置</a>";
                 }
             } else {
                 $response = "未知错误".$result;

@@ -62,8 +62,8 @@ class My_couponApp extends MemberbaseApp
             'style' =>  'jquery.ui/themes/ui-lightness/jquery.ui.css',
         ));
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                            LANG::get('my_coupon'), 'index.php?app=my_coupon',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                            LANG::get('my_coupon'), url('app=my_coupon'),
                             LANG::get('coupon_list'));
         $this->_curitem('my_coupon');
 
@@ -158,8 +158,8 @@ class My_couponApp extends MemberbaseApp
             }
         }
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-            LANG::get('my_coupon'), 'index.php?app=my_coupon',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+            LANG::get('my_coupon'), url('app=my_coupon'),
             LANG::get('coupon_list'));
         $this->_curitem('my_coupon');
 
@@ -204,8 +204,8 @@ class My_couponApp extends MemberbaseApp
             }
         }
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-            LANG::get('my_coupon'), 'index.php?app=my_coupon',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+            LANG::get('my_coupon'), url('app=my_coupon'),
             LANG::get('coupon_list'));
         $this->_curitem('my_coupon');
 
@@ -247,15 +247,15 @@ class My_couponApp extends MemberbaseApp
         $menus = array(
             array(
                 'name'  => 'coupon_list',
-                'url'   => 'index.php?app=my_coupon',
+                'url'   => url('app=my_coupon'),
             ),
             array(
                 'name'  => 'coupon_used',
-                'url'   => 'index.php?app=my_coupon&act=used',
+                'url'   => url('app=my_coupon&act=used'),
             ),
             array(
                 'name'  => 'coupon_passed',
-                'url'   => 'index.php?app=my_coupon&act=passed',
+                'url'   => url('app=my_coupon&act=passed'),
             )
         );
         return $menus;

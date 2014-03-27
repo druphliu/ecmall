@@ -41,8 +41,8 @@ class My_qaApp extends StoreadminbaseApp
         $page['item_count'] = $this->my_qa_mod->getCount();
         $this->_format_page($page);
                 /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('my_qa'), 'index.php?app=my_qa',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('my_qa'), url('app=my_qa'),
                          LANG::get('my_qa_list'));
 
         /* 当前用户中心菜单 */
@@ -86,8 +86,8 @@ class My_qaApp extends StoreadminbaseApp
                 return;
             }
                     /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('my_qa'), 'index.php?app=my_qa',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('my_qa'), url('app=my_qa'),
                              LANG::get('reply'));
 
             /* 当前用户中心菜单 */
@@ -233,19 +233,19 @@ class My_qaApp extends StoreadminbaseApp
         $array = array(
             array(
                 'name' => 'all_qa',
-                'url' => 'index.php?app=my_qa&amp;type=all_qa',
+                'url' => url('app=my_qa&type=all_qa'),
             ),
             array(
                 'name' => 'to_reply_qa',
-                'url' => 'index.php?app=my_qa&amp;type=to_reply_qa',
+                'url' => url('app=my_qa&type=to_reply_qa'),
             ),
             array(
                 'name' => 'replied',
-                'url' => 'index.php?app=my_qa&amp;type=replied',
+                'url' => url('app=my_qa&type=replied'),
             ),
 /*            array(
                 'name' => 'reply',
-                'url' => 'index.php?app=my_qa&amp;type=reply',
+                'url' => 'index.php?app=my_qa&type=reply',
             ),*/
         );
         if (ACT == 'index')

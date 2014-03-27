@@ -14,8 +14,8 @@ class Buyer_orderApp extends MemberbaseApp
         $this->_get_orders();
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                         LANG::get('my_order'), 'index.php?app=buyer_order',
+        $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                         LANG::get('my_order'), url('app=buyer_order'),
                          LANG::get('order_list'));
 
         /* 当前用户中心菜单 */
@@ -84,8 +84,8 @@ class Buyer_orderApp extends MemberbaseApp
         }
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                         LANG::get('my_order'), 'index.php?app=buyer_order',
+        $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                         LANG::get('my_order'), url('app=buyer_order'),
                          LANG::get('view_order'));
 
         /* 当前用户中心菜单 */
@@ -246,7 +246,7 @@ class Buyer_orderApp extends MemberbaseApp
                 $model_goodsstatistics->edit($goods['goods_id'], "sales=sales+{$goods['quantity']}");
             }
 
-            $this->pop_warning('ok','','index.php?app=buyer_order&act=evaluate&order_id='.$order_id);;
+            $this->pop_warning('ok','',url('app=buyer_order&act=evaluate&order_id='.$order_id));
         }
 
     }
@@ -302,8 +302,8 @@ class Buyer_orderApp extends MemberbaseApp
             {
                 empty($goods['goods_image']) && $goods_list[$key]['goods_image'] = Conf::get('default_goods_image');
             }
-            $this->_curlocal(LANG::get('member_center'), 'index.php?app=member',
-                             LANG::get('my_order'), 'index.php?app=buyer_order',
+            $this->_curlocal(LANG::get('member_center'), url('app=member'),
+                             LANG::get('my_order'), url('app=buyer_order'),
                              LANG::get('evaluate'));
             $this->assign('goods_list', $goods_list);
             $this->assign('order', $order_info);
@@ -387,7 +387,7 @@ class Buyer_orderApp extends MemberbaseApp
 
 
             $this->show_message('evaluate_successed',
-                'back_list', 'index.php?app=buyer_order');
+                'back_list', url('app=buyer_order'));
         }
     }
 
@@ -467,7 +467,7 @@ class Buyer_orderApp extends MemberbaseApp
         $menus = array(
             array(
                 'name'  => 'order_list',
-                'url'   => 'index.php?app=buyer_order',
+                'url'   => url('app=buyer_order'),
             ),
         );
         return $menus;

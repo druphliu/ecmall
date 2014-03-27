@@ -76,8 +76,8 @@ class Seller_groupbuyApp extends StoreadminbaseApp
             $groupbuy['default_image'] || $groupbuy_list[$key]['default_image'] = Conf::get('default_goods_image');
         }
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('groupbuy_manage'), 'index.php?app=seller_groupbuy',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('groupbuy_manage'), url('app=seller_groupbuy'),
                          LANG::get('groupbuy_list'));
 
         /* 当前用户中心菜单 */
@@ -108,12 +108,12 @@ class Seller_groupbuyApp extends StoreadminbaseApp
             $goods_count = $goods_mod->get_count();
             if ($goods_count == 0)
             {
-                $this->show_warning('has_no_goods', 'add_goods', 'index.php?app=my_goods&act=add');
+                $this->show_warning('has_no_goods', 'add_goods', url('app=my_goods&act=add'));
                 return;
             }
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('groupbuy_manage'), 'index.php?app=seller_groupbuy',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('groupbuy_manage'), url('app=seller_groupbuy'),
                              LANG::get('add_groupbuy'));
 
             /* 当前用户中心菜单 */
@@ -155,8 +155,8 @@ class Seller_groupbuyApp extends StoreadminbaseApp
                 ));
             }
             $this->show_message('add_groupbuy_ok',
-                'back_list', 'index.php?app=seller_groupbuy',
-                'continue_add', 'index.php?app=seller_groupbuy&amp;act=add'
+                'back_list', url('app=seller_groupbuy'),
+                'continue_add', url('app=seller_groupbuy&act=add')
             );
         }
     }
@@ -177,8 +177,8 @@ class Seller_groupbuyApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('groupbuy_manage'), 'index.php?app=seller_groupbuy',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('groupbuy_manage'), url('app=seller_groupbuy'),
                              LANG::get('edit_groupbuy'));
 
             /* 当前用户中心菜单 */
@@ -213,8 +213,8 @@ class Seller_groupbuyApp extends StoreadminbaseApp
                 return;
             }
             $this->show_message('edit_groupbuy_ok',
-                'back_list', 'index.php?app=seller_groupbuy',
-                'continue_edit', 'index.php?app=seller_groupbuy&act=edit&id=' . $id
+                'back_list', url('app=seller_groupbuy'),
+                'continue_edit', url('app=seller_groupbuy&act=edit&id=' . $id)
             );
         }
     }
@@ -318,8 +318,8 @@ class Seller_groupbuyApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('groupbuy_manage'), 'index.php?app=seller_groupbuy',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('groupbuy_manage'), url('app=seller_groupbuy'),
                              LANG::get('desc_groupbuy'));
 
             /* 当前用户中心菜单 */
@@ -347,7 +347,7 @@ class Seller_groupbuyApp extends StoreadminbaseApp
                 return;
             }
             $this->show_message('desc_ok',
-                'back_list', 'index.php?app=seller_groupbuy'
+                'back_list', url('app=seller_groupbuy')
             );
         }
     }
@@ -375,8 +375,8 @@ class Seller_groupbuyApp extends StoreadminbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                             LANG::get('groupbuy_manage'), 'index.php?app=seller_groupbuy',
+            $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                             LANG::get('groupbuy_manage'), url('app=seller_groupbuy'),
                              LANG::get('cancel_groupbuy'));
 
             /* 当前用户中心菜单 */
@@ -408,7 +408,7 @@ class Seller_groupbuyApp extends StoreadminbaseApp
             );
 
             $this->show_message('cancel_ok',
-                'back_list', 'index.php?app=seller_groupbuy'
+                'back_list', url('app=seller_groupbuy')
             );
         }
 
@@ -638,7 +638,7 @@ class Seller_groupbuyApp extends StoreadminbaseApp
         $menus = array(
             array(
                 'name'  => 'groupbuy_list',
-                'url'   => 'index.php?app=seller_groupbuy',
+                'url'   => url('app=seller_groupbuy'),
             ),
         );
         if (ACT == 'add' || ACT == 'edit' || ACT == 'desc' || ACT == 'cancel')

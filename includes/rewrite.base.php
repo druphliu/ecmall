@@ -17,6 +17,8 @@ class BaseRewrite extends Object
     /* Rewrite rules，记录各规则信息 */
     var $_rewrite_rules = array();
 
+    /*要静态化的键*/
+    var $_rewrite_query = array();
     /**
      *    获取重写的URL
      *
@@ -37,11 +39,12 @@ class BaseRewrite extends Object
         $url_params = is_array($query) ? $query : $this->_get_params($query);
         $rewrite_name = empty($rewrite_name) ? $this->_get_rule_by_param($url_params) : $rewrite_name;
         $rewrite_rule = $this->_get_rule($rewrite_name);
-
+        $other_query = $this->_get_other_query($url_params);
         if (!empty($rewrite_rule))
         {
             $pattern = $this->_get_replace_pattern($url_params);
             $rewrite = str_replace($pattern, $url_params, $rewrite_rule['rewrite']);
+            $rewrite .= $other_query ? "?$other_query" : '';
         }
         else
         {
@@ -100,28 +103,60 @@ class BaseRewrite extends Object
         return $this->_get_rule_by_mapkey($key, $url_params);
     }
 
+    function _get_other_query($url_params)
+    {
+        $query = $comm = '';
+        if(isset($url_params['app'])){
+            unset($url_params['app']);
+        }
+        foreach($url_params as $k=>$v){
+            if(!in_array($k,$this->_rewrite_query)){
+                $query .=$comm.$k."=".$v;
+                $comm = '&';
+            }
+        }
+        return $query;
+    }
+
+//    function _get_mapkey($url_params)
+//    {
+//        $key = '';
+//        $app = isset($url_params['app']) ? $url_params['app'] : null;
+//        $query = '';
+//        unset($url_params['app']);
+//        $query_keys = array_keys($url_params);
+//        if (!empty($query_keys))
+//        {
+//            sort($query_keys);
+//            $query = implode('_', $query_keys);
+//        }
+//        if ($app)
+//        {
+//            $key = $app;
+//            $key .= ($query) ? '_' . $query : '';
+//        }
+//        else
+//        {
+//            $key = $query;
+//        }
+//
+//        return $key;
+//    }
+
     function _get_mapkey($url_params)
     {
-        $key = '';
-        $app = isset($url_params['app']) ? $url_params['app'] : null;
-        $query = '';
+        $query = $query_keys = $key = '';
+        $app = isset($url_params['app']) ? 'app' : null;
         unset($url_params['app']);
         $query_keys = array_keys($url_params);
-        if (!empty($query_keys))
-        {
-            sort($query_keys);
-            $query = implode('_', $query_keys);
+        asort($query_keys);
+        foreach($query_keys as $k){
+            if(in_array($k, $this->_rewrite_query)){
+                $query[] = $k;
+            }
         }
-        if ($app)
-        {
-            $key = $app;
-            $key .= ($query) ? '_' . $query : '';
-        }
-        else
-        {
-            $key = $query;
-        }
-
+        $key = $app;
+        $key .= $query ? '_' . @implode('_', $query) : '';
         return $key;
     }
 
@@ -151,7 +186,9 @@ class BaseRewrite extends Object
         {
             foreach ($url_params as $key => $value)
             {
+
                 $return[] = '%' . $key . '%';
+
             }
         }
 

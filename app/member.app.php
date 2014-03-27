@@ -55,11 +55,16 @@ class MemberApp extends MemberbaseApp
         $sql6 = "SELECT COUNT(*) FROM " . DB_PREFIX ."groupbuy_log AS log LEFT JOIN {$groupbuy_mod->table} AS gb ON gb.group_id = log.group_id WHERE log.user_id='{$user['user_id']}' AND gb.state = " .GROUP_FINISHED;
         $buyer_stat = array(
             'pending'  => $order_mod->getOne($sql1),
+            'pending_url'=>url('app=buyer_order&type=pending'),
             'shipped'  => $order_mod->getOne($sql2),
+            'shipped_url'=>url('app=buyer_order&type=shipped'),
             'finished' => $order_mod->getOne($sql3),
+            'finished_url'=>url('app=buyer_order&type=finished'),
             'my_question' => $goodsqa_mod->getOne($sql4),
             'groupbuy_canceled' => $groupbuy_mod->getOne($sql5),
+            'groupbuy_canceled_url'=>url('app=buyer_groupbuy&state=canceled'),
             'groupbuy_finished' => $groupbuy_mod->getOne($sql6),
+            'groupbuy_finished_url'=>url('app=buyer_groupbuy&state=finished')
         );
         $sum = array_sum($buyer_stat);
         $buyer_stat['sum'] = $sum;
@@ -75,9 +80,12 @@ class MemberApp extends MemberbaseApp
             $sql10 = "SELECT COUNT(*) FROM {$groupbuy_mod->table} WHERE store_id='{$user['user_id']}' AND state = " .GROUP_END;
             $seller_stat = array(
                 'submitted' => $order_mod->getOne($sql7),
+                'submitted_url'=>url('app=seller_order&type=submitted'),
                 'accepted'  => $order_mod->getOne($sql8),
+                'accepted_url'=>url('app=seller_order&type=accepted'),
                 'replied'   => $goodsqa_mod->getOne($sql9),
                 'groupbuy_end'   => $goodsqa_mod->getOne($sql10),
+                'groupby_url'=>url('app=seller_groupbuy&state=end'),
             );
 
             $this->assign('seller_stat', $seller_stat);
@@ -118,6 +126,7 @@ class MemberApp extends MemberbaseApp
         $this->_curlocal(LANG::get('member_center'),    url('app=member'),
                          LANG::get('overview'));
 
+        $this->assign('new_message_url',url('app=message&act=newpm'));
         /* 当前用户中心菜单 */
         $this->_curitem('overview');
         $this->_config_seo('title', Lang::get('member_center'));
@@ -268,7 +277,7 @@ class MemberApp extends MemberbaseApp
 
             $this->show_message(Lang::get('register_successed') . $synlogin,
                 'back_before_register', rawurldecode($_POST['ret_url']),
-                'enter_member_center', 'index.php?app=member'//,
+                'enter_member_center', url('app=member')//,
 //                'apply_store', 'index.php?app=apply'
             );
         }
@@ -344,7 +353,7 @@ class MemberApp extends MemberbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),  'index.php?app=member',
+            $this->_curlocal(LANG::get('member_center'),  url('app=member'),
                              LANG::get('basic_information'));
 
             /* 当前用户中心菜单 */
@@ -410,7 +419,7 @@ class MemberApp extends MemberbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),  'index.php?app=member',
+            $this->_curlocal(LANG::get('member_center'),  url('app=member'),
                              LANG::get('edit_password'));
 
             /* 当前用户中心菜单 */
@@ -477,7 +486,7 @@ class MemberApp extends MemberbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),  'index.php?app=member',
+            $this->_curlocal(LANG::get('member_center'), url('app=member'),
                              LANG::get('edit_email'));
 
             /* 当前用户中心菜单 */
@@ -540,7 +549,7 @@ class MemberApp extends MemberbaseApp
         if (!IS_POST)
         {
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),  'index.php?app=member',
+            $this->_curlocal(LANG::get('member_center'),  url('app=member'),
                              LANG::get('feed_settings'));
 
             /* 当前用户中心菜单 */
@@ -597,22 +606,22 @@ class MemberApp extends MemberbaseApp
         $submenus =  array(
             array(
                 'name'  => 'basic_information',
-                'url'   => 'index.php?app=member&amp;act=profile',
+                'url'   => url('app=member&act=profile'),
             ),
             array(
                 'name'  => 'edit_password',
-                'url'   => 'index.php?app=member&amp;act=password',
+                'url'   => url('app=member&act=password'),
             ),
             array(
                 'name'  => 'edit_email',
-                'url'   => 'index.php?app=member&amp;act=email',
+                'url'   => url('app=member&act=email'),
             ),
         );
         if ($this->_feed_enabled)
         {
             $submenus[] = array(
                 'name'  => 'feed_settings',
-                'url'   => 'index.php?app=member&amp;act=feed_settings',
+                'url'   => url('app=member&act=feed_settings'),
             );
         }
 
@@ -638,7 +647,7 @@ class MemberApp extends MemberbaseApp
         $uploader->addFile($file);
         if ($uploader->file_info() === false)
         {
-            $this->show_warning($uploader->get_error(), 'go_back', 'index.php?app=member&amp;act=profile');
+            $this->show_warning($uploader->get_error(), 'go_back', url('app=member&act=profile'));
             return false;
         }
         $uploader->root_dir(ROOT_PATH);

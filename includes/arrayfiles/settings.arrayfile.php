@@ -31,7 +31,7 @@ class SettingsArrayfile extends BaseArrayfile
             'time_format_simple' => 'Y-m-d',
             'time_format_complete' => 'Y-m-d H:i:s',
             'price_format'  => '&yen;%s',
-            'url_rewrite' => '0',
+            'url_rewrite' => '1',
             'cache_life' => '1800',
             'site_name' => 'ECMall',
             'site_title' => 'ECMall',

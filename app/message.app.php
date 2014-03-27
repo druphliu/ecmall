@@ -13,8 +13,8 @@ class MessageApp extends MemberbaseApp
         $this->_clear_newpm_cache();
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),   'index.php?app=member',
-                         LANG::get('message'),         'index.php?app=message&amp;act=newpm',
+        $this->_curlocal(LANG::get('member_center'),   url('app=member'),
+                         LANG::get('message'),         url('app=message&act=newpm'),
                          LANG::get('newpm')
                          );
 
@@ -55,8 +55,8 @@ class MessageApp extends MemberbaseApp
         $this->_clear_newpm_cache();
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),   'index.php?app=member',
-                         LANG::get('message'),         'index.php?app=message&amp;act=newpm',
+        $this->_curlocal(LANG::get('member_center'),   url('app=member'),
+                         LANG::get('message'),        url('app=message&amp;act=newpm'),
                          LANG::get('privatepm')
                          );
         /* 当前所处子菜单 */
@@ -92,8 +92,8 @@ class MessageApp extends MemberbaseApp
         $this->_clear_newpm_cache();
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),   'index.php?app=member',
-                         LANG::get('message'),         'index.php?app=message&amp;act=newpm',
+        $this->_curlocal(LANG::get('member_center'),   url('app=member'),
+                         LANG::get('message'),         url('app=message&amp;act=newpm'),
                          LANG::get('systempm')
                          );
         /* 当前所处子菜单 */
@@ -127,8 +127,8 @@ class MessageApp extends MemberbaseApp
         $this->_clear_newpm_cache();
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),   'index.php?app=member',
-                         LANG::get('message'),         'index.php?app=message&amp;act=newpm',
+        $this->_curlocal(LANG::get('member_center'),   url('app=member'),
+                         LANG::get('message'),         url('app=message&act=newpm'),
                          LANG::get('announcepm')
                          );
         /* 当前所处子菜单 */
@@ -167,8 +167,8 @@ class MessageApp extends MemberbaseApp
 
         if (!IS_POST){
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),   'index.php?app=member',
-                             LANG::get('message'),         'index.php?app=message&amp;act=newpm',
+            $this->_curlocal(LANG::get('member_center'),  url('app=member'),
+                             LANG::get('message'),         url('app=message&act=newpm'),
                              LANG::get('send_message')
                              );
             /* 当前所处子菜单 */
@@ -234,10 +234,10 @@ class MessageApp extends MemberbaseApp
                 //$this->show_warning($ms->pm->get_error());
                 $rs = $ms->pm->get_error();
                 $msg = current($rs);
-                $this->show_warning($msg['msg'], 'go_back', 'index.php?app=message&act=send');
+                $this->show_warning($msg['msg'], 'go_back', url('app=message&=send'));
                 return;
             }
-            $this->show_message('send_message_successed', 'go_back', 'index.php?app=message&act=privatepm');
+            $this->show_message('send_message_successed', 'go_back', url('app=message&act=privatepm'));
         }
     }
 
@@ -320,8 +320,8 @@ class MessageApp extends MemberbaseApp
             $this->_config_seo('title', Lang::get('member_center') . ' - ' . Lang::get('view_message'));
             $this->assign('box', $box);
             /* 当前位置 */
-            $this->_curlocal(LANG::get('member_center'),   'index.php?app=member',
-                             LANG::get('message'),         'index.php?app=message&amp;act=newpm',
+            $this->_curlocal(LANG::get('member_center'),   url('app=member'),
+                             LANG::get('message'),         url('app=message&amp;act=newpm'),
                              LANG::get('view_message')
                              );
             /* 当前所处子菜单（必须放在这里，否则新消息数量不正确） */
@@ -401,7 +401,7 @@ class MessageApp extends MemberbaseApp
         if (in_array($_GET['back'],array('newpm', 'privatepm')))
         {
             $this->show_message('drop_message_successed',
-                'back_' . $_GET['back'] ,'index.php?app=message&amp;act=' . $_GET['back']);
+                'back_' . $_GET['back'] ,url('app=message&amp;act=' . $_GET['back']));
         }
         else
         {
@@ -445,7 +445,7 @@ class MessageApp extends MemberbaseApp
         if (in_array($_GET['back'],array('newpm', 'privatepm')))
         {
             $this->show_message('drop_message_successed',
-                'back_' . $_GET['back'] ,'index.php?app=message&amp;act=' . $_GET['back']);
+                'back_' . $_GET['back'] ,url('app=message&amp;act=' . $_GET['back']));
         }
         else
         {
@@ -467,17 +467,17 @@ class MessageApp extends MemberbaseApp
         $menus = array(
                 array(
                     'name'  => 'newpm',
-                    'url'   => 'index.php?app=message&amp;act=newpm',
+                    'url'   => url('app=message&amp;act=newpm'),
                     'text'  => Lang::get('newpm') . $newpm,
                 ),
                 array(
                     'name'  => 'privatepm',
-                    'url'   => 'index.php?app=message&amp;act=privatepm',
+                    'url'   => url('app=message&act=privatepm'),
                     'text'  => Lang::get('privatepm'),
                 ),
                 array(
                     'name'  => 'systempm',
-                    'url'   => 'index.php?app=message&amp;act=systempm',
+                    'url'   => url('app=message&act=systempm'),
                     'text'  => Lang::get('systempm'),
                 ),
         );
@@ -485,7 +485,7 @@ class MessageApp extends MemberbaseApp
         {
             $menus[] = array(
                     'name'  => 'announcepm',
-                    'url'   => 'index.php?app=message&amp;act=announcepm',
+                    'url'   => url('app=message&act=announcepm'),
                     'text'  => Lang::get('announcepm'),
                 );
         }

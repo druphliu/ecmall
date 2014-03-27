@@ -141,7 +141,7 @@ class Find_passwordApp extends MallbaseApp
             $ret = $this->_password_mod->edit($id, array('activation' => $md5word));
 
             $this->show_message("edit_success",
-                'login_in', 'index.php?app=member&act=login',
+                'login_in', url('app=member&act=login'),
                 'back_index', 'index.php');
             return ;
         }

@@ -51,7 +51,7 @@ class My_storeApp extends StoreadminbaseApp
                 'button_text' => Lang::get('bat_upload'),
                 'button_id' => 'editor_upload_button',
                 'progress_id' => 'editor_upload_progress',
-                'upload_url' => 'index.php?app=swfupload',
+                'upload_url' => url('app=swfupload'),
                 'if_multirow' => 1,
             )));
             
@@ -91,7 +91,7 @@ class My_storeApp extends StoreadminbaseApp
                 'order' => 'add_time DESC'
             ));
             /* 当前页面信息 */
-            $this->_curlocal(LANG::get('member_center'), 'index.php?app=member', LANG::get('my_store'));
+            $this->_curlocal(LANG::get('member_center'), url('app=member', LANG::get('my_store')));
             $this->_curitem('my_store');
             $this->_curmenu('my_store');
             $this->import_resource( array(
@@ -180,14 +180,14 @@ class My_storeApp extends StoreadminbaseApp
     {
         $id = isset($_GET['id']) ? trim($_GET['id']) : '';
         $this->_store_mod->edit($this->_store_id, array('im_msn' => $id));
-        header("Location: index.php?app=my_store");
+        header("Location: ".url("app=my_store"));
         exit;
     }
 
     function drop_im_msn()
     {
         $this->_store_mod->edit($this->_store_id, array('im_msn' => ''));
-        header("Location: index.php?app=my_store");
+        header("Location: ".url("app=my_store"));
         exit;
     }
 
@@ -196,7 +196,7 @@ class My_storeApp extends StoreadminbaseApp
         return array(
             array(
                 'name' => 'my_store',
-                'url'  => 'index.php?app=my_store',
+                'url'  => url('app=my_store'),
             ),
         );
     }

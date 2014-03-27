@@ -148,7 +148,7 @@ class FrontendApp extends ECBaseApp
 
             $this->show_message(Lang::get('login_successed') . $synlogin,
                 'back_before_login', rawurldecode($_POST['ret_url']),
-                'enter_member_center', 'index.php?app=member'
+                'enter_member_center', url('app=member')
             );
         }
     }
@@ -186,7 +186,8 @@ class FrontendApp extends ECBaseApp
         $this->visitor->logout();
 
         /* 跳转到登录页，执行同步退出操作 */
-        header("Location: index.php?app=member&act=login&synlogout=1");
+
+        header("Location: /".url('app=member&act=login&synlogout=1'));
         return;
     }
 
@@ -619,36 +620,37 @@ class MemberbaseApp extends MallbaseApp
      */
     function _get_member_menu()
     {
+
         $menu = array();
 
         /* 我的ECMall */
         $menu['my_ecmall'] = array(
-            'name'  => 'my_ecmall',
-            'text'  => Lang::get('my_ecmall'),
-            'submenu'   => array(
-                'overview'  => array(
-                    'text'  => Lang::get('overview'),
-                    'url'   => 'index.php?app=member',
-                    'name'  => 'overview',
-                    'icon'  => 'ico1',
+            'name' => 'my_ecmall',
+            'text' => Lang::get('my_ecmall'),
+            'submenu' => array(
+                'overview' => array(
+                    'text' => Lang::get('overview'),
+                    'url' => url('app=member'),
+                    'name' => 'overview',
+                    'icon' => 'ico1',
                 ),
-                'my_profile'  => array(
-                    'text'  => Lang::get('my_profile'),
-                    'url'   => 'index.php?app=member&act=profile',
-                    'name'  => 'my_profile',
-                    'icon'  => 'ico2',
+                'my_profile' => array(
+                    'text' => Lang::get('my_profile'),
+                    'url' => url('app=member&act=profile'),
+                    'name' => 'my_profile',
+                    'icon' => 'ico2',
                 ),
-                'message'  => array(
-                    'text'  => Lang::get('message'),
-                    'url'   => 'index.php?app=message&act=newpm',
-                    'name'  => 'message',
-                    'icon'  => 'ico3',
+                'message' => array(
+                    'text' => Lang::get('message'),
+                    'url' => url('app=message&act=newpm'),
+                    'name' => 'message',
+                    'icon' => 'ico3',
                 ),
-                'friend'  => array(
-                    'text'  => Lang::get('friend'),
-                    'url'   => 'index.php?app=friend',
-                    'name'  => 'friend',
-                    'icon'  => 'ico4',
+                'friend' => array(
+                    'text' => Lang::get('friend'),
+                    'url' => url('app=friend'),
+                    'name' => 'friend',
+                    'icon' => 'ico4',
                 ),
                 /*
                 'my_credit'  => array(
@@ -662,21 +664,21 @@ class MemberbaseApp extends MallbaseApp
 
         /* 我是买家 */
         $menu['im_buyer'] = array(
-            'name'  => 'im_buyer',
-            'text'  => Lang::get('im_buyer'),
-            'submenu'   => array(
-                'my_order'  => array(
-                    'text'  => Lang::get('my_order'),
-                    'url'   => 'index.php?app=buyer_order',
-                    'name'  => 'my_order',
-                    'icon'  => 'ico5',
+            'name' => 'im_buyer',
+            'text' => Lang::get('im_buyer'),
+            'submenu' => array(
+                'my_order' => array(
+                    'text' => Lang::get('my_order'),
+                    'url' => url('app=buyer_order'),
+                    'name' => 'my_order',
+                    'icon' => 'ico5',
                 ),
-//                'my_groupbuy'  => array(
-//                    'text'  => Lang::get('my_groupbuy'),
-//                    'url'   => 'index.php?app=buyer_groupbuy',
-//                    'name'  => 'my_groupbuy',
-//                    'icon'  => 'ico21',
-//                ),
+                'my_groupbuy' => array(
+                    'text' => Lang::get('my_groupbuy'),
+                    'url' => url('app=buyer_groupbuy'),
+                    'name' => 'my_groupbuy',
+                    'icon' => 'ico21',
+                ),
 //                'my_question' =>array(
 //                    'text'  => Lang::get('my_question'),
 //                    'url'   => 'index.php?app=my_question',
@@ -684,23 +686,23 @@ class MemberbaseApp extends MallbaseApp
 //                    'icon'  => 'ico17',
 //
 //                ),
-                'my_favorite'  => array(
-                    'text'  => Lang::get('my_favorite'),
-                    'url'   => 'index.php?app=my_favorite',
-                    'name'  => 'my_favorite',
-                    'icon'  => 'ico6',
+                'my_favorite' => array(
+                    'text' => Lang::get('my_favorite'),
+                    'url' =>url('app=my_favorite'),
+                    'name' => 'my_favorite',
+                    'icon' => 'ico6',
                 ),
-                'my_address'  => array(
-                    'text'  => Lang::get('my_address'),
-                    'url'   => 'index.php?app=my_address',
-                    'name'  => 'my_address',
-                    'icon'  => 'ico7',
+                'my_address' => array(
+                    'text' => Lang::get('my_address'),
+                    'url' => url('app=my_address'),
+                    'name' => 'my_address',
+                    'icon' => 'ico7',
                 ),
-                'my_coupon'  => array(
-                    'text'  => Lang::get('my_coupon'),
-                    'url'   => 'index.php?app=my_coupon',
-                    'name'  => 'my_coupon',
-                    'icon'  => 'ico20',
+                'my_coupon' => array(
+                    'text' => Lang::get('my_coupon'),
+                    'url' =>url('app=my_coupon'),
+                    'name' => 'my_coupon',
+                    'icon' => 'ico20',
                 ),
             ),
         );
@@ -735,7 +737,7 @@ class MemberbaseApp extends MallbaseApp
 
             $menu['im_seller']['submenu']['my_goods'] = array(
                     'text'  => Lang::get('my_goods'),
-                    'url'   => 'index.php?app=my_goods',
+                    'url'   =>  url('app=my_goods'),
                     'name'  => 'my_goods',
                     'icon'  => 'ico8',
             );
@@ -753,19 +755,19 @@ class MemberbaseApp extends MallbaseApp
 //            );
             $menu['im_seller']['submenu']['my_category'] = array(
                     'text'  => Lang::get('my_category'),
-                    'url'   => 'index.php?app=my_category',
+                    'url'   => url('app=my_category'),
                     'name'  => 'my_category',
                     'icon'  => 'ico9',
             );
             $menu['im_seller']['submenu']['order_manage'] = array(
                     'text'  => Lang::get('order_manage'),
-                    'url'   => 'index.php?app=seller_order',
+                    'url'   =>url('app=seller_order'),
                     'name'  => 'order_manage',
                     'icon'  => 'ico10',
             );
             $menu['im_seller']['submenu']['my_store']  = array(
                     'text'  => Lang::get('my_store'),
-                    'url'   => 'index.php?app=my_store',
+                    'url'   => url('app=my_store'),
                     'name'  => 'my_store',
                     'icon'  => 'ico11',
             );
@@ -801,7 +803,7 @@ class MemberbaseApp extends MallbaseApp
 //            );
             $menu['im_seller']['submenu']['coupon']  = array(
                     'text'  => Lang::get('coupon'),
-                    'url'   => 'index.php?app=coupon',
+                    'url'   =>url('app=coupon'),
                     'name'  => 'coupon',
                     'icon'  => 'ico19',
             );
@@ -826,7 +828,7 @@ class StoreadminbaseApp extends MemberbaseApp
         {
             if (!IS_AJAX)
             {
-                header('Location:index.php?app=member&act=login&ret_url=' . rawurlencode($_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']));
+                header('Location:'.url('app=member&act=login&ret_url=' . rawurlencode($_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'])));
 
                 return;
             }
@@ -854,7 +856,7 @@ class StoreadminbaseApp extends MemberbaseApp
             /* 您不是店铺管理员 */
             $this->show_warning(
                 'not_storeadmin',
-                'apply_now', 'index.php?app=apply',
+                'apply_now', url('app=apply'),
                 $ret_text, $ret_url
             );
 

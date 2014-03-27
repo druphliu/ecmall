@@ -32,7 +32,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <p>{sprintf lang=you_have_pm var1=new_message}</p>
+                        <p>{sprintf lang=you_have_pm var1=new_message var2=new_message_url}</p>
                     </div>
                 </div>
 
@@ -47,9 +47,9 @@
                     <div class="remind">
                         <dl>
                             <dt>{$lang.order_remind}</dt>
-                            <dd>{sprintf lang=order_for_pay_remind var1=buyer_stat.pending}</dd>
-                            <dd>{sprintf lang=order_for_confirm_remind var1=buyer_stat.shipped}</dd>
-                            <dd>{sprintf lang=order_for_evaluate_remind var1=buyer_stat.finished}</dd>
+                            <dd>{sprintf lang=order_for_pay_remind var1=buyer_stat.pending var2=buyer_stat.pending_url}</dd>
+                            <dd>{sprintf lang=order_for_confirm_remind var1=buyer_stat.shipped var2=buyer_stat.shipped_url}</dd>
+                            <dd>{sprintf lang=order_for_evaluate_remind var1=buyer_stat.finished var2=buyer_stat.finished_url}</dd>
                         </dl>
                         <!--<dl>-->
                             <!--<dt>{$lang.groupbuy_remind}</dt>-->
@@ -83,8 +83,8 @@
                     <div class="remind">
                         <dl>
                             <dt>{$lang.order_remind}</dt>
-                            <dd>{sprintf lang=order_for_settle_remind var1=seller_stat.submitted}</dd>
-                            <dd>{sprintf lang=order_for_ship_remind var1=seller_stat.accepted}</dd>
+                            <dd>{sprintf lang=order_for_settle_remind var1=seller_stat.submitted var2=seller_stat.submitted_url}</dd>
+                            <dd>{sprintf lang=order_for_ship_remind var1=seller_stat.accepted var2=seller_stat.accepted_url}</dd>
                         </dl>
                         <!--<dl>-->
                             <!--<dt>{$lang.groupbuy_remind}</dt>-->

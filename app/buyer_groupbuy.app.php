@@ -66,8 +66,8 @@ class Buyer_groupbuyApp extends MemberbaseApp
             $groupbuy['default_image'] || $groupbuy_list[$key]['default_image'] = Conf::get('default_goods_image');
         }//dump($groupbuy_list);
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                         LANG::get('my_groupbuy'), 'index.php?app=buyer_groupbuy',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                         LANG::get('my_groupbuy'), url('app=buyer_groupbuy'),
                          LANG::get('groupbuy_list'));
 
         /* 当前用户中心菜单 */
@@ -99,7 +99,7 @@ class Buyer_groupbuyApp extends MemberbaseApp
         $menus = array(
             array(
                 'name'  => 'groupbuy_list',
-                'url'   => 'index.php?app=seller_groupbuy',
+                'url'   => url('app=seller_groupbuy'),
             ),
         );
         if (ACT == 'add' || ACT == 'edit' || ACT == 'desc' || ACT == 'cancel')

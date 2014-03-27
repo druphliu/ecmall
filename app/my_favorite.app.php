@@ -112,8 +112,8 @@ class My_favoriteApp extends MemberbaseApp
         $this->assign('filtered', $conditions? 1 : 0); //是否有查询条件
         $this->assign('collect_goods', $collect_goods);
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                            LANG::get('my_favorite'), 'index.php?app=my_favorite',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                            LANG::get('my_favorite'), url('app=my_favorite'),
                             LANG::get('collect_goods'));
 
         $this->import_resource(array(
@@ -182,8 +182,8 @@ class My_favoriteApp extends MemberbaseApp
         $this->assign('collect_store', $collect_store);
 
         /* 当前位置 */
-        $this->_curlocal(LANG::get('member_center'),    'index.php?app=member',
-                        LANG::get('my_favorite'), 'index.php?app=my_favorite',
+        $this->_curlocal(LANG::get('member_center'),    url('app=member'),
+                        LANG::get('my_favorite'), url('app=my_favorite'),
                         LANG::get('collect_store'));
 
         $this->import_resource(array(
@@ -352,11 +352,11 @@ class My_favoriteApp extends MemberbaseApp
         $menus = array(
             array(
                 'name'  => 'collect_goods',
-                'url'   => 'index.php?app=my_favorite',
+                'url'   => url('app=my_favorite'),
             ),
             array(
                 'name'  => 'collect_store',
-                'url'   => 'index.php?app=my_favorite&amp;type=store',
+                'url'   => url('app=my_favorite&type=store'),
             ),
         );
         return $menus;

@@ -8,8 +8,8 @@ RewriteRule ^goods/([0-9]+)/([^/]+)/page_([^/]+)/?$ index.php?app=goods&id=$1&ac
 RewriteRule ^groupbuy/([0-9]+)/?$ index.php?app=groupbuy&id=$1 [L]
 
 #分类
-RewriteRule ^category/goods/?$ index.php?app=category [L]
-RewriteRule ^category/(.*)/?$ index.php?app=category&act=$1 [L]
+RewriteRule ^category/goods.html?$ index.php?app=category [L]
+RewriteRule ^category/(.*).html?$ index.php?app=category&act=$1 [L]
 
 #品牌
 RewriteRule ^brand/?$ index.php?app=brand [L]
