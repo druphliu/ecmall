@@ -51,12 +51,12 @@
                             <dd>{sprintf lang=order_for_confirm_remind var1=buyer_stat.shipped}</dd>
                             <dd>{sprintf lang=order_for_evaluate_remind var1=buyer_stat.finished}</dd>
                         </dl>
-                        <dl>
-                            <dt>{$lang.groupbuy_remind}</dt>
-                            <dd>{sprintf lang=groupbuy_for_finished_remind var1=buyer_stat.groupbuy_finished}</dd>
-                            <dd>{sprintf lang=groupbuy_for_canceled_remind var1=buyer_stat.groupbuy_canceled}</dd>
-                        </dl>
-                        <a href="{url app=buyer_order}" class="btn pos1" title="{$lang.look_order}"><span class="pic1">{$lang.look_order}</span></a>
+                        <!--<dl>-->
+                            <!--<dt>{$lang.groupbuy_remind}</dt>-->
+                            <!--<dd>{sprintf lang=groupbuy_for_finished_remind var1=buyer_stat.groupbuy_finished}</dd>-->
+                            <!--<dd>{sprintf lang=groupbuy_for_canceled_remind var1=buyer_stat.groupbuy_canceled}</dd>-->
+                        <!--</dl>-->
+                        <!--<a href="{url app=buyer_order}" class="btn pos1" title="{$lang.look_order}"><span class="pic1">{$lang.look_order}</span></a>-->
                     </div>
                     <!--{else}-->
                     <div class="awoke">
@@ -86,10 +86,10 @@
                             <dd>{sprintf lang=order_for_settle_remind var1=seller_stat.submitted}</dd>
                             <dd>{sprintf lang=order_for_ship_remind var1=seller_stat.accepted}</dd>
                         </dl>
-                        <dl>
-                            <dt>{$lang.groupbuy_remind}</dt>
-                            <dd>{sprintf lang=groupbuy_for_end_remind var1=seller_stat.groupbuy_end}</dd>
-                        </dl>
+                        <!--<dl>-->
+                            <!--<dt>{$lang.groupbuy_remind}</dt>-->
+                            <!--<dd>{sprintf lang=groupbuy_for_end_remind var1=seller_stat.groupbuy_end}</dd>-->
+                        <!--</dl>-->
                         <a href="{url app=my_goods}" title="{$lang.look_store}" target="_blank" class="btn1 pos2"><span class="pic1">{$lang.goods_manage}</span></a>
                         <a href="{url app=seller_order}" class="btn pos3" title="{$lang.manage_order}"><span class="pic1">{$lang.manage_order}</span></a>
                     </div>

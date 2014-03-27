@@ -134,7 +134,7 @@ return array(
     'look_order'   => '查看我的订单',
     'look_store' => '查看我的店铺',
     'manage_order'  => '管理我的订单',
-    'store_grade'  => '店铺等级',
+    'store_grade'  => '代理商等级',
     'expire_time' => '有效期',
     'goods_put' => '商品发布',
     'goods_manage'=>'商品管理',
