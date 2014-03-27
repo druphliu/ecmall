@@ -28,17 +28,15 @@
                     </tr>
                     <tr>
                         <th class="width11 cursor_pointer" column="brand_name" title="{$lang.sort_order}"  class="cursor_pointer"><span ectype="order_by">{$lang.brand_name}</span></th>
-                        <th>{$lang.brand_logo}</th>
-                        <th class="width11 cursor_pointer" column='tag' title="{$lang.sort_order}"  class="cursor_pointer"><span ectype="order_by">{$lang.tag}</span></th>
+                        <th class="width11 cursor_pointer" column='brand_desc' title="{$lang.sort_order}"  class="cursor_pointer"><span ectype="order_by">{$lang.brand_summary}</span></th>
                         <th class="width13">{$lang.handle}</th>
                     </tr>
                    <!-- {/if} -->
                 <!-- {foreach from=$brands item=brand name=v} -->
                 <tr class="line<!--{if $smarty.foreach.v.last}--> last_line<!--{/if}-->">
                     <td class="padding2">{$brand.brand_name}</td>
-                    <td class="padding2"><img src="{$brand.brand_logo}" height="30" /></td>
-                    <td class="padding2">{$brand.tag}</td>
-                    <td class="align2"><!--{if !$brand.if_show}--><a class="edit1" href="javascript:void(0);" ectype="dialog" dialog_title="{$lang.brand_edit}" dialog_id="my_goods_brand_edit" dialog_width="480" uri="index.php?app=my_goods&act=brand_edit&id={$brand.brand_id}">{$lang.edit}</a> <a class="delete" href="javascript:drop_confirm('{$lang.drop_confirm}', 'index.php?app=my_goods&act=brand_drop&id={$brand.brand_id}');">{$lang.drop}</a><!--{/if}--></td>
+                    <td class="padding2">{$brand.brand_desc}</td>
+                    <td class="align2"><a class="edit1" href="javascript:void(0);" ectype="dialog" dialog_title="{$lang.brand_edit}" dialog_id="my_goods_brand_edit" dialog_width="480" uri="index.php?app=my_goods&act=brand_edit&id={$brand.brand_id}">{$lang.edit}</a> <a class="delete" href="javascript:drop_confirm('{$lang.drop_confirm}', 'index.php?app=my_goods&act=brand_drop&id={$brand.brand_id}');">{$lang.drop}</a></td>
                 </tr>
                 <!-- {foreachelse} -->
                 <tr>

@@ -1653,30 +1653,28 @@ class My_goodsApp extends StoreadminbaseApp
         else
         {
             $brand_name = trim($_POST['brand_name']);
+            $brand_desc = time($_POST['brand_desc']);
             if (empty($brand_name))
             {
                 $this->pop_warning("brand_name_required");
                 exit;
             }
+            if(empty($brand_desc)){
+                $this->pop_warning('brand_desc_required');
+                exit;
+            }
 
-            if (!$this->_brand_mod->unique($brand_name))
+            if (!$this->_brand_mod->unique($brand_name, $this->_store_id))
             {
                 $this->pop_warning('brand_name_exist');
                 return;
             }
-            if (!$brand_id = $this->_brand_mod->add(array('brand_name' => $brand_name, 'store_id' => $this->_store_id, 'if_show' => 0, 'tag' => trim($_POST['tag']))))  //获取brand_id
+            if (!$brand_id = $this->_brand_mod->add(array('brand_name' => $brand_name, 'brand_desc' => $brand_desc, 'store_id' => $this->_store_id, 'if_show' => 1, 'tag' => trim($_POST['tag']))))  //获取brand_id
             {
                 $this->pop_warning($this->_brand_mod->get_error());
 
                 return;
             }
-
-            $logo = $this->_upload_logo($brand_id);
-            if ($logo === false)
-            {
-                return;
-            }
-            $this->_brand_mod->edit($brand_id, array('brand_logo' => $logo));
             $this->pop_warning('ok',
                 'my_goods_brand_apply', 'index.php?app=my_goods&act=brand_list');
         }
@@ -1685,7 +1683,7 @@ class My_goodsApp extends StoreadminbaseApp
     function brand_edit()
     {
         $id = intval($_GET['id']);
-        $brand = $this->_brand_mod->find('store_id = ' . $this->_store_id . ' AND if_show = ' . BRAND_REFUSE . ' AND brand_id = ' . $id);
+        $brand = $this->_brand_mod->find('store_id = ' . $this->_store_id . ' AND brand_id = ' . $id);
         $brand = current($brand);
         if (empty($brand))
         {
@@ -1700,23 +1698,19 @@ class My_goodsApp extends StoreadminbaseApp
         }
         else
         {
+            $brand_desc = trim($_POST['brand_desc']);
             $brand_name = trim($_POST['brand_name']);
-            if (!$this->_brand_mod->unique($brand_name, $id))
+            if (!$this->_brand_mod->unique($brand_name, $this->_store_id, $id))
             {
                 $this->pop_warning('brand_name_exist');
                 return;
             }
-            $data = array();
-            if (isset($_FILES['brand_logo']))
-            {
-                $logo = $this->_upload_logo($id);
-                if ($logo === false)
-                {
-                    return;
-                }
-                $data['brand_logo'] = $logo;
+            if(empty($brand_desc)){
+                $this->pop_warning('brand_desc_required');
+                exit;
             }
             $data['brand_name'] = $brand_name;
+            $data['brand_desc'] = $brand_desc;
             $data['tag'] = trim($_POST['tag']);
             $this->_brand_mod->edit($id, $data);
             if ($this->_brand_mod->has_error())
@@ -1737,7 +1731,7 @@ class My_goodsApp extends StoreadminbaseApp
             $this->show_warning('request_error');
             exit;
         }
-        $brand = $this->_brand_mod->find("store_id = " . $this->_store_id . " AND if_show = " . BRAND_REFUSE . " AND brand_id = " . $id);
+        $brand = $this->_brand_mod->find("store_id = " . $this->_store_id . " AND brand_id = " . $id);
         $brand = current($brand);
         if (empty($brand))
         {
@@ -1748,10 +1742,6 @@ class My_goodsApp extends StoreadminbaseApp
         {
             $this->show_warning($this->_brand_mod->get_error());
             exit;
-        }
-        if (!empty($brand['brand_logo']) && file_exists(ROOT_PATH . '/' . $brand['brand_logo']))
-        {
-            @unlink(ROOT_PATH . '/' . $brand['brand_logo']);
         }
         $this->show_message('drop_brand_ok',
             'back_list', 'index.php?app=my_goods&act=brand_list');
@@ -1766,7 +1756,7 @@ class My_goodsApp extends StoreadminbaseApp
             echo ecm_json_encode(true);
             return ;
         }
-        if ($this->_brand_mod->unique($brand_name))
+        if ($this->_brand_mod->unique($brand_name, $this->_store_id))
         {
             echo ecm_json_encode(true);
         }
@@ -1775,40 +1765,6 @@ class My_goodsApp extends StoreadminbaseApp
             echo ecm_json_encode(false);
         }
         return ;
-    }
-    function _upload_logo($brand_id)
-    {
-        $file = $_FILES['brand_logo'];
-        if ($file['error'] == UPLOAD_ERR_NO_FILE || !isset($_FILES['brand_logo'])) // 没有文件被上传
-        {
-            return '';
-        }
-        import('uploader.lib');             //导入上传类
-        $uploader = new Uploader();
-        $uploader->allowed_type(IMAGE_FILE_TYPE); //限制文件类型
-        $uploader->addFile($_FILES['brand_logo']);//上传logo
-        if (!$uploader->file_info())
-        {
-            $this->pop_warning($uploader->get_error());
-            if (ACT == 'brand_apply')
-            {
-                $m_brand = &m('brand');
-                $m_brand->drop($brand_id);
-            }            
-            return false;
-        }
-        /* 指定保存位置的根目录 */
-        $uploader->root_dir(ROOT_PATH);
-
-        /* 上传 */
-        if ($file_path = $uploader->save('data/files/mall/brand', $brand_id))   //保存到指定目录，并以指定文件名$brand_id存储
-        {
-            return $file_path;
-        }
-        else
-        {
-            return false;
-        }
     }
     
     /* 价格过滤，返回非负浮点数 */
