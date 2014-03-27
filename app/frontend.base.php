@@ -741,12 +741,12 @@ class MemberbaseApp extends MallbaseApp
                     'name'  => 'my_goods',
                     'icon'  => 'ico8',
             );
-            $menu['im_seller']['submenu']['groupbuy_manage'] = array(
-                    'text'  => Lang::get('groupbuy_manage'),
-                    'url'   => url('app=seller_groupbuy'),
-                    'name'  => 'groupbuy_manage',
-                    'icon'  => 'ico22',
-            );
+//            $menu['im_seller']['submenu']['groupbuy_manage'] = array(
+//                    'text'  => Lang::get('groupbuy_manage'),
+//                    'url'   => 'index.php?app=seller_groupbuy',
+//                    'name'  => 'groupbuy_manage',
+//                    'icon'  => 'ico22',
+//            );
 //            $menu['im_seller']['submenu']['my_qa'] = array(
 //                    'text'  => Lang::get('my_qa'),
 //                    'url'   => 'index.php?app=my_qa',
