@@ -1,7 +1,5 @@
 {include file=member.header.html}
 {$images_upload}
-{$editor_upload}
-{$build_editor}
 <style>
 .box_arr .table_btn { width: 222px; }
 .box_arr .table_btn a { float: left; }
@@ -16,6 +14,10 @@
 </style>
 <script type="text/javascript">
 //<!CDATA[
+jQuery.validator.addMethod("datetime", function(value, element) {
+    return this.optional(element) || /[0-9][0-9]:[0-9][0-9]/.test(value);
+}, "{$lang.format_error}");
+
 var SPEC = {$goods.spec_json};
 
 
@@ -32,14 +34,6 @@ function add_uploadedfile(file_data)
                 $('#uploader').hide();
                 $('#open_uploader').find('.show').attr('class','hide');
             },4000);
-        }
-    }else if(file_data.instance == 'desc_image'){
-        $('#desc_images').append('<li file_name="'+ file_data.file_name +'" file_path="'+ file_data.file_path +'" ectype="handle_pic" file_id="'+ file_data.file_id +'"><input type="hidden" name="desc_file_id[]" value="'+ file_data.file_id +'"><div class="pic" style="z-index: 2;"><img src="{$site_url}/'+ file_data.file_path +'" width="50" height="50" alt="'+ file_data.file_name +'" /></div><div ectype="handler" class="bg" style="z-index: 3;display:none"><img src="{$site_url}/'+ file_data.file_path +'" width="50" height="50" alt="'+ file_data.file_name +'" /><p class="operation"><a href="javascript:void(0);" class="cut_in" ectype="insert_editor" ecm_title="{$lang.insert_editor}"></a><span class="delete" ectype="drop_image" ecm_title="{$lang.drop}"></span></p><p class="name">'+ file_data.file_name +'</p></div></li>');
-                trigger_uploader();
-        if(EDITOR_SWFU.getStats().files_queued == 0){
-            window.setTimeout(function(){
-                $('#editor_uploader').hide();
-            },5000);
         }
     }
 }
@@ -89,6 +83,22 @@ $(function(){
                         }
                     }
                 }
+            },
+            morning_start :{
+                required:true,
+                datetime:true
+            },
+            morning_end:{
+                required:true,
+                datetime:true
+            },
+            afternoon_start :{
+                required:true,
+                datetime:true
+            },
+            afternoon_end:{
+                required:true,
+                datetime:true
             }
         },
         messages : {
@@ -99,6 +109,18 @@ $(function(){
                 number     : '{$lang.number_only}',
                 required : '{$lang.price_empty}',
                 min : '{$lang.price_ge_0}'
+            },
+            morning_start:{
+                required:'{$lang.not_empty}'
+            },
+            morning_end:{
+                required:'{$lang.not_empty}'
+            },
+            afternoon_start:{
+                required:'{$lang.not_empty}'
+            },
+            afternoon_end:{
+             required:'{$lang.not_empty}'
             },
             stock       : {
                 digits  : '{$lang.number_only}'
@@ -255,13 +277,22 @@ $(function(){
                                         <div class="arrange"><input type="text" name="brand" value="{$goods.brand|escape}" class="text width_normal" /></div>
                                     </li>
                                     <li>
-                                        <h2>{$lang.tags}: </h2>
-                                        <div class="arrange"><input type="text" name="tags" value="{$goods.tags|escape}" class="text width_normal" />
-                                            <span class="gray">{$lang.goods_tags_note}</span></div>
-                                    </li>
-                                    <li>
                                         <h2  ectype="no_spec">{$lang.price}: </h2>
                                         <div class="arrange"  ectype="no_spec"><input name="spec_id" value="{$goods._specs.0.spec_id}" type="hidden" /><input name="price" value="{$goods._specs.0.price}" type="text" class="text width_short" /></div>
+                                    </li>
+                                    <li>
+                                        <h2>{$lang.supply_time}:</h2>
+                                        <div class="arrange">
+                                            {$lang.morning}:
+                                            <input  class="text width_short" name="morning_start" value="10:30"> ~
+                                            <input class="text width_short" name="morning_end" value="12:30">
+                                            <label  class="field_notice">{$lang.morning_eg}</label>
+                                            <br>
+                                            {$lang.afternoon}:
+                                            <input  class="text width_short" name="afternoon_start" value="16:30"> ~
+                                            <input class="text width_short" name="afternoon_end" value="18:30">
+                                            <label  class="field_notice">{$lang.afternoon_eg}</label>
+                                        </div>
                                     </li>
                                     <li ectype="no_spec">
                                         <h2>{$lang.stock}: </h2>
@@ -331,55 +362,8 @@ $(function(){
                             <div class="add_wrap">
                                 <div class="editor">
                                     <div>
-                                    <textarea name="description" id="description"  style="width:100%; height:400px;">
-                                    {$goods.description|escape}
-                                    </textarea>
+                                    <textarea name="description" id="description"  style="width:100%; height:200px;">{$goods.description|escape}</textarea>
                                     </div>
-                                    <div style=" position: relative; top: 10px; z-index: 5;"><a class="btn3" id="open_editor_uploader">{$lang.uploadedfile}</a>
-                                        <div class="upload_con" id="editor_uploader" style="display:none">
-                                            <div class="upload_con_top"></div>
-                                            <div class="upload_wrap">
-
-                                                <ul>
-                                                    <li>
-                                                        <div id="divSwfuploadContainer">
-                                                            <div id="divButtonContainer">
-                                                                <span id="editor_upload_button"></span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li><iframe src="index.php?app=comupload&act=view_iframe&id={$id}&belong={$belong}&instance=desc_image" width="86" height="30" scrolling="no" frameborder="0"></iframe></li>
-                                                    <li id="open_editor_remote" class="btn2">{$lang.rem_upload}</li>
-                                                </ul>
-                                                <div id="editor_remote" class="upload_file" style="display:none">
-                                                <iframe src="index.php?app=comupload&act=view_remote&id={$id}&belong={$belong}&instance=desc_image" width="272" height="39" scrolling="no" frameborder="0"></iframe>
-                                                </div>
-                                                <div id="editor_upload_progress"></div>
-                                                <div class="upload_txt">
-                                                    <span>{$lang.note_for_upload}</span>
-                                                </div>
-
-                                            </div>
-                                            <div class="upload_con_bottom"></div>
-                                        </div>
-                                    </div>
-                                    <ul id="desc_images" class="preview">
-                                        <!--{foreach from=$desc_images item=desc_image}-->
-                                        <li ectype="handle_pic" file_name="{$desc_image.file_name|escape}" file_path="{$desc_image.file_path}" file_id="{$desc_image.file_id}">
-                                        <input type="hidden" name="desc_file_id[]" value="{$desc_image.file_id}">
-                                            <div class="pic">
-                                            <img src="{$site_url}/{$desc_image.file_path}" width="50" height="50" alt="{$desc_image.file_name|escape}" title="{$desc_image.file_name|escape}" /></div>
-                                            <div ectype="handler" class="bg">
-                                            <img src="{$site_url}/{$desc_image.file_path}" width="50" height="50" alt="{$desc_image.file_name|escape}" title="{$desc_image.file_name|escape}" />
-                                                <p class="operation">
-                                                    <a class="cut_in" ectype="insert_editor" href="javascript:void(0);" ecm_title="{$lang.insert_editor}"></a>
-                                                    <span class="delete" ectype="drop_image" ecm_title="{$lang.drop}"></span>
-                                                </p>
-                                                <p title="{$desc_image.file_name|escape}" class="name">{$desc_image.file_name|escape}</p>
-                                            </div>
-                                        </li>
-                                        <!--{/foreach}-->
-                                    </ul>
                                     <div class="clear"></div>
                                 </div>
                                 <div class="issuance"><input type="submit" class="btn" value="{$lang.submit}" /></div>

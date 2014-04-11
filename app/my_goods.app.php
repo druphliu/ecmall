@@ -428,7 +428,7 @@ class My_goodsApp extends StoreadminbaseApp
 
     function add()
     {
-        /* 检测支付方式、配送方式、商品数量等 */
+        /* 检测商品数量 */
         if (!$this->_addible()) {
             return;
         }
@@ -486,20 +486,6 @@ class My_goodsApp extends StoreadminbaseApp
                  'if_multirow' => 1,
              )));
 
-             /* 编辑器图片批量上传器 */
-             $this->assign('editor_upload', $this->_build_upload(array(
-                 'obj' => 'EDITOR_SWFU',
-                 'belong' => BELONG_GOODS,
-                 'item_id' => 0,
-                 'button_text' => Lang::get('bat_upload'),
-                 'button_id' => 'editor_upload_button',
-                 'progress_id' => 'editor_upload_progress',
-                 'upload_url' => url('app=swfupload&instance=desc_image'),
-                 'if_multirow' => 1,
-                 'ext_js' => false,
-                 'ext_css' => false,
-             )));
-
              $this->import_resource(array(
                  'script' => array(
                      array(
@@ -525,14 +511,7 @@ class My_goodsApp extends StoreadminbaseApp
                  ),
                  'style' =>  'jquery.ui/themes/ui-lightness/jquery.ui.css',
              ));
-             
-             /* 所见即所得编辑器 */
-             extract($this->_get_theme());
-             $this->assign('build_editor', $this->_build_editor(array(
-                 'name' => 'description',
-                 'content_css' => SITE_URL . "/themes/store/{$template_name}/styles/{$style_name}" . '/shop.css', // for preview
-             )));
-             
+
              $this->display('my_goods.form.html');
         }
         else
@@ -679,26 +658,26 @@ class My_goodsApp extends StoreadminbaseApp
             )));
 
             /* 编辑器图片批量上传器 */
-            $this->assign('editor_upload', $this->_build_upload(array(
-                'obj' => 'EDITOR_SWFU',
-                'belong' => BELONG_GOODS,
-                'item_id' => $id,
-                'button_text' => Lang::get('bat_upload'),
-                'button_id' => 'editor_upload_button',
-                'progress_id' => 'editor_upload_progress',
-                'upload_url' => url('app=swfupload&instance=desc_image'),
-                'if_multirow' => 1,
-                'ext_js' => false,
-                'ext_css' => false,
-            )));
+//            $this->assign('editor_upload', $this->_build_upload(array(
+//                'obj' => 'EDITOR_SWFU',
+//                'belong' => BELONG_GOODS,
+//                'item_id' => $id,
+//                'button_text' => Lang::get('bat_upload'),
+//                'button_id' => 'editor_upload_button',
+//                'progress_id' => 'editor_upload_progress',
+//                'upload_url' => url('app=swfupload&instance=desc_image'),
+//                'if_multirow' => 1,
+//                'ext_js' => false,
+//                'ext_css' => false,
+//            )));
 
             /* 所见即所得编辑器 */
-            extract($this->_get_theme());
-            $this->assign('build_editor', $this->_build_editor(array(
-                'name' => 'description',
-                'content_css' => SITE_URL . "/themes/store/{$template_name}/styles/{$style_name}" . '/shop.css', // for preview
-            )));
-             
+//            extract($this->_get_theme());
+//            $this->assign('build_editor', $this->_build_editor(array(
+//                'name' => 'description',
+//                'content_css' => SITE_URL . "/themes/store/{$template_name}/styles/{$style_name}" . '/shop.css', // for preview
+//            )));
+
             $this->display('my_goods.form.html');
         }
         else
@@ -966,7 +945,7 @@ class My_goodsApp extends StoreadminbaseApp
                  ),
 //                 array(
 //                     'name' => 'import_taobao',
-//                     'url'  => 'index.php?app=my_goods&amp;act=import_taobao',
+//                     'url'  => 'app=my_goods&amp;act=import_taobao',
 //                 ),
                  array(
                     'name' => 'brand_apply_list',
@@ -1140,22 +1119,6 @@ class My_goodsApp extends StoreadminbaseApp
      */
     function _addible()
     {
-//        $payment_mod =& m('payment');
-//        $payments = $payment_mod->get_enabled($this->_store_id);
-//        if (empty($payments))
-//        {
-//            $this->show_warning('please_install_payment', 'go_payment', 'index.php?app=my_payment');
-//                  return false;
-//        }
-
-//        $shipping_mod =& m('shipping');
-//        $shippings = $shipping_mod->find("store_id = '{$this->_store_id}' AND enabled = 1");
-//        if (empty($shippings))
-//        {
-//                  $this->show_warning('please_install_shipping', 'go_shipping', 'index.php?app=my_shipping');
-//                  return false;
-//        }
-
         /* 判断商品数是否已超过限制 */
         $store_mod =& m('store');
         $settings = $store_mod->get_settings($this->_store_id);
@@ -1266,7 +1229,7 @@ class My_goodsApp extends StoreadminbaseApp
     {
         $goods = array(
             'goods_name'       => $_POST['goods_name'],
-            'description'      => $_POST['description'],
+            'description'      => trim($_POST['description']),
             'cate_id'             => $_POST['cate_id'],
             'cate_name'        => $_POST['cate_name'],
             'brand'                  => $_POST['brand'],
@@ -1274,6 +1237,10 @@ class My_goodsApp extends StoreadminbaseApp
             'last_update'      => gmtime(),
             'recommended'      => $_POST['recommended'],
             'tags'             => trim($_POST['tags']),
+            'morning_start' => trim($_POST['morning_start']),
+            'morning_end' => trim($_POST['morning_end']),
+            'afternoon_start' => trim($_POST['afternoon_start']),
+            'afternoon_end' => trim($_POST['afternoon_end']),
         );
         $spec_name_1 = !empty($_POST['spec_name_1']) ? $_POST['spec_name_1'] : '';
         $spec_name_2 = !empty($_POST['spec_name_2']) ? $_POST['spec_name_2'] : '';
@@ -1392,15 +1359,15 @@ class My_goodsApp extends StoreadminbaseApp
         /* 分类 */
         $cates = array();
 
-        foreach ($_POST['sgcate_id'] as $cate_id)
-        {
-            if (intval($cate_id) > 0)
-            {
-                $cates[$cate_id] = array(
-                    'cate_id'      => $cate_id,
-                );
-            }
-        }
+//        foreach ($_POST['sgcate_id'] as $cate_id)
+//        {
+//            if (intval($cate_id) > 0)
+//            {
+//                $cates[$cate_id] = array(
+//                    'cate_id'      => $cate_id,
+//                );
+//            }
+//        }
 
         return array('goods' => $goods, 'specs' => $specs, 'cates' => $cates, 'goods_file_id' => $goods_file_id, 'desc_file_id' => $desc_file_id);
     }
@@ -1424,6 +1391,13 @@ class My_goodsApp extends StoreadminbaseApp
                   || $data['goods']['spec_qty'] == 2 && (empty($data['goods']['spec_name_1']) || empty($data['goods']['spec_name_2'])))
         {
             $this->_error('fill_spec_name');
+            return false;
+        }
+        $pattern='/[0-9][0-9]:[0-9][0-9]/';
+        if (preg_match($pattern, $data['morning_start']) && preg_match($pattern, $data['morning_end']) && preg_match
+            ($pattern, $data['afternoon_start']) && preg_match($pattern, $data['afternoon_end']))
+        {
+            $this->_error('format_error');
             return false;
         }
         if (empty($data['specs']))
@@ -1614,7 +1588,7 @@ class My_goodsApp extends StoreadminbaseApp
         $page['item_count'] = $this->_brand_mod->getCount();
         $this->_format_page($page);
         $this->_curlocal(LANG::get('member_center'), url('app=member'),
-                         LANG::get('my_goods'), url('index.php?app=my_goods'),
+                         LANG::get('my_goods'), url('app=my_goods'),
                          LANG::get('brand_list'));
         $this->_curitem('my_goods');
         $this->_curmenu('brand_apply_list');
@@ -1676,7 +1650,7 @@ class My_goodsApp extends StoreadminbaseApp
                 return;
             }
             $this->pop_warning('ok',
-                'my_goods_brand_apply', 'index.php?app=my_goods&act=brand_list');
+                'my_goods_brand_apply', url('app=my_goods&act=brand_list'));
         }
     }
 
@@ -1744,7 +1718,7 @@ class My_goodsApp extends StoreadminbaseApp
             exit;
         }
         $this->show_message('drop_brand_ok',
-            'back_list', 'index.php?app=my_goods&act=brand_list');
+            'back_list', url('app=my_goods&act=brand_list'));
 
     }
 
