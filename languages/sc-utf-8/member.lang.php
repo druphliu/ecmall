@@ -103,7 +103,7 @@ return array(
     'portrait' => '头像',
     'edit_profile' => '编辑个人资料',
     'password_confirm_desc' => '重复输入您的密码',
-    'email_desc' => '请输入一个有效的电子邮箱地址',
+    'email_desc' => '请输入有效的电子邮箱地址',
     'email_already_taken'=>'邮箱已经存在',
     'tel_already_taken'=>'手机号码已存在',
     'captcha_desc' => '请输入图片中的文字,点击图片以更换',

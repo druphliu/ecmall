@@ -4,8 +4,10 @@
 $(function(){
     $('#login_form').validate({
         errorPlacement: function(error, element){
-            $(element).parent('td').append(error); 
+            $(element).parent('div').next().append(error);
         },
+        successElement : "span",
+        errorElement : "span",
         success       : function(label){
             label.addClass('validate_right').text('OK!');
         },
@@ -45,60 +47,60 @@ $(function(){
     });
 });
 </script>
-
-<div class="content">
-    <div class="module_common">
-        <h2><b class="login" title="LOGIN{$lang.user_login}"></b></h2>
-        <div class="wrap">
-            <div class="wrap_child">
-                <div class="login_con">
-                    <div class="login_left">
-                        <form method="post" id="login_form">
-                        <table>
-                            <tr>
-                                <td>{$lang.user_name}: </td>
-                                <td><input type="text" name="user_name" class="text width5" placeholder="用户名/邮箱/手机号码"/></td>
-                            </tr>
-                            <tr>
-                                <td>{$lang.password}: </td>
-                                <td><input type="password" name="password" class="text width5" /></td>
-                            </tr>
-                            <!--{if $captcha}-->
-                            <tr>
-                                <td>{$lang.captcha}:</td>
-                                <td>
-                                    <input type="text" name="captcha" class="text" id="captcha1" />
-                                    <span><a href="javascript:change_captcha($('#captcha'));" class="renewedly"><img id="captcha" src="index.php?app=captcha&amp;{$random_number}" /></a></span>
-                                </td>
-                            </tr>
-                            <!--{/if}-->
-                            <tr class="distance">
-                                <td></td>
-                                <td>
-                                  <input type="submit" name="Submit" value="" class="enter" />                                  
-                                  <a href="{url app=find_password}" class="clew">{$lang.forget_password}</a>
-                                </td>
-                            </tr>
-                        </table>
-                        <input type="hidden" name="ret_url" value="{$ret_url}" />
-                        </form>
-                    </div>
-
-                    <div class="login_right">
-                        <h4>{$lang.attention}:<br />{$lang.not_member}</h4>
-                        <p>{$lang.after_register}</p>
-                        <ol>
-                            <li><strong>1.</strong> {$lang.save_profile}</li>
-                            <li><strong>2.</strong> {$lang.collect_goods}</li>
-                           <!-- <li><strong>3.</strong> {$lang.member_point}</li>-->
-                            <li><strong>3.</strong> {$lang.subscription_goods}</li>
-                        </ol>
-                        <a href="{url app=member&act=register&ret_url=$ret_url}" class="login_btn" title="{$lang.register_now}"></a>
+<div class="container">
+    <div class="row login">
+        <div class="row col-md-7 col-sm-7">
+            <h3>{$lang.user_login}</h3>
+            <form class="form-horizontal" role="form" method="post" id="login_form">
+                <div class="row form-group">
+                    <div class="col-md-3 col-sm-3 text-right"><label class="control-label">{$lang.user_name}</label></div>
+                    <div class="col-md-6 col-sm-6"><input class="form-control" placeholder="用户名/邮箱/手机号码" name="user_name"></div>
+                    <div class="col-md-3 col-sm-3">
+                        <span class="field_notice"></span>
                     </div>
                 </div>
+                <div class="row form-group">
+                    <div class="col-md-3 col-sm-3 text-right"><label class="control-label">{$lang.password}</label></div>
+                    <div class="col-md-6 col-sm-6">
+                        <input class="form-control" name="password" type="password">
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <span class="field_notice"></span>
+                    </div>
+                </div>
+                <!--{if $captcha}-->
+                <div class="row form-group">
+                    <div class="col-md-3 col-sm-3 text-right"><label class="control-label">{$lang.captcha}</label></div>
+                    <div class="col-md-6 col-sm-6">
+                        <input class="form-control" id="captcha1" name="captcha" type="text">
+                        <a href="javascript:change_captcha($('#captcha'));" class="renewedly">
+                            <img id="captcha" src="index.php?app=captcha&amp;{$random_number}" />
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <span class="field_notice">{$lang.captcha_desc}</span>
+                    </div>
+                </div>
+                <!--{/if}-->
+                <div class="row text-center">
+                    <input type="hidden" name="ret_url" value="{$ret_url}" />
+                    <input class="btn btn-default" type="submit" name="" value="提交">
+                    <input class="btn btn-default" type="reset" name="" value="重置"></div>
+            </form>
+        </div>
+        <div class="row col-md-5 col-sm-5 help-block">
+            <div class="login_right">
+                <h4>{$lang.attention}:<br />{$lang.not_member}</h4>
+                <p>{$lang.after_register}</p>
+                <ul class="list-unstyled">
+                    <li>⊙{$lang.save_profile}</li>
+                    <li>⊙{$lang.collect_goods}</li>
+                    <li>⊙{$lang.subscription_goods}</li>
+                </ul>
+                <a href="{url app=member&act=register&ret_url=$ret_url}" class="login_btn"
+                   title="{$lang.register_now}">注册</a>
             </div>
         </div>
     </div>
 </div>
-
 {include file="footer.html"}

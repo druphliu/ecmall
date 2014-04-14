@@ -7,6 +7,7 @@ function regionInit(divId)
 {
     $("#" + divId + " > select").change(regionChange); // select的onchange事件
     $("#" + divId + " > input:button[class='edit_region']").click(regionEdit); // 编辑按钮的onclick事件
+    $("#" + divId + " > a[class='edit_region']").click(regionEdit); // 编辑按钮的onclick事件
 }
 
 function regionChange()
