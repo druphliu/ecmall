@@ -253,6 +253,9 @@ header .dropdown-menu .wechat_text {
     display: block;
     background: url("../images/loding.gif") no-repeat center;
 }
+#foods_list .goods{
+    cursor: pointer;
+}
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
     background-color: #FF8432;

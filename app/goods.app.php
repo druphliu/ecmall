@@ -45,7 +45,11 @@ class GoodsApp extends StorebaseApp
         }
 
         $this->assign('guest_comment_enable', Conf::get('guest_comment'));
-        $this->display('goods.index.html');
+        if (IS_AJAX) {
+            $this->display('goods_ajax.index.html');
+        } else {
+            $this->display('goods.index.html');
+        }
     }
 
     /* 商品评论 */

@@ -1,0 +1,116 @@
+{include file=header.html}
+<script>
+    $(function(){
+        $("img.lazy").lazyload({
+            load:function(){
+                $('#foods_list').BlocksIt({
+                    numOfCol:5,
+                    offsetX: 2,
+                    offsetY: 4
+                });
+            }
+        });
+        //window resize
+        var currentWidth = 1100;
+        $(window).resize(function() {
+            var winWidth = $(window).width();
+            var conWidth;
+            if(winWidth < 660) {
+                conWidth = winWidth;
+                col = 2
+            } else if(winWidth < 880) {
+                conWidth = 660;
+                col = 3
+            } else if(winWidth < 1100) {
+                conWidth = 880;
+                col = 4;
+            } else {
+                conWidth = 1100;
+                col = 5;
+            }
+
+            if(conWidth != currentWidth) {
+                currentWidth = conWidth;
+                $('#foods_list').width(conWidth);
+                $('#foods_list').BlocksIt({
+                    numOfCol: col,
+                    offsetX: 2,
+                    offsetY: 4
+                });
+            }
+        });
+        $(".goods").click(function(){
+            var url = $(this).find(".food_desc").attr("data-url");
+            var id = 'my_foods_order';
+            var title = '订餐';
+            var width = '480';
+            ajax_form(id, title, url, width);
+            return false;
+        })
+    });
+</script>
+<div class="container">
+<div class="row category">
+    <ul>
+        <li class="active"><a href="#">盖饭</a></li>
+        <li><a href="#">冒菜</a></li>
+        <li><a href="#">拌饭</a></li>
+        <li><a href="#">炒饭</a></li>
+        <li><a href="#">水面</a></li>
+        <li><a href="#">刀削面</a></li>
+        <li><a href="#">饺子</a></li>
+        <li><a href="#">抄手</a></li>
+        <li><a href="#">馄饨</a></li>
+    </ul>
+    <div class="line"></div>
+    <ul>
+        <li><a href="#">盖饭</a></li>
+        <li><a href="#">冒菜</a></li>
+        <li><a href="#">拌饭</a></li>
+        <li><a href="#">炒饭</a></li>
+        <li><a href="#">水面</a></li>
+        <li><a href="#">刀削面</a></li>
+        <li><a href="#">饺子</a></li>
+        <li><a href="#">抄手</a></li>
+        <li><a href="#">馄饨</a></li>
+    </ul>
+</div>
+<div class="row" id="foods_list">
+    <div class="grid nav-select">
+        <div class="nav-select-title">
+            <span style="padding-right: 10px">排行</span>
+            <span class="nav-select-title-left active"><a href="#">{$lang.sales_desc}</a></span>
+            <span class="nav-select-title-right"><a href="#">{$lang.add_time_desc}</a></span>
+        </div>
+        <div class="nav-select-list">
+            <!--{if $brands}-->
+            <span class="active"><a href="#">全部</a></span>
+            <!--{foreach from=$brands item=row name=fe_brand}-->
+            <span><a href="{$row.brand|escape:url}">{$row.brand|escape}</a></span>
+            <!--{/foreach}-->
+            <!--{/if}-->
+        </div>
+    </div>
+    <!-- {if $goods_list} -->
+        <!--{foreach from=$goods_list item=goods}-->
+    <div class="grid goods">
+        <div class="imgholder">
+            <img class="lazy" src="{res file=images/pixel.gif}"
+                 data-original="{$goods.default_image}"/>
+        </div>
+        <div class="food_desc" data-url="{url app=goods&id=$goods.goods_id}">
+            <span>{$goods.price|price}/份</span>
+            <span>{$goods.goods_name|escape}</span>
+        </div>
+    </div>
+        <!--{/foreach}-->
+    <!-- {else} -->
+    <div id="no_results">{$lang.no_records}</div>
+    <!-- {/if} -->
+
+</div>
+    {include file=page.bottom.html}
+
+</div>
+
+{include file=footer.html}

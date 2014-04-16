@@ -58,6 +58,7 @@ class DefaultRewrite extends BaseRewrite
         'app_act'=>'app_cate',
         'app_act_id'=>'app_cate_id',
         'app_act_page'=>'app_cate_page',
+        'app_page'=>'app_page',
         'app_act_cate_id_id_page'=>'app_cate_id_id_page'
         #TODO 还有一些静态化路径未实现
 //        /*卖家相关*/
@@ -126,6 +127,9 @@ class DefaultRewrite extends BaseRewrite
         ),
         'app_cate_page'=>array(
             'rewrite'=>'%app%/%act%/page_%page%.html'
+        ),
+        'app_page'=>array(
+            'rewrite'=>'%app%/page_%page%.html'
         ),
 //        'my_goods_index'=>array(
 //            'rewrite'=>'my_goods.html'

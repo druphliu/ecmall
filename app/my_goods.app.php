@@ -482,7 +482,7 @@ class My_goodsApp extends StoreadminbaseApp
                  'item_id' => 0,
                  'button_text' => Lang::get('bat_upload'),
                  'progress_id' => 'goods_upload_progress',
-                 'upload_url' => url('app=swfupload&instance=goods_image'),
+                 'upload_url' => site_url().'/index.php?app=swfupload&instance=goods_image',
                  'if_multirow' => 1,
              )));
 
@@ -653,7 +653,7 @@ class My_goodsApp extends StoreadminbaseApp
                 'item_id' => $id,
                 'button_text' => Lang::get('bat_upload'),
                 'progress_id' => 'goods_upload_progress',
-                'upload_url' => url('app=swfupload&instance=goods_image'),
+                'upload_url' => site_url().'/index.php?app=swfupload&instance=goods_image',
                 'if_multirow' => 1,
             )));
 

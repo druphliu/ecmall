@@ -17,11 +17,6 @@ class ListApp extends MallbaseApp
     {
         // 查询参数
         $param = $this->_get_query_param();
-//        if (empty($param))
-//        {
-//            header('Location: index.php?app=category');
-//            exit;
-//        }
         if (isset($param['cate_id']) && $param['layer'] === false)
         {
             $this->show_warning('no_such_category');
@@ -90,231 +85,26 @@ class ListApp extends MallbaseApp
         /* 当前位置 */
         $cate_id = isset($param['cate_id']) ? $param['cate_id'] : 0;
         $this->_curlocal($this->_get_goods_curlocal($cate_id));
-        
+
+        $this->import_resource(array(
+            'script' => array(
+                array(
+                    'path' => 'blocksit.min.js',
+                    'attr' => 'id="blocksit_js"',
+                ),
+                array(
+                    'path' => 'jquery.lazyload.min.js',
+                    'attr' => '',
+                )
+            )
+        ));
+
         /* 配置seo信息 */
         $this->_config_seo($this->_get_seo_info('goods', $cate_id));
-        $this->display('search.goods.html');
+        $this->display('goods.list.html');
     }
 
-    /* 搜索店铺 */
-    function store()
-    {
-        /* 取得导航 */
-        $this->assign('navs', $this->_get_navs());
-
-        /* 取得该分类及子分类cate_id */
-        $cate_id = empty($_GET['cate_id']) ? 0 : intval($_GET['cate_id']);
-        $cate_ids=array();
-        $condition_id='';
-        if ($cate_id > 0)
-        {
-            $scategory_mod =& m('scategory');
-            $cate_ids = $scategory_mod->get_descendant($cate_id);
-        }
-
-        /* 店铺分类检索条件 */
-        $condition_id=implode(',',$cate_ids);
-        $condition_id && $condition_id = ' AND cate_id IN(' . $condition_id . ')';
-
-        /* 其他检索条件 */
-        $conditions = $this->_get_query_conditions(array(
-            array( //店铺名称
-                'field' => 'store_name',
-                'equal' => 'LIKE',
-                'assoc' => 'AND',
-                'name'  => 'keyword',
-                'type'  => 'string',
-            ),
-            array( //地区名称
-                'field' => 'region_name',
-                'equal' => 'LIKE',
-                'assoc' => 'AND',
-                'name'  => 'region_name',
-                'type'  => 'string',
-            ),
-            array( //地区id
-                'field' => 'region_id',
-                'equal' => '=',
-                'assoc' => 'AND',
-                'name'  => 'region_id',
-                'type'  => 'string',
-            ),
-            array( //商家用户名
-                'field' => 'user_name',
-                'equal' => 'LIKE',
-                'assoc' => 'AND',
-                'name'  => 'user_name',
-                'type'  => 'string',
-            ),
-        ));
-
-        $model_store =& m('store');
-        $regions = $model_store->list_regions();
-        $page   =   $this->_get_page(10);   //获取分页信息
-        $stores = $model_store->find(array(
-            'conditions'  => 'state = ' . STORE_OPEN . $condition_id . $conditions,
-            'limit'   =>$page['limit'],
-            'order'   => empty($_GET['order']) || !in_array($_GET['order'], array('credit_value desc')) ? 'sort_order' : $_GET['order'],
-            'join'    => 'belongs_to_user,has_scategory',
-
-            'count'   => true   //允许统计
-        ));
-
-        $model_goods = &m('goods');
-
-        foreach ($stores as $key => $store)
-        {
-            //店铺logo
-            empty($store['store_logo']) && $stores[$key]['store_logo'] = Conf::get('default_store_logo');
-
-            //商品数量
-            $stores[$key]['goods_count'] = $model_goods->get_count_of_store($store['store_id']);
-
-            //等级图片
-            $step = intval(Conf::get('upgrade_required'));
-            $step < 1 && $step = 5;
-            $stores[$key]['credit_image'] = $this->_view->res_base . '/images/' . $model_store->compute_credit($store['credit_value'], $step);
-
-        }
-        $page['item_count']=$model_store->getCount();   //获取统计数据
-        $this->_format_page($page);
-
-        /* 当前位置 */
-        $this->_curlocal($this->_get_store_curlocal($cate_id));
-        $scategorys = $this->_list_scategory();
-        $this->assign('stores', $stores);
-        $this->assign('regions', $regions);
-        $this->assign('cate_id', $cate_id);
-        $this->assign('scategorys', $scategorys);
-        $this->assign('page_info', $page);
-        /* 配置seo信息 */
-        $this->_config_seo($this->_get_seo_info('store', $cate_id));
-        $this->display('search.store.html');
-    }
-
-    function groupbuy()
-    {
-        empty($_GET['state']) &&  $_GET['state'] = 'on';
-        $conditions = '1=1';
-
-        // 排序
-        $orders = array(
-            'group_id desc'          => Lang::get('select_pls'),
-            'views desc'     => Lang::get('views'),
-        );
-
-        if ($_GET['state'] == 'on')
-        {
-            $orders['end_time asc'] = Lang::get('lefttime');
-            $conditions .= ' AND gb.state ='. GROUP_ON .' AND gb.end_time>' . gmtime();
-        }
-        elseif ($_GET['state'] == 'end')
-        {
-            $conditions .= ' AND (gb.state=' . GROUP_ON . ' OR gb.state=' . GROUP_END . ') AND gb.end_time<=' . gmtime();
-        }
-        else
-        {
-            $conditions .= $this->_get_query_conditions(array(
-                array(      //按团购状态搜索
-                    'field' => 'gb.state',
-                    'name'  => 'state',
-                    'handler' => 'groupbuy_state_translator',
-                )
-            ));
-        }
-        $conditions .= $this->_get_query_conditions(array(
-            array( //活动名称
-                'field' => 'group_name',
-                'equal' => 'LIKE',
-                'assoc' => 'AND',
-                'name'  => 'keyword',
-                'type'  => 'string',
-            ),
-        ));
-        $page = $this->_get_page(NUM_PER_PAGE);   //获取分页信息
-        $groupbuy_mod = &m('groupbuy');
-        $groupbuy_list = $groupbuy_mod->find(array(
-            'conditions'    => $conditions,
-            'fields'        => 'gb.group_name,gb.spec_price,gb.min_quantity,gb.store_id,gb.state,gb.end_time,g.default_image,default_spec,s.store_name',
-            'join'          => 'belong_store, belong_goods',
-            'limit'         => $page['limit'],
-            'count'         => true,   //允许统计
-            'order'         => isset($_GET['order']) && isset($orders[$_GET['order']]) ? $_GET['order'] : 'group_id desc',
-        ));
-        if ($ids = array_keys($groupbuy_list))
-        {
-            $quantity = $groupbuy_mod->get_join_quantity($ids);
-        }
-        foreach ($groupbuy_list as $key => $groupbuy)
-        {
-            $groupbuy_list[$key]['quantity'] = empty($quantity[$key]['quantity']) ? 0 : $quantity[$key]['quantity'];
-            $groupbuy['default_image'] || $groupbuy_list[$key]['default_image'] = Conf::get('default_goods_image');
-            $groupbuy['spec_price'] = unserialize($groupbuy['spec_price']);
-            $groupbuy_list[$key]['group_price'] = $groupbuy['spec_price'][$groupbuy['default_spec']]['price'];
-            $groupbuy['state'] == GROUP_ON && $groupbuy_list[$key]['lefttime'] = lefttime($groupbuy['end_time']);
-        }
-        $this->assign('state', array(
-             'on' => Lang::get('group_on'),
-             'end' => Lang::get('group_end'),
-             'finished' => Lang::get('group_finished'),
-             'canceled' => Lang::get('group_canceled'))
-        );
-        $this->assign('orders', $orders);
-        // 当前位置
-        $this->_curlocal(array(array('text' => Lang::get('groupbuy'))));
-        $this->_config_seo('title', Lang::get('groupbuy') . ' - ' . Conf::get('site_title'));
-        $page['item_count'] = $groupbuy_mod->getCount();   //获取统计数据
-        $this->_format_page($page);
-        $this->assign('nav_groupbuy', 1); // 标识当前页面是团购列表，用于设置导航状态
-        $this->assign('page_info', $page);
-        $this->assign('groupbuy_list',$groupbuy_list);
-        $this->assign('recommended_groupbuy', $this->_recommended_groupbuy(2));
-        $this->assign('last_join_groupbuy', $this->_last_join_groupbuy(2));
-        $this->display('search.groupbuy.html');
-    }
-
-    // 推荐团购活动
-    function _recommended_groupbuy($_num)
-    {
-        $model_groupbuy =& m('groupbuy');
-        $data = $model_groupbuy->find(array(
-            'join'          => 'belong_goods',
-            'conditions'    => 'gb.recommended=1 AND gb.state=' . GROUP_ON . ' AND gb.end_time>' . gmtime(),
-            'fields'        => 'group_id, goods.default_image, group_name, end_time, spec_price',
-            'order'         => 'group_id DESC',
-            'limit'         => $_num,
-        ));
-        foreach ($data as $gb_id => $gb_info)
-        {
-            $price = current(unserialize($gb_info['spec_price']));
-            empty($gb_info['default_image']) && $data[$gb_id]['default_image'] = Conf::get('default_goods_image');
-            $data[$gb_id]['lefttime']   = lefttime($gb_info['end_time']);
-            $data[$gb_id]['price']      = $price['price'];
-        }
-        return $data;
-    }
-
-    // 最新参加的团购
-    function _last_join_groupbuy($_num)
-    {
-        $model_groupbuy =& m('groupbuy');
-        $data = $model_groupbuy->find(array(
-            'join' => 'be_join,belong_goods',
-            'fields' => 'gb.group_id,gb.group_name,gb.group_id,groupbuy_log.add_time,gb.spec_price,goods.default_image',
-            'conditions' => 'groupbuy_log.user_id > 0',
-            'order' => 'groupbuy_log.add_time DESC',
-            'limit' => $_num,
-        ));
-        foreach ($data as $gb_id => $gb_info)
-        {
-            $price = current(unserialize($gb_info['spec_price']));
-            empty($gb_info['default_image']) && $data[$gb_id]['default_image'] = Conf::get('default_goods_image');
-            $data[$gb_id]['price']      = $price['price'];
-        }
-        return $data;
-    }
-
-                /* 取得店铺分类 */
+    /* 取得店铺分类 */
     function _list_scategory()
     {
         $scategory_mod =& m('scategory');
@@ -410,12 +200,6 @@ class ListApp extends MallbaseApp
             {
                 $brand = trim($_GET['brand']);
                 $res['brand'] = $brand;
-            }
-    
-            // region_id
-            if (isset($_GET['region_id']) && intval($_GET['region_id']) > 0)
-            {
-                $res['region_id'] = intval($_GET['region_id']);
             }
     
             // price
