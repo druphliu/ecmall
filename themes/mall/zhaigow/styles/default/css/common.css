@@ -353,7 +353,10 @@ header .dropdown-menu .wechat_text {
     padding: 4px 30px 10px 10px;
 }
 
-
+/************************goods_info**********************/
+.goods_info{
+    width: 700px;
+}
 
 
 

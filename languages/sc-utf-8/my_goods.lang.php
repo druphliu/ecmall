@@ -25,7 +25,6 @@ return array(
     'price' => '价格',
     'stock' => '库存',
     'sku' => '货号',
-    'supply_time'=>'供应时间',
     'note_for_recommended' => '被推荐的商品会显示在店铺首页',
     'note_for_add_spec' => '您最多可以添加两种商品规格（如：颜色，尺码）如商品没有规格则不用添加',
     'note_for_add_spec_popup' => '您最多可以添加两种规格（如：颜色和尺码）规格名称可以自定义<br/>如只有一项规格另一项留空',

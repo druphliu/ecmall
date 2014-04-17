@@ -1,6 +1,9 @@
 <?php
 return array(
     'goods_detail' => '商品详情',
+    'supply_customer'=>'供应商家:',
+    'supply_customer_address'=>'供应地址:',
+    'buyer_notice'=>'【温馨提示】美食有大、中、小/一两、二两、三两的区分，请根据自己的需要下单。',
     'goods_not_exist' => '该商品不存在',
     'add_to_favorite' => '收藏该商品',
     'add_to_cart' => '加入购物车',

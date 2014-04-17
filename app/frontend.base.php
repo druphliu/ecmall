@@ -33,15 +33,20 @@ class FrontendApp extends ECBaseApp
     function _config_view()
     {
         parent::_config_view();
-        $this->_view->template_dir  = ROOT_PATH . '/themes';
-        $this->_view->compile_dir   = ROOT_PATH . '/temp/compiled/mall';
-        $this->_view->res_base      = SITE_URL . '/themes';
+
+        $template_name = $this->_get_template_name();
+        $style_name    = $this->_get_style_name();
+
+        $this->_view->template_dir = ROOT_PATH . "/themes/mall/{$template_name}";
+        $this->_view->compile_dir  = ROOT_PATH . "/temp/compiled/mall/{$template_name}";
+        $this->_view->res_base     = SITE_URL . "/themes/mall/{$template_name}/styles/{$style_name}";
         $this->_config_seo(array(
             'title' => Conf::get('site_title'),
             'description' => Conf::get('site_description'),
             'keywords' => Conf::get('site_keywords')
         ));
     }
+
     function display($tpl)
     {
         $cart =& m('cart');
@@ -338,18 +343,30 @@ class FrontendApp extends ECBaseApp
      */
     function _get_template_name()
     {
-        return 'default';
+        $template_name = Conf::get('template_name');
+        if (!$template_name)
+        {
+            $template_name = 'default';
+        }
+
+        return $template_name;
     }
 
     /**
-     *    获取当前使用的风格名称
+     *    获取当前模板中所使用的风格名称
      *
      *    @author    Garbin
      *    @return    string
      */
     function _get_style_name()
     {
-        return 'default';
+        $style_name = Conf::get('style_name');
+        if (!$style_name)
+        {
+            $style_name = 'default';
+        }
+
+        return $style_name;
     }
 
     /**
@@ -445,18 +462,6 @@ class MallbaseApp extends FrontendApp
         parent::_run_action();
     }
 
-    function _config_view()
-    {
-        parent::_config_view();
-
-        $template_name = $this->_get_template_name();
-        $style_name    = $this->_get_style_name();
-
-        $this->_view->template_dir = ROOT_PATH . "/themes/mall/{$template_name}";
-        $this->_view->compile_dir  = ROOT_PATH . "/temp/compiled/mall/{$template_name}";
-        $this->_view->res_base     = SITE_URL . "/themes/mall/{$template_name}/styles/{$style_name}";
-    }
-
     /* 取得支付方式实例 */
     function _get_payment($code, $payment_info)
     {
@@ -467,39 +472,7 @@ class MallbaseApp extends FrontendApp
         return new $class_name($payment_info);
     }
 
-    /**
-     *   获取当前所使用的模板名称
-     *
-     *    @author    Garbin
-     *    @return    string
-     */
-    function _get_template_name()
-    {
-        $template_name = Conf::get('template_name');
-        if (!$template_name)
-        {
-            $template_name = 'default';
-        }
 
-        return $template_name;
-    }
-
-    /**
-     *    获取当前模板中所使用的风格名称
-     *
-     *    @author    Garbin
-     *    @return    string
-     */
-    function _get_style_name()
-    {
-        $style_name = Conf::get('style_name');
-        if (!$style_name)
-        {
-            $style_name = 'default';
-        }
-
-        return $style_name;
-    }
 }
 
 /**
@@ -972,17 +945,6 @@ class StorebaseApp extends FrontendApp
         $this->_config_view();
     }
 
-    function _config_view()
-    {
-        parent::_config_view();
-        $template_name = $this->_get_template_name();
-        $style_name    = $this->_get_style_name();
-
-        $this->_view->template_dir = ROOT_PATH . "/themes/store/{$template_name}";
-        $this->_view->compile_dir  = ROOT_PATH . "/temp/compiled/store/{$template_name}";
-        $this->_view->res_base     = SITE_URL . "/themes/store/{$template_name}/styles/{$style_name}";
-    }
-
     /**
      * 取得店铺信息
      */
@@ -1094,36 +1056,6 @@ class StorebaseApp extends FrontendApp
         $tree = new Tree();
         $tree->setTree($gcategories, 'cate_id', 'parent_id', 'cate_name');
         return $tree->getArrayList(0);
-    }
-
-    /**
-     *    获取当前店铺所设定的模板名称
-     *
-     *    @author    Garbin
-     *    @return    string
-     */
-    function _get_template_name()
-    {
-        $store_info = $this->_get_store_info();
-        $theme = !empty($store_info['theme']) ? $store_info['theme'] : 'default|default';
-        list($template_name, $style_name) = explode('|', $theme);
-
-        return $template_name;
-    }
-
-    /**
-     *    获取当前店铺所设定的风格名称
-     *
-     *    @author    Garbin
-     *    @return    string
-     */
-    function _get_style_name()
-    {
-        $store_info = $this->_get_store_info();
-        $theme = !empty($store_info['theme']) ? $store_info['theme'] : 'default|default';
-        list($template_name, $style_name) = explode('|', $theme);
-
-        return $style_name;
     }
 }
 

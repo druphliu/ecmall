@@ -228,6 +228,12 @@ class GoodsApp extends StorebaseApp
             }
             $goods['tags'] = $goods['tags'] ? explode(',', trim($goods['tags'], ',')) : array();
 
+            /* 品牌 */
+            if($goods['brand']){
+                $brand_mod =& m('brand');
+                $brand_info = $brand_mod->get(array('brand_name'=>$goods['brand']));
+                $goods['brand_info'] = $brand_info;
+            }
             $data['goods'] = $goods;
 
             /* 店铺信息 */
