@@ -384,7 +384,7 @@ class OrderApp extends ShoppingbaseApp
         }
         $coupon_mod =& m('couponsn');
         $coupon = $coupon_mod->get(array(
-            'fields' => 'coupon.*,couponsn.remain_times',
+            'fields' => 'coupon.*',
             'conditions' => "coupon_sn.coupon_sn = '{$coupon_sn}' AND coupon.store_id = " . $store_id,
             'join'  => 'belongs_to_coupon'));
         if (empty($coupon))
