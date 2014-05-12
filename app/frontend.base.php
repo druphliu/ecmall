@@ -8,13 +8,14 @@
  */
 class FrontendApp extends ECBaseApp
 {
-    var $area, $area_name;
+    var $area, $area_name, $area_id;
     function __construct()
     {
         $this->FrontendApp();
         $this->area = ecm_getcookie('area');
         $this->area_name = ecm_getcookie('area_name');
-        $this->assign(array('area' => $this->area, 'area_name' => $this->area_name));
+        $this->area_id = ecm_getcookie('area_id');
+        $this->assign(array('area' => $this->area, 'area_name' => $this->area_name, 'area_id'=>$this->area_id));
     }
     function FrontendApp()
     {
@@ -280,6 +281,9 @@ class FrontendApp extends ECBaseApp
             return false;
         $expire = 60*60*24*30;
         $parent = $region_mod->get($area['parent_id']);
+        $store_mod =& m('store');
+        $store_info = $store_mod->get("FIND_IN_SET(".$area['region_id'].", seller_area)");
+        ecm_setcookie('area_id',$store_info['store_id'] , time() + $expire);
         ecm_setcookie('area', $area['region_id'], time() + $expire);
         ecm_setcookie('area_name', $parent['region_name'] . "." . $area['region_name'], time() + $expire);
         return true;

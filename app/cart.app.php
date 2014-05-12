@@ -29,7 +29,7 @@ class CartApp extends MallbaseApp
 
             return;
         }
-
+        $this->assign('user_info',$this->visitor->get(''));
         $this->assign('carts', $carts);
         $this->display('cart.index.html');
     }
