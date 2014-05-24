@@ -37,7 +37,7 @@ $(function(){
                 <div class="order_form">
                     <h2>
                         <p class="num">{$lang.order_sn}: {$order.order_sn}{if $order.extension eq 'groupbuy'}<span class="color8">[{$lang.groupbuy}]</span>{/if}</p>
-                        <p class="name"><span>{$lang.store_name}: <a href="{url app=store&id=$order.seller_id}" target="_blank">{$order.seller_name|escape}</a></span><a target="_blank" href="{url app=message&act=send&to_id=$order.seller_id}" class="email"></a></p>
+                        <p class="name"><a target="_blank" href="{url app=message&act=send&to_id=$order.seller_id}" class="email"></a></p>
                         <p class="state">{$lang.order_status}: <strong>{$order.status|modifier:order_status}<!--{if $order.evaluation_status}-->,&nbsp;{$lang.already_evaluate}<!--{/if}--></strong></p>
                     </h2>
 

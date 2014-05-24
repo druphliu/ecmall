@@ -27,10 +27,11 @@ class CartModel extends BaseModel
      *    @author    Garbin
      *    @return    void
      */
-    function get_kinds($sess_id, $user_id = 0)
+    function get_kinds($sess_id, $user_id = 0, $store_id=0)
     {
         $where_user_id = $user_id ? " AND user_id={$user_id}" : '';
-        $kinds = $this->db->getOne("SELECT COUNT(DISTINCT goods_id) as c FROM {$this->table} WHERE session_id='{$sess_id}'{$where_user_id}");
+        $where_store_id = $store_id ? " AND store_id={$store_id}" : '';
+        $kinds = $this->db->getOne("SELECT COUNT(DISTINCT goods_id) as c FROM {$this->table} WHERE session_id='{$sess_id}'{$where_user_id}{$where_store_id}");
 
         return $kinds;
     }

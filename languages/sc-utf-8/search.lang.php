@@ -11,7 +11,7 @@ return array(
     'price_desc' => '价格降序',
     'credit_value_desc' => '信用度',
     'views_desc' => '浏览量',
-    'add_time_desc' => '上架时间',
+    'add_time_desc' => '最新',
     'buy' => '购买',
     'collect' => '收藏',
     'current_filter' => '您当前的筛选条件为',

@@ -51,7 +51,7 @@ class FrontendApp extends ECBaseApp
     function display($tpl)
     {
         $cart =& m('cart');
-        $this->assign('cart_goods_kinds', $cart->get_kinds(SESS_ID, $this->visitor->get('user_id')));
+        $this->assign('cart_goods_kinds', $cart->get_kinds(SESS_ID, $this->visitor->get('user_id'), $this->area_id));
         /* 新消息 */
         $this->assign('new_message', isset($this->visitor) ? $this->_get_new_message() : '');
         $this->assign('navs', $this->_get_navs());  // 自定义导航

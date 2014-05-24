@@ -16,7 +16,7 @@ class CartApp extends MallbaseApp
      */
     function index()
     {
-        $store_id = isset($_GET['store_id']) ? intval($_GET['store_id']) : 0;
+        $store_id = $this->area_id ? $this->area_id : 0;
         $carts = $this->_get_carts($store_id);
         $this->_curlocal(
             LANG::get('cart')
@@ -29,9 +29,98 @@ class CartApp extends MallbaseApp
 
             return;
         }
-        $this->assign('user_info',$this->visitor->get(''));
-        $this->assign('carts', $carts);
-        $this->display('cart.index.html');
+        if(IS_POST){
+            $store_id = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area_id;
+            $goods_info = $this->_get_goods_info();
+            if ($goods_info === false)
+            {
+                /* 购物车是空的 */
+                $this->show_warning('goods_empty');
+
+                return;
+            }
+            /* 根据商品类型获取对应的订单类型 */
+            $goods_type =& gt($goods_info['type']);
+            $order_type =& ot($goods_info['otype']);
+
+            /* 将这些信息传递给订单类型处理类生成订单(你根据我提供的信息生成一张订单) */
+            $order_id = $order_type->submit_order(array(
+                'goods_info'    =>  $goods_info,      //商品信息（包括列表，总价，总量，所属店铺，类型）,可靠的!
+                'post'          =>  $_POST,           //用户填写的订单信息
+            ));
+
+
+            if (!$order_id)
+            {
+                $this->show_warning($order_type->get_error());
+
+                return;
+            }
+            /* 下单完成后清理商品，如清空购物车，或将团购拍卖的状态转为已下单之类的 */
+            $this->_clear_goods($order_id);
+
+            /* 发送邮件 */
+            $model_order =& m('order');
+
+            /* 减去商品库存 */
+            $model_order->change_stock('-', $order_id);
+
+            /* 获取订单信息 */
+            $order_info = $model_order->get($order_id);
+
+            /*发送微信提醒*/
+            $wechat_info = $this->get_wechat_info($order_info['seller_id']);
+            //TODO 调用客服接口
+
+            /* 发送事件 */
+            $feed_images = array();
+            foreach ($goods_info['items'] as $_gi)
+            {
+                $feed_images[] = array(
+                    'url'   => SITE_URL . '/' . $_gi['goods_image'],
+                    'link'  => SITE_URL . '/' . url('app=goods&id=' . $_gi['goods_id']),
+                );
+            }
+            $this->send_feed('order_created', array(
+                'user_id'   => $this->visitor->get('user_id'),
+                'user_name' => addslashes($this->visitor->get('user_name')),
+                'seller_id' => $order_info['seller_id'],
+                'seller_name' => $order_info['seller_name'],
+                'store_url' => SITE_URL . '/' . url('app=store&id=' . $order_info['seller_id']),
+                'images'    => $feed_images,
+            ));
+
+            $buyer_address = $this->visitor->get('email');
+            $model_member =& m('member');
+            $member_info  = $model_member->get($goods_info['store_id']);
+            $seller_address= $member_info['email'];
+
+            /* 发送给买家下单通知 */
+            $buyer_mail = get_mail('tobuyer_new_order_notify', array('order' => $order_info));
+            $this->_mailto($buyer_address, addslashes($buyer_mail['subject']), addslashes($buyer_mail['message']));
+
+            /* 发送给卖家新订单通知 */
+            $seller_mail = get_mail('toseller_new_order_notify', array('order' => $order_info));
+            $this->_mailto($seller_address, addslashes($seller_mail['subject']), addslashes($seller_mail['message']));
+
+            /* 更新下单次数 */
+            $model_goodsstatistics =& m('goodsstatistics');
+            $goods_ids = array();
+            foreach ($goods_info['items'] as $goods)
+            {
+                $goods_ids[] = $goods['goods_id'];
+            }
+            $model_goodsstatistics->edit($goods_ids, 'orders=orders+1');
+            $this->assign('order', $order_info);
+            $this->display('order.finished.html');
+        }else{
+            $addresses  = $this->_get_my_address($this->visitor->get('user_id'));
+            $this->assign('my_address', $addresses);
+            $this->assign('user_info',$this->visitor->get(''));
+            $this->assign('carts', $carts);
+            $this->display('cart.index.html');
+        }
+
     }
 
     /**
@@ -314,6 +403,184 @@ class CartApp extends MallbaseApp
         }
 
         return $carts;
+    }
+    /**
+     *    获取收货人信息
+     *
+     *    @author    Garbin
+     *    @param     int $user_id
+     *    @return    array
+     */
+    function _get_my_address($user_id)
+    {
+        if (!$user_id)
+        {
+            return array();
+        }
+        $address_model =& m('address');
+
+        return $address_model->find('user_id=' . $user_id);
+    }
+    /**
+     *    获取外部传递过来的商品
+     *
+     *    @author    Garbin
+     *    @param    none
+     *    @return    void
+     */
+    function _get_goods_info()
+    {
+        $return = array(
+            'items'     =>  array(),    //商品列表
+            'quantity'  =>  0,          //商品总量
+            'amount'    =>  0,          //商品总价
+            'store_id'  =>  0,          //所属店铺
+            'store_name'=>  '',         //店铺名称
+            'type'      =>  null,       //商品类型
+            'otype'     =>  'normal',   //订单类型
+            'allow_coupon'  => true,    //是否允许使用优惠券
+        );
+        switch ($_GET['goods'])
+        {
+            case 'groupbuy':
+                /* 团购的商品 */
+                $group_id = isset($_GET['group_id']) ? intval($_GET['group_id']) : 0;
+                $user_id  = $this->visitor->get('user_id');
+                if (!$group_id || !$user_id)
+                {
+                    return false;
+                }
+                /* 获取团购记录详细信息 */
+                $model_groupbuy =& m('groupbuy');
+                $groupbuy_info = $model_groupbuy->get(array(
+                    'join'  => 'be_join, belong_store, belong_goods',
+                    'conditions'    => $model_groupbuy->getRealFields("groupbuy_log.user_id={$user_id} AND groupbuy_log.group_id={$group_id} AND groupbuy_log.order_id=0 AND this.state=" . GROUP_FINISHED),
+                    'fields'    => 'store.store_id, store.store_name, goods.goods_id, goods.goods_name, goods.default_image, groupbuy_log.quantity, groupbuy_log.spec_quantity, this.spec_price',
+                ));
+
+                if (empty($groupbuy_info))
+                {
+                    return false;
+                }
+
+                /* 库存信息 */
+                $model_goodsspec = &m('goodsspec');
+                $goodsspec = $model_goodsspec->find('goods_id='. $groupbuy_info['goods_id']);
+
+                /* 获取商品信息 */
+                $spec_quantity = unserialize($groupbuy_info['spec_quantity']);
+                $spec_price    = unserialize($groupbuy_info['spec_price']);
+                $amount = 0;
+                $groupbuy_items = array();
+                $goods_image = empty($groupbuy_info['default_image']) ? Conf::get('default_goods_image') : $groupbuy_info['default_image'];
+                foreach ($spec_quantity as $spec_id => $spec_info)
+                {
+                    $the_price = $spec_price[$spec_id]['price'];
+                    $subtotal = $spec_info['qty'] * $the_price;
+                    $groupbuy_items[] = array(
+                        'goods_id'  => $groupbuy_info['goods_id'],
+                        'goods_name'  => $groupbuy_info['goods_name'],
+                        'spec_id'  => $spec_id,
+                        'specification'  => $spec_info['spec'],
+                        'price'  => $the_price,
+                        'quantity'  => $spec_info['qty'],
+                        'goods_image'  => $goods_image,
+                        'subtotal'  => $subtotal,
+                        'stock' => $goodsspec[$spec_id]['stock'],
+                    );
+                    $amount += $subtotal;
+                }
+
+                $return['items']        =   $groupbuy_items;
+                $return['quantity']     =   $groupbuy_info['quantity'];
+                $return['amount']       =   $amount;
+                $return['store_id']     =   $groupbuy_info['store_id'];
+                $return['store_name']   =   $groupbuy_info['store_name'];
+                $return['type']         =   'material';
+                $return['otype']        =   'groupbuy';
+                $return['allow_coupon'] =   false;
+                break;
+            default:
+                $_GET['store_id'] = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area_id;
+                $store_id = $_GET['store_id'];
+                if (!$store_id)
+                {
+                    return false;
+                }
+                $cart_model =& m('cart');
+
+                $cart_items      =  $cart_model->find(array(
+                    'conditions' => "user_id = " . $this->visitor->get('user_id') . " AND session_id='" . SESS_ID . "'",
+                    'join'       => 'belongs_to_goodsspec',
+                ));
+                if (empty($cart_items))
+                {
+                    return false;
+                }
+
+
+                foreach ($cart_items as $rec_id => $goods)
+                {
+                    $return['quantity'] += $goods['quantity'];                      //商品总量
+                    $return['amount']   += $goods['quantity'] * $goods['price'];    //商品总价
+                    $cart_items[$rec_id]['subtotal']    =   $goods['quantity'] * $goods['price'];   //小计
+                    empty($goods['goods_image']) && $cart_items[$rec_id]['goods_image'] = Conf::get('default_goods_image');
+                }
+
+                $return['items']        =   $cart_items;
+                $return['store_id']     =   $store_id;
+                $return['type']         =   'material';
+                $return['otype']        =   'normal';
+                break;
+        }
+
+        return $return;
+    }
+    /**
+     *    下单完成后清理商品
+     *
+     *    @author    Garbin
+     *    @return    void
+     */
+    function _clear_goods($order_id)
+    {
+        switch ($_GET['goods'])
+        {
+            case 'groupbuy':
+                /* 团购的商品 */
+                $model_groupbuy =& m('groupbuy');
+                $model_groupbuy->updateRelation('be_join', $_GET['group_id'], $this->visitor->get('user_id'), array(
+                    'order_id'  => $order_id,
+                ));
+                break;
+            default://购物车中的商品
+                /* 订单下完后清空指定购物车 */
+                $_GET['store_id'] = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area_id;
+                $store_id = $_GET['store_id'];
+                if (!$store_id)
+                {
+                    return false;
+                }
+                $model_cart =& m('cart');
+                $model_cart->drop("store_id = {$store_id} AND session_id='" . SESS_ID . "'");
+                //优惠券信息处理
+                if (isset($_POST['coupon_sn']) && !empty($_POST['coupon_sn']))
+                {
+                    $sn = trim($_POST['coupon_sn']);
+                    $couponsn_mod =& m('couponsn');
+                    $couponsn = $couponsn_mod->get("coupon_sn = '{$sn}'");
+                    if ($couponsn['remain_times'] > 0)
+                    {
+                        $couponsn_mod->edit("coupon_sn = '{$sn}'", "remain_times= remain_times - 1");
+                    }
+                }
+                break;
+        }
+    }
+    function get_wechat_info($user_id){
+        $_wechat_mod = & m('memberwechat');
+        $wechat = $_wechat_mod->get("user_id= '$user_id'");
+        return $wechat;
     }
 }
 

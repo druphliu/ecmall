@@ -9,7 +9,7 @@
             </h3>
         </div>
         <div class="row">
-            <form>
+            <form method="post">
                 <div class="row">
                     <div class="col-md-2"><span class="glyphicon glyphicon-play"></span>订单详情</div>
                     <div class="col-md-10">
@@ -52,7 +52,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="row text-right amount">总价：45.00￥ <a href="#" class="active">使用优惠券</a></div>
+                <div class="row text-right amount">{$lang.goods_amount}:&nbsp;&nbsp;<strong class="fontsize1"
+                                                                                            id="cart{$store_id}_amount">{$cart.amount|price}</strong><!--<a href="#" class="active">使用优惠券</a>--></div>
                 <div class="row">
                     <div class="col-md-2"><span class="glyphicon glyphicon-play"></span>送餐信息</div>
                     <div class="col-md-10">
@@ -64,13 +65,20 @@
                                 <td>寝室地址</td>
                                 <td>操作</td>
                             </tr>
+                            <!--{foreach from=$my_address item=address name=address_select}-->
                             <tr>
-                                <td>框河鱼</td>
-                                <td>13350844220</td>
-                                <td>成都中医大温江校区</td>
-                                <td>针灸学院24栋公寓608号寝室</td>
-                                <td><a href="#">修改</a></td>
+                                <td>{$address.consignee|escape}</td>
+                                <td><!--{if $address.phone_mob}-->{$address.phone_mob}<!--{else}-->{$address.phone_tel}<!--{/if}--></td>
+                                <td>{$address.region_name|escape}</td>
+                                <td>{$address.address|escape}</td>
+                                <td><a href="{url app=my_address}" target="_blank">修改</a></td>
                             </tr>
+                            <input type="hidden" name="consignee" value="{$address.consignee|escape}">
+                            <input type="hidden" name="address" value="{$address.address|escape}">
+                            <input type="hidden" name="phone_tel" value="<!--{if $address.phone_mob}-->{$address.phone_mob}<!--{else}-->{$address.phone_tel}<!--{/if}-->">
+                            <input type="hidden" name="region_id" value="{$area}">
+                            <!--{/foreach}-->
+
                         </table>
                         <div class="row text-left cat-tick">
                             <div class="col-md-12 icon"><span class="glyphicon glyphicon-eject"></span></div>
@@ -102,69 +110,3 @@
     </div>
 </div>
 {include file="footer.html"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{include file="curlocal.html"}
-
-<div class="flow_chart">
-    <div class="pos_x1 bg_a1" title="{$lang.shopping_step_one}"></div>
-    <div class="pos_x2 bg_b2" title="{$lang.shopping_step_two}"></div>
-    <div class="pos_x3 bg_c2" title="{$lang.shopping_step_three}"></div>
-</div>
-
-<div class="content">
-
-    <div class="module_common">
-
-        <div class="buy">
-            <h3><b class="ico">{$lang.your_cart_goods}</b></h3>
-        <!--{foreach from=$carts item=cart key=store_id}-->
-            <div class="con">
-                <h4>{$lang.store}: <a href="{url app=store&id=$store_id}">{$cart.store_name|escape}</a></h4>
-                <div class="buytable">
-                    <table>
-                        <tr>
-                            <th width="420">{$lang.store_goods}</th>
-                            <th>{$lang.price}</th>
-                            <th>{$lang.quantity}</th>
-                            <th>{$lang.subtotal}</th>
-                            <th>{$lang.handle}</th>
-                        </tr>
-                    </table>
-                    <div class="buy_foot">
-                        <p>{$lang.goods_amount}:&nbsp;&nbsp;<strong class="fontsize1" id="cart{$store_id}_amount">{$cart.amount|price}</strong></p>
-                        <p>
-                            <a href="{url app=order&goods=cart&store_id=$store_id}" class="btn">{$lang.next_order_form}</a>
-                            <a href="{url app=store&id=$store_id}" class="back">{$lang.goon_shopping}</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        <!--{/foreach}-->
-        </div>
-    </div>
-</div>

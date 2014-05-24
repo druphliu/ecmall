@@ -64,6 +64,13 @@ class GcategoryModel extends BaseModel
         ));
     }
 
+    function get_children(){
+        $conditions = '1 = 1 and parent_id<>0';
+        return $this->find(array(
+            'conditions' => $conditions,
+            'order' => 'sort_order, cate_id',
+        ));
+    }
     function get_options($parent_id = -1, $shown = false)
     {
         $options = array();

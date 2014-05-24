@@ -33,6 +33,13 @@ class SearchApp extends MallbaseApp
 
         /* 按分类、品牌、地区、价格区间统计商品数量 */
         $stats = $this->_get_group_by_info($param, ENABLE_SEARCH_CACHE);
+        $categories = $this->_list_gcategory($param['cate_id']);
+        $all_category = array_merge(array(array('cate_id'=>0,'cate_name'=>'全部')),$categories);
+        $count = count($all_category);
+        for($i=0;$i<ceil($count/9);$i++){
+            $category_arr[] = array_slice($all_category,$i*9, 9);
+        }
+        $this->assign('category_arr', $category_arr);
 
         $this->assign('categories', $stats['by_category']);
         $this->assign('category_count', count($stats['by_category']));
@@ -42,6 +49,7 @@ class SearchApp extends MallbaseApp
 
         $this->assign('price_intervals', $stats['by_price']);
 
+        $this->assign('app', APP);
         $this->assign('regions', $stats['by_region']);
         $this->assign('region_count', count($stats['by_region']));
 
@@ -54,7 +62,7 @@ class SearchApp extends MallbaseApp
         $page['item_count'] = $stats['total_count'];
         $this->_format_page($page);
         $this->assign('page_info', $page);
-
+        $this->assign('param', $param);
         /* 商品列表 */
         $sgrade_mod =& m('sgrade');
         $sgrades    = $sgrade_mod->get_options();
@@ -82,6 +90,18 @@ class SearchApp extends MallbaseApp
         {
             $display_mode = 'squares'; // 默认格子方式
         }
+        $this->import_resource(array(
+            'script' => array(
+                array(
+                    'path' => 'blocksit.min.js',
+                    'attr' => 'id="blocksit_js"',
+                ),
+                array(
+                    'path' => 'jquery.lazyload.min.js',
+                    'attr' => '',
+                )
+            )
+        ));
         $this->assign('display_mode', $display_mode);
 
         /* 取得导航 */
@@ -90,10 +110,10 @@ class SearchApp extends MallbaseApp
         /* 当前位置 */
         $cate_id = isset($param['cate_id']) ? $param['cate_id'] : 0;
         $this->_curlocal($this->_get_goods_curlocal($cate_id));
-        
+
         /* 配置seo信息 */
         $this->_config_seo($this->_get_seo_info('goods', $cate_id));
-        $this->display('search.goods.html');
+        $this->display('goods.list.html');
     }
 
     /* 搜索店铺 */
@@ -325,7 +345,11 @@ class SearchApp extends MallbaseApp
         $tree->setTree($scategories, 'cate_id', 'parent_id', 'cate_name');
         return $tree->getArrayList(0);
     }
-
+    function _list_gcategory($cate_id){
+        $gcategory_mod =& m('gcategory');
+        $scategories = $gcategory_mod->get_list($cate_id);
+        return $scategories;
+    }
     function _get_goods_curlocal($cate_id)
     {
         $parents = array();
@@ -385,7 +409,7 @@ class SearchApp extends MallbaseApp
         if ($res === null)
         {
             $res = array();
-    
+
             // keyword
             $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
             if ($keyword != '')
@@ -396,7 +420,7 @@ class SearchApp extends MallbaseApp
                 sort($keyword);
                 $res['keyword'] = $keyword;
             }
-    
+
             // cate_id
             if (isset($_GET['cate_id']) && intval($_GET['cate_id']) > 0)
             {
@@ -404,20 +428,20 @@ class SearchApp extends MallbaseApp
                 $gcategory_mod  =& bm('gcategory');
                 $res['layer']   = $gcategory_mod->get_layer($cate_id, true);
             }
-    
+
             // brand
             if (isset($_GET['brand']))
             {
                 $brand = trim($_GET['brand']);
                 $res['brand'] = $brand;
             }
-    
+
             // region_id
             if (isset($_GET['region_id']) && intval($_GET['region_id']) > 0)
             {
                 $res['region_id'] = intval($_GET['region_id']);
             }
-    
+
             // price
             if (isset($_GET['price']))
             {
@@ -428,7 +452,7 @@ class SearchApp extends MallbaseApp
                 {
                     list($min, $max) = array($max, $min);
                 }
-    
+
                 $res['price'] = array(
                     'min' => $min,
                     'max' => $max
@@ -482,7 +506,7 @@ class SearchApp extends MallbaseApp
                 }
             }
         }
-            
+
 
         return $filters;
     }
@@ -509,10 +533,7 @@ class SearchApp extends MallbaseApp
         {
             $conditions .= " AND g.brand = '" . $param['brand'] . "'";
         }
-        if (isset($param['region_id']))
-        {
-            $conditions .= " AND s.region_id = '" . $param['region_id'] . "'";
-        }
+        $conditions .= " AND s.region_id = '" .$this->area  . "'";
         if (isset($param['price']))
         {
             $min = $param['price']['min'];
@@ -601,7 +622,7 @@ class SearchApp extends MallbaseApp
                 /* 按品牌统计 */
                 $sql = "SELECT g.brand, COUNT(*) AS count FROM {$table} WHERE" . $conditions . " AND g.brand > '' GROUP BY g.brand ORDER BY count DESC";
                 $by_brands = $goods_mod->db->getAllWithIndex($sql, 'brand');
-                
+
                 /* 滤去未通过商城审核的品牌 */
                 if ($by_brands)
                 {
@@ -617,8 +638,8 @@ class SearchApp extends MallbaseApp
                     }
                 }
                 $data['by_brand'] = $by_brands;
-                
-                
+
+
                 /* 按地区统计 */
                 $sql = "SELECT s.region_id, s.region_name, COUNT(*) AS count FROM {$table} WHERE" . $conditions . " AND s.region_id > 0 GROUP BY s.region_id ORDER BY count DESC";
                 $data['by_region'] = $goods_mod->getAll($sql);
@@ -740,7 +761,7 @@ class SearchApp extends MallbaseApp
             'add_time desc'     => Lang::get('add_time_desc'),
         );
     }
-    
+
     function _get_seo_info($type, $cate_id)
     {
         $seo_info = array(
@@ -751,7 +772,7 @@ class SearchApp extends MallbaseApp
         $parents = array(); // 所有父级分类包括本身
         switch ($type)
         {
-            case 'goods':                
+            case 'goods':
                 if ($cate_id)
                 {
                     $gcategory_mod =& bm('gcategory');
@@ -772,7 +793,7 @@ class SearchApp extends MallbaseApp
                     $parents = array_reverse($parents);
                 }
         }
-        
+
         foreach ($parents as $key => $cate)
         {
             $seo_info['title'] .= $cate['cate_name'] . ' - ';

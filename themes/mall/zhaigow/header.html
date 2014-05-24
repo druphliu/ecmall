@@ -41,9 +41,10 @@
         //]]>
     </script>
     {$_head_tags}
+    <!--<editmode></editmode>-->
 </head>
 <body>
-<header>
+<header id="head">
     <div class="container top_bar">
         <span>
             <span class="nav-login">{$lang.hello},
@@ -92,8 +93,8 @@
                             <li class="wechat_text">⊙手动添加微信号zhaigow<br>⊙二维码添加打开微信→发现→扫一扫直接扫描左边的二维码即可添加</li>
                         </ul>
                     </li>
-                    <li><a href="{url app=cart}" class="navbar-brand">{$lang.shopping_cart} <span
-                            id="cart_goods_kinds ">({$cart_goods_kinds})</span></a>
+                    <li><a href="{url app=cart}" class="navbar-brand">{$lang.shopping_cart}
+                        (<span id="cart_goods_kinds">{$cart_goods_kinds}</span>)</a>
                     </li>
                 </ul>
             </div>
@@ -102,21 +103,13 @@
     <div class="sub-nav">
         <div class="container">
             <ul class="list-inline">
-                <li><a class="active" href="#">首页</a></li>
+                <li><a class="active" href="{url app=index}">首页</a></li>
+
+                <!--{foreach from=$navs.middle item=nav}-->
                 |
-                <li><a href="#">中式美食</a></li>
-                |
-                <li><a href="#">西式美食</a></li>
-                |
-                <li><a href="#">早餐套餐</a></li>
-                |
-                <li><a href="#">特色烧烤</a></li>
-                |
-                <li><a href="#">特色小吃</a></li>
-                |
-                <li><a href="#">聚餐预定</a></li>
-                |
-                <li><a href="#">优惠券</a></li>
+                <li><a class="{if !$index and $nav.link eq $current_url}active{/if}" href="{$nav.link}"{if $nav.open_new}
+                    target="_blank"{/if}>{$nav.title|escape}</a></li>
+                <!--{/foreach}-->
             </ul>
             <div class="search_input col-xs-12 col-sm-6 col-md-3">
                 <form method="GET" action="{url app=search}">

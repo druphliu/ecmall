@@ -467,7 +467,7 @@ class MessageApp extends MemberbaseApp
         $menus = array(
                 array(
                     'name'  => 'newpm',
-                    'url'   => url('app=message&amp;act=newpm'),
+                    'url'   => url('app=message&act=newpm'),
                     'text'  => Lang::get('newpm') . $newpm,
                 ),
                 array(

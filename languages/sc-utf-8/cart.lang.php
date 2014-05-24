@@ -17,6 +17,9 @@ return array(
     'best_item'             => '精品推荐',
     'can_not_buy_yourself'  => '不能购买自己的商品',
     'confirm_goods' => '确认购物清单',
+    'order_created'  => '订单提交成功！',
+    'order_created_desc'    => '您的订单已成功生成，我们会尽快处理并配送!',
+    'member_view_order'     => '您可以在用户中心中的我的订单查看该订单',
 );
 
 ?>

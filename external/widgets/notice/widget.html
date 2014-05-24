@@ -2,7 +2,7 @@
     <h2><b class="news" title="NEWS公告栏"></b></h2>
     <div class="wrap">
         <div class="wrap_child">
-            <ul class="news_list">
+            <ul class="news_list list-unstyled">
                 <!--{foreach from=$widget_data.notices item=article}-->
                 <li>{$article.add_time|date:m-d} <a href="{url app=article&act=view&article_id=$article.article_id}" title="{$article.title|escape}">{$article.title|escape}</a></li>
                 <!--{/foreach}-->

@@ -445,7 +445,7 @@ class OrderApp extends ShoppingbaseApp
 
     function get_wechat_info($user_id){
         $_wechat_mod = & m('memberwechat');
-        $wechat = $_wechat_mod->get("user_id= '$user_id'");print_r($wechat);exit;
+        $wechat = $_wechat_mod->get("user_id= '$user_id'");
         return $wechat;
     }
 }

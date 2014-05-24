@@ -1,17 +1,14 @@
-<div class="module_common">
-    <h2><b class="best_item" title="BEST ITEM精品推荐"></b></h2>
-    <div class="wrap">
-        <div class="wrap_child">
-            <div class="recommend">
-                <ul class="list_pic">
-                    <!--{foreach from=$widget_data item=goods}-->
-                    <li>
-                        <p><a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img src="{$goods.default_image}" width="100" height="100" /></a></p>
-                        <h3><a href="{url app=goods&id=$goods.goods_id}" target="_blank" title="{$goods.goods_name|escape}">{$goods.goods_name|escape}</a><span>{$goods.price|price}</span></h3>
-                    </li>
-                    <!--{/foreach}-->
-                </ul>
-            </div>
-        </div>
+<!--{foreach from=$widget_data item=goods}-->
+<div class="grid">
+    <div class="imgholder"><img class="lazy" src="{$goods.default_image}"/></div>
+    <div class="food_title">
+        {$goods.goods_name|escape}
     </div>
+    <div class="food_desc">
+
+    </div>
+    <div class="food_price">{$goods.price|price}/份</div>
+    <div class="text-center"><a href="#" class="btn btn-default">加入购物车</a> </div>
 </div>
+<!--{/foreach}-->
+

@@ -77,6 +77,7 @@ class ECMall
         $default_act = $config['default_act'] ? $config['default_act'] : 'index';
 
         $app    = isset($_REQUEST['app']) ? preg_replace('/(\W+)/', '', $_REQUEST['app']) : $default_app;
+        $app = $app == 'index' ? $default_app : $app;
         $act    = isset($_REQUEST['act']) ? trim($_REQUEST['act']) : $default_act;
         $app_file = $config['app_root'] . "/{$app}.app.php";
         if (!is_file($app_file))
