@@ -43,8 +43,8 @@ $(function(){
 
                     <!--{foreach from=$order.order_goods item=goods}-->
                     <div class="con">
-                        <p class="ware_pic"><a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img src="{$goods.goods_image}" width="50" height="50"  /></a></p>
-                        <p class="ware_text"><a href="{url app=goods&id=$goods.goods_id}" target="_blank">{$goods.goods_name|escape}</a><br /><span class="attr">{$goods.specification|escape}</span></p>
+                        <p class="ware_pic"><img src="{$goods.goods_image}" width="50" height="50"  /></p>
+                        <p class="ware_text">{$goods.goods_name|escape}<br /><span class="attr">{$goods.specification|escape}</span></p>
                         <p class="price">{$lang.price}: <span>{$goods.price|price}</span></p>
                         <p class="amount">{$lang.quantity}: <span>{$goods.quantity}</span></p>
                     </div>

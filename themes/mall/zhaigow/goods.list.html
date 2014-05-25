@@ -29,7 +29,7 @@
     <ul>
         <!--{foreach from=$v item=category }-->
         <li <!--{if $param.category==$category.cate_id}-->class="active"<!--{/if}-->>
-        <a href="{url app=list&category=$category.cate_id}">{$category.cate_name}</a>
+        <a href="{url app=search&cate_id=$category.cate_id}">{$category.cate_name}</a>
         </li>
         <!--{/foreach}-->
     </ul>

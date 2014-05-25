@@ -650,12 +650,12 @@ class MemberbaseApp extends MallbaseApp
                     'name' => 'my_order',
                     'icon' => 'ico5',
                 ),
-                'my_groupbuy' => array(
-                    'text' => Lang::get('my_groupbuy'),
-                    'url' => url('app=buyer_groupbuy'),
-                    'name' => 'my_groupbuy',
-                    'icon' => 'ico21',
-                ),
+//                'my_groupbuy' => array(
+//                    'text' => Lang::get('my_groupbuy'),
+//                    'url' => url('app=buyer_groupbuy'),
+//                    'name' => 'my_groupbuy',
+//                    'icon' => 'ico21',
+//                ),
 //                'my_question' =>array(
 //                    'text'  => Lang::get('my_question'),
 //                    'url'   => 'index.php?app=my_question',
@@ -675,12 +675,12 @@ class MemberbaseApp extends MallbaseApp
                     'name' => 'my_address',
                     'icon' => 'ico7',
                 ),
-                'my_coupon' => array(
-                    'text' => Lang::get('my_coupon'),
-                    'url' =>url('app=my_coupon'),
-                    'name' => 'my_coupon',
-                    'icon' => 'ico20',
-                ),
+//                'my_coupon' => array(
+//                    'text' => Lang::get('my_coupon'),
+//                    'url' =>url('app=my_coupon'),
+//                    'name' => 'my_coupon',
+//                    'icon' => 'ico20',
+//                ),
             ),
         );
 
@@ -730,12 +730,12 @@ class MemberbaseApp extends MallbaseApp
 //                    'name'  => 'my_qa',
 //                    'icon'  => 'ico18',
 //            );
-            $menu['im_seller']['submenu']['my_category'] = array(
-                    'text'  => Lang::get('my_category'),
-                    'url'   => url('app=my_category'),
-                    'name'  => 'my_category',
-                    'icon'  => 'ico9',
-            );
+//            $menu['im_seller']['submenu']['my_category'] = array(
+//                    'text'  => Lang::get('my_category'),
+//                    'url'   => url('app=my_category'),
+//                    'name'  => 'my_category',
+//                    'icon'  => 'ico9',
+//            );
             $menu['im_seller']['submenu']['order_manage'] = array(
                     'text'  => Lang::get('order_manage'),
                     'url'   =>url('app=seller_order'),
@@ -778,12 +778,12 @@ class MemberbaseApp extends MallbaseApp
 //                    'name'  => 'my_partner',
 //                    'icon'  => 'ico16',
 //            );
-            $menu['im_seller']['submenu']['coupon']  = array(
-                    'text'  => Lang::get('coupon'),
-                    'url'   =>url('app=coupon'),
-                    'name'  => 'coupon',
-                    'icon'  => 'ico19',
-            );
+//            $menu['im_seller']['submenu']['coupon']  = array(
+//                    'text'  => Lang::get('coupon'),
+//                    'url'   =>url('app=coupon'),
+//                    'name'  => 'coupon',
+//                    'icon'  => 'ico19',
+//            );
         }
 
         return $menu;

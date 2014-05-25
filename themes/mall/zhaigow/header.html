@@ -79,7 +79,7 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a class="{if $index}active{/if}" href="index.php"><span>{$lang.index}</span></a></li>
+                    <li><a class="{if $index}active{/if}" href="/index.html"><span>{$lang.index}</span></a></li>
                     <!--{foreach from=$navs.middle item=nav}-->
                     <li><a class="{if !$index and $nav.link eq $current_url}active{/if}" href="{$nav.link}"{if $nav.open_new}
                         target="_blank"{/if}><span>{$nav.title|escape}</span></a></li>

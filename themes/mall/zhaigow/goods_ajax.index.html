@@ -10,6 +10,7 @@
     <script type="text/javascript">
         //<!CDATA[
         /* buy */
+        var url = "{url app=cart&act=add}";
         var cart_url = "{url app=cart}";
         function buy(type)
         {
@@ -37,7 +38,7 @@
         /* add cart */
         function add_to_cart(spec_id, quantity, type)
         {
-            var url = SITE_URL + '/index.php?app=cart&act=add';
+
             $.getJSON(url, {'spec_id':spec_id, 'quantity':quantity}, function(data){
                 if (data.done)
                 {

@@ -16,8 +16,8 @@ class Best_goodsWidget extends BaseWidget
     {
         $cache_server =& cache_server();
         $key = $this->_get_cache_id();
-        $data = $cache_server->get($key);
-        if($data === false)
+//        $data = $cache_server->get($key);
+        $data=false;if($data === false)
         {
             $recom_mod =& m('recommend');
             $data = $recom_mod->get_recommended_goods($this->options['img_recom_id'], $this->_num, true, $this->options['img_cate_id']);

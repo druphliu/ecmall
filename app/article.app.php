@@ -177,7 +177,8 @@ class ArticleApp extends MallbaseApp
         }
         foreach ($parents as $category)
         {
-            $curlocal[] = array('text' => $category['cate_name'], 'ACC' => $category['code'], 'url' => url('app=article&cate_id=') . $category['cate_id']);
+            $curlocal[] = array('text' => $category['cate_name'], 'ACC' => $category['code'],
+                'url' => url('app=article&cate_id='.$category['cate_id']));
         }
         return $curlocal;
     }

@@ -28,7 +28,7 @@
                         <div class="ware_pic"><img src="{$goods.goods_image}" width="50" height="50"  /></div>
                         <div class="ware_text">
                             <div class="ware_text1">
-                                <a href="{url app=goods&id=$goods.goods_id}">{$goods.goods_name|escape}</a>
+                                {$goods.goods_name|escape}
                                 {if $group_id}<a target="_blank" href="{url app=groupbuy&id=$group_id}"><strong class="color8">[{$lang.groupbuy}]</strong></a>{/if}
                                 <br />
                                 <span>{$goods.specification|escape}</span>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <!--{/foreach}-->
-                    <div class="transportation">{$lang.carriage}&nbsp;:&nbsp;<span>{$order_extm.shipping_fee|price}<strong>({$order_extm.shipping_name|escape})</strong></span>{$lang.preference}&nbsp;:&nbsp;<span>{$order.discount|price}</span>{$lang.total_price}&nbsp;:&nbsp;<b>{$order.order_amount|price}</b></div>
+                    <div class="transportation">{$lang.preference}&nbsp;:&nbsp;<span>{$order.discount|price}</span>{$lang.total_price}&nbsp;:&nbsp;<b>{$order.order_amount|price}</b></div>
                     <ul class="order_detail_list">
                        <!--{if $order.payment_code}-->
                         <li>{$lang.payment_name}&nbsp;:&nbsp;{$order.payment_name|escape}<!--{if $order.status eq ORDER_PENDING}-->&nbsp;&nbsp;(&nbsp;<a href="{url app=cashier&order_id=$order.order_id}">{$lang.pay}</a>&nbsp;)<!--{/if}--></li>
