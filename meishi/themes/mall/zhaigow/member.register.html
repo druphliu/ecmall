@@ -168,67 +168,67 @@ function hide_error(){
     $('#region').find('.error').hide();
 }
 </script>
-<div class="container">
+<div class="container content">
     <div class="row register">
-        <div class="row col-md-8 col-sm-8">
+        <div class="row col-xs-8">
             <h3>{$lang.enter_register_info}</h3>
             <form class="form-horizontal" role="form" method="post" id="register_form">
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.user_name}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6"><input class="form-control" id="user_name" name="user_name"></div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-xs-6"><input class="form-control" id="user_name" name="user_name"></div>
+                    <div class="col-xs-4">
                         <span class=" field_notice">{$lang.user_name_desc}</span>
                         <span id="checking_user" class="checking" >{$lang.checking}</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.phone_mob}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6"><input class="form-control" id="tel" name="tel"></div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-xs-6"><input class="form-control" id="tel" name="tel"></div>
+                    <div class="col-xs-4">
                         <span class="field_notice">{$lang.phone_mob_desc}</span>
                         <span class="checking" id="checking_tel">{$lang.checking}</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.password}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-xs-6">
                         <input class="form-control" id="password" name="password" type="password">
                     </div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-xs-4">
                         <span class="field_notice">{$lang.password_desc}</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.password_confirm}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-xs-6">
                         <input class="form-control" type="password" name="password_confirm">
                     </div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-xs-4">
                         <span class="field_notice">{$lang.password_confirm_desc}</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.real_name}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6"><input type="text" class="form-control" name="real_name"></div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-xs-6"><input type="text" class="form-control" name="real_name"></div>
+                    <div class="col-xs-4">
                         <span class="field_notice">{$lang.real_name_desc}</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.gender}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-xs-6">
                         <div class="radio-inline">
                             <input type="radio" checked="checked" name="sex" id="women" value="2">
                             <label for="women">{$lang.female}</label>
@@ -240,22 +240,22 @@ function hide_error(){
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.email}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-xs-6">
                         <input class="form-control" id="email" type="text" name="email">
                     </div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-xs-4">
                         <span class="field_notice">{$lang.email_desc}</span>
                         <span id="checking_email" class="checking">{$lang.checking}</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.school_area}</label>
                     </div>
-                    <div class="col-md-8 col-sm-8" style="padding-top: 6px" id="region">
+                    <div class="col-xs-8" style="padding-top: 6px" id="region">
                         <input type="hidden" name="region_id" value="{$area}" id="region_id" class="mls_id" />
                         <input type="hidden" name="region_name" value="{$area_name}" class="mls_names" />
                         <!-- {if $area} -->
@@ -273,36 +273,36 @@ function hide_error(){
                         <!-- {/if} -->
 
                     </div>
-                    <div class="col-md-2 col-sm-2"><span class="field_notice"></span></div>
+                    <div class="col-xs-2"><span class="field_notice"></span></div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.address}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6"><input class="form-control" name="address" type="text"></div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-xs-6"><input class="form-control" name="address" type="text"></div>
+                    <div class="col-xs-4">
                         <span class="field_notice">{$lang.address_desc}</span>
                     </div>
                 </div>
                 <!--{if $captcha}-->
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right">
+                    <div class="col-xs-2 text-right">
                         <label class="control-label">{$lang.captcha}</label>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-xs-6">
                         <input class="form-control" id="captcha1" name="captcha" type="text">
                         <a href="javascript:change_captcha($('#captcha'));" class="renewedly">
                             <img id="captcha" src="index.php?app=captcha&amp;{$random_number}" />
                         </a>
                     </div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-xs-4">
                         <span class="field_notice">{$lang.captcha_desc}</span>
                     </div>
                 </div>
                 <!--{/if}-->
                 <div class="row form-group">
-                    <div class="col-md-2 col-sm-2 text-right"><label class="control-label"></label></div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-xs-2 text-right"><label class="control-label"></label></div>
+                    <div class="col-xs-6">
                         <input id="clause" type="checkbox" name="agree" value="1" />
                         <span for="clause">{$lang.i_have_read}
                             <a href="{url app=article&act=system&code=eula}" target="_blank" class="agreement">{$lang.mall_eula}</a>
@@ -315,7 +315,7 @@ function hide_error(){
                     <input class="btn btn-default" type="reset" name="" value="重置"></div>
             </form>
         </div>
-        <div class="row col-md-4 col-sm-4 help-block">
+        <div class="row col-xs-4 help-block">
             注册提示:
             <ul class="list-unstyled">
                 <li>⊙请填写真实的姓名，电话，地址否则会导致订单失败</li>
