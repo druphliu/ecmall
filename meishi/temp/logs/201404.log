@@ -1,0 +1,14 @@
+Thu, 17 Apr 2014 05:42:37 +0000	[256]MySQL Error[1054]: Unknown column 'coupon_sn.remain_times' in 'field list'
+MySQL Query:SELECT coupon.*,coupon_sn.remain_times,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_coupon coupon ON coupon_sn.coupon_id = coupon.coupon_id WHERE coupon_sn.coupon_sn = '000002661869' AND coupon.store_id = 2
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Thu, 17 Apr 2014 05:42:40 +0000	[256]MySQL Error[1054]: Unknown column 'coupon_sn.remain_times' in 'field list'
+MySQL Query:SELECT coupon.*,coupon_sn.remain_times,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_coupon coupon ON coupon_sn.coupon_id = coupon.coupon_id WHERE coupon_sn.coupon_sn = '000002661869' AND coupon.store_id = 2
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Thu, 17 Apr 2014 05:42:46 +0000	[256]MySQL Error[1054]: Unknown column 'coupon_sn.remain_times' in 'field list'
+MySQL Query:SELECT coupon.*,coupon_sn.remain_times,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_coupon coupon ON coupon_sn.coupon_id = coupon.coupon_id WHERE coupon_sn.coupon_sn = '000002661869' AND coupon.store_id = 2
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Thu, 17 Apr 2014 05:42:57 +0000	[256]MySQL Error[1054]: Unknown column 'coupon_sn.remain_times' in 'field list'
+MySQL Query:SELECT coupon.*,coupon_sn.remain_times,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_coupon coupon ON coupon_sn.coupon_id = coupon.coupon_id WHERE coupon_sn.coupon_sn = '000002661869' AND coupon.store_id = 2
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Thu, 17 Apr 2014 05:47:39 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89

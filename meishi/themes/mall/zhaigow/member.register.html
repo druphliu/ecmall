@@ -1,0 +1,327 @@
+{include file="header.html"}
+<script type="text/javascript">
+    jQuery.validator.addMethod("alnum", function(value, element) {
+        return this.optional(element) || /[A-Za-z]/.test(value);
+    }, "必须包含字母");
+//注册表单验证
+$(function(){
+    regionInit("region");
+    $('#register_form').validate({
+        errorPlacement: function(error, element){
+            var error_td = element.parent('div').next('div');
+            error_td.find('.field_notice').hide();
+            error_td.append(error);
+        },
+        errorElement : "span",
+        successElement : "span",
+        success       : function(label){
+            label.addClass('validate_right').text('OK!');
+        },
+        onkeyup: false,
+        rules : {
+            user_name : {
+                required : true,
+                byteRange: [3,15,'{$charset}'],
+                alnum : true,
+                remote   : {
+                    url :'index.php?app=member&act=check_user&ajax=1',
+                    type:'get',
+                    data:{
+                        user_name : function(){
+                            return $('#user_name').val();
+                        }
+                    },
+                    beforeSend:function(){
+                        var _checking = $('#checking_user');
+                        _checking.prev('.field_notice').hide();
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_user').hide();
+                    }
+                }
+            },
+            password : {
+                required : true,
+                minlength: 6
+            },
+            password_confirm : {
+                required : true,
+                equalTo  : '#password'
+            },
+            email : {
+                required : true,
+                email    : true,
+                remote   : {
+                    url :'index.php?app=member&act=check_email&ajax=1',
+                    type:'get',
+                    data:{
+                        email : function(){
+                            return $('#email').val();
+                        }
+                    },
+                    beforeSend:function(){
+                        var _checking = $('#checking_email');
+                        _checking.prev('.field_notice').hide();
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_email').hide();
+                    }
+                }
+            },
+            tel :{
+                required : true,
+                checkTel:true,
+                remote   : {
+                    url :'index.php?app=member&act=check_tel&ajax=1',
+                    type:'get',
+                    data:{
+                        tel : function(){
+                            return $('#tel').val();
+                        }
+                    },
+                    beforeSend:function(){
+                        var _checking = $('#checking_tel');
+                        _checking.prev('.field_notice').hide();
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_tel').hide();
+                    }
+                }
+            },
+            real_name : {
+                required : true
+            },
+            region_id : {
+                required : true,
+                min   : 1
+            },
+            address : {
+              required : true
+            },
+            captcha : {
+                required : true,
+                remote   : {
+                    url : 'index.php?app=captcha&act=check_captcha',
+                    type: 'get',
+                    data:{
+                        captcha : function(){
+                            return $('#captcha1').val();
+                        }
+                    }
+                }
+            },
+            agree : {
+                required : true
+            }
+        },
+        messages : {
+            user_name : {
+                required : '{$lang.user_name_required}',
+                byteRange: '{$lang.user_name_limit}',
+                remote   : '{$lang.user_already_taken}'
+            },
+            password  : {
+                required : '{$lang.password_required}',
+                minlength: '{$lang.password_length_limit}'
+            },
+            password_confirm : {
+                required : '{$lang.password_confirm_please}',
+                equalTo  : '{$lang.password_inconsistent}'
+            },
+            email : {
+                required : '{$lang.email_required}',
+                email    : '{$lang.email_invalid}',
+                remote   : '{$lang.email_already_taken}'
+            },
+            tel : {
+                required : '{$lang.tel_required}',
+                checkTel : '{$lang.tel_invalid}',
+                remote   : '{$lang.tel_already_taken}'
+            },
+            real_name : {
+                required : '{$lang.real_name_required}'
+            },
+            region_id : {
+                required : '{$lang.region_required}',
+                min  : '{$lang.region_required}'
+            },
+            address :{
+                required : '{$lang.address_requied}',
+            },
+            captcha : {
+                required : '{$lang.captcha_required}',
+                remote   : '{$lang.captcha_error}'
+            },
+            agree : {
+                required : '{$lang.agree_required}'
+            }
+        }
+    });
+});
+function hide_error(){
+    $('#region').find('.error').hide();
+}
+</script>
+<div class="container">
+    <div class="row register">
+        <div class="row col-md-8 col-sm-8">
+            <h3>{$lang.enter_register_info}</h3>
+            <form class="form-horizontal" role="form" method="post" id="register_form">
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.user_name}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6"><input class="form-control" id="user_name" name="user_name"></div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class=" field_notice">{$lang.user_name_desc}</span>
+                        <span id="checking_user" class="checking" >{$lang.checking}</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.phone_mob}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6"><input class="form-control" id="tel" name="tel"></div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="field_notice">{$lang.phone_mob_desc}</span>
+                        <span class="checking" id="checking_tel">{$lang.checking}</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.password}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <input class="form-control" id="password" name="password" type="password">
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="field_notice">{$lang.password_desc}</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.password_confirm}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <input class="form-control" type="password" name="password_confirm">
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="field_notice">{$lang.password_confirm_desc}</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.real_name}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6"><input type="text" class="form-control" name="real_name"></div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="field_notice">{$lang.real_name_desc}</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.gender}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="radio-inline">
+                            <input type="radio" checked="checked" name="sex" id="women" value="2">
+                            <label for="women">{$lang.female}</label>
+                        </div>
+                        <div class="radio-inline">
+                            <input type="radio" name="sex" id="man" value="1">
+                            <label for="man">{$lang.male}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.email}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <input class="form-control" id="email" type="text" name="email">
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="field_notice">{$lang.email_desc}</span>
+                        <span id="checking_email" class="checking">{$lang.checking}</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.school_area}</label>
+                    </div>
+                    <div class="col-md-8 col-sm-8" style="padding-top: 6px" id="region">
+                        <input type="hidden" name="region_id" value="{$area}" id="region_id" class="mls_id" />
+                        <input type="hidden" name="region_name" value="{$area_name}" class="mls_names" />
+                        <!-- {if $area} -->
+                        <a href="javascript:void(0)" class="edit_region">[切换校园<span class="caret"></span>]</a>
+                        <span>{$area_name}</span>
+                        <select style="display:none" onchange="hide_error();">
+                            <option>{$lang.select_pls}</option>
+                            {html_options options=$regions}
+                        </select>
+                        <!-- {else} -->
+                        <select onchange="hide_error();">
+                            <option>{$lang.select_pls}</option>
+                            {html_options options=$regions}
+                        </select>
+                        <!-- {/if} -->
+
+                    </div>
+                    <div class="col-md-2 col-sm-2"><span class="field_notice"></span></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.address}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6"><input class="form-control" name="address" type="text"></div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="field_notice">{$lang.address_desc}</span>
+                    </div>
+                </div>
+                <!--{if $captcha}-->
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right">
+                        <label class="control-label">{$lang.captcha}</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <input class="form-control" id="captcha1" name="captcha" type="text">
+                        <a href="javascript:change_captcha($('#captcha'));" class="renewedly">
+                            <img id="captcha" src="index.php?app=captcha&amp;{$random_number}" />
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="field_notice">{$lang.captcha_desc}</span>
+                    </div>
+                </div>
+                <!--{/if}-->
+                <div class="row form-group">
+                    <div class="col-md-2 col-sm-2 text-right"><label class="control-label"></label></div>
+                    <div class="col-md-6 col-sm-6">
+                        <input id="clause" type="checkbox" name="agree" value="1" />
+                        <span for="clause">{$lang.i_have_read}
+                            <a href="{url app=article&act=system&code=eula}" target="_blank" class="agreement">{$lang.mall_eula}</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <input type="hidden" name="ret_url" value="{$ret_url}" />
+                    <input class="btn btn-default" type="submit" name="" value="提交">
+                    <input class="btn btn-default" type="reset" name="" value="重置"></div>
+            </form>
+        </div>
+        <div class="row col-md-4 col-sm-4 help-block">
+            注册提示:
+            <ul class="list-unstyled">
+                <li>⊙请填写真实的姓名，电话，地址否则会导致订单失败</li>
+                <li>⊙注册会员以后才能下单！</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{include file="footer.html"}

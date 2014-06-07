@@ -1,0 +1,29 @@
+<!--{foreach from=$widget_data item=goods}-->
+<div class="grid">
+    <div class="imgholder">
+      <b class="goods_mark">推荐</b>
+      <img class="lazy" src="{$goods.default_image}"/>
+     </div>
+    <div class="food_title">
+        {$goods.goods_name|escape}
+    </div>
+    <div class="food_desc">
+
+    </div>
+    <div class="food_price">{$goods.price|price}/份</div>
+    <div class="text-center"><a href="javascript:void(0)" data-url="{url app=goods&id=$goods.goods_id}" class="btn btn-default add_goods">加入购物车</a> </div>
+</div>
+<!--{/foreach}-->
+
+<script>
+$(function(){
+    $(".add_goods").click(function(){
+            var url = $(this).attr("data-url");
+            var id = 'my_foods_order';
+            var title = '订餐';
+            var width = '700';
+            ajax_form(id, title, url, width);
+            return false;
+        })
+})
+</script>

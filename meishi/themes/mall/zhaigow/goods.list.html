@@ -1,0 +1,81 @@
+{include file=header.html}
+<script>
+    $(function(){
+        $("img.lazy").lazyload({
+            load:function(){
+                $('#foods_list').BlocksIt({
+                    numOfCol:4,
+                    offsetX: 2,
+                    offsetY: 4
+                });
+            }
+        });
+        $(".goods").click(function(){
+            var url = $(this).find(".food_desc").attr("data-url");
+            var id = 'my_foods_order';
+            var title = '订餐';
+            var width = '700';
+            ajax_form(id, title, url, width);
+            return false;
+        })
+    });
+</script>
+<div class="container">
+<div class="row category">
+    <!--{foreach from=$category_arr item=v key=key}-->
+    <!--{if $key>0}-->
+    <div class="line"></div>
+    <!--{/if}-->
+    <ul>
+        <!--{foreach from=$v item=category }-->
+        <li <!--{if $param.category==$category.cate_id}-->class="active"<!--{/if}-->>
+        <a href="{url app=search&cate_id=$category.cate_id}">{$category.cate_name}</a>
+        </li>
+        <!--{/foreach}-->
+    </ul>
+    <!--{/foreach}-->
+</div>
+<div class="row" id="foods_list">
+    <!-- {if $goods_list} -->
+    <div class="grid nav-select">
+        <div class="nav-select-title">
+            <span style="padding-right: 10px">排行</span>
+            <span class="nav-select-title-left <!--{if $param.order=='sales_desc'}-->active<!--{/if}-->">
+                <a href="{url app=list&order=sales_desc}">{$lang.sales_desc}</a>
+            </span>
+            <span class="nav-select-title-right <!--{if $param.order=='add_time_desc'}-->active<!--{/if}-->">
+                <a href="{url app=list&order=add_time_desc}">{$lang.add_time_desc}</a>
+            </span>
+        </div>
+        <div class="nav-select-list">
+            <!--{if $brands}-->
+            <span <!--{if !$param.brand}-->class="active"<!--{/if}-->><a href="#">全部</a></span>
+            <!--{foreach from=$brands item=row name=fe_brand}-->
+            <span <!--{if $param.brand ==$row.brand}-->class="active"<!--{/if}-->><a
+                href="{url app=$app&brand=$row.brand}" >{$row.brand|escape}</a></span>
+            <!--{/foreach}-->
+            <!--{/if}-->
+        </div>
+    </div>
+    <!--{foreach from=$goods_list item=goods}-->
+    <div class="grid goods">
+        <div class="imgholder">
+            <img class="lazy" src="{res file=images/pixel.gif}"
+                 data-original="{$goods.default_image}"/>
+        </div>
+        <div class="food_desc" data-url="{url app=goods&id=$goods.goods_id}">
+            <span>{$goods.price|price}/份</span>
+            <span>{$goods.goods_name|escape}</span>
+        </div>
+    </div>
+        <!--{/foreach}-->
+    <!-- {else} -->
+    <div id="no_results">{$lang.no_records}</div>
+    <!-- {/if} -->
+
+</div>
+    {include file=page.bottom.html}
+
+</div>
+
+{include file=footer.html}
