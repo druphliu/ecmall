@@ -84,8 +84,8 @@
     </div>
     <div class="clearfix"></div>
     <div class="row panel-footer">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-9">
+
+        <div class="text-right" style="padding-right: 260px">
             Copyright ©2014 zhaigow.com,All rights reserved 蜀ICP备13022251号
         </div>
 
@@ -93,11 +93,9 @@
 <script>
     $().ready(function(){
         $(".lef_nav a").hover(function(){
-//            $(this).children(":first").hide();
             $(this).removeClass("left_padding").children(":first").show(20);
         },function(){
             $(this).addClass("left_padding").children(":first").hide();
-//            $(this).children(":last").hide();
         })
     })
 </script>
