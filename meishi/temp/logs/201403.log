@@ -1,0 +1,317 @@
+Sat, 08 Mar 2014 16:07:52 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+)	\includes\libraries\class.smtp.php	89
+Sat, 08 Mar 2014 16:08:07 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+)	\includes\libraries\class.smtp.php	89
+Sun, 09 Mar 2014 13:42:37 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+)	\includes\libraries\class.smtp.php	89
+Sat, 15 Mar 2014 09:48:59 +0000	[2]Invalid argument supplied for foreach()	\app\area.app.php	29
+Sat, 15 Mar 2014 11:23:09 +0000	[2]Invalid argument supplied for foreach()	\admin\app\store.app.php	749
+Tue, 18 Mar 2014 06:47:04 +0000	[2]Missing argument 1 for Tree::getParents(), called in D:\wamp\www\ecmall\app\frontend.base.php on line 282 and defined	\includes\libraries\tree.lib.php	154
+Tue, 18 Mar 2014 14:43:27 +0000	[2]unlink(D:\wamp\www\ecmall/test) [<a href='function.unlink'>function.unlink</a>]: Permission denied	\admin\app\store.app.php	404
+Tue, 18 Mar 2014 14:44:16 +0000	[2]unlink(D:\wamp\www\ecmall/test2) [<a href='function.unlink'>function.unlink</a>]: Permission denied	\admin\app\store.app.php	404
+Tue, 18 Mar 2014 14:46:31 +0000	[2]unlink(D:\wamp\www\ecmall/test2) [<a href='function.unlink'>function.unlink</a>]: Permission denied	\admin\app\store.app.php	404
+Wed, 19 Mar 2014 07:11:01 +0000	[2]Missing argument 1 for FrontendApp::set_area(), called in D:\wamp\www\ecmall\eccore\controller\app.base.php on line 127 and defined	\app\frontend.base.php	270
+Wed, 19 Mar 2014 07:11:10 +0000	[2]Missing argument 1 for FrontendApp::set_area(), called in D:\wamp\www\ecmall\eccore\controller\app.base.php on line 127 and defined	\app\frontend.base.php	270
+Wed, 19 Mar 2014 07:11:16 +0000	[2]Missing argument 1 for FrontendApp::set_area(), called in D:\wamp\www\ecmall\eccore\controller\app.base.php on line 127 and defined	\app\frontend.base.php	270
+Wed, 19 Mar 2014 07:11:50 +0000	[2]Missing argument 1 for ECBaseApp::do_action(), called in D:\wamp\www\ecmall\eccore\controller\app.base.php on line 127 and defined	\includes\ecapp.base.php	176
+Wed, 19 Mar 2014 07:49:00 +0000	[256]MySQL Error[1054]: Unknown column 'AREA' in 'where clause'
+MySQL Query:SELECT *,region.region_id FROM ecm_region region WHERE AREA
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Wed, 19 Mar 2014 07:49:06 +0000	[256]MySQL Error[1054]: Unknown column 'AREA' in 'where clause'
+MySQL Query:SELECT *,region.region_id FROM ecm_region region WHERE AREA
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Thu, 20 Mar 2014 14:48:02 +0000	[256]MySQL Error[1054]: Unknown column 'if_activity' in 'where clause'
+MySQL Query:SELECT coupon_sn FROM ecm_coupon_sn WHERE (if_activity = 0) AND coupon_id  IN ('000000231444') 
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:08:58 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:10:02 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:10:41 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	526
+Fri, 21 Mar 2014 06:11:41 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:12:23 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:12:30 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:12:33 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:12:33 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:12:48 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:17:13 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:18:02 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:23:14 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:23:16 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:23:38 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:23:53 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:24:09 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:24:25 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:24:40 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:25:04 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:25:58 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	524
+Fri, 21 Mar 2014 06:26:19 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:26:40 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	525
+Fri, 21 Mar 2014 06:28:52 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	542
+Fri, 21 Mar 2014 06:29:38 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	542
+Fri, 21 Mar 2014 06:30:11 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	542
+Fri, 21 Mar 2014 06:30:18 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	542
+Fri, 21 Mar 2014 06:30:34 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	542
+Fri, 21 Mar 2014 06:30:36 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	542
+Fri, 21 Mar 2014 06:30:53 +0000	[2]explode() expects parameter 2 to be string, array given	\app\coupon.app.php	542
+Fri, 21 Mar 2014 06:31:30 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:31:32 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:31:57 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:32:21 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:32:40 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:32:59 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:33:11 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:34:08 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:34:15 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:34:46 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:35:08 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:35:35 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:35:54 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:35:57 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:36:13 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:36:23 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:36:53 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:37:38 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:37:46 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:38:05 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:38:23 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:38:36 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:38:39 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:39:07 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:40:03 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:40:22 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:41:44 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:42:09 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[523]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:42:41 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[524]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 06:43:40 +0000	[256]MySQL Error[1054]: Unknown column 'user_area_name' in 'field list'
+MySQL Query:UPDATE ecm_coupon SET coupon_name='e22',coupon_value='1',store_id='1',start_time='1395360000',end_time='1395619199',min_amount='0',if_issue='0',user_area_name='æ¹–åŒ—å·¥ä¸šå¤§.æ€»æ ¡',use_area='20' WHERE coupon_id = 7
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[524]	\eccore\model\mysql.php	286
+Fri, 21 Mar 2014 14:34:06 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+)	\includes\libraries\class.smtp.php	89
+Sat, 22 Mar 2014 07:30:20 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:37:07 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:38:18 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:38:19 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:38:53 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:38:54 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:38:56 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:38:56 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:38:56 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:38:56 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:44:26 +0000	[256]MySQL Error[1054]: Unknown column 'll' in 'order clause'
+MySQL Query:SELECT *,member.user_id FROM ecm_member member WHERE user_id = 1 ORDER BY ll LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:48:18 +0000	[2]Invalid argument supplied for foreach()	\app\my_coupon.app.php	28
+Sat, 22 Mar 2014 07:48:35 +0000	[256]MySQL Error[1052]: Column 'user_id' in where clause is ambiguous
+MySQL Query:SELECT COUNT(*) as c FROM ecm_user_coupon user_coupon LEFT JOIN ecm_member member ON user_coupon.user_id = member.user_id WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[458]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 07:54:50 +0000	[2]Invalid argument supplied for foreach()	\app\my_coupon.app.php	28
+Sat, 22 Mar 2014 07:55:05 +0000	[2]Invalid argument supplied for foreach()	\app\my_coupon.app.php	28
+Sat, 22 Mar 2014 07:56:39 +0000	[2]array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #1 is not an array	\app\my_coupon.app.php	41
+Sat, 22 Mar 2014 07:57:06 +0000	[2]array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #1 is not an array	\app\my_coupon.app.php	41
+Sat, 22 Mar 2014 07:57:19 +0000	[2]array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #1 is not an array	\app\my_coupon.app.php	41
+Sat, 22 Mar 2014 08:02:05 +0000	[2]array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #1 is not an array	\app\my_coupon.app.php	45
+Sat, 22 Mar 2014 08:02:12 +0000	[256]MySQL Error[1054]: Unknown column 'er' in 'order clause'
+MySQL Query:SELECT *,user_coupon.user_id FROM ecm_user_coupon user_coupon LEFT JOIN ecm_member member ON user_coupon.user_id = member.user_id WHERE user_coupon.user_id = 1 ORDER BY er LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:10:13 +0000	[256]MySQL Error[1054]: Unknown column 'is_used' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:30:21 +0000	[256]MySQL Error[1054]: Unknown column 'coupon_sn' in 'where clause'
+MySQL Query:SELECT *,member.user_id FROM ecm_member member WHERE coupon_sn=000002661869
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:31:59 +0000	[256]MySQL Error[1052]: Column 'coupon_sn' in where clause is ambiguous
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_user_coupon user_coupon ON coupon_sn.coupon_sn = user_coupon.coupon_sn WHERE coupon_sn=000002661869
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:46:31 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:47:05 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_coupon coupon ON coupon_sn.coupon_id = coupon.coupon_id WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:47:56 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_coupon coupon ON coupon_sn.coupon_id = coupon.coupon_id WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:48:27 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:49:44 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:50:15 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:50:37 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:51:37 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:51:52 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:52:02 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 08:52:56 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 09:20:43 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:SELECT *,coupon.coupon_id FROM ecm_coupon coupon WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 09:29:50 +0000	[256]MySQL Error[1054]: Unknown column 'coupon_sn' in 'where clause'
+MySQL Query:SELECT *,coupon.coupon_id FROM ecm_coupon coupon WHERE coupon_sn = 000002661869
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 09:34:14 +0000	[256]MySQL Error[1052]: Column 'coupon_sn' in where clause is ambiguous
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_coupon coupon ON coupon_sn.coupon_id = coupon.coupon_id LEFT JOIN ecm_user_coupon user_coupon ON coupon_sn.coupon_sn = user_coupon.coupon_sn WHERE coupon_sn = 000002661869
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 09:47:26 +0000	[256]MySQL Error[1052]: Column 'user_id' in where clause is ambiguous
+MySQL Query:SELECT *,member.user_id FROM ecm_member member LEFT JOIN ecm_user_coupon user_coupon ON member.user_id = user_coupon.user_id WHERE user_id=1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 10:19:20 +0000	[256]MySQL Error[1064]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>visitor->get('user_id') and coupon_id = $4' at line 1
+MySQL Query:select * from ecm_coupon_sn where user_id=this->visitor->get('user_id') and coupon_id = $4
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[589]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 10:19:22 +0000	[256]MySQL Error[1064]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>visitor->get('user_id') and coupon_id = $4' at line 1
+MySQL Query:select * from ecm_coupon_sn where user_id=this->visitor->get('user_id') and coupon_id = $4
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[589]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 10:19:55 +0000	[256]MySQL Error[1064]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>visitor->get('user_id') and coupon_id = 4' at line 1
+MySQL Query:select * from ecm_coupon_sn where user_id=this->visitor->get('user_id') and coupon_id = 4
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[589]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 18:20:06 +0800	[256]MySQL Error[1064]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>get('user_id') and coupon_id = 4' at line 1
+MySQL Query:select * from ecm_coupon_sn where user_id=->get('user_id') and coupon_id = 4
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[589]	\eccore\model\mysql.php	286
+Sat, 22 Mar 2014 10:20:26 +0000	[256]MySQL Error[1054]: Unknown column 'user_id' in 'where clause'
+MySQL Query:select * from ecm_coupon_sn where user_id=1 and coupon_id = 4
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[589]	\eccore\model\mysql.php	286
+Mon, 24 Mar 2014 13:46:15 +0000	[256]MySQL Error[1146]: Table 'ecmall.ecm_user_coupon' doesn't exist
+MySQL Query:SELECT COUNT(*) as c FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_user_coupon user_coupon ON coupon_sn.coupon_sn = user_coupon.coupon_sn WHERE coupon_id = 4
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[458]	\eccore\model\mysql.php	286
+Mon, 24 Mar 2014 13:58:51 +0000	[256]MySQL Error[1054]: Unknown column 'is_activity' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Mon, 24 Mar 2014 14:00:07 +0000	[256]MySQL Error[1054]: Unknown column 'is_activity' in 'order clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id = 4 ORDER BY is_activity desc, is_used desc LIMIT 0,10
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Mon, 24 Mar 2014 14:08:59 +0000	[256]MySQL Error[1327]: Undeclared variable: q
+MySQL Query:SELECT *,member.user_id FROM ecm_member member WHERE user_id = 1 LIMIT q
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Mon, 24 Mar 2014 14:12:36 +0000	[256]MySQL Error[1052]: Column 'user_id' in where clause is ambiguous
+MySQL Query:SELECT COUNT(*) as c FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_member member ON coupon_sn.user_id = member.user_id WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[458]	\eccore\model\mysql.php	286
+Mon, 24 Mar 2014 14:12:38 +0000	[256]MySQL Error[1052]: Column 'user_id' in where clause is ambiguous
+MySQL Query:SELECT COUNT(*) as c FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_member member ON coupon_sn.user_id = member.user_id WHERE user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[458]	\eccore\model\mysql.php	286
+Mon, 24 Mar 2014 14:13:05 +0000	[256]MySQL Error[1054]: Unknown column 'couponsn.user_id' in 'where clause'
+MySQL Query:SELECT COUNT(*) as c FROM ecm_coupon_sn coupon_sn LEFT JOIN ecm_member member ON coupon_sn.user_id = member.user_id WHERE couponsn.user_id = 1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[458]	\eccore\model\mysql.php	286
+Mon, 24 Mar 2014 14:13:15 +0000	[2]Invalid argument supplied for foreach()	\app\my_coupon.app.php	29
+Mon, 24 Mar 2014 14:14:04 +0000	[2]current() expects parameter 1 to be array, null given	\app\my_coupon.app.php	26
+Tue, 25 Mar 2014 03:32:14 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+)	\includes\libraries\class.smtp.php	89
+Tue, 25 Mar 2014 03:32:24 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+)	\includes\libraries\class.smtp.php	89
+Tue, 25 Mar 2014 06:30:47 +0000	[256]MySQL Error[1054]: Unknown column 'if_issue' in 'where clause'
+MySQL Query:SELECT *,coupon_sn.coupon_sn FROM ecm_coupon_sn coupon_sn WHERE coupon_id=5 AND user_id=0 AND if_issue=1
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 07:39:41 +0000	[256]MySQL Error[1054]: Unknown column 'brand_desc' in 'field list'
+MySQL Query:INSERT INTO ecm_brand(brand_name,brand_desc,store_id,if_show,tag) VALUES('334','1395905981','1','0','')
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[299]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 07:40:02 +0000	[256]MySQL Error[1054]: Unknown column 'brand_desc' in 'field list'
+MySQL Query:INSERT INTO ecm_brand(brand_name,brand_desc,store_id,if_show,tag) VALUES('2323','1395906002','1','0','')
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[299]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 07:51:40 +0000	[256]MySQL Error[1054]: Unknown column 'brand_desc' in 'field list'
+MySQL Query:INSERT INTO ecm_brand(brand_name,brand_desc,store_id,if_show,tag) VALUES('é©±èšŠå™¨','1395906700','1','0','')
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[299]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 07:51:51 +0000	[256]MySQL Error[1054]: Unknown column 'brand_desc' in 'field list'
+MySQL Query:INSERT INTO ecm_brand(brand_name,brand_desc,store_id,if_show,tag) VALUES('è¿‡æ¡¥ç±³123','1395906711','1','0','')
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[299]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 07:52:35 +0000	[256]MySQL Error[1054]: Unknown column 'brand_desc' in 'field list'
+MySQL Query:INSERT INTO ecm_brand(brand_name,brand_desc,store_id,if_show,tag) VALUES('è¿‡æ¡¥ç±³123','1395906755','1','1','')
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[299]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 07:52:42 +0000	[256]MySQL Error[1054]: Unknown column 'brand_desc' in 'field list'
+MySQL Query:INSERT INTO ecm_brand(brand_name,brand_desc,store_id,if_show,tag) VALUES('è¿‡æ¡¥ç±³123','1395906762','1','1','')
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[299]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 07:55:54 +0000	[256]MySQL Error[1054]: Unknown column 'brand_desc' in 'field list'
+MySQL Query:INSERT INTO ecm_brand(brand_name,brand_desc,store_id,if_show,tag) VALUES('é©±èšŠå™¨','1395906954','1','1','')
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[299]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 08:00:58 +0000	[256]MySQL Error[1054]: Unknown column 'brand_desc' in 'field list'
+MySQL Query:INSERT INTO ecm_brand(brand_name,brand_desc,store_id,if_show,tag) VALUES('234','1395907258','1','1','')
+Wrong File:  D:\wamp\www\ecmall\eccore\model\model.base.php[299]	\eccore\model\mysql.php	286
+Thu, 27 Mar 2014 08:33:42 +0000	[2]Invalid argument supplied for foreach()	\app\my_goods.app.php	1395
+Thu, 27 Mar 2014 08:34:26 +0000	[2]Invalid argument supplied for foreach()	\app\my_goods.app.php	1395

@@ -1,0 +1,54 @@
+Thu, 22 May 2014 14:59:17 +0000	[2]include(D:\wamp\www\ecmall/includes/goodstypes/.gtype.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory	\includes\global.lib.php	43
+Thu, 22 May 2014 15:00:50 +0000	[256]MySQL Error[1064]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND session_id='0cfca1b526884f690bafe3e5dce4dd9f'' at line 1
+MySQL Query:SELECT *,cart.rec_id FROM ecm_cart cart LEFT JOIN ecm_goods_spec gs ON cart.spec_id = gs.spec_id WHERE user_id = 1 AND store_id =  AND session_id='0cfca1b526884f690bafe3e5dce4dd9f'
+Wrong File:  D:\wamp\www\ecmall\eccore\model\mysql.php[534]	\eccore\model\mysql.php	286
+Thu, 22 May 2014 15:09:25 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Thu, 22 May 2014 15:13:11 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Thu, 22 May 2014 15:13:48 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Thu, 22 May 2014 15:13:51 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Thu, 22 May 2014 15:13:59 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Thu, 22 May 2014 15:23:19 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Thu, 22 May 2014 15:23:25 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Thu, 22 May 2014 15:23:42 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 03:44:50 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 03:44:56 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 03:45:11 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 03:52:33 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 03:52:37 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 03:53:34 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 03:53:39 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:00:44 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:00:50 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:13:32 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:13:39 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:20:16 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:20:22 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:20:34 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:21:37 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 04:21:44 +0000	[2]fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :25 (由于目标计算机积极拒绝，无法连接。
+)	\includes\libraries\class.smtp.php	89
+Sat, 24 May 2014 15:26:10 +0000	[2]trim() expects parameter 1 to be string, array given	\app\my_goods.app.php	1284
+Sat, 24 May 2014 15:26:21 +0000	[2]trim() expects parameter 1 to be string, array given	\app\my_goods.app.php	1284

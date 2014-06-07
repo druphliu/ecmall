@@ -1,0 +1,233 @@
+body{
+    margin: 0 auto;
+}
+a{
+    color: #FFFFFF;;
+}
+.index-title h2{
+    font-family: "microsoft yahei";
+    font-size: 2em;
+}
+.index-nav {
+    line-height: 45px;
+    letter-spacing: 3px;
+}
+.index-nav ul li a{
+    font-family: "microsoft yahei", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    padding-right: 0px;
+    height: 35px;
+    font-size: 16px;
+}
+.metro-layout .box {
+    background: none repeat scroll 0 0 #00A8EC;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: left;
+    height: 170px;
+    overflow: hidden;
+    padding: 0.5em;
+    position: relative;
+    text-decoration: none;
+    width: 170px;
+    z-index: 9;
+}
+.metro-layout .box span {
+    bottom: 0.5em;
+    font-size: 1.5em;
+    font-family: "microsoft yahei";
+    font-weight:600;
+    left: 1em;
+    position: absolute;
+    z-index: 8;
+}
+.metro-layout .metro-shop span{
+    bottom: 3em;
+    font-size: 1.8em;
+    left: 1.4em;
+}
+.metro-layout .metro-flower span{
+    font-size: 1.7em;
+    left: 0.5em;
+}
+.metro-layout .metro-lvy span{
+    left: 1.5em;
+    bottom: 0.8em;
+}
+.metro-layout .metro-fruit span{
+
+}
+.metro-layout .metro-food span{
+    left: auto;
+    right: 0.3em;
+    top: 1em;
+}
+.metro-layout .metro-food ul{
+    position: absolute;
+    top: 4.5em;
+    right: 0.5em;
+    width: 200px;
+    font-family: "microsoft yahei";
+}
+.metro-layout .metro-food ul li{
+    float: right;
+    list-style: none;
+    padding-left: 10px;
+}
+.metro-layout .metro-shop ul{
+    position: absolute;
+    bottom: 0.5em;
+    padding-left: 25px;
+    font-family: "microsoft yahei";
+}
+.metro-layout .metro-shop ul li{
+    float: left;
+    list-style: none;
+    padding-right: 10px;
+}
+.metro-layout .metro-lvy {
+    position: absolute;
+    height: 350px;
+    left: 0px;
+    top: 0px;
+    -moz-transform: translate(0px, 0px);
+    -ms-transform:  translate(0px, 0px);
+    -webkit-transform: translate(0px, 0px);
+    -o-transform: translate(0px, 0px);
+    background: none repeat scroll 0% 0% #FFBB5A;
+}
+.metro-layout .metro-snacks{
+    background: none repeat scroll 0% 0% #89CB69;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    -moz-transform: translate(180px, 0px);
+    -ms-transform:  translate(180px, 0px);
+    -webkit-transform: translate(180px, 0px);
+    -o-transform: translate(180px, 0px);
+}
+.metro-layout .metro-food{
+    background: none repeat scroll 0% 0% #AD76C9;
+    position: absolute;
+    width: 350px;
+    left: 0px;
+    top: 0px;
+    -webkit-transform: translate(360px, 0px);
+    -moz-transform: translate(360px, 0px);
+    -ms-transform:  translate(360px, 0px);
+    -o-transform: translate(360px, 0px);
+}
+.metro-layout .metro-fruit{
+    background: none repeat scroll 0% 0% #7AC8EE;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    -webkit-transform: translate(180px, 180px);
+    -moz-transform: translate(180px, 180px);
+    -ms-transform:  translate(180px, 180px);
+    -o-transform: translate(180px, 180px);
+}
+.metro-layout .metro-shop{
+    background: none repeat scroll 0% 0% #C6AE94;
+    height: 350px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    -webkit-transform: translate(360px, 180px);
+    -moz-transform: translate(360px, 180px);
+    -ms-transform:  translate(360px, 180px);
+    -o-transform: translate(360px, 180px);
+}
+.metro-layout .metro-commodity{
+    background: none repeat scroll 0% 0% #65C547;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    -webkit-transform: translate(540px, 180px);
+    -moz-transform: translate(540px, 180px);
+    -ms-transform:  translate(540px, 180px);
+    -o-transform: translate(540px, 180px);
+}
+.metro-layout .metro-website{
+    background: none repeat scroll 0% 0% #FF9146;
+    position: absolute;
+    left: 0px;
+    width: 350px;
+    top: 0px;
+    -webkit-transform: translate(0px, 360px);
+    -moz-transform: translate(0px, 360px);
+    -ms-transform:  translate(0px, 360px);
+    -o-transform: translate(0px, 360px);
+    padding-left: 25px;
+    padding-top: 20px;
+}
+.metro-layout .metro-flower{
+    background: none repeat scroll 0% 0% #EE7143;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    -webkit-transform: translate(540px, 360px);
+    -moz-transform: translate(540px, 360px);
+    -ms-transform:  translate(540px, 360px);
+    -o-transform: translate(540px, 360px);
+}
+.metro-layout .metro-flower img{
+    left: 45px;
+    top: 1.5em;
+    position: absolute;
+
+}
+.button-area {
+    background: -moz-linear-gradient(center top , #00B5E5, #00A1CB) repeat scroll 0 0 #00A1CB;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 1px rgba(91, 53, 2, 0.35);
+    border: 0;
+}
+.button-about {
+    background: -moz-linear-gradient(center top , #FA9915, #D87E04) repeat scroll 0 0 #F18D05;
+    border-color: #BF7004;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 1px rgba(91, 53, 2, 0.35);
+    border: 0;
+}
+.button-food {
+    background: -moz-linear-gradient(center top , #00B5E5, #008DB2) repeat scroll 0 0 #00A1CB;
+    /*border-color: #007998;*/
+    color: #FFFFFF;
+    text-shadow: 0 -1px 1px rgba(0, 40, 50, 0.35);
+    border: 0;
+}
+
+.button-shop {
+    background: -moz-linear-gradient(center top , #E8543F, #D9331A) repeat scroll 0 0 #E54028;
+    border-color: #C22D18;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 1px rgba(103, 24, 13, 0.35);
+    border: 0;
+}
+.button-register {
+    background: -moz-linear-gradient(center top , #99389F, #752A79) repeat scroll 0 0 #87318C;
+    border-color: #632466;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 1px rgba(26, 9, 27, 0.35);
+    border: 0;
+}
+.button-login {
+    background: -moz-linear-gradient(center top , #8FCF00, #6B9C00) repeat scroll 0 0 #7DB500;
+    border-color: #5A8200;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 1px rgba(19, 28, 0, 0.35);
+    border: 0;
+}
+.position{
+    position: absolute;
+    -moz-transform: translate(788px, 535px);
+    -ms-transform:  translate(788px, 535px);
+    -webkit-transform: translate(788px, 535px);
+    -o-transform: translate(788px, 535px);
+    font-size: 12px;
+    font-weight: 600;
+}
+.panel-footer{
+    margin-left: 0px;
+    margin-right: 0px;
+}
