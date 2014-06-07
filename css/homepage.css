@@ -18,6 +18,15 @@ a{
     height: 35px;
     font-size: 16px;
 }
+.lef_nav li{
+    cursor: pointer;
+}
+.lef_nav a:hover{
+    color: #ffffff;
+}
+.left_padding{
+    padding-left: 0px;
+}
 .metro-layout .box {
     background: none repeat scroll 0 0 #00A8EC;
     color: #FFFFFF;

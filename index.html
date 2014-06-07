@@ -16,13 +16,13 @@
         <div class="row text-center index-title"><h2>为了拥有更多的时间 所以有我</h2></div>
         <div class="row" style="min-height:580px">
             <div class="col-xs-3 index-nav">
-                <ul class="list-unstyled text-right">
-                    <li><a class="button button-pill button-action button-login" href="">登录<img src="images/nav-login.png"></a></li>
-                    <li><a class="button button-pill button-royal button-register" href="">注册<img src="images/nav-register.png"></a> </li>
-                    <li><a class="button button-pill button-caution button-shop" href="">大学生开店<img src="images/nav-shop.png"></a> </li>
-                    <li><a class="button button-pill button-primary button-food" href="">美食合作<img src="images/nav-food.png"> </a> </li>
-                    <li><a class="button button-pill button-highlight button-about" href="">关于我们<img src="images/nav-about.png"> </a> </li>
-                    <li><a class="button button-pill button-primary button-area" href="">切换区域<img src="images/nav-area.png"> </a> </li>
+                <ul class="list-unstyled text-right lef_nav">
+                    <li><a class="button button-pill button-action button-login left_padding" href=""><span style="display: none">登录</span><span><img src="images/nav-login.png"></span></a></li>
+                    <li><a class="button button-pill button-royal button-register left_padding" href=""><span style="display: none">注册</span><span><img src="images/nav-register.png"></span></a> </li>
+                    <li><a class="button button-pill button-caution button-shop left_padding" href=""><span style="display: none">大学生开店</span><span><img src="images/nav-shop.png"></span></a> </li>
+                    <li><a class="button button-pill button-primary button-food left_padding" href=""><span style="display: none">美食合作</span><span><img src="images/nav-food.png"></span></a> </li>
+                    <li><a class="button button-pill button-highlight button-about left_padding" href=""><span style="display: none">关于我们</span><span><img src="images/nav-about.png"></span></a> </li>
+                    <li><a class="button button-pill button-primary button-area left_padding" href=""><span style="display: none">切换区域</span><span><img src="images/nav-area.png"></span></a> </li>
                 </ul>
             </div>
             <div class="col-xs-9 metro-layout">
@@ -52,7 +52,7 @@
 
                 </span>
                 <span class="box metro-fruit">
-                    <span><a <a href="#">校园水果派送</a></span>
+                    <span><a href="#">校园水果派送</a></span>
 
                 </span>
                 <span  class="box metro-shop">
@@ -90,5 +90,16 @@
         </div>
 
     </div>
+<script>
+    $().ready(function(){
+        $(".lef_nav a").hover(function(){
+//            $(this).children(":first").hide();
+            $(this).removeClass("left_padding").children(":first").show(20);
+        },function(){
+            $(this).addClass("left_padding").children(":first").hide();
+//            $(this).children(":last").hide();
+        })
+    })
+</script>
 </body>
 </html>
