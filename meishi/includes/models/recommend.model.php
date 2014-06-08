@@ -40,7 +40,7 @@ class RecommendModel extends BaseModel
     {
         $goods_list = array();
 
-        $conditions = "g.if_show = 1 AND g.closed = 0 AND s.state = 1 AND g.store_id=".ecm_getcookie('area').' ';
+        $conditions = "g.if_show = 1 AND g.closed = 0 AND s.state = 1 AND g.store_id=".ecm_getcookie('area_id').' ';
         if ($recom_id == REC_NEW)
         {
             /* 最新商品 */
@@ -50,26 +50,26 @@ class RecommendModel extends BaseModel
                 $conditions .= " AND g.cate_id " . db_create_in($gcategory_mod->get_descendant($mall_cate_id));
             }
             $sql = "SELECT g.goods_id, g.goods_name, g.default_image, gs.price, gs.stock " .
-                    "FROM " . DB_PREFIX . "goods AS g " .
-                    "LEFT JOIN " . DB_PREFIX . "goods_spec AS gs ON g.default_spec = gs.spec_id " .
-                    "LEFT JOIN " . DB_PREFIX . "store AS s ON g.store_id = s.store_id " .
-                    "WHERE " . $conditions .
-                    "ORDER BY g.add_time DESC " .
-                    "LIMIT {$num}";
+                "FROM " . DB_PREFIX . "goods AS g " .
+                "LEFT JOIN " . DB_PREFIX . "goods_spec AS gs ON g.default_spec = gs.spec_id " .
+                "LEFT JOIN " . DB_PREFIX . "store AS s ON g.store_id = s.store_id " .
+                "WHERE " . $conditions .
+                "ORDER BY g.add_time DESC " .
+                "LIMIT {$num}";
         }
         else
         {
             /* 推荐商品 */
             $sql = "SELECT g.goods_id, g.goods_name, g.default_image, gs.price, gs.stock " .
-                    "FROM " . DB_PREFIX . "recommended_goods AS rg " .
-                    "   LEFT JOIN " . DB_PREFIX . "goods AS g ON rg.goods_id = g.goods_id " .
-                    "   LEFT JOIN " . DB_PREFIX . "goods_spec AS gs ON g.default_spec = gs.spec_id " .
-                    "   LEFT JOIN " . DB_PREFIX . "store AS s ON g.store_id = s.store_id " .
-                    "WHERE " . $conditions . 
-                    "AND rg.recom_id = '$recom_id' " .
-                    "AND g.goods_id IS NOT NULL " .
-                    "ORDER BY rg.sort_order " .
-                    "LIMIT {$num}";
+                "FROM " . DB_PREFIX . "recommended_goods AS rg " .
+                "   LEFT JOIN " . DB_PREFIX . "goods AS g ON rg.goods_id = g.goods_id " .
+                "   LEFT JOIN " . DB_PREFIX . "goods_spec AS gs ON g.default_spec = gs.spec_id " .
+                "   LEFT JOIN " . DB_PREFIX . "store AS s ON g.store_id = s.store_id " .
+                "WHERE " . $conditions .
+                "AND rg.recom_id = '$recom_id' " .
+                "AND g.goods_id IS NOT NULL " .
+                "ORDER BY rg.sort_order " .
+                "LIMIT {$num}";
         }
         $res = $this->db->query($sql);
         while ($row = $this->db->fetchRow($res))
@@ -138,12 +138,12 @@ class RecommendBModel extends RecommendModel
     {
         $count = array();
         $sql = "SELECT rg.recom_id, COUNT(*) AS goods_count " .
-                "FROM " . DB_PREFIX . "recommended_goods AS rg " .
-                "   LEFT JOIN {$this->table} AS r ON rg.recom_id = r.recom_id " .
-                "   LEFT JOIN " . DB_PREFIX . "goods AS g ON rg.goods_id = g.goods_id " .
-                "WHERE r.store_id = '{$this->_store_id}' " .
-                "AND g.goods_id IS NOT NULL " .
-                "GROUP BY rg.recom_id";
+            "FROM " . DB_PREFIX . "recommended_goods AS rg " .
+            "   LEFT JOIN {$this->table} AS r ON rg.recom_id = r.recom_id " .
+            "   LEFT JOIN " . DB_PREFIX . "goods AS g ON rg.goods_id = g.goods_id " .
+            "WHERE r.store_id = '{$this->_store_id}' " .
+            "AND g.goods_id IS NOT NULL " .
+            "GROUP BY rg.recom_id";
         $res = $this->db->query($sql);
         while ($row = $this->db->fetchRow($res))
         {
