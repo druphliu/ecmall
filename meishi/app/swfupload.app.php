@@ -1,7 +1,7 @@
 <?php
 
 define('THUMB_WIDTH', 300);
-define('THUMB_HEIGHT', 300);
+defined(THUMB_HEIGHT)?define('THUMB_HEIGHT', 300):"";
 define('THUMB_QUALITY', 85);
 
 /**

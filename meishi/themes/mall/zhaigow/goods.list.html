@@ -19,6 +19,9 @@
             return false;
         })
     });
+    $(window).bind("load", function() {
+        var timeout = setTimeout('$("img").trigger("appear");',1000);
+    });
 </script>
 <div class="container content">
 <div class="row category">
@@ -62,10 +65,16 @@
         <div class="imgholder">
             <img class="lazy" src="{res file=images/pixel.gif}"
                  data-original="{$goods.default_image}"/>
+            <!--{foreach from=$goods['images'] item=images}-->
+                <!--{if $images['thumbnail'] != $goods['default_image']}-->
+                    <img class="lazy" src="{res file=images/pixel.gif}" data-original="{$images.thumbnail}"/>
+                <!--{/if}-->
+            <!--{/foreach}-->
         </div>
         <div class="food_desc" data-url="{url app=goods&id=$goods.goods_id}">
             <span>{$goods.price|price}/份</span>
-            <span>{$goods.goods_name|escape}</span>
+            <!--<span>{$goods.goods_name|escape}</span>-->
+            <span><a href="#" class="buy_button">开始订餐</a> </span>
         </div>
     </div>
         <!--{/foreach}-->

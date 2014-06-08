@@ -127,6 +127,23 @@ a:focus,
     font-weight: 700;
 }
 /*-------------------------------------------list----------------------------------------------------*/
+.buy_button{
+    background: -moz-linear-gradient(center top , #FF5836, #C31701) repeat scroll 0 0 #E54028;
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #FF5836), color-stop(100%, #C31701));
+    background: -webkit-linear-gradient(top, #FF5836, #C31701);
+    background: -o-linear-gradient(top, #FF5836, #C31701);
+    background: linear-gradient(top, #FF5836, #C31701);
+    color: #FFFFFF;
+    text-shadow: 0 -1px 1px rgba(103, 24, 13, 0.35);
+    border-radius:3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
+    padding: 0 15px;
+    float: right;
+    margin-right: 5px;
+}
+#foods_list .food_desc{
+    margin-top: 5px;
+}
 header .navbar {
     border-radius: 0;
     background-color: #FF8432;
@@ -426,7 +443,7 @@ header .dropdown-menu .wechat_text {
     min-height: 400px;
 }
 .article h1{
-    font-size: 25px;
+    font-size: 23px;
     text-align: center;
 }
 .article h2{
@@ -498,16 +515,60 @@ header .dropdown-menu .wechat_text {
 /*.goods_info{*/
     /*width: 700px;*/
 /*}*/
-.solid {
-    background-image: none;
+.solid,.goods_info .active {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125) inset;
     outline: 0 none;
+    background-color: #FC822F;
+    color: #FFFFFF;
+}
+.goods_info li{
+    cursor: pointer;
 }
 .ware_cen{
     position:absolute;
-    top: -85px;
+    top: -200px;
+    border: 2px solid #EAEAEA;
+    background-color: #ffffff;
+    /*opacity: 0.7;-moz-opacity: 0.7;filter:alpha(opacity=70);*/
 }
-
+.ware_center{
+    margin: 0 10px;
+    background-color: #ffffff !important;
+}
+.goods_info .button{
+    margin-left: 25px;
+}
+.fontColor3{
+    color: #FC822F;
+    font-weight: 600;
+    line-height: 60px;
+    font-size: 26px;
+}
+.row.goods_title > h3 {
+    margin-top: 5px;
+}
+.goods_info .goods_desc{
+    font-size: 16px;
+}
+.goods_info .content_desc{
+    margin: 0px;
+    padding-right: 0px;
+    line-height: 30px;
+}
+.goods_info .notice{
+    font-size: 16px;
+    color: #fc822f;
+}
+.goods_info .handle{
+    padding-right: 0px;
+    margin-right: 0px;
+}
+.btn1 ,.btn2{
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
+    height: 32px;
+    padding-top:4px;
+    border-radius: 0;
+}
 
 
 /* form avalidate */

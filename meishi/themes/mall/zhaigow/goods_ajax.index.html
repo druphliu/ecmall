@@ -73,8 +73,8 @@
 </head>
 <body>
 <div class="goods_info">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row" style="padding-right: 0px; margin: 0px;">
+        <div class="col-md-5">
             <div class="row text-center big_pic">
                 <img width="250px" height="250px" src="{$goods._images.0.thumbnail|default:$default_image}">
             </div>
@@ -94,7 +94,7 @@
                 });
             </script>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 content_desc">
             <div class="row goods_title"><h3>{$goods.goods_name|escape}</h3></div>
             <div class="row goods_desc">{$goods.description|escape:editor}</div>
             <div class="row">
@@ -106,15 +106,16 @@
             <div class="row"><span>{$lang.supply_customer}</span>{$goods.brand|escape}</div>
             <div class="row"><span>{$lang.supply_customer_address}</span>{$goods.brand_info.brand_desc|escape}</div>
             <!--{/if}-->
-            <div class="row">{$lang.buyer_notice}</div>
+            <div class="row notice">{$lang.buyer_notice}</div>
         </div>
+        <div class="col-md-1"></div>
     </div>
     <div class="row">
-        <div class="handle col-md-6">
-            <div class="col-md-3">
+        <div class="handle col-md-5">
+            <div class="col-md-4">
                 <span class="fontColor3" ectype="goods_price">{$goods._specs.0.price|price}</span>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <!--{if $goods.spec_qty gt 0}-->
                 <ul class="list-inline">
                     <li class="handle_title">{$goods.spec_name_1|escape}:</li>
@@ -137,8 +138,8 @@
                     <div class="ware_cen_btn">
                         <p class="ware_text_p">{$lang.cart_status}</p>
                         <p class="ware_text_btn">
-                            <input type="submit" class="btn1" name="" value="{$lang.view_cart}" onclick="location.href='{$site_url}/index.php?app=cart'" />
-                            <input type="submit" class="btn2" name="" value="{$lang.continue_buy}" onclick="$('.ware_cen').css({'display':'none'});" />
+                            <input type="submit" class="btn1 btn" name="" value="{$lang.view_cart}" onclick="location.href='{url app=cart}'" />
+                            <input type="submit" class="btn2 btn" name="" value="{$lang.continue_buy}" onclick="$('.ware_cen').css({'display':'none'});" />
                         </p>
                     </div>
                 </div>
@@ -148,6 +149,7 @@
             <input class="button button-rounded button-caution" type="submit" onclick="buy('add');" value="加入购物车">
             <input class="button button-rounded button-caution" type="submit" value="直接购买" onclick="buy('direct')">
         </div>
+        <div class="col-md-1"></div>
     </div>
 </div>
 </body>

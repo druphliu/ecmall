@@ -16,7 +16,7 @@ class CartApp extends MallbaseApp
      */
     function index()
     {
-        $store_id = $this->area_id ? $this->area_id : 0;
+        $store_id = $this->area ? $this->area : 0;
         $carts = $this->_get_carts($store_id);
         $this->_curlocal(
             LANG::get('cart')
@@ -30,7 +30,10 @@ class CartApp extends MallbaseApp
             return;
         }
         if(IS_POST){
-            $store_id = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area_id;
+            if(!$this->visitor->has_login){
+                header('Location:'.url('app=member&act=login&ret_url=' . rawurlencode($_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'])));
+            }
+            $store_id = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area;
             $goods_info = $this->_get_goods_info();
             if ($goods_info === false)
             {
@@ -166,7 +169,7 @@ class CartApp extends MallbaseApp
 
         /* 是否添加过 */
         $model_cart =& m('cart');
-        $item_info  = $model_cart->get("spec_id={$spec_id} AND session_id='" . SESS_ID . "'");
+        $item_info  = $model_cart->get("spec_id={$spec_id} AND session_id='" . SESS_ID . "' and store_id=".$this->area);
         if (!empty($item_info))
         {
             $this->json_error('goods_already_in_cart');
@@ -189,7 +192,7 @@ class CartApp extends MallbaseApp
         $cart_item = array(
             'user_id'       => $this->visitor->get('user_id'),
             'session_id'    => SESS_ID,
-            'store_id'      => $spec_info['store_id'],
+            'store_id'      => $this->area,
             'spec_id'       => $spec_id,
             'goods_id'      => $spec_info['goods_id'],
             'goods_name'    => addslashes($spec_info['goods_name']),
@@ -368,7 +371,7 @@ class CartApp extends MallbaseApp
         $carts = array();
 
         /* 获取所有购物车中的内容 */
-        $where_store_id = $store_id ? ' AND cart.store_id=' . $store_id : '';
+        $where_store_id = ' AND cart.store_id=' . $this->area ;
 
         /* 只有是自己购物车的项目才能购买 */
         $where_user_id = $this->visitor->get('user_id') ? " AND cart.user_id=" . $this->visitor->get('user_id') : '';
@@ -501,7 +504,7 @@ class CartApp extends MallbaseApp
                 $return['allow_coupon'] =   false;
                 break;
             default:
-                $_GET['store_id'] = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area_id;
+                $_GET['store_id'] = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area;
                 $store_id = $_GET['store_id'];
                 if (!$store_id)
                 {
@@ -555,7 +558,7 @@ class CartApp extends MallbaseApp
                 break;
             default://购物车中的商品
                 /* 订单下完后清空指定购物车 */
-                $_GET['store_id'] = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area_id;
+                $_GET['store_id'] = isset($_GET['store_id']) ? intval($_GET['store_id']) : $this->area;
                 $store_id = $_GET['store_id'];
                 if (!$store_id)
                 {

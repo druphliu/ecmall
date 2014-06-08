@@ -71,11 +71,11 @@ function goodsspec(specs, specQty, defSpec)
             {
                 if (spec1Values[i] == this.spec1)
                 {
-                    $(".handle ul:eq(0)").append("<li class='solid btn' onclick='selectSpec(1, this)'>" + spec1Values[i] + "</li>");
+                    $(".handle ul:eq(0)").append("<li class='solid' onclick='selectSpec(1, this)'>" + spec1Values[i] + "</li>");
                 }
                 else
                 {
-                    $(".handle ul:eq(0)").append("<li class='dotted btn' onclick='selectSpec(1, this)'>" + spec1Values[i] + "</li>");
+                    $(".handle ul:eq(0)").append("<li class='dotted' onclick='selectSpec(1, this)'>" + spec1Values[i] + "</li>");
                 }
             }
         }
@@ -86,11 +86,11 @@ function goodsspec(specs, specQty, defSpec)
             {
                 if (spec2Values[i] == this.spec2)
                 {
-                    $(".handle ul:eq(1)").append("<li class='solid btn' onclick='selectSpec(2, this)'>" + spec2Values[i] + "</li>");
+                    $(".handle ul:eq(1)").append("<li class='solid' onclick='selectSpec(2, this)'>" + spec2Values[i] + "</li>");
                 }
                 else
                 {
-                    $(".handle ul:eq(1)").append("<li class='dotted btn' onclick='selectSpec(2, this)'>" + spec2Values[i] + "</li>");
+                    $(".handle ul:eq(1)").append("<li class='dotted' onclick='selectSpec(2, this)'>" + spec2Values[i] + "</li>");
                 }
             }
         }
@@ -103,8 +103,9 @@ function goodsspec(specs, specQty, defSpec)
 function selectSpec(num, liObj)
 {
     goodsspec['spec' + num] = $(liObj).html();
-    $(liObj).attr("class", "active btn");
-    $(liObj).siblings(".active").attr("class", "dotted btn");
+    $(liObj).attr("class", "active");
+    $(liObj).siblings(".active").attr("class", "dotted");
+    $(liObj).siblings(".solid").attr("class", "dotted");
 
     // 当有2种规格并且选中了第一个规格时，刷新第二个规格
     if (num == 1 && goodsspec.specQty == 2)
@@ -116,7 +117,7 @@ function selectSpec(num, liObj)
         var spec2Values = goodsspec.getDistinctValues('spec2', goodsspec.spec1);
         for (var i = 0; i < spec2Values.length; i++)
         {
-            $(".handle ul:eq(1)").append("<li class='dotted btn' onclick='selectSpec(2, this)'>" + spec2Values[i] + "</li>");
+            $(".handle ul:eq(1)").append("<li class='dotted' onclick='selectSpec(2, this)'>" + spec2Values[i] + "</li>");
         }
     }
     else

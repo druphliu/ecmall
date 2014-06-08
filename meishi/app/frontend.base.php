@@ -8,14 +8,13 @@
  */
 class FrontendApp extends ECBaseApp
 {
-    var $area, $area_name, $area_id;
+    var $area, $area_name;
     function __construct()
     {
         $this->FrontendApp();
         $this->area = ecm_getcookie('area');
         $this->area_name = ecm_getcookie('area_name');
-        $this->area_id = ecm_getcookie('area_id');
-        $this->assign(array('area' => $this->area, 'area_name' => $this->area_name, 'area_id'=>$this->area_id));
+        $this->assign(array('area' => $this->area, 'area_name' => $this->area_name));
     }
     function FrontendApp()
     {
@@ -51,7 +50,7 @@ class FrontendApp extends ECBaseApp
     function display($tpl)
     {
         $cart =& m('cart');
-        $this->assign('cart_goods_kinds', $cart->get_kinds(SESS_ID, $this->visitor->get('user_id'), $this->area_id));
+        $this->assign('cart_goods_kinds', $cart->get_kinds(SESS_ID, $this->visitor->get('user_id'), $this->area));
         /* 新消息 */
         $this->assign('new_message', isset($this->visitor) ? $this->_get_new_message() : '');
         $this->assign('navs', $this->_get_navs());  // 自定义导航
@@ -193,7 +192,7 @@ class FrontendApp extends ECBaseApp
 
         /* 跳转到登录页，执行同步退出操作 */
 
-        header("Location: /".url('app=member&act=login&synlogout=1'));
+        header("Location: ".url('app=member&act=login&synlogout=1'));
         return;
     }
 
@@ -283,7 +282,6 @@ class FrontendApp extends ECBaseApp
         $parent = $region_mod->get($area['parent_id']);
         $store_mod =& m('store');
         $store_info = $store_mod->get("FIND_IN_SET(".$area['region_id'].", seller_area)");
-        ecm_setcookie('area_id',$store_info['store_id'] , time() + $expire);
         ecm_setcookie('area', $area['region_id'], time() + $expire);
         ecm_setcookie('area_name', $parent['region_name'] . "." . $area['region_name'], time() + $expire);
         return true;

@@ -85,7 +85,9 @@ $(function(){
                 <div class="row text-center">
                     <input type="hidden" name="ret_url" value="{$ret_url}" />
                     <input class="btn btn-default" type="submit" name="" value="提交">
-                    <input class="btn btn-default" type="reset" name="" value="重置"></div>
+                    <input class="btn btn-default" type="reset" name="" value="重置">
+                    <a href="{url app=member&act=register&ret_url=$ret_url}" class="login_btn btn btn-default"
+                       title="{$lang.register_now}">注册</a></div>
             </form>
         </div>
         <div class="row col-xs-5 help-block">
@@ -97,8 +99,7 @@ $(function(){
                     <li>⊙{$lang.collect_goods}</li>
                     <li>⊙{$lang.subscription_goods}</li>
                 </ul>
-                <a href="{url app=member&act=register&ret_url=$ret_url}" class="login_btn"
-                   title="{$lang.register_now}">注册</a>
+
             </div>
         </div>
     </div>

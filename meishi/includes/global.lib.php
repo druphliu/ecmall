@@ -497,7 +497,7 @@ function url($query, $rewrite_name = null)
         $url = ($rewrite !== false) ? $rewrite : 'index.php?' . $query;
     }
 
-    return str_replace('&', '&amp;', $url);
+    return $url;
 }
 
 /**

@@ -4,7 +4,9 @@
     <div class="row cart">
         <div class="row">
             <h3>欢迎
-                <!--{if $user_info['real_name']}-->{$user_info.real_name}<!--{else}-->{$user_info.user_name}<!--{/if}-->先生！
+                <!--{if $user_info['real_name']}-->{$user_info.real_name}<!--{else}-->{$user_info.user_name}<!--{/if}-->
+                <!--{if !$visitor.user_id}--><a href="{url app=login}" style="color: #fff660">[登录]</a><!--{/if}-->
+                先生！
                 <small><a href="{url app=list}">[继续选购]</a></small>
             </h3>
         </div>
@@ -25,7 +27,7 @@
                             <!--{foreach from=$carts item=cart key=store_id}-->
                                 <!--{foreach from=$cart.goods item=goods}-->
                                 <tr id="cart_item_{$goods.rec_id}"
-                                    class="<!--{if $store_id!=$area_id}-->seller_area_error<!--{/if}-->">
+                                    class="<!--{if $store_id!=$area}-->seller_area_error<!--{/if}-->">
                                     <td><a href="{url app=goods&id=$goods.goods_id}" target="_blank">{$goods.goods_name|escape}</a></td>
                                     <td class="padding1">
                                         <span class="attr">{$goods.specification|escape}</span>
@@ -103,7 +105,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <input name="submit" type="submit" value="订单生成">
+                    <div class="col-md-9"></div>
+                    <div class="col-md-3 text-left"><input name="submit" type="submit" class="btn" value="订单生成"></div>
                 </div>
             </form>
         </div>

@@ -64,6 +64,7 @@ class SearchApp extends MallbaseApp
         $this->assign('page_info', $page);
         $this->assign('param', $param);
         /* 商品列表 */
+        $goods_image_mod = m('goodsimage');
         $sgrade_mod =& m('sgrade');
         $sgrades    = $sgrade_mod->get_options();
         $conditions = $this->_get_goods_conditions($param);
@@ -78,6 +79,8 @@ class SearchApp extends MallbaseApp
             $step = intval(Conf::get('upgrade_required'));
             $step < 1 && $step = 5;
             $store_mod =& m('store');
+            $goods_list[$key]['images'] = $goods_image_mod->find(array(
+                'conditions'  =>'goods_id='.$goods['goods_id']));
             $goods_list[$key]['credit_image'] = $this->_view->res_base . '/images/' . $store_mod->compute_credit($goods['credit_value'], $step);
             empty($goods['default_image']) && $goods_list[$key]['default_image'] = Conf::get('default_goods_image');
             $goods_list[$key]['grade_name'] = $sgrades[$goods['sgrade']];
@@ -533,7 +536,7 @@ class SearchApp extends MallbaseApp
         {
             $conditions .= " AND g.brand = '" . $param['brand'] . "'";
         }
-        $conditions .= " AND s.region_id = '" .$this->area  . "'";
+        $conditions .= " AND FIND_IN_SET('" .$this->area  . "',s.seller_area)";
         if (isset($param['price']))
         {
             $min = $param['price']['min'];

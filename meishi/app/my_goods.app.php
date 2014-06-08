@@ -1,7 +1,7 @@
 <?php
 
 define('THUMB_WIDTH', 300);
-define('THUMB_HEIGHT', 300);
+define('THUMB_HEIGHT', 0);
 define('THUMB_QUALITY', 85);
 
 /* 品牌申请状态 */
