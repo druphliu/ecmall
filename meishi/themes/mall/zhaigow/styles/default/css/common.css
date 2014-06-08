@@ -563,6 +563,17 @@ header .dropdown-menu .wechat_text {
     padding-right: 0px;
     margin-right: 0px;
 }
+.goods_info .handle ul{
+    margin-top: 5px;
+}
+.goods_info .big_pic{
+    height: 250px;
+    width: 250px;
+    line-height:250px
+}
+.goods_info .ware_box{
+    margin-top: 5px;
+}
 .btn1 ,.btn2{
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
     height: 32px;
