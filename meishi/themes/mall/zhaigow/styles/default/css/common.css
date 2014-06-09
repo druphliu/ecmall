@@ -524,16 +524,36 @@ header .dropdown-menu .wechat_text {
 .goods_info li{
     cursor: pointer;
 }
+.t_l, .t_c, .t_r, .m_l, .m_r, .b_l, .b_c, .b_r {
+    background: none repeat scroll 0 0 #7F7F7F;
+    opacity: 0.16;
+    overflow: hidden;
+}
+.t_l, .t_r, .b_l, .b_r {
+    height: 8px;
+    width: 8px;
+}
+.t_c, .b_c {
+    height: 13px;
+}
+.m_l, .m_r {
+    width: 15px;
+}
+#fwin_content{
+    background: none repeat scroll 0 0 #FFFFFF;
+    text-align:center;
+}
 .ware_cen{
     position:absolute;
     top: -200px;
+    left: -75px;
     border: 2px solid #EAEAEA;
-    background-color: #ffffff;
     /*opacity: 0.7;-moz-opacity: 0.7;filter:alpha(opacity=70);*/
 }
 .ware_center{
     margin: 0 10px;
     background-color: #ffffff !important;
+    width: 250px;
 }
 .goods_info .button{
     margin-left: 25px;

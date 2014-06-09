@@ -129,22 +129,45 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="ware_cen" style="display: none">
-                <div class="ware_center">
-                    <h1>
-                        <span class="dialog_title">{$lang.add_to_cart_ok}</span>
-                        <span class="close_link" title="{$lang.close}" onmouseover="this.className = 'close_hover'" onmouseout="this.className = 'close_link'" onclick="slideUp_fn();"></span>
-                    </h1>
-                    <div class="ware_cen_btn">
-                        <p class="ware_text_p">{$lang.cart_status}</p>
-                        <p class="ware_text_btn">
-                            <input type="submit" class="btn1 btn" name="" value="{$lang.view_cart}" onclick="location.href='{url app=cart}'" />
-                            <input type="submit" class="btn2 btn" name="" value="{$lang.continue_buy}" onclick="$('.ware_cen').css({'display':'none'});" />
-                        </p>
-                    </div>
-                </div>
-                <div class="ware_cen_bottom"></div>
-            </div>
+            <table cellspacing="0" cellpadding="0" class="fwin ware_cen" style="display: none">
+                <tbody>
+                <tr>
+                    <td class="t_l"></td>
+                    <td class="t_c"></td>
+                    <td class="t_r"></td>
+                </tr>
+                <tr>
+                    <td class="m_l" >&nbsp;&nbsp;</td>
+                    <td id="fwin_content" class="m_c" style="" fwin="login">
+                        <div class="ware_center">
+                            <h1>
+                                <span class="dialog_title">{$lang.add_to_cart_ok}</span>
+                                <span class="close_link" title="{$lang.close}"
+                                      onmouseover="this.className = 'close_hover'"
+                                      onmouseout="this.className = 'close_link'" onclick="slideUp_fn();"></span>
+                            </h1>
+
+                            <div class="ware_cen_btn">
+                                <p class="ware_text_p">{$lang.cart_status}</p>
+
+                                <p class="ware_text_btn">
+                                    <input type="submit" class="btn1 btn" name="" value="{$lang.view_cart}"
+                                           onclick="location.href='{url app=cart}'"/>
+                                    <input type="submit" class="btn2 btn" name="" value="{$lang.continue_buy}"
+                                           onclick="$('.ware_cen').css({'display':'none'});"/>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="m_r"></td>
+                </tr>
+                <tr>
+                    <td class="b_l"></td>
+                    <td class="b_c"></td>
+                    <td class="b_r"></td>
+                </tr>
+                </tbody>
+            </table>
             <input type="hidden" class="text width1" name="" id="quantity" value="1" />
             <input class="button button-rounded button-caution" type="submit" onclick="buy('add');" value="加入购物车">
             <input class="button button-rounded button-caution" type="submit" value="直接购买" onclick="buy('direct')">
