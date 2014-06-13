@@ -40,7 +40,8 @@ class RecommendModel extends BaseModel
     {
         $goods_list = array();
 
-        $conditions = "g.if_show = 1 AND g.closed = 0 AND s.state = 1 AND FIND_IN_SET('".ecm_getcookie('area')."',s.seller_area) ";
+//        $conditions = "g.if_show = 1 AND g.closed = 0 AND s.state = 1 AND FIND_IN_SET('".ecm_getcookie('area')."',s.seller_area) ";
+        $conditions = "g.if_show = 1 AND g.closed = 0 AND s.state = 1 AND g.store_id=".ecm_getcookie('area_id').' ';
         if ($recom_id == REC_NEW)
         {
             /* 最新商品 */
