@@ -71,6 +71,9 @@ class GcategoryModel extends BaseModel
             'order' => 'sort_order, cate_id',
         ));
     }
+    function get_parent($cate_id){
+        return $this->get_info($cate_id);
+    }
     function get_options($parent_id = -1, $shown = false)
     {
         $options = array();

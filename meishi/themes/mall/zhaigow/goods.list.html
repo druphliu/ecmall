@@ -31,7 +31,7 @@
     <!--{/if}-->
     <ul>
         <!--{foreach from=$v item=category }-->
-        <li <!--{if $param.category==$category.cate_id}-->class="active"<!--{/if}-->>
+        <li <!--{if $param.cate_id==$category.cate_id}-->class="active"<!--{/if}-->>
         <a href="{url app=search&cate_id=$category.cate_id}">{$category.cate_name}</a>
         </li>
         <!--{/foreach}-->
@@ -44,18 +44,18 @@
         <div class="nav-select-title">
             <span style="padding-right: 10px">排行</span>
             <span class="nav-select-title-left <!--{if $param.order=='sales_desc'}-->active<!--{/if}-->">
-                <a href="{url app=list&order=sales_desc}">{$lang.sales_desc}</a>
+                <a href="{url app=search&order=sales_desc&cate_id=$cate_id}">{$lang.sales_desc}</a>
             </span>
             <span class="nav-select-title-right <!--{if $param.order=='add_time_desc'}-->active<!--{/if}-->">
-                <a href="{url app=list&order=add_time_desc}">{$lang.add_time_desc}</a>
+                <a href="{url app=search&order=add_time_desc&cate_id=$cate_id}">{$lang.add_time_desc}</a>
             </span>
         </div>
         <div class="nav-select-list">
             <!--{if $brands}-->
             <span <!--{if !$param.brand}-->class="active"<!--{/if}-->><a href="#">全部</a></span>
             <!--{foreach from=$brands item=row name=fe_brand}-->
-            <span <!--{if $param.brand ==$row.brand}-->class="active"<!--{/if}-->><a
-                href="{url app=$app&brand=$row.brand}" >{$row.brand|escape}</a></span>
+            <span <!--{if $param.brand ==$row.brand_name}-->class="active"<!--{/if}-->><a
+                href="{url app=$app&brand=$row.brand_name&cate_id=$cate_id}" >{$row.brand_name|escape}</a></span>
             <!--{/foreach}-->
             <!--{/if}-->
         </div>

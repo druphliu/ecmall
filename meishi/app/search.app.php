@@ -28,35 +28,23 @@ class SearchApp extends MallbaseApp
             return;
         }
 
-        /* 筛选条件 */
-        $this->assign('filters', $this->_get_filter($param));
 
         /* 按分类、品牌、地区、价格区间统计商品数量 */
         $stats = $this->_get_group_by_info($param, ENABLE_SEARCH_CACHE);
-        $categories = $this->_list_gcategory($param['cate_id']);
-        $all_category = array_merge(array(array('cate_id'=>0,'cate_name'=>'全部')),$categories);
+        $categories = $this->_list_gcategory($param['cate_id'],$param['layer']);
+        $cate_id = $param['cate_id'];
+
+        $all_category = array_merge(array(array('cate_id'=>$param['layer']>1?$categories[$param['cate_id']]['parent_id']:$param['cate_id'],'cate_name'=>'全部')),$categories);
         $count = count($all_category);
         for($i=0;$i<ceil($count/9);$i++){
             $category_arr[] = array_slice($all_category,$i*9, 9);
         }
         $this->assign('category_arr', $category_arr);
 
-        $this->assign('categories', $stats['by_category']);
-        $this->assign('category_count', count($stats['by_category']));
-
-        $this->assign('brands', $stats['by_brand']);
-        $this->assign('brand_count', count($stats['by_brand']));
-
-        $this->assign('price_intervals', $stats['by_price']);
+        $brands = $this->_get_brands($param);
+        $this->assign('brands', $brands);
 
         $this->assign('app', APP);
-        $this->assign('regions', $stats['by_region']);
-        $this->assign('region_count', count($stats['by_region']));
-
-        /* 排序 */
-        $orders = $this->_get_orders();
-        $this->assign('orders', $orders);
-
         /* 分页信息 */
         $page = $this->_get_page(NUM_PER_PAGE);
         $page['item_count'] = $stats['total_count'];
@@ -87,12 +75,6 @@ class SearchApp extends MallbaseApp
         }
         $this->assign('goods_list', $goods_list);
 
-        /* 商品展示方式 */
-        $display_mode = ecm_getcookie('goodsDisplayMode');
-        if (empty($display_mode) || !in_array($display_mode, array('list', 'squares')))
-        {
-            $display_mode = 'squares'; // 默认格子方式
-        }
         $this->import_resource(array(
             'script' => array(
                 array(
@@ -105,114 +87,11 @@ class SearchApp extends MallbaseApp
                 )
             )
         ));
-        $this->assign('display_mode', $display_mode);
-
-        /* 取得导航 */
-        $this->assign('navs', $this->_get_navs());
-
-        /* 当前位置 */
-        $cate_id = isset($param['cate_id']) ? $param['cate_id'] : 0;
-        $this->_curlocal($this->_get_goods_curlocal($cate_id));
+        $this->assign('cate_id',$cate_id);
 
         /* 配置seo信息 */
         $this->_config_seo($this->_get_seo_info('goods', $cate_id));
         $this->display('goods.list.html');
-    }
-
-    /* 搜索店铺 */
-    function store()
-    {
-        /* 取得导航 */
-        $this->assign('navs', $this->_get_navs());
-
-        /* 取得该分类及子分类cate_id */
-        $cate_id = empty($_GET['cate_id']) ? 0 : intval($_GET['cate_id']);
-        $cate_ids=array();
-        $condition_id='';
-        if ($cate_id > 0)
-        {
-            $scategory_mod =& m('scategory');
-            $cate_ids = $scategory_mod->get_descendant($cate_id);
-        }
-
-        /* 店铺分类检索条件 */
-        $condition_id=implode(',',$cate_ids);
-        $condition_id && $condition_id = ' AND cate_id IN(' . $condition_id . ')';
-
-        /* 其他检索条件 */
-        $conditions = $this->_get_query_conditions(array(
-            array( //店铺名称
-                'field' => 'store_name',
-                'equal' => 'LIKE',
-                'assoc' => 'AND',
-                'name'  => 'keyword',
-                'type'  => 'string',
-            ),
-            array( //地区名称
-                'field' => 'region_name',
-                'equal' => 'LIKE',
-                'assoc' => 'AND',
-                'name'  => 'region_name',
-                'type'  => 'string',
-            ),
-            array( //地区id
-                'field' => 'region_id',
-                'equal' => '=',
-                'assoc' => 'AND',
-                'name'  => 'region_id',
-                'type'  => 'string',
-            ),
-            array( //商家用户名
-                'field' => 'user_name',
-                'equal' => 'LIKE',
-                'assoc' => 'AND',
-                'name'  => 'user_name',
-                'type'  => 'string',
-            ),
-        ));
-
-        $model_store =& m('store');
-        $regions = $model_store->list_regions();
-        $page   =   $this->_get_page(10);   //获取分页信息
-        $stores = $model_store->find(array(
-            'conditions'  => 'state = ' . STORE_OPEN . $condition_id . $conditions,
-            'limit'   =>$page['limit'],
-            'order'   => empty($_GET['order']) || !in_array($_GET['order'], array('credit_value desc')) ? 'sort_order' : $_GET['order'],
-            'join'    => 'belongs_to_user,has_scategory',
-
-            'count'   => true   //允许统计
-        ));
-
-        $model_goods = &m('goods');
-
-        foreach ($stores as $key => $store)
-        {
-            //店铺logo
-            empty($store['store_logo']) && $stores[$key]['store_logo'] = Conf::get('default_store_logo');
-
-            //商品数量
-            $stores[$key]['goods_count'] = $model_goods->get_count_of_store($store['store_id']);
-
-            //等级图片
-            $step = intval(Conf::get('upgrade_required'));
-            $step < 1 && $step = 5;
-            $stores[$key]['credit_image'] = $this->_view->res_base . '/images/' . $model_store->compute_credit($store['credit_value'], $step);
-
-        }
-        $page['item_count']=$model_store->getCount();   //获取统计数据
-        $this->_format_page($page);
-
-        /* 当前位置 */
-        $this->_curlocal($this->_get_store_curlocal($cate_id));
-        $scategorys = $this->_list_scategory();
-        $this->assign('stores', $stores);
-        $this->assign('regions', $regions);
-        $this->assign('cate_id', $cate_id);
-        $this->assign('scategorys', $scategorys);
-        $this->assign('page_info', $page);
-        /* 配置seo信息 */
-        $this->_config_seo($this->_get_seo_info('store', $cate_id));
-        $this->display('search.store.html');
     }
 
     function groupbuy()
@@ -348,51 +227,16 @@ class SearchApp extends MallbaseApp
         $tree->setTree($scategories, 'cate_id', 'parent_id', 'cate_name');
         return $tree->getArrayList(0);
     }
-    function _list_gcategory($cate_id){
+    function _list_gcategory($cate_id,$layer=0){
         $gcategory_mod =& m('gcategory');
+        if($layer>1){
+            $category = $gcategory_mod->get_parent($cate_id);
+            $cate_id = $category['parent_id'];
+        }
         $scategories = $gcategory_mod->get_list($cate_id);
         return $scategories;
     }
-    function _get_goods_curlocal($cate_id)
-    {
-        $parents = array();
-        if ($cate_id)
-        {
-            $gcategory_mod =& bm('gcategory');
-            $parents = $gcategory_mod->get_ancestor($cate_id, true);
-        }
 
-        $curlocal = array(
-            array('text' => LANG::get('all_categories'), 'url' => "javascript:dropParam('cate_id')"),
-        );
-        foreach ($parents as $category)
-        {
-            $curlocal[] = array('text' => $category['cate_name'], 'url' => "javascript:replaceParam('cate_id', '" . $category['cate_id'] . "')");
-        }
-        unset($curlocal[count($curlocal) - 1]['url']);
-
-        return $curlocal;
-    }
-
-    function _get_store_curlocal($cate_id)
-    {
-        $parents = array();
-        if ($cate_id)
-        {
-            $scategory_mod =& m('scategory');
-            $scategory_mod->get_parents($parents, $cate_id);
-        }
-
-        $curlocal = array(
-            array('text' => LANG::get('all_categories'), 'url' => url('app=category&act=store')),
-        );
-        foreach ($parents as $category)
-        {
-            $curlocal[] = array('text' => $category['cate_name'], 'url' => url('app=search&act=store&cate_id=' . $category['cate_id']));
-        }
-        unset($curlocal[count($curlocal) - 1]['url']);
-        return $curlocal;
-    }
 
     /**
      * 取得查询参数（有值才返回）
@@ -429,7 +273,7 @@ class SearchApp extends MallbaseApp
             {
                 $res['cate_id'] = $cate_id = intval($_GET['cate_id']);
                 $gcategory_mod  =& bm('gcategory');
-                $res['layer']   = $gcategory_mod->get_layer($cate_id, true);
+                $res['layer']   = $gcategory_mod->get_layer($cate_id, true);//获取分类层级
             }
 
             // brand
@@ -438,13 +282,11 @@ class SearchApp extends MallbaseApp
                 $brand = trim($_GET['brand']);
                 $res['brand'] = $brand;
             }
-
-            // region_id
-            if (isset($_GET['region_id']) && intval($_GET['region_id']) > 0)
-            {
-                $res['region_id'] = intval($_GET['region_id']);
+            //order
+            if(isset($_GET['order'])){
+                $order = trim($_GET['order']);
+                $res['order'] = $order;
             }
-
             // price
             if (isset($_GET['price']))
             {
@@ -751,19 +593,6 @@ class SearchApp extends MallbaseApp
         return ' AND (' . $conditions . ')';
     }
 
-    /* 商品排序方式 */
-    function _get_orders()
-    {
-        return array(
-            ''                  => Lang::get('select_pls'),
-            'sales desc'        => Lang::get('sales_desc'),
-            'credit_value desc' => Lang::get('credit_value_desc'),
-            'price asc'         => Lang::get('price_asc'),
-            'price desc'        => Lang::get('price_desc'),
-            'views desc'        => Lang::get('views_desc'),
-            'add_time desc'     => Lang::get('add_time_desc'),
-        );
-    }
 
     function _get_seo_info($type, $cate_id)
     {
@@ -810,6 +639,11 @@ class SearchApp extends MallbaseApp
         $seo_info['keywords'] .= Conf::get('site_title');
         $seo_info['description'] .= Conf::get('site_title');
         return $seo_info;
+    }
+    private function _get_brands($param){
+        $brand_model = m('brand');
+        $brands = $brand_model->find(array('store_id'=>$this->area_id));
+        return $brands;
     }
 }
 
