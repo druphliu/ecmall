@@ -285,7 +285,7 @@ class FrontendApp extends ECBaseApp
         $store_info = $store_mod->get("FIND_IN_SET(".$area['region_id'].", seller_area)");
         ecm_setcookie('area', $area['region_id'], time() + $expire);
         ecm_setcookie('area_name', $parent['region_name'] . "." . $area['region_name'], time() + $expire);
-        ecm_setcookie('area_id',$store_info['store_id']);
+        ecm_setcookie('area_id',$store_info['store_id'], time() + $expire);
         return true;
     }
     /**
