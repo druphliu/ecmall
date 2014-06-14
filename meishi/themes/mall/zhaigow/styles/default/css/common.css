@@ -432,7 +432,8 @@ header .dropdown-menu .wechat_text {
 .container .register,
 .container .login,
 .container .cart,
-.container .article{
+.container .article,
+.container .apply{
     background-color: #ffffff;
     margin: 20px auto;
     padding: 20px 30px 60px;
@@ -610,3 +611,48 @@ form span.checking { padding-left:18px; background:transparent url(../images/che
 form span.validate_right { padding-left:12px; background:transparent url(../images/right.gif) no-repeat; margin-left:5px; font-style:italic; color:green; float:none; }
 
 .choice { float:left; width: 8%;}
+
+/***************************************apply*******************************************************/
+.chart {
+    height: 50px;
+    margin-bottom: 20px;
+    position: relative;
+    width: 875px;
+}
+.chart .bg_a2 {
+    background: url("../images/chart.gif") no-repeat scroll 0 -50px rgba(0, 0, 0, 0);
+}
+.chart .pos_x1 {
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 280px;
+}
+.chart .bg_b1 {
+    background: url("../images/chart.gif") no-repeat scroll 0 -100px rgba(0, 0, 0, 0);
+}
+.bg_a1 { background: url(../images/chart.gif) no-repeat 0 0; }
+.chart .pos_x2 {
+    height: 50px;
+    left: 298px;
+    position: absolute;
+    top: 0;
+    width: 280px;
+}
+.chart .bg_c {
+    background: url("../images/chart.gif") no-repeat scroll 0 -200px rgba(0, 0, 0, 0);
+}
+.chart .pos_x3 {
+    height: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 280px;
+}
+.chart .bg_b2 {
+    background: url("../images/chart.gif") no-repeat scroll 0 -150px rgba(0, 0, 0, 0);
+}
+.apply th{
+    width: 135px;
+}

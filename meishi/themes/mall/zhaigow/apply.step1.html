@@ -1,12 +1,7 @@
 {include file=header.html}
-<link href="{res file=css/ecmall.css}" rel="stylesheet" type="text/css" />
-<script src="{res file=js/jquery.js}"></script>
-<script src="{res file=js/nav.js}"></script>
-<script src="{res file=js/select.js}"></script>
-<div class="content">
-    <div class="module_common">
-        <h2><b class="set_up_shop" title="SHOP REGISTRATION{$lang.i_want_open_store}"></b></h2>
-        <div class="wrap">
+<div class="container content">
+    <div class="row apply">
+        <div class="row chart">
             <div class="wrap_child">
 
                 <div class="module_new_shop">
@@ -17,7 +12,7 @@
                         <div class="pos_x3 bg_c" title="{$lang.step_3}"></div>
                     </div>
 
-                    <div class="grade_shop">
+                    <div class="row text-center">
                         <table>
                         <!--{foreach from=$sgrades item=sgrade}-->
                             <tr>
@@ -49,10 +44,11 @@
                                     </table>
                                 </td>
                                 <td class="width6 padding2">{$sgrade.description}</td>
-                                <td><a href="{url app=apply&step=2&id=$sgrade.grade_id}" class="shop_btn">{$lang.soon_open}</a></td>
+                                <td><a href="{url app=apply&step=2&id=$sgrade.grade_id}" class="btn btn-default">{$lang.soon_open}</a></td>
                             </tr>
                         <!--{/foreach}-->
                         </table>
+
                     </div>
 
                 </div>
