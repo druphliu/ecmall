@@ -60,11 +60,11 @@
     </div>
     <div id="ifocus_btn">
         <ul class="list-unstyled">
-            <!-- {foreach from=$widget_data item=image name=fe_image} -->
+            <!-- {foreach from=$widget_data item=image name=fe_image key=i} -->
             <!-- {if $smarty.foreach.fe_image.first} -->
             <li class="current" id="p0" alt="0"><img src="{$image.ad_image_url}" alt="" /></li>
             <!-- {else} -->
-            <li class="" id="p{$smarty.foreach.fe_image.iteration}" alt="{$smarty.foreach.fe_image.iteration}"><img src="{$image.ad_image_url}" alt="" /></li>
+            <li class="" id="p{$i}" alt="{$i}"><img src="{$image.ad_image_url}" alt="" /></li>
             <!-- {/if} -->
             <!-- {/foreach} -->
         </ul>

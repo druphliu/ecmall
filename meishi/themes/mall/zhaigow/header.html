@@ -22,6 +22,8 @@
         var PRICE_FORMAT = '{$price_format}';
         var area = '{$area}';
         var area_name = '{$area_name}';
+        var agent_id = '{$agent_id}';
+        var agent_name = '{$agent_name}';
         var SITE_TITLE = "{$site_title}";
         $(function () {
             $('*[ectype="getarea"]').click(function () {
@@ -32,7 +34,7 @@
                 ajax_form(id, title, url, width);
                 return false;
             });
-            if (area == 0) {
+            if (area == 0 || area_name=='' || agent_id==0 || agent_name=='') {
                 $('*[ectype="getarea"]').click();
             }
             $("#fav").click(function(){AddFavorite(SITE_TITLE, SITE_URL)});

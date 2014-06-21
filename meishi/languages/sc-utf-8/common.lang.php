@@ -41,6 +41,7 @@ return array(
     'apply_store'      => '申请开店',
     'my_category'      => '分类管理',
     'order_manage'      => '订单管理',
+    'wechat_manage'   =>'微信帐号绑定',
     'my_store'      => '代理商信息',
     'my_theme' => '主题设置',
     'my_payment'      => '支付方式管理',

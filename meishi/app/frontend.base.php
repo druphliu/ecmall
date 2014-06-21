@@ -8,14 +8,15 @@
  */
 class FrontendApp extends ECBaseApp
 {
-    var $area, $area_name,$area_id;
+    var $area, $area_name,$agent_id,$agent_name;
     function __construct()
     {
         $this->FrontendApp();
         $this->area = ecm_getcookie('area');
         $this->area_name = ecm_getcookie('area_name');
-        $this->area_id = ecm_getcookie('area_id');
-        $this->assign(array('area' => $this->area, 'area_name' => $this->area_name));
+        $this->agent_id = ecm_getcookie('agent_id');
+        $this->agent_name = ecm_getcookie('agent_name');
+        $this->assign(array('area' => $this->area, 'area_name' => $this->area_name,'agent_id'=>$this->agent_id,'agent_name'=>$this->agent_name));
     }
     function FrontendApp()
     {
@@ -285,7 +286,8 @@ class FrontendApp extends ECBaseApp
         $store_info = $store_mod->get("FIND_IN_SET(".$area['region_id'].", seller_area)");
         ecm_setcookie('area', $area['region_id'], time() + $expire);
         ecm_setcookie('area_name', $parent['region_name'] . "." . $area['region_name'], time() + $expire);
-        ecm_setcookie('area_id',$store_info['store_id'], time() + $expire);
+        ecm_setcookie('agent_id',$store_info['store_id'], time() + $expire);
+        ecm_setcookie('agent_name',$store_info['store_name'],time()+$expire);
         return true;
     }
     /**
@@ -687,7 +689,7 @@ class MemberbaseApp extends MallbaseApp
         if (!$this->visitor->get('has_store') && Conf::get('store_allow'))
         {
             /* 没有拥有店铺，且开放申请，则显示申请开店链接 */
-            /*$menu['im_seller'] = array(
+            $menu['im_seller'] = array(
                 'name'  => 'im_seller',
                 'text'  => Lang::get('im_seller'),
                 'submenu'   => array(),
@@ -697,7 +699,7 @@ class MemberbaseApp extends MallbaseApp
                 'text'  => Lang::get('apply_store'),
                 'url'   => 'index.php?app=apply',
                 'name'  => 'apply_store',
-            );*/
+            );
 //            $menu['overview'] = array(
 //                'text' => Lang::get('apply_store'),
 //                'url'  => 'index.php?app=apply',
@@ -747,6 +749,12 @@ class MemberbaseApp extends MallbaseApp
                     'url'   => url('app=my_store'),
                     'name'  => 'my_store',
                     'icon'  => 'ico11',
+            );
+            $menu['im_seller']['submenu']['wechat_manage']  = array(
+                'text'  => Lang::get('wechat_manage'),
+                'url'   => url('app=wehcat'),
+                'name'  => 'wechat_manage',
+                'icon'  => 'ico13',
             );
 //            $menu['im_seller']['submenu']['my_theme']  = array(
 //                    'text'  => Lang::get('my_theme'),

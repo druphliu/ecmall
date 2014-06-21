@@ -642,7 +642,7 @@ class SearchApp extends MallbaseApp
     }
     private function _get_brands($param){
         $brand_model = m('brand');
-        $brands = $brand_model->find(array('store_id'=>$this->area_id));
+        $brands = $brand_model->find(array('store_id'=>$this->agent_id));
         return $brands;
     }
 }
