@@ -10,8 +10,12 @@
     <div class="food_desc">
 
     </div>
-    <div class="food_price">{$goods.price|price}/份</div>
-    <div class="text-center"><a href="javascript:void(0)" data-url="{url app=goods&id=$goods.goods_id}" class="btn btn-default add_goods">加入购物车</a> </div>
+    <!--<div class="food_price">{$goods.price|price}/份</div>-->
+    <!--<div class="text-center"><a href="javascript:void(0)" data-url="{url app=goods&id=$goods.goods_id}" class="btn btn-default add_goods">加入购物车</a> </div>-->
+    <div class="food_price">
+        <span style="margin: 5px 10px 0 10px">{$goods.price|price}/份</span>
+        <span><a href="javascript:void(0)" data-url="{url app=goods&id=$goods.goods_id}" class="btn btn-default add_goods">加入购物车</a></span>
+    </div>
 </div>
 <!--{/foreach}-->
 

@@ -86,7 +86,7 @@ a:focus,
     background-color: #ffffff;
     float: left;
     margin-right: 10px;
-    height: 365px;
+    height: 310px;
     margin-bottom: 10px;
 }
 .hot_list_food .grid .btn{
@@ -116,6 +116,7 @@ a:focus,
 .hot_list_food .food_title{
     color: #FF8432;
     font-size: 18px;
+    text-align: center;
 }
 .hot_list_food .food_desc{
     font-size: 10px;
@@ -125,6 +126,12 @@ a:focus,
     color: #F22E00;
     font-size: 18px;
     font-weight: 700;
+    text-align: center;
+}
+.hot_list_food .food_price span{
+    display: block;
+    float: left;
+    line-height: 50px;
 }
 /*-------------------------------------------list----------------------------------------------------*/
 .buy_button{
@@ -140,6 +147,14 @@ a:focus,
     padding: 0 15px;
     float: right;
     margin-right: 5px;
+}
+#foods_list .list_foods_title{
+    color: #DF5A01;
+    font-size: 18px;
+}
+#foods_list .foods_price{
+    font-weight: 700;
+    font-size: 16px;
 }
 #foods_list .food_desc{
     margin-top: 5px;
@@ -524,6 +539,7 @@ header .dropdown-menu .wechat_text {
 }
 .goods_info li{
     cursor: pointer;
+    line-height: 25px;
 }
 .t_l, .t_c, .t_r, .m_l, .m_r, .b_l, .b_c, .b_r {
     background: none repeat scroll 0 0 #7F7F7F;
@@ -586,6 +602,7 @@ header .dropdown-menu .wechat_text {
 }
 .goods_info .handle ul{
     margin-top: 5px;
+    line-height: 50px;
 }
 .goods_info .big_pic{
     height: 250px;

@@ -71,8 +71,11 @@
                 <!--{/if}-->
             <!--{/foreach}-->
         </div>
+        <div class="text-center">
+            <span class="text-center list_foods_title">{$goods.goods_name}</span>
+        </div>
         <div class="food_desc" data-url="{url app=goods&id=$goods.goods_id}">
-            <span>{$goods.price|price}/份</span>
+            <span class="foods_price">{$goods.price|price}/份</span>
             <!--<span>{$goods.goods_name|escape}</span>-->
             <span><a href="#" class="buy_button">开始订餐</a> </span>
         </div>

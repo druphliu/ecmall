@@ -5,8 +5,9 @@
         <div class="row">
             <h3>欢迎
                 <!--{if $user_info['real_name']}-->{$user_info.real_name}<!--{else}-->{$user_info.user_name}<!--{/if}-->
-                <!--{if !$visitor.user_id}--><a href="{url app=login}" style="color: #fff660">[登录]</a><!--{/if}-->
+
                 先生！
+                <!--{if !$visitor.user_id}--><small><a href="{url app=login}" style="color: #FF7011">[登录]</a></small><!--{/if}-->
                 <small><a href="{url app=list}">[继续选购]</a></small>
             </h3>
         </div>
@@ -40,7 +41,7 @@
                                     </td>
                                     <td class="align1"><span class="price2" id="item{$goods.rec_id}_subtotal">{$goods.subtotal|price}</span></td>
                                     <td class="align2">
-                                        <a class="move" href="javascript:;" onclick="move_favorite({$store_id}, {$goods.rec_id}, {$goods.goods_id});">{$lang.move_favorite}</a>
+                                        <a class="move" href="javascript:;" onclick="move_favorite({$store_id}, {$goods.rec_id}, {$goods.goods_id});">{$lang.move_favorite}</a>|
                                         <a class="del" href="javascript:;" onclick="drop_cart_item({$store_id}, {$goods.rec_id});">{$lang.drop}</a>
                                     </td>
                                 </tr>
@@ -106,7 +107,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-9"></div>
-                    <div class="col-md-3 text-left"><input name="submit" type="submit" class="btn" value="订单生成"></div>
+                    <div class="col-md-3 text-left"><input name="submit" type="submit" style="background-color: #ff7011;color:#ffffff" class="btn" value="订单生成"></div>
                 </div>
             </form>
         </div>
