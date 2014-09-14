@@ -1,4 +1,18 @@
 {include file=wap/header.html}
+<div class="header lineb bcf" id="header">
+
+    <a class="l bce p10" href="javascript:history.go(-1)"><span class="black mr5 tovh dib">&lt;</span>返回</a>
+
+	    <span class="r p10">
+
+            <strong class="l g3 liner pr10 wp110 ell tr">我的订单</strong>
+
+		    <a class="l user ml10 mr10 tovh" href="{url app=wap&act=ucenter}">用户中心</a>
+
+		    <a class="l index ml10 tovh" href="{url app=wap}">首页</a>
+
+	    </span>
+</div>
 <div id="content">
 
 	<div class="wrap">
@@ -54,32 +68,4 @@
 	</div>
 
 </div>
-
-    
-    <div class="bcf linet footer">
-        <div class="f_a ovh">
-            <a href="/ajaxPost/VersionNavi/?target=mainweb">电脑版</a>
-            <a href="/about/contactus/">联系我们</a>
-            <a href="/about/suggestion/">意见建议</a>
-        </div>
-    </div>
-    
-    <script type="text/javascript" src="http://s1.95171.cn/b/m/min/jqm.v820160922.js"  charset="utf-8"></script>
-    <script type="text/javascript" src="http://s1.95171.cn/b/m/min/nm.v724164956.js"  charset="utf-8"></script>
-
-    
-
-    <script>
-        changewidth();
-	</script>
-    
-    <!--页面js脚本区域-->
-    <script>
-        // 选择下拉刷新
-        $("#memOrderSel").bind("change", function () {
-            location.replace(this.value);
-        });
-    </script>
-
-</body>
-</html>
+{include file=wap/footer.html}
