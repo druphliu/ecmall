@@ -7,6 +7,7 @@ return array(
     'header'        => '头部',
     'middle'        => '中部',
     'footer'        => '底部',
+    'wap'=>'手机',
     'no_such_navigation'        => '没有该页面导航',
     'edit_navigation_successed' => '编辑页面导航成功。',
     'drop_navigation_successed' => '删除页面导航成功。',

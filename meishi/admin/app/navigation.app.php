@@ -58,6 +58,7 @@ class NavigationApp extends BackendApp
             'header' => Lang::get('header'),
             'middle' => Lang::get('middle'),
             'footer' => Lang::get('footer'),
+            'wap'=>Lang::get('wap'),
         );
         foreach ($navigations as $key => $navigation){
             $navigations[$key]['open_new'] = $open_new[$navigation['open_new']];
@@ -284,6 +285,7 @@ class NavigationApp extends BackendApp
             'header' => Lang::get('header'),
             'middle' => Lang::get('middle'),
             'footer' => Lang::get('footer'),
+            'wap'=>Lang::get('wap'),
         );
         $open_new = array(
            '0' => Lang::get('no'),
