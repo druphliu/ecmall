@@ -63,7 +63,12 @@ class FrontendApp extends ECBaseApp
         $current_url = explode('/', $_SERVER['REQUEST_URI']);
         $count = count($current_url);
         $this->assign('current_url',  $count > 1 ? $current_url[$count-1] : $_SERVER['REQUEST_URI']);// 用于设置导航状态(以后可能会有问题)
-        parent::display($tpl);
+        if(checkmobile()){
+            parent::display('wap/'.$tpl);
+        }else{
+            parent::display($tpl);
+        }
+
     }
     function login()
     {

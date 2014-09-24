@@ -16,6 +16,9 @@ class AreaApp extends MallbaseApp
         $region_list = $tree->getArrayList();
         $areas = $this->_getList($region_list,1);
         $this->assign('areas', $areas);
+        //wap
+        $this->assign('wapArea', $region_list);
+        $this->assign('hot_area',array(13=>'四川大学.成华校区',14=>'四川大学.温江校区'));
         $this->display('area.html');
     }
 
@@ -46,6 +49,12 @@ class AreaApp extends MallbaseApp
             $retval = "-1";
             $mesg = 'error';
         }
-        $this->json_error($mesg, $retval);
+        if(checkmobile()){
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: /');
+        }else{
+            $this->json_error($mesg, $retval);
+        }
+
     }
 }
