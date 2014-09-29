@@ -66,7 +66,7 @@ class FrontendApp extends ECBaseApp
         if(checkmobile()){
             parent::display('wap/'.$tpl);
         }else{
-            parent::display($tpl);
+            parent::display('wap/'.$tpl);
         }
 
     }

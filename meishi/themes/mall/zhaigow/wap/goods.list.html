@@ -63,7 +63,7 @@
     <!-- 列表们 -->
     <!--{foreach from=$goods_list item=goods}-->
     <li>
-        <a href="{url app=wap&act=view&id=$goods.goods_id}">
+        <a href="{url app=goods&id=$goods.goods_id}">
             <img class="l jsLazyImage" width="70" height="70" src="{$goods.default_image}" data-url="{$goods.default_image}" alt="" />
             <span class="r ico_aa mt25">&nbsp;</span>
             <div class="ml70">
@@ -83,10 +83,8 @@
     </li>
     <!--{/foreach}-->
     </ul>
-    
-		<div class="pages">
-            <span class="page_off">首 页</span><span class="page_off">上一页</span><strong class="page_on">1/50</strong><a href="/shop/search-p2/" class="page_able">下一页</a><a href="/shop/search-p50/" class="page_able">尾 页</a>
-		</div>
+        {include file=page.bottom.html}
+
 	</div>
     
 </div>
