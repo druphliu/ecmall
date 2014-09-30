@@ -52,7 +52,11 @@ class FrontendApp extends ECBaseApp
     function display($tpl)
     {
         $cart =& m('cart');
-        $this->assign('cart_goods_kinds', $cart->get_kinds(SESS_ID, $this->visitor->get('user_id'), $this->area));
+        $carts = $this->_get_carts($this->agent_id);
+        $goods = current($carts);
+        $this->assign('amount',$goods['amount']?$goods['amount']:0);
+        $this->assign('quantity',$goods['quantity']?$goods['quantity']:0);
+        $this->assign('cart_goods_kinds', $cart->get_kinds(SESS_ID, $this->visitor->get('user_id'), $this->agent_id));
         /* 新消息 */
         $this->assign('new_message', isset($this->visitor) ? $this->_get_new_message() : '');
         $this->assign('navs', $this->_get_navs());  // 自定义导航
@@ -418,6 +422,47 @@ class FrontendApp extends ECBaseApp
     function _init_visitor()
     {
         $this->visitor =& env('visitor', new UserVisitor());
+    }
+    private function _get_carts($store_id = 0)
+    {
+        $carts = array();
+
+        /* 获取所有购物车中的内容 */
+        $where_store_id = ' AND cart.store_id=' . $this->agent_id ;
+
+        /* 只有是自己购物车的项目才能购买 */
+        $where_user_id = $this->visitor->get('user_id') ? " AND cart.user_id=" . $this->visitor->get('user_id') : '';
+        $cart_model =& m('cart');
+        $cart_items = $cart_model->find(array(
+            'conditions'    => 'session_id = \'' . SESS_ID . "'" . $where_store_id . $where_user_id,
+            'fields'        => 'this.*,store.store_name',
+            'join'          => 'belongs_to_store',
+        ));
+        if (empty($cart_items))
+        {
+            return $carts;
+        }
+        $kinds = array();
+        foreach ($cart_items as $item)
+        {
+            /* 小计 */
+            $item['subtotal']   = $item['price'] * $item['quantity'];
+            $kinds[$item['store_id']][$item['goods_id']] = 1;
+
+            /* 以店铺ID为索引 */
+            empty($item['goods_image']) && $item['goods_image'] = Conf::get('default_goods_image');
+            $carts[$item['store_id']]['store_name'] = $item['store_name'];
+            $carts[$item['store_id']]['amount']     += $item['subtotal'];   //各店铺的总金额
+            $carts[$item['store_id']]['quantity']   += $item['quantity'];   //各店铺的总数量
+            $carts[$item['store_id']]['goods'][]    = $item;
+        }
+
+        foreach ($carts as $_store_id => $cart)
+        {
+            $carts[$_store_id]['kinds'] =   count(array_keys($kinds[$_store_id]));  //各店铺的商品种类数
+        }
+
+        return $carts;
     }
 }
 /**

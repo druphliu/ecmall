@@ -33,8 +33,8 @@
         $.getJSON(url, {'spec_id':spec_id, 'quantity':quantity}, function(data){
             if (data.done)
             {
-                
-				$('#tatalDish').html(data.retval.cart.kinds);
+                $("#goOrder").removeClass('order_false').addClass('order_true');
+				$('#tatalDish').html(data.retval.cart.quantity);
 				$('#tatalPrice').html(data.retval.cart.amount);
             }
             else
@@ -155,10 +155,10 @@
 </div>
 <div class="ovh mt20 p10 f">
 
-    <div class="tatalp2 l fs18 pt10"> 共 <span id="tatalDish">{$cart_goods_kinds}</span> 份，￥ <span id="tatalPrice">0</span></div>
+    <div class="tatalp2 l fs18 pt10"> 共 <span id="tatalDish">{$quantity}</span> 份，￥ <span id="tatalPrice">{$amount}</span></div>
     <div class="r pb10">
+        <a id="goOrder" href="{url app=cart}" <!--{if $quantity==0}-->disabled="disabled"<!--{/if}--> class="order_click <!--{if $quantity==0}-->order_false<!--{else}-->order_true<!--{/if}-->" >去买单</a>
 
-        <input type="submit" value="去买单" data-href="{$site_url}/index.php?app=cart" <!--{if $cart_goods_kinds==0}-->disabled="disabled"<!--{/if}--> data-text="去买单" class="order_click order_false" id="menuPrice">
 
     </div>
 

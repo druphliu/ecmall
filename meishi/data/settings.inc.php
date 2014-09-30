@@ -7,7 +7,7 @@ return array (
   'statistics_code' => '',
   'sitemap_enabled' => true,
   'sitemap_frequency' => 1,
-  'rewrite_enabled' => true,
+  'rewrite_enabled' => false,
   'guest_comment' => true,
   'enable_radar' => false,
   'template_name' => 'zhaigow',
