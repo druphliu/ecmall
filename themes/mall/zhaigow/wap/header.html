@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {$page_seo}
+    <link rel="stylesheet" href="{res file=css/wp.css}">
+    <script type="application/javascript" src="{lib file=jquery-1.11.0.min.js}"></script>
+    <script type="application/javascript" src="{res file=bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="index.php?act=jslang"></script>
+    <script type="text/javascript" src="{lib file=ecmall.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="{lib file=dialog/dialog.js}" charset="utf-8" id="dialog_js"></script>
+    <script type="text/javascript" src="{lib file=jquery.ui/jquery-ui-1.10.4.min.js}" CHARSET="utf-8"></script>
+    <script type="text/javascript" src="{lib file=jquery-migrate-1.1.0.min.js}"></script>
+    <!--<script type="text/javascript" src="{res file=js/jqm.v820160922.js}"  charset="utf-8"></script>
+    <script type="text/javascript" src="{res file=js/nm.v724164956.js}"  charset="utf-8"></script>-->
+    {$_head_tags}
+
+    <script type="text/javascript">
+
+        var SITE_URL = "{$site_url}";
+        var REAL_SITE_URL = "{$real_site_url}";
+        var PRICE_FORMAT = '{$price_format}';
+        var area = '{$area}';
+        var area_name = '{$area_name}';
+        var agent_id = '{$agent_id}';
+        var agent_name = '{$agent_name}';
+        var SITE_TITLE = "{$site_title}";
+        var USERAGENT = navigator.userAgent.toLowerCase(), APPVERSION = navigator.appVersion.toLowerCase();
+        var ISSYMBIAN = USERAGENT.indexOf("symbianos") !== -1;
+        var NOFONTFACE = (USERAGENT.indexOf("android") !== -1 && USERAGENT.indexOf("uc") !== -1) ||
+                (USERAGENT.indexOf("windows") !== -1 && /uc\/8/.test(APPVERSION)) ||
+                (USERAGENT.indexOf("msie") !== -1 && USERAGENT.indexOf("iemobile") !== -1) ||
+                ISSYMBIAN || false;
+
+    </script>
+
+
+</head>
+<body>

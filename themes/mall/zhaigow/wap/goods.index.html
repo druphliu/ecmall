@@ -1,0 +1,166 @@
+{include file=wap/header.html}
+<script type="text/javascript" src="{lib file=goodsinfo.js}" charset="utf-8"></script>
+<script type="text/javascript">
+    //<!CDATA[
+    /* buy */
+    function buy()
+    {
+        if (goodsspec.getSpec() == null)
+        {
+            alert(lang.select_specs);
+            return;
+        }
+        var spec_id = goodsspec.getSpec().id;
+
+        var quantity = $("#quantity").val();
+        if (quantity == '')
+        {
+            alert(lang.input_quantity);
+            return;
+        }
+        if (parseInt(quantity) < 1)
+        {
+            alert(lang.invalid_quantity);
+            return;
+        }
+        add_to_cart(spec_id, quantity);
+    }
+
+    /* add cart */
+    function add_to_cart(spec_id, quantity)
+    {
+        var url = SITE_URL + '/index.php?app=cart&act=add';
+        $.getJSON(url, {'spec_id':spec_id, 'quantity':quantity}, function(data){
+            if (data.done)
+            {
+                $("#goOrder").removeClass('order_false').addClass('order_true');
+				$('#tatalDish').html(data.retval.cart.quantity);
+				$('#tatalPrice').html(data.retval.cart.amount);
+            }
+            else
+            {
+                alert(data.msg);
+            }
+        });
+    }
+
+    var specs = new Array();
+    <!--{foreach from=$goods._specs item=spec}-->
+    specs.push(new spec({$spec.spec_id}, '{$spec.spec_1|escape}', '{$spec.spec_2|escape}', {$spec.price}, {$spec.stock}));
+    <!--{/foreach}-->
+    var specQty = {$goods.spec_qty};
+    var defSpec = {$goods.default_spec|escape};
+    var goodsspec = new goodsspec(specs, specQty, defSpec);
+    $(function(){
+        goodsspec.init();
+    })
+    //]]>
+</script>
+<div id="header" class="header lineb bcf">
+
+    <a href="javascript:history.go(-1)" class="l bce p10"><span class="black mr5 tovh dib">&lt;</span>返回</a>
+
+	    <span class="r p10">
+
+            <strong class="l g3 liner pr10 wp110 ell tr">{$goods.goods_name|escape}</strong>
+
+		    <a href="{url app=member}" class="l user ml10 mr10 tovh">用户中心</a>
+
+		    <a href="{url app=index}" class="l index ml10 tovh">首页</a>
+
+	    </span>
+</div>
+
+    <div class="pt10 pl10 pr10 ovh">
+        <strong class="l g3">{$goods.goods_name|escape}</strong>
+        <span class="r line p3 ico_star" id="collect">&nbsp;<input type="hidden" id="collectV" name="collect" value="0" /></span>
+    </div>
+    <div class="ml10 mr10 ovh"  id="right">
+
+        <div class="l line rel p2 bcf">
+                <img width="88" height="88" src="{$goods.default_image|default:$default_image}" alt="" />
+
+        </div>
+        <div class="ml100 g3">
+            <div class="pb10">价格<span class="cr mr10 ml5" ectype="goods_price">{$goods._specs.0.price|price}</span></div>
+            <div class="pb10 h20 ovh handle">
+                <!--{if $goods.spec_qty gt 0}-->
+                <ul class="list-inline">
+                    <li class="handle_title">{$goods.spec_name_1|escape}:</li>
+                </ul>
+                <!--{/if}-->
+                <!--{if $goods.spec_qty gt 1}-->
+                <ul class="list-inline">
+                    <li class="handle_title">{$goods.spec_name_2|escape}:</li>
+                </ul>
+                <!--{/if}-->
+            </div>
+			<input type="hidden" class="text width1" name="" id="quantity" value="1" />
+            <a class="rbtn well"  onclick="buy('add');" href="javascript:void(0)">加入购物车</a>
+            <a class="rbtn well"  onclick="buy('direct')" href="javascript:void(0)">直接购买</a>
+        </div>
+    </div>
+    <!--{if $goods.brand}-->
+    <div class="wrap">
+        <ul class="list">
+            <li>
+                <p>供应商详情</p>
+            </li>
+            <li>
+                {$lang.supply_customer}{$goods.brand|escape}
+            </li>
+            <li>
+                {$lang.supply_customer_address}{$goods.brand_info.brand_desc|escape}
+            </li>
+        </ul>
+    </div>
+    <!--{/if}-->
+    <div class="wrap">
+        <ul class="list">
+            <li>
+                <p>美食描述</p>
+            </li>
+            <li>
+               {$goods.description}
+            </li>
+        </ul>
+    </div>
+    <!--{if $goods._images}-->
+    <div class="wrap">
+        <ul class="list">
+            <li>
+                <p>美食图集</p>
+            </li>
+            <li>
+            <!--{foreach from=$goods._images item=goods_image name=fe_goods_image}-->
+            <A href="{$goods_image.thumbnail}"><img src="{$goods_image.thumbnail}" width="55" height="55" /></A>
+            <!--{/foreach}-->
+            </li>
+        </ul>
+    </div>
+    <!--{/if}-->
+    <div class="wrap">
+        <ul class="list">
+            <li>
+                <span class="l">温馨提示</span>
+            </li>
+            <li>
+                【温馨提示】美食有大、中、小/一两、二两、三两的区分，请根据自己的需要下单。
+            </li>
+        </ul>
+    </div>
+
+
+
+</div>
+<div class="ovh mt20 p10 f">
+
+    <div class="tatalp2 l fs18 pt10"> 共 <span id="tatalDish">{$quantity}</span> 份，￥ <span id="tatalPrice">{$amount}</span></div>
+    <div class="r pb10">
+        <a id="goOrder" href="{url app=cart}" <!--{if $quantity==0}-->disabled="disabled"<!--{/if}--> class="order_click <!--{if $quantity==0}-->order_false<!--{else}-->order_true<!--{/if}-->" >去买单</a>
+
+
+    </div>
+
+</div>
+{include file=wap/footer.html}

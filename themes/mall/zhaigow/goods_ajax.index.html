@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="{res file=bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="{res file=css/common.css}">
+    <link rel="stylesheet" href="{res file=css/buttons.css}">
+    <script type="text/javascript" src="{lib file=goodsinfo.js}" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        //<!CDATA[
+        /* buy */
+        var url = "{url app=cart&act=add}";
+        var cart_url = "{url app=cart}";
+        function buy(type)
+        {
+            if (goodsspec.getSpec() == null)
+            {
+                alert(lang.select_specs);
+                return;
+            }
+            var spec_id = goodsspec.getSpec().id;
+
+            var quantity = $("#quantity").val();
+            if (quantity == '')
+            {
+                alert(lang.input_quantity);
+                return;
+            }
+            if (parseInt(quantity) < 1)
+            {
+                alert(lang.invalid_quantity);
+                return;
+            }
+            add_to_cart(spec_id, quantity, type);
+        }
+
+        /* add cart */
+        function add_to_cart(spec_id, quantity, type)
+        {
+
+            $.getJSON(url, {'spec_id':spec_id, 'quantity':quantity}, function(data){
+                if (data.done)
+                {
+                    if(type =='direct'){
+                        window.location.href = cart_url;
+                    }else{
+                        var count = $("#cart_goods_kinds").html();
+                        $("#cart_goods_kinds").html(parseInt(count)+1);
+                        $('.bold_num').text(data.retval.cart.kinds);
+                        $('.bold_mly').html(price_format(data.retval.cart.amount));
+                        $('.ware_cen').slideDown('slow');
+                        setTimeout(slideUp_fn, 5000);
+                    }
+                }
+                else
+                {
+                    alert(data.msg);
+                }
+            });
+        }
+
+        var specs = new Array();
+        <!--{foreach from=$goods._specs item=spec}-->
+        specs.push(new spec({$spec.spec_id}, '{$spec.spec_1|escape}', '{$spec.spec_2|escape}', {$spec.price}, {$spec.stock}));
+        <!--{/foreach}-->
+        var specQty = {$goods.spec_qty};
+        var defSpec = {$goods.default_spec|escape};
+        var goodsspec = new goodsspec(specs, specQty, defSpec);
+        goodsspec.init();
+        //]]>
+    </script>
+</head>
+<body>
+<div class="goods_info">
+    <div class="row" style="padding-right: 0px; margin: 0px;">
+        <div class="col-md-5">
+            <div class="row text-center big_pic">
+                <img width="250px" src="{$goods._images.0.thumbnail|default:$default_image}">
+            </div>
+            <div class="row text-center ware_box">
+                <!--{foreach from=$goods._images item=goods_image name=fe_goods_image}-->
+                <span {if $smarty.foreach.fe_goods_image.first}class="ware_pic_hover"{/if} bigimg="{$goods_image.image_url}">
+                    <img src="{$goods_image.thumbnail}" width="55" height="55" />
+                </span>
+                <!--{/foreach}-->
+            </div>
+            <script>
+                $('.ware_box span').mouseover(function(){
+                    $('.ware_box span').removeClass();
+                    $(this).addClass('ware_pic_hover');
+                    $('.big_pic img').attr('src', $(this).children('img:first').attr('src'));
+                    $('.big_pic img').attr('jqimg', $(this).attr('bigimg'));
+                });
+            </script>
+        </div>
+        <div class="col-md-6 content_desc">
+            <div class="row goods_title"><h3>{$goods.goods_name|escape}</h3></div>
+            <div class="row goods_desc">{$goods.description|escape:editor}</div>
+            <div class="row">
+                <span>{$lang.supply_time}:</span>
+                {$goods.morning_start}--{$goods.morning_end}/{$goods.afternoon_start}-{$goods.afternoon_end}
+            </div>
+            <div class="row"><span>付款方式:</span>货到付款</div>
+            <!--{if $goods.brand}-->
+            <div class="row"><span>{$lang.supply_customer}</span>{$goods.brand|escape}</div>
+            <div class="row"><span>{$lang.supply_customer_address}</span>{$goods.brand_info.brand_desc|escape}</div>
+            <!--{/if}-->
+            <div class="row notice">{$lang.buyer_notice}</div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="handle col-md-5">
+            <div class="col-md-4">
+                <span class="fontColor3" ectype="goods_price">{$goods._specs.0.price|price}</span>
+            </div>
+            <div class="col-md-8">
+                <!--{if $goods.spec_qty gt 0}-->
+                <ul class="list-inline">
+                    <li class="handle_title">{$goods.spec_name_1|escape}:</li>
+                </ul>
+                <!--{/if}-->
+                <!--{if $goods.spec_qty gt 1}-->
+                <ul class="list-inline">
+                    <li class="handle_title">{$goods.spec_name_2|escape}:</li>
+                </ul>
+                <!--{/if}-->
+            </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 10px;">
+            <table cellspacing="0" cellpadding="0" class="fwin ware_cen" style="display: none">
+                <tbody>
+                <tr>
+                    <td class="t_l"></td>
+                    <td class="t_c"></td>
+                    <td class="t_r"></td>
+                </tr>
+                <tr>
+                    <td class="m_l" >&nbsp;&nbsp;</td>
+                    <td id="fwin_content" class="m_c" style="" fwin="login">
+                        <div class="ware_center">
+                            <h1>
+                                <span class="dialog_title">{$lang.add_to_cart_ok}</span>
+                                <span class="close_link" title="{$lang.close}"
+                                      onmouseover="this.className = 'close_hover'"
+                                      onmouseout="this.className = 'close_link'" onclick="slideUp_fn();"></span>
+                            </h1>
+
+                            <div class="ware_cen_btn">
+                                <p class="ware_text_p">{$lang.cart_status}</p>
+
+                                <p class="ware_text_btn">
+                                    <input type="submit" class="btn1 btn" name="" value="{$lang.view_cart}"
+                                           onclick="location.href='{url app=cart}'"/>
+                                    <input type="submit" class="btn2 btn" name="" value="{$lang.continue_buy}"
+                                           onclick="$('.ware_cen').css({'display':'none'});"/>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="m_r"></td>
+                </tr>
+                <tr>
+                    <td class="b_l"></td>
+                    <td class="b_c"></td>
+                    <td class="b_r"></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="hidden" class="text width1" name="" id="quantity" value="1" />
+            <input class="button button-rounded button-caution" type="submit" onclick="buy('add');" value="加入购物车">
+            <input class="button button-rounded button-caution" type="submit" value="直接购买" onclick="buy('direct')">
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+</body>
+</html>

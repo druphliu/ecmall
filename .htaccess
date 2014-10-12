@@ -1,0 +1,11 @@
+RewriteEngine on
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(\w+).html$ index.php?app=$1&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(\w+)/page_([0-9]+).html$ index.php?app=$1&page=$2&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(\w+)/([0-9]+).html$ index.php?app=$1&cate_id=$2%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(\w+)/(\w+).html$ index.php?app=$1&act=$2&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(\w+)/(\w+)/([0-9]+).html$ index.php?app=$1&act=$2&id=$3&%1

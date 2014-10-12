@@ -1,0 +1,89 @@
+{include file=wap/header.html}
+<div class="header lineb bcf" id="header">
+
+    <a class="l bce p10" href="javascript:history.go(-1)"><span class="black mr5 tovh dib">&lt;</span>返回</a>
+
+	    <span class="r p10">
+
+            <strong class="l g3 liner pr10 wp110 ell tr">我的订单</strong>
+
+		    <a class="l user ml10 mr10 tovh" href="{url app=member}">用户中心</a>
+
+		    <a class="l index ml10 tovh" href="{url app=index}">首页</a>
+
+	    </span>
+</div>
+<div id="content">
+
+	<div class="wrap">
+		<ul class="list linet">
+			<li>
+				<div class="l">druphliu</div>
+				<div class="r tc rel">
+                    <span class="cg l">全部订单</span><span class="ico_sel r ml10">&nbsp;</span>
+					<select name="" id="memOrderSel" class="opa cur">
+                        <option value="{url app=buyer_order&type=all}">所有订单</option>
+                        <option <!--{if $type=='pending'}-->selected=""<!--{/if}-->value="{url app=buyer_order&type=pending}">待付款的</option>
+                        <option  <!--{if $type=='submitted'}-->selected=""<!--{/if}-->value="{url app=buyer_order&type=submitted}">已提交的</option>
+                        <option  <!--{if $type=='accepted'}-->selected=""<!--{/if}-->value="{url app=buyer_order&type=accepted}">待发货的</option>
+                        <option  <!--{if $type=='shipped'}-->selected=""<!--{/if}-->value="{url app=buyer_order&type=shipped}">已发货的</option>
+                        <option  <!--{if $type=='finished'}-->selected=""<!--{/if}-->value="{url app=buyer_order&type=finished}">已完成的</option>
+                        <option  <!--{if $type=='canceled'}-->selected=""<!--{/if}-->value="{url app=buyer_order&type=canceled}">已取消的</option>
+                    
+					</select>
+				</div>
+			</li>
+            <!--{foreach from=$orders item=order}-->
+            <li>
+                <h2>
+                    <p class="name">{$lang.order_sn}: {$order.order_sn}{if $order.extension eq 'groupbuy'}<span class="color8">[{$lang.groupbuy}]</span>{/if}</p>
+                    <p class="name"><a target="_blank" href="{url app=message&act=send&to_id=$order.seller_id}" class="email"></a></p>
+                    <p class="state">{$lang.order_status}: <strong>{$order.status|modifier:order_status}<!--{if $order.evaluation_status}-->,&nbsp;{$lang.already_evaluate}<!--{/if}--></strong></p>
+                </h2>
+
+                <!--{foreach from=$order.order_goods item=goods}-->
+                <div class="con">
+                    <p class="ware_pic"><img src="{$goods.goods_image}" width="50" height="50"  /></p>
+                    <p class="ware_text">{$goods.goods_name|escape}<br /><span class="attr">{$goods.specification|escape}</span></p>
+                    <p class="price">{$lang.price}: <span>{$goods.price|price}</span></p>
+                    <p class="amount">{$lang.quantity}: <span>{$goods.quantity}</span></p>
+                </div>
+                <!--{/foreach}-->
+
+                <div class="foot">
+                    <p class="time">{$lang.add_time}: {$order.add_time|date:Y-m-d H:i:s}</p>
+                    <!--{if $order.payment_name}-->
+                    <p class="defray">{$lang.payment_name}: {$order.payment_name|escape}</p>
+                    <!--{/if}-->
+                    <div class="handle">
+                        <div style="float:left;">
+                            {$lang.order_amount}: <b id="order{$order.order_id}_order_amount">{$order.order_amount|price}</b>
+                        </div>
+                        <a class="btn1" href="{url app=buyer_order&act=evaluate&order_id=$order.order_id}" target="_blank" id="order{$order.order_id}_evaluate"{if $order.status neq ORDER_FINISHED or $order.evaluation_status neq 0} style="display:none"{/if}>{$lang.evaluate}</a>
+
+                        <input type="button" value="{$lang.confirm_order}" class="btn1" ectype="dialog" dialog_id="buyer_order_confirm_order" dialog_width="400" dialog_title="{$lang.confirm_order}" uri="index.php?app=buyer_order&amp;act=confirm_order&order_id={$order.order_id}&ajax"  id="order{$order.order_id}_action_confirm"{if $order.status neq ORDER_SHIPPED or $order.payment_code eq 'cod'} style="display:none"{/if} />
+                        <input type="button" value="{$lang.cancel_order}" class="btn1" ectype="dialog" dialog_width="400" dialog_title="{$lang.cancel_order}" dialog_id="buyer_order_cancel_order" uri="index.php?app=buyer_order&amp;act=cancel_order&order_id={$order.order_id}&ajax"  id="order{$order.order_id}_action_cancel"{if $order.status neq ORDER_PENDING and $order.status neq ORDER_SUBMITTED} style="display:none"{/if} />
+
+                    </div>
+                </div>
+            </li>
+            <!--{foreachelse}-->
+            <!--{/foreach}-->
+
+
+
+            
+		</ul>
+		<div class="pages">
+            {include file=wap/member.page.bottom.html}
+		</div>
+	</div>
+
+</div>
+{include file=wap/footer.html}
+<script>
+    // 选择下拉刷新
+    $("#memOrderSel").bind("change", function () {
+        location.replace(this.value);
+    });
+</script>

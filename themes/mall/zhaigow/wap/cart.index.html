@@ -1,0 +1,72 @@
+{include file=wap/header.html}
+<script type="text/javascript" src="{lib file=cart.js}" charset="utf-8"></script>
+<div class="header lineb bcf" id="header">
+
+    <a class="l bce p10" href="javascript:history.go(-1)"><span class="black mr5 tovh dib">&lt;</span>返回</a>
+
+	    <span class="r p10">
+
+            <strong class="l g3 liner pr10 wp110 ell tr">我的订单</strong>
+
+		    <a class="l user ml10 mr10 tovh" href="{url app=member}">用户中心</a>
+
+		    <a class="l index ml10 tovh" href="{url app=index}">首页</a>
+
+	    </span>
+</div>
+<div id="content">
+    <div class="wrap">
+        <form method="post">
+        <ul class="list linet">
+            <!--{foreach from=$carts item=cart key=store_id}-->
+            <!--{foreach from=$cart.goods item=goods}-->
+            <li id="cart_item_{$goods.rec_id}"
+                class="<!--{if $store_id!=$area}-->seller_area_error<!--{/if}-->">
+
+                    <div class="l">
+                        <a href="{url app=goods&id=$goods.goods_id}"><h2 class="g3 pb5">{$goods.goods_name|escape}</h2></a>
+                        <div class="pb5">
+                            <span class="g9 mr10">{$goods.specification|escape}</span>{$goods.price|price}
+                        </div>
+                        <div class="pb5">
+                            <img src='{res file="images/subtract.gif"}' onclick="decrease_quantity({$goods.rec_id});" alt="{$lang.decrease}" width="12" height="12" />
+                            <input id="input_item_{$goods.rec_id}" value="{$goods.quantity}" orig="{$goods.quantity}" changed="{$goods.quantity}" onkeyup="change_quantity({$store_id}, {$goods.rec_id}, {$goods.spec_id}, this);" class="text1 width3" type="text" />
+                            <img src='{res file="images/adding.gif"}'onclick="add_quantity({$goods.rec_id});" alt="{$lang.increase}" width="12" height="12" />
+                        </div>
+                        <div class="pb5">
+
+                            <a class="del" href="javascript:;" onclick="drop_cart_item({$store_id}, {$goods.rec_id});">{$lang.drop}</a>
+                        </div>
+                    </div>
+                <span class="r mt2" id="item{$goods.rec_id}_subtotal">{$goods.subtotal|price}</span>
+
+
+            </li>
+            <!--{/foreach}-->
+            <!--{/foreach}-->
+        </ul>
+            <ul class="list">
+                <li>送餐地址:</li>
+                <!--{foreach from=$my_address item=address name=address_select}-->
+                <li>{$address.consignee|escape}</li>
+                <li><!--{if $address.phone_mob}-->{$address.phone_mob}<!--{else}-->{$address.phone_tel}<!--{/if}--></li>
+                <li>{$address.region_name|escape}</li>
+                <li>{$address.address|escape}</li>
+
+                <input type="hidden" name="consignee" value="{$address.consignee|escape}">
+                <input type="hidden" name="address" value="{$address.address|escape}">
+                <input type="hidden" name="phone_tel" value="<!--{if $address.phone_mob}-->{$address.phone_mob}<!--{else}-->{$address.phone_tel}<!--{/if}-->">
+                <input type="hidden" name="region_id" value="{$area}">
+                <!--{/foreach}-->
+            </ul>
+            <ul class="list linet">
+                <li>{$lang.goods_amount}:<strong class="fontsize1"id="cart{$store_id}_amount">{$cart.amount|price}</strong></li>
+
+                <li><input name="submit" type="submit" style="background-color: #ff7011;color:#ffffff" class="order_true" value="订单生成"></li>
+            </ul>
+
+            </form>
+
+    </div>
+</div>
+{include file=wap/footer.html}
